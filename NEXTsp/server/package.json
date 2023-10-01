@@ -1,0 +1,34 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "nodemon index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xuan3chan/Nextsp.git"
+  },
+  "keywords": [
+    "nextsp",
+    "NEXTSP",
+    "NEXTSPNEXTSP",
+    "NEXtshop"
+  ],
+  "author": "xuannguyen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/xuan3chan/Nextsp/issues"
+  },
+  "homepage": "https://github.com/xuan3chan/Nextsp#readme",
+  "dependencies": {
+    "argon2": "^0.31.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^7.5.3"
+  }
+}
