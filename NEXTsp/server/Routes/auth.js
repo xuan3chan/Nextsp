@@ -37,5 +37,36 @@ router.post('/register', async (req, res) => {
         res.status(500).json({ success: false, message: 'Internal Server Error' });
     }
 });
+//@route POST api/auth/login
+//desc login user
+//@access public
+router.post('/login', async (req, res) => {
+    const { username, password } = req.body;
+
+    // Simple validation
+    if (!username || !password)
+        return res.status(400).json({ success: false, message: 'Missing username or password' });
+
+    try {
+        // Check for existing user
+        const user = await User.findOne({ username });
+        if (!user)
+            return res.status(400).json({ success: false, message: 'Incorrect username or password' });
+
+        // Username found
+        const passwordValid = await argon2d.verify(user.password, password);
+        if (!passwordValid)
+            return res.status(400).json({ success: false, message: 'Incorrect username or password' });
+
+        // All good
+        // Return token
+        const accessToken = jwt.sign({ userId: user._id }, process.env.ACCESS_TOKEN_SECRET);
+        res.json({ success: true, message: 'User logged in successfully', accessToken });
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ success: false, message: 'Internal Server Error' });
+    }
+});
 
 module.exports = router;

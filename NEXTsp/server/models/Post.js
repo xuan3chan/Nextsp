@@ -1,23 +1,27 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema
+const Schema = mongoose.Schema;
 
-const PostSchema=new Schema({
-    title:{
-        type:String,
-        require:true
+const PostSchema = new Schema({
+    title: {
+        type: String,
+        required: true
     },
-    description:{
-        type :String
-    },
-    url:{
+    description: {
         type: String
     },
-    status:{
-        type : String,
-        enum:['To learn,','Learning','Learned']
+    url: {
+        type: String
     },
-    user:{
+    status: {
+        type: String,
+        enum: ['To learn', 'Learning', 'Learned']
+    },
+    user: {
         type: Schema.Types.ObjectId,
-        ref:'users'
+        ref: 'users'
     }
-})
+});
+
+const Post = mongoose.model('Post', PostSchema);
+
+module.exports = Post;

@@ -1,14 +1,18 @@
 require('dotenv').config();
 const express = require('express');
 const app = express();
-const port = 3000;
+const port = 3101;
 const mongoose = require('mongoose');
 
 app.use(express.json()); // Move this line up
 
 const authRouter = require('./Routes/auth');
-app.use('/api/auth', authRouter);
+const postRouter = require('./Routes/post');
 
+app.use('/api/auth', authRouter);
+app.use('/api/posts', postRouter);
+
+// Connect to MongoDB
 const connectDB = async () => {
     try {
         await mongoose.connect(`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.l4ybpeb.mongodb.net/`, {
@@ -25,10 +29,18 @@ const connectDB = async () => {
 
 connectDB();
 
+// Routes
 app.get('/', (req, res) => {
     res.send('Xin chào, đây là trang chính của tôi!');
 });
 
+// Error handling middleware
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).json({ success: false, message: 'Internal Server Error' });
+});
+
+// Start the server
 app.listen(port, () => {
     console.log(`Máy chủ Express đang lắng nghe trên cổng ${port}`);
 });

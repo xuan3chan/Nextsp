@@ -1,7 +1,47 @@
-POST http://localhost:3000/api/auth/register
-Content-Type : application/json
+# Nodejs-Express-MongoDB-REST-API
+#register
+# POST http://localhost:3000/api/auth/register
+# Content-Type : application/json
 
-{
-    "username":"minhxuan",
-    "password":"123"
-}
+# {
+#     "username":"minhxuan",
+#     "password":"123"
+# }
+
+# Login
+# POST http://localhost:3000/api/auth/login
+# Content-Type : application/json
+
+# {
+#     "username":"minhxuan",
+#     "password":"123"
+# }
+
+# POST http://localhost:3101/api/posts
+# Content-Type : application/json
+# Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTE5NTFhOTJkYmQzYjgyZWRiNzQ1OWYiLCJpYXQiOjE2OTYyMjYwOTh9.lbBbchENpVjBQ_YVaY-AfwATXyFKvNGoHD7wnRf6MaA
+
+# {
+#     "title": "Learn Node.js",
+#     "description": "Exploring the basics of Node.js development",
+#     "url": "https://example.com/nodejs-guide",
+#     "status": "Learning"
+# }
+
+# GET http://localhost:3000/api/posts
+
+# Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTE5NTFhOTJkYmQzYjgyZWRiNzQ1OWYiLCJpYXQiOjE2OTYyMjYwOTh9.lbBbchENpVjBQ_YVaY-AfwATXyFKvNGoHD7wnRf6MaA
+
+# PUT http://localhost:3101/api/posts/651a66ed20a2b0f6b929afe2
+# Content-Type: application/json
+# Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTE5NTFhOTJkYmQzYjgyZWRiNzQ1OWYiLCJpYXQiOjE2OTYyMjYwOTh9.lbBbchENpVjBQ_YVaY-AfwATXyFKvNGoHD7wnRf6MaA
+
+#  {
+#      "title": "vue",
+#      "description": "dddddddddddddddddddddddddddddddd",
+#      "url": "duii.org",
+#      "status": "Learning"
+# #  }
+
+# DELETE http://localhost:3101/api/posts/651a66ed20a2b0f6b929afe2
+# Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTE5NTFhOTJkYmQzYjgyZWRiNzQ1OWYiLCJpYXQiOjE2OTYyMjYwOTh9.lbBbchENpVjBQ_YVaY-AfwATXyFKvNGoHD7wnRf6MaA
