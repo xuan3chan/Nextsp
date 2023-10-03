@@ -1,5 +1,4 @@
 import React from 'react'
-import {Register}  from '../components'
 import {LoginForm} from '../components/auth/LoginForm'
 const Auth = () => {
   
