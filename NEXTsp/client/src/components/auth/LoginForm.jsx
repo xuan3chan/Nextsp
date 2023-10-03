@@ -10,7 +10,7 @@ export const LoginForm = () => {
 
   const handleLogin = async () => {
     await axios
-      .post("https://localhost:7292/api/Account/Login", { userName, password })
+      .post("", { userName, password })
       .then((res) =>
         localStorage.setItem("accessToken", JSON.stringify(res.data))
       )

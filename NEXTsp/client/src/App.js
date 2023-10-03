@@ -5,14 +5,14 @@ import Auth from './views/Auth'
 
 const App = () => {
   return (
-    <>
+    <>   
       <Router>
         <Routes>
           <Route path="/" element={<Landing />} />
           <Route
             exact
             path="/login"
-            render={props => <Auth {...props} authRoute='login' />}
+            element={<Auth/>}
           />
           <Route
             exact
