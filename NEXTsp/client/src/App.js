@@ -19,6 +19,7 @@ const App = () => {
             path="/register"
             render={props => <Auth {...props} authRoute='register'/>} 
           />
+          <h1>hahahahaha</h1>
         </Routes>
       </Router>
     </>
