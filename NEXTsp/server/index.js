@@ -30,9 +30,22 @@ const connectDB = async () => {
 connectDB();
 
 // Routes
-app.get('/', (req, res) => {
-    res.send('Xin chào, đây là trang chính của tôi!');
+// create API for get data from server
+app.get('/api', (req, res) => {
+    res.json({ success: true, message: 'This is API for Nextsp' });
 });
+//create API for login and register form client
+
+app.post('/api/register', (req, res) => {
+    console.log(req.body);
+    res.json({ success: true });
+});
+app.post('/api/login', (req, res) => {
+    console.log(req.body);
+    res.json({ success: true });
+});
+
+
 
 // Error handling middleware
 app.use((err, req, res, next) => {
@@ -44,3 +57,5 @@ app.use((err, req, res, next) => {
 app.listen(port, () => {
     console.log(`Máy chủ Express đang lắng nghe trên cổng ${port}`);
 });
+
+ 
