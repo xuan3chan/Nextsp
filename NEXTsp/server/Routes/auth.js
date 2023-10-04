@@ -10,22 +10,26 @@ const jwt = require('jsonwebtoken')
 //@access public
 
 router.post('/register', async (req, res) => {
-    const { username , password } = req.body
-    
+    const { username, password, email } = req.body;
 
     // Simple validation
-    if (!username || !password)
-        return res.status(400).json({ success: false, message: 'Missing username or password' });
+    if (!username || !password || !email)
+        return res.status(400).json({ success: false, message: 'Missing username, password, or email' });
 
     try {
-        // Check if username already exists
-        const user = await User.findOne({ username });
-        if (user)
-            return res.status(400).json({ success: false, message: 'Username already taken' });
+        // Check if username or email already exists
+        const existingUser = await User.findOne({ $or: [{ username }, { email }] });
+        if (existingUser) {
+            if (existingUser.username === username) {
+                return res.status(400).json({ success: false, message: 'Username already taken' });
+            } else {
+                return res.status(400).json({ success: false, message: 'Email already registered' });
+            }
+        }
 
         // All good, hash the password and save the user
         const hashedPassword = await argon2d.hash(password);
-        const newUser = new User({ username, password: hashedPassword });
+        const newUser = new User({ username, password: hashedPassword, email });
         await newUser.save();
 
         // Return token
