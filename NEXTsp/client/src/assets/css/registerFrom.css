@@ -1,0 +1,76 @@
+body {
+    background-color: blanchedalmond;
+}
+
+.form {
+    background-color: white;
+    border-radius: 5px;
+    width: 550px;
+    margin: 20px auto;
+    padding: 20px;
+    /* height: 600px; */
+}
+.form > h1{ 
+    text-align: center;
+    font-size: 30px;
+    font-weight: 700;
+    color: #222;
+    margin-bottom: 20px;
+}
+
+.form-body {
+    text-align: left;
+    padding: 20px 10px;
+}
+
+.form-body > * {
+    padding: 5px;
+}
+
+.form__label {
+    display: inline-block;
+    width: 150px;
+}
+
+.form__input {
+    display: inline-block;
+    width: 200px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 5px;
+    outline: none;
+}
+
+.footer {
+    text-align: center;
+}
+.button-31 {
+    background-color: #222;
+    border-radius: 4px;
+    border-style: none;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    font-family: "Farfetch Basis", "Helvetica Neue", Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.5;
+    margin: 0;
+    max-width: none;
+    min-height: 32px;
+    min-width: 10px;
+    outline: none;
+    overflow: hidden;
+    padding: 3px 10px 4px;
+    position: relative;
+    text-align: center;
+    text-transform: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+.button-31:hover,
+.button-31:focus {
+    opacity: 0.75;
+}

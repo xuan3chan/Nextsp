@@ -1,2 +1,2 @@
 export { default as Landing } from './layout/Landing';
-export { default as Register } from './auth/Register';
+export { default as RegisterFrom } from './auth/RegisterFrom';

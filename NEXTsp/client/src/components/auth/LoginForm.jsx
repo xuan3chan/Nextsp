@@ -41,7 +41,7 @@ export const LoginForm = () => {
             <i></i>
           </div>
           <div className="links">
-            <Link className="link" to="/a">
+            <Link className="link" to="/RegisterFrom">
               Register
             </Link>
           </div>
