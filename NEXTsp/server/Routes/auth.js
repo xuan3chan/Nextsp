@@ -45,22 +45,22 @@ router.post('/register', async (req, res) => {
 //desc login user
 //@access public
 router.post('/login', async (req, res) => {
-    const { username, password } = req.body;
+    const { username, email, password } = req.body;
 
     // Simple validation
-    if (!username || !password)
-        return res.status(400).json({ success: false, message: 'Missing username or password' });
+    if ((!username && !email) || !password)
+        return res.status(400).json({ success: false, message: 'Missing username or email or password' });
 
     try {
-        // Check for existing user
-        const user = await User.findOne({ username });
+        // Check for existing user by username or email
+        const user = await User.findOne({ $or: [{ username }, { email }] });
         if (!user)
-            return res.status(400).json({ success: false, message: 'Incorrect username or password' });
+            return res.status(400).json({ success: false, message: 'Incorrect username or email or password' });
 
-        // Username found
+        // Username or email found
         const passwordValid = await argon2d.verify(user.password, password);
         if (!passwordValid)
-            return res.status(400).json({ success: false, message: 'Incorrect username or password' });
+            return res.status(400).json({ success: false, message: 'Incorrect username or email or password' });
 
         // All good
         // Return token
@@ -72,5 +72,6 @@ router.post('/login', async (req, res) => {
         res.status(500).json({ success: false, message: 'Internal Server Error' });
     }
 });
+
 
 module.exports = router;
