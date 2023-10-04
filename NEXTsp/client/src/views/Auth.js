@@ -1,7 +1,7 @@
 import React from 'react'
 import {Register}  from '../components'
 import {LoginForm} from '../components/auth/LoginForm'
-const Auth = () => {
+const Auth = ({authRoute}) => {
   
 
   return (
@@ -9,7 +9,6 @@ const Auth = () => {
       <div className='dark-overlay'>
         <div className='landing-inner'>
           <h1>LearnIT</h1>
-          <LoginForm/>
         </div>
       </div>
     </div>
