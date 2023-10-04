@@ -1,53 +1,58 @@
 import React from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
-export const LoginForm = () => {
+const LoginForm = () => {
+  const navigate = useNavigate();
   const [userName, setUserName] = React.useState("");
   const [password, setPassword] = React.useState("");
-  const navigate = useNavigate();
 
-  const handleLogin = async () => {
-    await axios
-      .post("", { userName, password })
-      .then((res) =>
-        localStorage.setItem("accessToken", JSON.stringify(res.data))
-      )
-      .catch((err) => console(err));
-    navigate("/");
-  };
+  const handleLogin = () => {
+    const postData = {
+      userName,
+      password,
+    };
+    axios
+      .post("http://localhost:3101/api/login", postData)
+      .then((response) => {
+        console.log("Response data:", response.data);
+        setUserName("");
+        setPassword("");
+        navigate("/");
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  }
   return (
-    <div className="body">
-      <div className="boxl">
-        <div className="form">
-          <h1 className="h2">Sign in</h1>
-          <div className="inputBox">
-            <input
-              type="text"
-              onChange={(e) => setUserName(e.target.value)}
-              required
-            />
-            <span>Username</span>
-            <i></i>
-          </div>
-          <div className="inputBox">
-            <input
-              type="password"
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-            <span>Password</span>
-            <i></i>
-          </div>
-          <div className="links">
-            <Link className="link" to="/RegisterFrom">
-              Register
-            </Link>
-          </div>
-          <input type="submit" value="Login" onClick={() => handleLogin()} />
+    <div className="w-full h-full flex justify-center items-center bg-gradient-to-tl from-login-pink via-login-blue to-login-green">
+      <div className="text-center w-[400px] h-fit pt-[50px] px-10 border-2 border-white rounded-xl bg-[#ece9fe]/30 shadow-md">
+        <h1 className="text-4xl pb-5"> Đăng nhập</h1>
+        <div className="flex flex-col items-start">
+          <label className="ml-1 mb-2" htmlFor="userName">Nhập tài khoản: </label>
+          <input id="userName" className="w-full py-2 px-3 mb-4 rounded-xl"
+            placeholder="Username hoặc email"
+            value={userName}
+            onChange={(e) => setUserName(e.target.value)}
+          />
+          <label className="ml-1 mb-2" htmlFor="password">Nhập mật khẩu </label>
+          <input id="password" className="w-full py-2 px-3 rounded-xl"
+            type="password"
+            placeholder="Mật khẩu"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <button className="px-3 py-2 rounded w-full text-white my-3 mt-5 bg-blue-700"
+            onClick={handleLogin}
+          >
+            Tiếp tục
+          </button>
+          <p className="py-4">
+            Bạn chưa có tài khoản? <Link to="/register" className="text-blue-700">Đăng ký ngay</Link>
+          </p>
         </div>
       </div>
     </div>
   );
-};
+}
+export default LoginForm;
