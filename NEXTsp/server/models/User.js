@@ -11,10 +11,6 @@ const UserSchema = new Schema({
         type: String,
         required: true,
     },
-    email:{
-        type:String,
-        unique:true
-    },
     createdAt: {
         type: Date,
         default: Date.now,
@@ -22,4 +18,3 @@ const UserSchema = new Schema({
 });
 
 module.exports = mongoose.model('User', UserSchema);
-

@@ -10,26 +10,22 @@ const jwt = require('jsonwebtoken')
 //@access public
 
 router.post('/register', async (req, res) => {
-    const { username, password, email } = req.body;
+    const { username , password } = req.body
+    
 
     // Simple validation
-    if (!username || !password || !email)
-        return res.status(400).json({ success: false, message: 'Missing username, password, or email' });
+    if (!username || !password)
+        return res.status(400).json({ success: false, message: 'Missing username or password' });
 
     try {
-        // Check if username or email already exists
-        const existingUser = await User.findOne({ $or: [{ username }, { email }] });
-        if (existingUser) {
-            if (existingUser.username === username) {
-                return res.status(400).json({ success: false, message: 'Username already taken' });
-            } else {
-                return res.status(400).json({ success: false, message: 'Email already registered' });
-            }
-        }
+        // Check if username already exists
+        const user = await User.findOne({ username });
+        if (user)
+            return res.status(400).json({ success: false, message: 'Username already taken' });
 
         // All good, hash the password and save the user
         const hashedPassword = await argon2d.hash(password);
-        const newUser = new User({ username, password: hashedPassword, email });
+        const newUser = new User({ username, password: hashedPassword });
         await newUser.save();
 
         // Return token
@@ -45,22 +41,22 @@ router.post('/register', async (req, res) => {
 //desc login user
 //@access public
 router.post('/login', async (req, res) => {
-    const { username, email, password } = req.body;
+    const { username, password } = req.body;
 
     // Simple validation
-    if ((!username && !email) || !password)
-        return res.status(400).json({ success: false, message: 'Missing username or email or password' });
+    if (!username || !password)
+        return res.status(400).json({ success: false, message: 'Missing username or password' });
 
     try {
-        // Check for existing user by username or email
-        const user = await User.findOne({ $or: [{ username }, { email }] });
+        // Check for existing user
+        const user = await User.findOne({ username });
         if (!user)
-            return res.status(400).json({ success: false, message: 'Incorrect username or email or password' });
+            return res.status(400).json({ success: false, message: 'Incorrect username or password' });
 
-        // Username or email found
+        // Username found
         const passwordValid = await argon2d.verify(user.password, password);
         if (!passwordValid)
-            return res.status(400).json({ success: false, message: 'Incorrect username or email or password' });
+            return res.status(400).json({ success: false, message: 'Incorrect username or password' });
 
         // All good
         // Return token
@@ -72,6 +68,5 @@ router.post('/login', async (req, res) => {
         res.status(500).json({ success: false, message: 'Internal Server Error' });
     }
 });
-
 
 module.exports = router;
