@@ -84,7 +84,7 @@ const RegisterFrom = () => {
           <button className="px-3 py-2 rounded w-full text-white my-3 mt-5 bg-blue-700"
             onClick={handleRegister}
           >
-            Tiếp tục
+            Đăng ký
           </button>
           <p className="py-4"> 
             Bạn đã có tài khoản? <Link to='/login' className="text-blue-700">Đăng nhập ngay</Link>
