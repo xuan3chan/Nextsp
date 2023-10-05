@@ -8,14 +8,24 @@
 #     "password":"123"
 # }
 
-# Login
-POST http://localhost:3101/api/auth/login
-Content-Type : application/json
+# # register
+# Post http://localhost:3101/auth/register
+#   content-type: application/json
 
-{
-    "username":"minhxuantest1",
-    "password":"123"
-}
+#    {
+#     "fullName": "Nguyen Le Minh Xuan4",
+#     "email": "xuan4@example.com",
+#     "accountName": "minhxuantest6",
+#     "password": "123"
+#   }
+##login
+# post http://localhost:3101/auth/login
+# Content-Type : application/json
+
+# {
+#     "email":"xuan3@example.com",
+#     "password": "123"
+# }
 
 # POST http://localhost:3101/api/posts
 # Content-Type : application/json

@@ -5,7 +5,7 @@ import axios from "axios";
 
 const RegisterFrom = () => {
   // const apiUrl = "http://localhost:3001/useraccount";
-  const apiUrl = "http://localhost:3101/api/register";
+  const apiUrl = "http://localhost:3101/register";
   const [fullName, setFullName] = useState(""); // Thêm biến trạng thái cho Tên Đầy Đủ
   const [email, setEmail] = useState(""); // Thêm biến trạng thái cho Email
   const [accountName, setAccountName] = useState(""); // Thêm biến trạng thái cho Tài Khoản

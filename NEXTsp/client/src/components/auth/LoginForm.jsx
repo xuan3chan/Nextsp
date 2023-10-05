@@ -13,7 +13,7 @@ const LoginForm = () => {
       password,
     };
     axios
-      .post("http://localhost:3101/api/login", postData)
+      .post("http://localhost:3101/login", postData)
       .then((response) => {
         console.log("Response data:", response.data);
         setUserName("");
