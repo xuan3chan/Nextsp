@@ -1,68 +1,36 @@
 {
   "userAccount": [
     {
-      "fullName": "",
-      "email": "",
-      "userName": "",
-      "password": "",
-      "confirmPassword": "",
+      "fullName": "123123",
+      "email": "123123123",
+      "accountName": "123123",
+      "password": "123123",
+      "confirmPassword": "123123",
       "id": 1
     },
     {
-      "fullName": "",
-      "email": "",
-      "userName": "",
-      "password": "",
-      "confirmPassword": "",
+      "fullName": "123123",
+      "email": "1231231",
+      "accountName": "2312312",
+      "password": "3123123",
+      "confirmPassword": "123123",
       "id": 2
     },
     {
-      "fullName": "",
-      "email": "",
-      "userName": "",
-      "password": "",
-      "confirmPassword": "",
+      "fullName": "1231",
+      "email": "123123@vanlanguni.vn",
+      "accountName": "12312",
+      "password": "123123",
+      "confirmPassword": "123123",
       "id": 3
     },
     {
-      "fullName": "",
-      "email": "",
-      "userName": "",
-      "password": "",
-      "confirmPassword": "",
+      "fullName": "admin ",
+      "email": "adming@gmail.com",
+      "accountName": "admin",
+      "password": "admin",
+      "confirmPassword": "admin",
       "id": 4
-    },
-    {
-      "fullName": "123123",
-      "email": "123123",
-      "accountName": "123",
-      "password": "12312",
-      "confirmPassword": "3123",
-      "id": 5
-    },
-    {
-      "fullName": "123123",
-      "email": "123123",
-      "accountName": "123",
-      "password": "12312",
-      "confirmPassword": "3123",
-      "id": 6
-    },
-    {
-      "fullName": "123123",
-      "email": "123123",
-      "accountName": "123",
-      "password": "12312",
-      "confirmPassword": "3123",
-      "id": 7
-    },
-    {
-      "fullName": "123123",
-      "email": "12312",
-      "accountName": "3123123",
-      "password": "123",
-      "confirmPassword": "123",
-      "id": 8
     }
   ]
 }
