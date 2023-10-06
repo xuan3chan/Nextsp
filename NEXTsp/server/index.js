@@ -79,7 +79,9 @@ connectDB();
 //     });
 // Routes
 app.use('/auth', authRoutes);
-
+app.post('/', (req, res) => {
+    res.send('Hello World!');
+});
 // Error handling middleware
 app.use((err, req, res, next) => {
     console.error(err.stack);
