@@ -32,7 +32,7 @@ const LoginForm = () => {
     }
     console.log("đăng nhập thành công");
   };
-
+//Check Check
   return (
     <div className="w-full h-full flex justify-center items-center bg-gradient-to-tl from-login-pink via-login-blue to-login-green">
       <div className="text-center w-[400px] h-fit pt-[50px] px-10 border-2 border-white rounded-xl bg-[#ece9fe]/30 shadow-md">
