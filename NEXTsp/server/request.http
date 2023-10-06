@@ -1,20 +1,30 @@
 # Nodejs-Express-MongoDB-REST-API
 #register
-POST http://localhost:3101/api/auth/register
-Content-Type : application/json
-
-{
-    "username":"xuandd",
-    "password":"123"
-}
-
-# Login
-# POST http://localhost:3000/api/auth/login
+# POST http://localhost:3000/api/auth/register
 # Content-Type : application/json
 
 # {
 #     "username":"minhxuan",
 #     "password":"123"
+# }
+
+# # register
+# Post http://localhost:3101/auth/register
+#   content-type: application/json
+
+#    {
+#     "fullName": "Nguyen Le Minh Xuan4",
+#     "email": "xuan4@example.com",
+#     "accountName": "minhxuantest6",
+#     "password": "123"
+#   }
+##login
+# post http://localhost:3101/auth/login
+# Content-Type : application/json
+
+# {
+#     "email":"xuan3@example.com",
+#     "password": "123"
 # }
 
 # POST http://localhost:3101/api/posts
@@ -45,6 +55,3 @@ Content-Type : application/json
 
 # DELETE http://localhost:3101/api/posts/651a66ed20a2b0f6b929afe2
 # Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTE5NTFhOTJkYmQzYjgyZWRiNzQ1OWYiLCJpYXQiOjE2OTYyMjYwOTh9.lbBbchENpVjBQ_YVaY-AfwATXyFKvNGoHD7wnRf6MaA
-
-
-

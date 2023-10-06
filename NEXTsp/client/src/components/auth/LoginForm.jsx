@@ -17,6 +17,7 @@ const LoginForm = () => {
   }, []);
 
   const handleLogin = () => {
+<<<<<<< HEAD
     // Kiểm tra xem accountName và password có khớp với dữ liệu trong db.json không
     const isMatch = dataFromDB.some(
       (item) => item.accountName === accountName && item.password === password
@@ -32,7 +33,22 @@ const LoginForm = () => {
     }
     console.log("đăng nhập thành công");
   };
-//Check Check
+    const postData = {
+      userName,
+      password,
+    };
+    axios
+      .post("http://localhost:3101/login", postData)
+      .then((response) => {
+        console.log("Response data:", response.data);
+        setUserName("");
+        setPassword("");
+        navigate("/");
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  }
   return (
     <div className="w-full h-full flex justify-center items-center bg-gradient-to-tl from-login-pink via-login-blue to-login-green">
       <div className="text-center w-[400px] h-fit pt-[50px] px-10 border-2 border-white rounded-xl bg-[#ece9fe]/30 shadow-md">

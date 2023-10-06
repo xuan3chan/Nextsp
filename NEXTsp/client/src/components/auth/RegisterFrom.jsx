@@ -5,7 +5,7 @@ import axios from "axios";
 
 const RegisterFrom = () => {
   // const apiUrl = "http://localhost:3001/useraccount";
-  const apiUrl = "http://localhost:3000/userAccount";
+  const apiUrl = "http://localhost:3101/api/register";
   const [fullName, setFullName] = useState(""); // Thêm biến trạng thái cho Tên Đầy Đủ
   const [email, setEmail] = useState(""); // Thêm biến trạng thái cho Email
   const [accountName, setAccountName] = useState(""); // Thêm biến trạng thái cho Tài Khoản
@@ -160,7 +160,7 @@ const RegisterFrom = () => {
           <button className="px-3 py-2 rounded w-full text-white my-3 mt-5 bg-blue-700"
             onClick={handleRegister}
           >
-            Đăng ký
+            Tiếp tục
           </button>
           <p className="py-4"> 
             Bạn đã có tài khoản? <Link to='/login' className="text-blue-700">Đăng nhập ngay</Link>
