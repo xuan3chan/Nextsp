@@ -24,59 +24,7 @@ const connectDB = async () => {
 }
 connectDB();
 
-// //Register
-// app.post('/register', (req, res) => {
-//     const { fullName, email, accountName, password } = req.body;
 
-//     // Check if user exists
-//     usermodel.findOne({ $or: [{ email }, { accountName }] })
-//         .then(user => {
-//             if (user) {
-//                 res.json({ message: "Email hoặc tên đăng nhập đã tồn tại" });
-//             } else {
-//                 const newUser = new usermodel({
-//                     fullName,
-//                     email,
-//                     accountName,
-//                     password,
-//                 });
-
-//                 newUser.save()
-//                     .then(user => {
-//                         res.json({ message: "Đăng ký thành công" });
-//                     })
-//                     .catch(err => {
-//                         console.error(err);
-//                         res.status(500).json({ success: false, message: 'Internal Server Error' });
-//                     });
-//             }
-//         })
-//         .catch(err => {
-//             console.error(err);
-//             res.status(500).json({ success: false, message: 'Internal Server Error' });
-//         });
-// });
-
-// app.post('/login', (req, res) => {
-//     const { accountName,email, password } = req.body;
-//     //check nếu đúng email hoặc tên đăng nhập
-//     usermodel.findOne({ $or: [{ email }, { accountName }] })
-//         .then(user => {
-//             if (user) {
-//                 if (user.password === password && user.accountName === accountName || user.email === email) {
-//                     res.json({ message: "Đăng nhập thành công" });
-//                 } else {
-//                     res.json({ message: "Mật khẩu không đúng" });
-//                 }
-//             } else { message: "Email hoặc tên đăng nhập không tồn tại" });
-//             }
-//         })
-//         .catch(err => {
-//             console.error(err);
-//             res.status(500).json({ success: false, message: 'Internal Server Error' });
-//         });
- 
-//     });
 // Routes
 app.use('/auth', authRoutes);
 app.post('/', (req, res) => {
