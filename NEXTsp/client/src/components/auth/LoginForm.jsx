@@ -1,57 +1,42 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import axios from "axios";
 
 const LoginForm = () => {
   const navigate = useNavigate();
-  const [accountName, setaccountName] = useState("");
+  const apiUrl = "http://localhost:3101/auth/login";
+  const [accountName, setAccountName] = useState("");
   const [password, setPassword] = useState("");
-  const [dataFromDB, setDataFromDB] = useState([]);
-  const [isLoginSuccessful, setIsLoginSuccessful] = useState(false);
-  const [error, setError] = useState(""); // Thêm state để quản lý lỗi
-
-  useEffect(() => {
-    axios.get("http://localhost:3000/userAccount").then((response) => {
-      setDataFromDB(response.data);
-    });
-  }, []);
+  const [error, setError] = useState(""); // State to manage errors
 
   const handleLogin = () => {
-<<<<<<< HEAD
-    // Kiểm tra xem accountName và password có khớp với dữ liệu trong db.json không
-    const isMatch = dataFromDB.some(
-      (item) => item.accountName === accountName && item.password === password
-    );
-
-    if (isMatch) {
-      setIsLoginSuccessful(true);
-      setError(""); // Reset lỗi nếu đăng nhập thành công
-      navigate("/Homepage"); // Chuyển hướng đến trang dashboard sau khi đăng nhập thành công
-    } else {
-      setIsLoginSuccessful(false);
-      setError("Tên tài khoản hoặc mật khẩu không đúng. Vui lòng thử lại.");
-    }
-    console.log("đăng nhập thành công");
-  };
-//Check Check
-=======
     const postData = {
-      userName,
+      accountName,
+      email: "", // You can send an empty string for email or remove it from the request if not needed
       password,
     };
+
     axios
-      .post("http://localhost:3101/login", postData)
+      .post(apiUrl, postData)
       .then((response) => {
         console.log("Response data:", response.data);
-        setUserName("");
+
+        // Reset input fields
+        setAccountName("");
         setPassword("");
-        navigate("/");
+
+        // Store the token in local storage
+        localStorage.setItem("accessToken", response.data.accessToken);
+
+        // Navigate to the homepage
+        navigate("/Homepage");
       })
       .catch((error) => {
-        console.error("Error:", error);
+        console.error("Error:", error.response.data.message);
+        setError("Tên tài khoản hoặc mật khẩu không đúng. Vui lòng thử lại.");
       });
-  }
->>>>>>> 086b11812d59b667a5b112a3cbed5896e6ca83f9
+  };
+
   return (
     <div className="w-full h-full flex justify-center items-center bg-gradient-to-tl from-login-pink via-login-blue to-login-green">
       <div className="text-center w-[400px] h-fit pt-[50px] px-10 border-2 border-white rounded-xl bg-[#ece9fe]/30 shadow-md">
@@ -63,9 +48,9 @@ const LoginForm = () => {
           <input
             id="accountName"
             className="w-full py-2 px-3 mb-4 rounded-xl"
-            placeholder="accountName hoặc email"
+            placeholder="accountName"
             value={accountName}
-            onChange={(e) => setaccountName(e.target.value)}
+            onChange={(e) => setAccountName(e.target.value)}
           />
 
           <label className="ml-1 mb-2" htmlFor="password">
@@ -79,7 +64,7 @@ const LoginForm = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          {error && <p className="text-red-500">{error}</p>} {/* Hiển thị lỗi nếu có */}
+          {error && <p className="text-red-500">{error}</p>}
           <button
             className="px-3 py-2 rounded w-full text-white my-3 mt-5 bg-blue-700"
             onClick={handleLogin}
