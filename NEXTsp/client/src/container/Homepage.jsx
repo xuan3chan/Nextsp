@@ -1,11 +1,14 @@
-import React from 'react'
+import React from 'react';
+import { BannerTop, Header } from '../components'; 
+import '../assets/css/homepage.css';
 
-const Homepage = () => {
-  return (
-    <div>
-      Homepage
-    </div>
-  )
+function Homepage(props) {
+    return (
+        <div>
+        <BannerTop></BannerTop>
+        <Header></Header>
+        </div>
+    );
 }
 
-export default Homepage
+export default Homepage;
