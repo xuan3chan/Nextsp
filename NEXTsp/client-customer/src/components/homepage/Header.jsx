@@ -2,11 +2,7 @@ import React from "react";
 import "../../assets/css/homepage.css";
 import "font-awesome/css/font-awesome.min.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars } from "@fortawesome/free-solid-svg-icons";
-import { faCaretRight } from "@fortawesome/free-solid-svg-icons";
-import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import { faUser } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faCaretRight, faCartShopping, faSearch, faUser } from "@fortawesome/free-solid-svg-icons";
 function Header(props) {
   return (
     <div>
@@ -46,7 +42,8 @@ function Header(props) {
               placeholder="Nhập Thứ Cần Tìm Kiếm"
             ></input>
             <button type="submit" class="searchButton">
-              <i class="fa fa-search"></i>
+              {/* <i class="fa fa-search"></i> */}
+              <FontAwesomeIcon icon={faSearch}/>
             </button>
           </div>
         </div>
