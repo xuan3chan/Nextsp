@@ -18,13 +18,8 @@ module.exports = {
         'login-green': '#DAFFE6',
         'login-white': '#ffffff'
       },
-      //import font Lato
-      fontFamily: {
-        'lato': ['Lato', 'sans-serif'],
-        'lato-light': ['lato-light', 'sans-serif']
-      },
-      backgroundImage: {
-        'background-banner-sales': "src('/NEXTsp/client-customer/src/assets/img/png-transparent-iphone-14-thumbnail.png')"
+      height: {
+        
       }
     },
   },
