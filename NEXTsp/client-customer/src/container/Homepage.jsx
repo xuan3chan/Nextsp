@@ -1,5 +1,5 @@
 import React from 'react';
-import { BannerTop, Header, BannerSales } from '../components'; 
+import { BannerTop, Header, BannerSales, BlogSection } from '../components'; 
 import '../assets/css/homepage.css';
 
 function Homepage(props) {
@@ -8,6 +8,7 @@ function Homepage(props) {
           <BannerTop></BannerTop>
           <Header></Header>
           <BannerSales/>
+          <BlogSection/>
         </div>
     );
 }
