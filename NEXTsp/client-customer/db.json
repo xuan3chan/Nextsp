@@ -35,22 +35,48 @@
   ],
   "Blog": [
     {
-      "Postid":"1",
+      "Postid": "1",
       "PostName": "iPhone bị mất tiếng loa ngoài phải làm sao? Cùng xem nguyên nhân và 9 cách khắc phục nhanh",
-      "PostImg": "https://drive.google.com/file/d/1ibXq4vEI0DWfcacDNXf9EXXu_zmjhRfq/view",
+      "PostImg": "https://www.peacemakersnetwork.org/wp-content/uploads/2019/09/placeholder.jpg",
       "PostTime": "25 phút trước"
     },
     {
-      "Postid":"2",
+      "Postid": "2",
       "PostName": "Cách kết nối Bluetooth với MacBook để chia sẻ dữ liệu, nghe nhạc, kết nối với thiết bị điện tử khác",
-      "PostImg": "https://drive.google.com/file/d/1ibXq4vEI0DWfcacDNXf9EXXu_zmjhRfq/view",
+      "PostImg": "https://www.peacemakersnetwork.org/wp-content/uploads/2019/09/placeholder.jpg",
       "PostTime": "25 phút trước"
     },
     {
-      "Postid":"3",
+      "Postid": "3",
       "PostName": "Đánh giá iOS 17 Beta 3: Ít nâng cấp, hiệu năng không tăng… ",
-      "PostImg": "https://drive.google.com/file/d/1ibXq4vEI0DWfcacDNXf9EXXu_zmjhRfq/view",
+      "PostImg": "https://www.peacemakersnetwork.org/wp-content/uploads/2019/09/placeholder.jpg",
       "PostTime": "25 phút trước"
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "title": "Iphone 12 Pro Max",
+      "price": 30000000,
+      "imageUrl": "URL của hình ảnh sản phẩm 1"
+    },
+    {
+      "id": 2,
+      "title": "Iphone 12 Pro Max",
+      "price": 30000000,
+      "imageUrl": "URL của hình ảnh sản phẩm 1"
+    },
+    {
+      "id": 3,
+      "title": "Iphone 12 Pro Max",
+      "price": 30000000,
+      "imageUrl": "URL của hình ảnh sản phẩm 1"
+    },
+    {
+      "id": 4,
+      "title": "Iphone 12 Pro Max",
+      "price": 30000000,
+      "imageUrl": "URL của hình ảnh sản phẩm 1"
     }
   ]
 }
