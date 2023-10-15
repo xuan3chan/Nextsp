@@ -37,11 +37,11 @@ function ProductList(props) {
   return (
     <div className="productList w-3/4 mr-auto ml-auto ">
       <h2 className="titleList">Sản Phẩm Mới</h2>
-      <div className=" flex flex-wrap ">
+      <div className=" flex flex-wrap gap-4">
         {products.map((product) => (
           <div
             key={product.id}
-            className="productItem flex flex-col w-1/4  border-4 border-black-500/100 p-4"
+            className="productItem flex flex-col  border-4 border-black-500/100 p-4"
           >
             <img
               src={product.imageUrl}

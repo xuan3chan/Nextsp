@@ -322,6 +322,9 @@ text-transform: uppercase;
 .productList{
 
 }
+.productItem{
+    width: 24%;
+}
 .productItem:hover{
     box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2);
 
