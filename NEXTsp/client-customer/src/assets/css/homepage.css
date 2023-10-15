@@ -12,6 +12,19 @@
 }
 
 /* End Banner Top */
+.btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 6px;
+    border: 1px solid #212529;
+    background: #212529;
+    color: white;
+    font-size: 12px;
+    cursor: pointer;
+    max-width: 160px;
+    border-radius: 5%;
+}
 /* Header*/
 
 .header {
@@ -210,4 +223,118 @@
   font-size: 20px;
 }
 
+/* Container Content */
+.container_content{ 
+    display: flex;
+    flex-direction: column;
+    gap:60px;
+}
 
+/* Banner Scrolled Image */
+
+.BannerScroll-background {
+    display: flex;
+    width: 100%;
+    height: 420px;
+    background-color:#EDF1F3;
+    align-items: center;
+    justify-content: center;
+}
+.BannerScroll-left {
+    display: flex;
+    flex-direction: column;
+    max-width: 660px;
+    padding: 0px 12px;
+    align-items: flex-start;
+    gap: 70px;
+}
+.BannerScroll-content {
+    position: relative;
+    color: #212529;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 42px;
+    font-style: normal;
+    font-weight: 300;
+    text-transform: uppercase;
+}
+.btn-sell {
+}
+.BannerScroll-right {
+    display: flex;
+    max-width: 657px;
+    max-height: 677px;
+    justify-content: center;
+    align-items: center;
+}
+.BannerScroll-right > img {
+    max-width: 450px;
+    max-height: 450px;
+}
+.BannerScroll-Arrow__right,
+.BannerScroll-Arrow__left {
+    position: absolute;
+}
+.BannerScroll-Arrow__right{
+    right:30px;
+}
+.BannerScroll-Arrow__left{
+    transform: rotate(180deg);
+    left:30px;
+}
+
+/* Slogan section */
+
+.SloganItem{
+
+}
+.image_slogan{
+
+}
+.tilte_slogan{
+    color: #212529;
+font-family:Arial, Helvetica, sans-serif;
+font-size: 21px;
+font-weight: 500;
+line-height: 25.2px; /* 120% */
+text-transform: uppercase;
+}
+.desc_slogan{
+    color: #AEAEAE;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16.8px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 26.88px; /* 160% */
+}
+
+/* Product List Section */
+
+.titleList{
+    color: #212529;
+font-family: Arial, Helvetica, sans-serif;
+font-size: 32px;
+font-style: normal;
+font-weight: 500;
+line-height: 38.4px; /* 120% */
+text-transform: uppercase;
+}
+
+.productList{
+
+}
+.productItem:hover{
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2);
+
+}
+.btn-sell{
+    background-color: #E30019;
+    border:none
+}
+.btn-sell:hover{
+    opacity: 80%; 
+    border:none
+}
+.btn-addCart:hover{  
+    opacity: 80%; 
+    border:none
+}
