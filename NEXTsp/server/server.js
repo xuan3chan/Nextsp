@@ -1,13 +1,14 @@
 require('dotenv').config();
 const express = require('express');
 const app = express();
-const authRoutes = require('./Routes/authRo');
-const port = 3101;
 const mongoose = require('mongoose');
-const usermodel = require('./models/User');
 const cors = require('cors');
+const port = 3101;
 app.use(express.json()); 
 app.use(cors());
+// Import routes
+const authRoutes = require('./Routes/authRo');
+const categoryRoutes = require('./Routes/categoryRo');
 // Connect to MongoDB
 const connectDB = async () => {
     try {
@@ -24,13 +25,13 @@ const connectDB = async () => {
 }
 connectDB();
 
-
 // Routes
 app.use('/api/auth', authRoutes);
+app.use('/api', categoryRoutes);
+
 app.post('/', (req, res) => {
     res.send('Hello World!');
 });
-
 
 
 
