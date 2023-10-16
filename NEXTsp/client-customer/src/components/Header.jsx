@@ -5,6 +5,28 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faCaretRight, faCartShopping, faSearch, faUser } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 function Header(props) {
+
+  const danhmuc = [
+    {
+      id: 1,
+      name: "Laptop",
+      link: "/laptop",
+      brands: ["HP", "Dell", "Lenovo"]
+    },
+    {
+      id: 2,
+      name: "Điện Thoại",
+      link: "/dienthoai",
+      brands: ["Samsung", "Apple", "Xiaomi"]
+    },
+    {
+      id: 3,
+      name: "Phụ Kiện",
+      link: "/phukien",
+      brands: ["Sony", "Logitech", "JBL"]
+    }
+  ];
+  
   return (
     <div>
       <div className="header z-20 fixed">
@@ -18,36 +40,41 @@ function Header(props) {
               Danh Mục
               <i className="fa fa-caret-down"></i>
             </button>
-            <div className="dropdown-content">
-              <a className="dropdown-item">
-                Laptop
-                <FontAwesomeIcon icon={faCaretRight} />
-              </a>
-              <a className="dropdown-item">
-                PC Gaming
-                <FontAwesomeIcon icon={faCaretRight} />
-              </a>
-              <a className="dropdown-item">
-                Linh Kiện PC
-                <FontAwesomeIcon icon={faCaretRight} />
-              </a>
+            <div className="dropdown-content flex flex-col">
+              {danhmuc.map((item, index) => {
+                return (
+                  <Link className="relative group" to={item.link} key={item.id}>
+                    {item.name} <FontAwesomeIcon icon={faCaretRight} />
+                    <div className="category_container shadow-md hidden flex-col absolute top-0 left-full bg-white text-black w-60 group-hover:flex ">
+                      {item.brands.map((brand, index) => {
+                        return (
+                          <Link className="category_item" 
+                            to={`${item.link}/${brand}`} key={index}>
+                            {brand}
+                          </Link>
+                        );
+                      })}
+                    </div>
+                  </Link>
+                );
+              })}
             </div>
           </div>
         </div>
         <div className="header_searching_module">
-        <div class="wrap">
-          <div class="search">
-            <input
-              type="text"
-              class="searchTerm"
-              placeholder="Nhập Thứ Cần Tìm Kiếm"
-            ></input>
-            <button type="submit" class="searchButton">
-              <FontAwesomeIcon icon={faSearch}/>
-            </button>
+          <div class="wrap">
+            <div class="search">
+              <input
+                type="text"
+                class="searchTerm"
+                placeholder="Nhập Thứ Cần Tìm Kiếm"
+              ></input>
+              <button type="submit" class="searchButton">
+                <FontAwesomeIcon icon={faSearch} />
+              </button>
+            </div>
           </div>
         </div>
-      </div>
         <div className="header_right_section">
           <div className="header_cart opacity-60 hover:cursor-pointer hover:opacity-100">
             <FontAwesomeIcon icon={faCartShopping} />
@@ -57,7 +84,7 @@ function Header(props) {
             <Link to='/Login'>
               <button className="user_module_login">
                 <FontAwesomeIcon icon={faUser} /> Đăng nhập
-              </button>           
+              </button>
             </Link>
           </div>
         </div>
