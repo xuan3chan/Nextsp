@@ -1,7 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const app = express();
-const authRoutes = require('./Routes/auth');
+const authRoutes = require('./Routes/authRo');
 const port = 3101;
 const mongoose = require('mongoose');
 const usermodel = require('./models/User');
@@ -26,10 +26,14 @@ connectDB();
 
 
 // Routes
-app.use('/auth', authRoutes);
+app.use('/api/auth', authRoutes);
 app.post('/', (req, res) => {
     res.send('Hello World!');
 });
+
+
+
+
 // Error handling middleware
 app.use((err, req, res, next) => {
     console.error(err.stack);

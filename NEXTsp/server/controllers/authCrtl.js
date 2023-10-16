@@ -1,13 +1,9 @@
-const express = require('express');
-const router =express.Router()
+// controllers/authCtrl.js
 const User = require('../models/User');
-const argon2d  = require('argon2');
-const jwt = require('jsonwebtoken')
+const argon2d = require('argon2');
+const jwt = require('jsonwebtoken');
 
-// @route POST api/auth/register
-// @desc Register user
-// @access Public
-router.post('/register', async (req, res) => {
+const registerUser = async (req, res) => {
     const { fullName, email, accountName, password } = req.body;
 
     // Simple validation
@@ -45,11 +41,9 @@ router.post('/register', async (req, res) => {
         console.log(error);
         res.status(500).json({ success: false, message: 'Internal server error' });
     }
-});
-// @route POST api/auth/login
-// @desc Login user
-// @access Public
-router.post('/login', async (req, res) => {
+};
+
+const loginUser = async (req, res) => {
     const { accountName, email, password } = req.body;
 
     // Simple validation
@@ -88,5 +82,9 @@ router.post('/login', async (req, res) => {
         console.log(error);
         res.status(500).json({ success: false, message: 'Internal server error' });
     }
-});
-module.exports = router;
+};
+
+module.exports = {
+    registerUser,
+    loginUser,
+};
