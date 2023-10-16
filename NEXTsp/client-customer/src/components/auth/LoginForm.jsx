@@ -4,7 +4,7 @@ import axios from "axios";
 
 const LoginForm = () => {
   const navigate = useNavigate();
-  const apiUrl = "http://localhost:3101/auth/login";
+  const apiUrl = "http://localhost:3101/api/auth/login";
   const [accountName, setAccountName] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(""); // State to manage errors
