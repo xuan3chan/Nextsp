@@ -4,7 +4,7 @@ import "../../assets/css/registerFrom.css";
 import axios from "axios";
 
 const RegisterForm = () => {
-  const apiUrl = "http://localhost:3101/auth/register";
+  const apiUrl = "http://localhost:3101/api/auth/register";
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [accountName, setAccountName] = useState("");
