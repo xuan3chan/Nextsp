@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Landing } from './components'
-import { LoginForm, RegisterFrom, SloganListSection} from './components';
+import { LoginForm, RegisterFrom} from './components';
 import Homepage from './container/Homepage';
 
 const App = () => {

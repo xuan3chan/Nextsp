@@ -8,4 +8,5 @@ export { default as BannerSales } from './homepage/BannerSales';
 export { default as BlogSection } from './homepage/BlogSection';
 export { default as BannerScroll } from './homepage/BannerScroll';
 export { default as SloganListSection } from './homepage/SloganListSection';
-export { default as ProductList } from './homepage/ProductList';
+export { default as ProductNewList } from './homepage/ProductNewList';
+export { default as ProductSlide } from './homepage/ProductSlide';
