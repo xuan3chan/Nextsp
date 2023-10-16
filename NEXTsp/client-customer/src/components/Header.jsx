@@ -10,19 +10,19 @@ function Header(props) {
     {
       id: 1,
       name: "Laptop",
-      link: "/laptop",
+      link: "/Laptop",
       brands: ["HP", "Dell", "Lenovo"]
     },
     {
       id: 2,
       name: "Điện Thoại",
-      link: "/dienthoai",
+      link: "/Dienthoai",
       brands: ["Samsung", "Apple", "Xiaomi"]
     },
     {
       id: 3,
       name: "Phụ Kiện",
-      link: "/phukien",
+      link: "/Phukien",
       brands: ["Sony", "Logitech", "JBL"]
     }
   ];
