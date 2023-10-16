@@ -17,7 +17,7 @@ function BannerScroll() {
           <button className='px-8 py-2 mt-10 hover:bg-gray-800 bg-black text-white'>Mua ngay</button>
           </div>
         <div className="BannerScroll-right">
-          <img src={BannerImage}></img>
+          <img src={BannerImage} alt = "Ảnh Banner"></img>
         </div>
         <div className="BannerScroll-Arrow__right">
           <img src={ButtonNextHero} alt="Next" />
