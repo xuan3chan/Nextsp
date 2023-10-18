@@ -10,7 +10,6 @@ const brandSchema = new mongoose.Schema(
         },
         description: {
             type: String,
-            required: true,
             trim: true,
         },
     },
@@ -18,3 +17,5 @@ const brandSchema = new mongoose.Schema(
         timestamps: true, //important
     }
 );
+const Brand = mongoose.model('Brand', brandSchema);
+module.exports = Brand;

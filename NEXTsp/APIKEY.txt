@@ -3,6 +3,12 @@ sửa danh mục : "http://localhost:3101/api/updatecategory"
 xoa danh muc "http://localhost:3101/api/deletecategory"
 xem toàn bộ : http://localhost:3101/api/gerallcategory
 
+
+Thêm brand : " http://localhost:3101/api/addbrand "
+sửa brand : "http://localhost:3101/api/updatebrand "
+xoa brand "http://localhost:3101/api/deletebrand "
+xem toan bo brand : http://localhost:3101/api/getallbrands "
+
 loginuser :http://localhost:3101/api/auth/login
 registeruer: http://localhost:3101/api/auth/register
 loginadmin:http://localhost:3101/api/auth/login/admin
