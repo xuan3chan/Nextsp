@@ -1,7 +1,14 @@
-PUT http://localhost:3101/api/updatecategory/652cefc663603fda07747a2b
-Content-Type : application/json
+# PUT http://localhost:3101/api/updatecategory/652cefc663603fda07747a2b
+# Content-Type : application/json
+
+# {
+#     "nameCategory":"laptop1",
+#     "description":""
+# }
+POST http://localhost:3101/api/auth/login/admin
+Content-Type: application/json
 
 {
-    "nameCategory":"laptop1",
-    "description":""
+    "accountName":"admin2",
+    "password":"admin"   
 }
