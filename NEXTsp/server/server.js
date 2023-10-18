@@ -9,6 +9,7 @@ app.use(cors());
 // Import routes
 const authRoutes = require('./Routes/authRo');
 const categoryRoutes = require('./Routes/categoryRo');
+
 // Connect to MongoDB
 const connectDB = async () => {
     try {
@@ -24,6 +25,7 @@ const connectDB = async () => {
     }
 }
 connectDB();
+
 
 // Routes
 app.use('/api/auth', authRoutes);

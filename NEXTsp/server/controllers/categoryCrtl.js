@@ -78,6 +78,26 @@ class CategoryController {
             });
         }
     }
+    //create method to get all categories
+    static async getallCategories(req, res) {
+        try {
+            const categories = await Category.find();
+            const extractedCategories = categories.map(category => {
+                return {
+                    nameCategory: category.nameCategory,
+                    description: category.description,
+                };
+            });
+            res.json({ success: true, categories: extractedCategories });
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({
+                success: false,
+                message: 'Internal server error',
+            });
+        }
+    }
+    
 }
 
 module.exports = CategoryController;
