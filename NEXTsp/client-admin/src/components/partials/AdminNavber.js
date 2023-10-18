@@ -8,7 +8,7 @@ const AdminNavber = (props) => {
     localStorage.removeItem("jwt");
     localStorage.removeItem("cart");
     localStorage.removeItem("wishList");
-    window.location.href = "/";
+    window.location.href = "/Login";
   };
 
   return (
@@ -124,7 +124,7 @@ const AdminNavber = (props) => {
             <div className="userDropdown absolute right-0 mt-1 bg-gray-200 rounded">
               <li className="flex flex-col text-gray-700">
                 <span
-                  onClick={(e) => history.push("/")}
+                  // onClick={(e) => history.push("/")}
                   className="flex space-x-1 py-2 px-8 hover:bg-gray-400 cursor-pointer"
                 >
                   <span>
