@@ -9,6 +9,7 @@ app.use(cors());
 // Import routes
 const authRoutes = require('./Routes/authRo');
 const categoryRoutes = require('./Routes/categoryRo');
+const brandRoutes = require('./Routes/brandRo');
 
 // Connect to MongoDB
 const connectDB = async () => {
@@ -30,6 +31,8 @@ connectDB();
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api', categoryRoutes);
+app.use('/api', brandRoutes);
+
 
 app.post('/', (req, res) => {
     res.send('Hello World!');
