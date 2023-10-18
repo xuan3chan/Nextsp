@@ -5,9 +5,8 @@ const App = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<AdminLayout/>} />
+        <Route path="/Dashboard" element={<AdminLayout/>} />
         <Route path='/Login' element={<Login/>} />
-        {/* <Route path="/Dashboard" element={<Dashboard/>} /> */}
       </Routes>
     </Router>
   )
