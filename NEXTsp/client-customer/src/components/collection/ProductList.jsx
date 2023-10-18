@@ -1,5 +1,5 @@
 import React from "react";
-
+import "../../assets/css/collection.css";
 function ProductList(props) {
   const products = [
     {
@@ -66,17 +66,109 @@ function ProductList(props) {
       imageUrl:
         "https://vcdn-sohoa.vnecdn.net/2021/12/30/Image-ExtractWord-0-Out-7288-1640840203.png",
     },
+    {
+        id: 8,
+        type: "PC",
+        title: "Laptop Asus Vivobook 15X OLED A1505VA L1114W",
+        oldPrice: "4.000.000",
+        price: "3.000.000",
+        imageUrl:
+          "https://vcdn-sohoa.vnecdn.net/2021/12/30/Image-ExtractWord-0-Out-7288-1640840203.png",
+      },
+      {
+        id: 9,
+        type: "PC",
+        title: "Laptop Asus Vivobook 15X OLED A1505VA L1114W",
+        oldPrice: "4.000.000",
+        price: "3.000.000",
+        imageUrl:
+          "https://vcdn-sohoa.vnecdn.net/2021/12/30/Image-ExtractWord-0-Out-7288-1640840203.png",
+      },
+      {
+        id: 10,
+        type: "PC",
+        title: "Laptop Asus Vivobook 15X OLED A1505VA L1114W",
+        oldPrice: "4.000.000",
+        price: "3.000.000",
+        imageUrl:
+          "https://vcdn-sohoa.vnecdn.net/2021/12/30/Image-ExtractWord-0-Out-7288-1640840203.png",
+      },
+      {
+        id: 11,
+        type: "PC",
+        title: "Laptop Asus Vivobook 15X OLED A1505VA L1114W",
+        oldPrice: "4.000.000",
+        price: "3.000.000",
+        imageUrl:
+          "https://vcdn-sohoa.vnecdn.net/2021/12/30/Image-ExtractWord-0-Out-7288-1640840203.png",
+      },
+      {
+        id: 12,
+        type: "PC",
+        title: "Laptop Asus Vivobook 15X OLED A1505VA L1114W",
+        oldPrice: "4.000.000",
+        price: "3.000.000",
+        imageUrl:
+          "https://vcdn-sohoa.vnecdn.net/2021/12/30/Image-ExtractWord-0-Out-7288-1640840203.png",
+      },
+      {
+        id: 13,
+        type: "PC",
+        title: "Laptop Asus Vivobook 15X OLED A1505VA L1114W",
+        oldPrice: "4.000.000",
+        price: "3.000.000",
+        imageUrl:
+          "https://vcdn-sohoa.vnecdn.net/2021/12/30/Image-ExtractWord-0-Out-7288-1640840203.png",
+      },
+      {
+        id: 14,
+        type: "PC",
+        title: "Laptop Asus Vivobook 15X OLED A1505VA L1114W",
+        oldPrice: "4.000.000",
+        price: "3.000.000",
+        imageUrl:
+          "https://vcdn-sohoa.vnecdn.net/2021/12/30/Image-ExtractWord-0-Out-7288-1640840203.png",
+      },
+      {
+        id: 15,
+        type: "PC",
+        title: "Laptop Asus Vivobook 15X OLED A1505VA L1114W",
+        oldPrice: "4.000.000",
+        price: "3.000.000",
+        imageUrl:
+          "https://vcdn-sohoa.vnecdn.net/2021/12/30/Image-ExtractWord-0-Out-7288-1640840203.png",
+      },
+      {
+        id: 16,
+        type: "PC",
+        title: "Laptop Asus Vivobook 15X OLED A1505VA L1114W",
+        oldPrice: "4.000.000",
+        price: "3.000.000",
+        imageUrl:
+          "https://vcdn-sohoa.vnecdn.net/2021/12/30/Image-ExtractWord-0-Out-7288-1640840203.png",
+      },
+      {
+        id: 17,
+        type: "PC",
+        title: "Laptop Asus Vivobook 15X OLED A1505VA L1114W",
+        oldPrice: "4.000.000",
+        price: "3.000.000",
+        imageUrl:
+          "https://vcdn-sohoa.vnecdn.net/2021/12/30/Image-ExtractWord-0-Out-7288-1640840203.png",
+      },
+
+
 
     // Thêm các sản phẩm khác tương tự
   ];
 
   return (
-    <div className="productList mr-auto ml-auto bg-white p-4 rounded-md">
-      <h2 className="titleList mb-4 text-center">{props.title}</h2>
-      <div className=" flex flex-wrap gap-4 content-center justify-center">
+    <div className="productList mx-auto bg-white rounded-md">
+      <h2 className="titleList mb-4">{props.title}</h2>
+      <div className=" flex flex-wrap gap-1 content-center justify-center">
         {products.map(
           (product, index) =>
-            index < 4 && (
+            index < 10 && (
               <div
                 key={product.id}
                 className="productItem flex flex-col  border-4 border-black-500/100 p-4 gap-1 "
