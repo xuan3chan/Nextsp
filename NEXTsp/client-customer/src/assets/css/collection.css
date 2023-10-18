@@ -1,0 +1,37 @@
+/* BreadCrumb menu */
+.breadcrumb {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    margin-top: 80px;
+  }
+  
+  .breadcrumb-item {
+    padding: 0.5rem;
+  }
+  
+  .breadcrumb-item a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .breadcrumb-item.active {
+    color: #6c757d;
+  }
+  
+  .breadcrumb-item + .breadcrumb-item::before {
+    content: '/\00a0';
+    padding: 0.5rem;
+  }
+
+
+  /* Product List */
+  .productItem{ 
+    width: 19%;
+  }
+  .productList{ 
+    height: 3000px  !important;
+  }

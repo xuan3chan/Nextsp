@@ -18,7 +18,7 @@ function ProductList(props) {
       oldPrice: "4.000.000",
       price: "3.000.000",
       imageUrl:
-        "https://vcdn-sohoa.vnecdn.net/2021/12/30/Image-ExtractWord-0-Out-7288-1640840203.png",
+        "https://cdn.originpc.com/img/compare-all/gaming-desktops/genesis-7000-series-system-image.png",
     },
     {
       id: 3,
@@ -71,22 +71,26 @@ function ProductList(props) {
   ];
 
   return (
-    <div className="productList w-3/4 mr-auto ml-auto bg-white p-4 rounded-md">
-      <h2 className="titleList mb-4">{props.title}</h2>
-      <div className=" flex flex-wrap gap-4">
+    <div className="productList mr-auto ml-auto bg-white p-4 rounded-md">
+      <h2 className="titleList mb-4 text-center">{props.title}</h2>
+      <div className=" flex flex-wrap gap-4 content-center justify-center">
         {products.map(
           (product, index) =>
-            index < 5 && (
+            index < 4 && (
               <div
                 key={product.id}
-                className="productItem flex flex-col  border-4 border-black-500/100 p-4 gap-1"
+                className="productItem flex flex-col  border-4 border-black-500/100 p-4 gap-1 "
               >
-                <img
-                  src={product.imageUrl}
-                  alt=""
-                  className="product_image w-72 h-52"
-                />
-                <h1 className="product_title ">{product.title} </h1>
+              <div className="product_image w-72 h-52 object-contain">
+              <img
+                src={product.imageUrl}
+                alt=""
+                className="w-full h-44 object-contain "
+              />
+              </div>
+              <div className ="product_title">
+              <h1 className=" ">{product.title} </h1>
+              </div>
                 <div>
                   <p className="product_oldPrice">{product.oldPrice}đ</p>
                   <p className="product_price">{product.price}đ</p>
