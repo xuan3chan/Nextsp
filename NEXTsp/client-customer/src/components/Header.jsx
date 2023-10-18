@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import "../assets/css/homepage.css";
 import "font-awesome/css/font-awesome.min.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -28,7 +28,7 @@ function Header(props) {
   ];
   
   return (
-    <div>
+    <Fragment>
       <div className="header z-20 fixed">
         <div className="header_logo"></div>
         <div class="navbar">
@@ -43,7 +43,7 @@ function Header(props) {
             <div className="dropdown-content flex flex-col">
               {danhmuc.map((item, index) => {
                 return (
-                  <Link className="relative group" to={item.link} key={item.id}>
+                  <Link className="relative group" to={`${item.link}`} key={item.id}>
                     {item.name} <FontAwesomeIcon icon={faCaretRight} />
                     <div className="category_container shadow-md hidden flex-col absolute top-0 left-full bg-white text-black w-60 group-hover:flex ">
                       {item.brands.map((brand, index) => {
@@ -89,7 +89,7 @@ function Header(props) {
           </div>
         </div>
       </div>
-    </div>
+    </Fragment>
   );
 }
 
