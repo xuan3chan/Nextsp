@@ -37,7 +37,7 @@ function ProductList(props) {
       oldPrice: "4.000.000",
       price: "3.000.000",
       imageUrl:
-        "https://vcdn-sohoa.vnecdn.net/2021/12/30/Image-ExtractWord-0-Out-7288-1640840203.png",
+        "https://product.hstatic.net/200000478869/product/-gallery-650wl-top.png__1920x1080_q100_crop-fit_optimize_subsampling-2_fa701dafb7a944e19962532afc446fcd.png",
     },
     {
       id: 5,
@@ -55,7 +55,7 @@ function ProductList(props) {
       oldPrice: "4.000.000",
       price: "3.000.000",
       imageUrl:
-        "https://vcdn-sohoa.vnecdn.net/2021/12/30/Image-ExtractWord-0-Out-7288-1640840203.png",
+        "https://product.hstatic.net/200000478869/product/-gallery-650wl-top.png__1920x1080_q100_crop-fit_optimize_subsampling-2_fa701dafb7a944e19962532afc446fcd.png",
     },
     {
       id: 7,
