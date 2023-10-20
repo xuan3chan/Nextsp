@@ -5,19 +5,19 @@
 #     "nameCategory":"laptop1",
 #     "description":""
 # }
-# POST http://localhost:3101/api/auth/login/admin
-# Content-Type: application/json
-
-# {
-#     "accountName":"admin2",
-#     "password":"admin"   
-# }
-# GET http://localhost:3101/api/getallbrands
-
-POST http://localhost:3101/api/addbrand
+POST http://localhost:3101/api/auth/login/admin
 Content-Type: application/json
 
 {
-    "nameBrand":"asus3",
-    "description":" "
+    "accountName":"admin2",
+    "password":"admin"   
 }
+# # GET http://localhost:3101/api/getallbrands
+
+# POST http://localhost:3101/api/addbrand
+# Content-Type: application/json
+
+# {
+#     "nameBrand":"asus3",
+#     "description":" "
+# }
