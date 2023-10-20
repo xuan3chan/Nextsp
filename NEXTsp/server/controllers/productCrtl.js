@@ -1,92 +1,62 @@
-//them sua xoa san pham
-const Products = require('../models/productModel')
-const Category = require('../models/categoryModel')
-const Brand = require('../models/brandModel')
+// controllers/productCtrl.js
+const ProductService = require('../service/productService');
+const handleErrorResponse = require('../middleware/errorHandling');
 
 class ProductController {
     static async addProduct(req, res) {
         try {
-            const { nameProduct, description, price, category, brand, images } = req.body;
-
-            if (!nameProduct)
-                return res
-                    .status(400)
-                    .json({ success: false, message: 'Missing nameProduct' });
-
-            const newProduct = new Products({ nameProduct, description, price, category, brand, images });
-            await newProduct.save();
-            res.json({
-                success: true,
-                message: 'Product created successfully',
-            });
+            const result = await ProductService.addProductService(req.body);
+            res.json(result);
         } catch (error) {
-            console.log(error);
-            res.status(500).json({ success: false, message: 'Internal server error' });
+            handleErrorResponse(res, error);
         }
     }
 
     static async updateProduct(req, res) {
         try {
-            const { nameProduct, description, price, category, brand, images } = req.body;
-
-            if (!nameProduct)
-                return res
-                    .status(400)
-                    .json({ success: false, message: 'Missing nameProduct and/or description' });
-
-            const updatedProduct = await Products.findByIdAndUpdate(
-                req.params.id,
-                { nameProduct, description, price, category, brand, images },
-                { new: true, runValidators: true }
-            );
-
-            if (!updatedProduct) {
-                return res.status(404).json({
-                    success: false,
-                    message: 'Product not found or user not authorized',
-                });
-            }
-
-            res.json({
-                success: true,
-                message: 'Excellent progress!',
-                product: updatedProduct,
-            });
+            const { id } = req.params;
+            const result = await ProductService.updateProductService({ id, ...req.body });
+            res.json(result);
         } catch (error) {
-            console.error(error);
-            res.status(500).json({
-                success: false,
-                message: 'Internal server error',
-            });
+            handleErrorResponse(res, error);
         }
     }
-    //create method to delete product
+
     static async deleteProduct(req, res) {
         try {
-            const deletedProduct = await Products.findByIdAndDelete(req.params.id);
-
-            if (!deletedProduct) {
-                return res.status(404).json({
-                    success: false,
-                    message: 'Product not found or user not authorized',
-                });
-            }
-
-            res.json({ success: true, product: deletedProduct });
+            const result = await ProductService.deleteProductService(req.params.id);
+            res.json(result);
         } catch (error) {
-            console.log(error);
-            res.status(500).json({ success: false, message: 'Internal server error' });
+            handleErrorResponse(res, error);
         }
     }
-    //get all product
-    static async getAllProduct(req, res) {
+
+    static async getDetailsProduct(req, res) {
         try {
-            const products = await Products.find();
-            res.json({ success: true, products });
+            const result = await ProductService.getDetailsProductService(req.params.id);
+            res.json(result);
         } catch (error) {
-            console.log(error);
-            res.status(500).json({ success: false, message: 'Internal server error' });
+            handleErrorResponse(res, error);
         }
     }
-    
+
+    // static async deleteManyProducts(req, res) {
+    //     try {
+    //         const result = await ProductService.deleteManyProductsService(req.body.ids);
+    //         res.json(result);
+    //     } catch (error) {
+    //         handleErrorResponse(res, error);
+    //     }
+    // }
+
+    static async getAllProducts(req, res) {
+        try {
+            const result = await ProductService.getAllProductsService();
+            res.json(result);
+        } catch (error) {
+            handleErrorResponse(res, error);
+        }
+    }
 }
+
+module.exports = ProductController;

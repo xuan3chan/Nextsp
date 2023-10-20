@@ -17,6 +17,11 @@ const brandSchema = new mongoose.Schema(
             ref: 'Category',
             required: true,
         },
+        status: {
+            type: String,
+            enum: ['active', 'inactive'],
+            default: 'active',
+        },
     },
     {
         timestamps: true, //important

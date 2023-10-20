@@ -1,98 +1,44 @@
-const Category = require('../models/categoryModel');
+// controllers/categoryCtrl.js
+const CategoryService = require('../service/categoryService');
+const handleErrorResponse = require('../middleware/errorHandling');
 
 class CategoryController {
     static async addCategory(req, res) {
         try {
-            const { nameCategory, description } = req.body;
-
-            if (!nameCategory)
-                return res
-                    .status(400)
-                    .json({ success: false, message: 'Missing nameCategory and/or description' });
-
-            const newCategory = new Category({ nameCategory, description });
-            await newCategory.save();
-            res.json({
-                success: true,
-                message: 'Category created successfully',
-            });
+            const result = await CategoryService.addCategoryService(req.body);
+            res.json(result);
         } catch (error) {
-            console.log(error);
-            res.status(500).json({ success: false, message: 'Internal server error' });
+            handleErrorResponse(res, error);
         }
     }
 
     static async updateCategory(req, res) {
         try {
-            const { nameCategory, description } = req.body;
-
-            if (!nameCategory)
-                return res
-                    .status(400)
-                    .json({ success: false, message: 'Missing nameCategory and/or description' });
-
-            const updatedCategory = await Category.findByIdAndUpdate(
-                req.params.id,
-                { nameCategory, description },
-                { new: true, runValidators: true }
-            );
-
-            if (!updatedCategory) {
-                return res.status(404).json({
-                    success: false,
-                    message: 'Category not found or user not authorized',
-                });
-            }
-
-            res.json({
-                success: true,
-                message: 'Excellent progress!',
-                category: updatedCategory,
-            });
+            const { id } = req.params;
+            const result = await CategoryService.updateCategoryService({ id, ...req.body });
+            res.json(result);
         } catch (error) {
-            console.error(error);
-            res.status(500).json({
-                success: false,
-                message: 'Internal server error',
-            });
+            handleErrorResponse(res, error);
         }
     }
-    //create method to delete category
+
     static async deleteCategory(req, res) {
         try {
-            const deletedCategory = await Category.findByIdAndDelete(req.params.id);
-
-            if (!deletedCategory) {
-                return res.status(404).json({
-                    success: false,
-                    message: 'Category not found or user not authorized',
-                });
-            }
-
-            res.json({ success: true, message: 'Excellent progress!' });
+            const result = await CategoryService.deleteCategoryService(req.params.id);
+            res.json(result);
         } catch (error) {
-            console.error(error);
-            res.status(500).json({
-                success: false,
-                message: 'Internal server error',
-            });
+            handleErrorResponse(res, error);
         }
     }
-    //create method to get all categories
-    static async getallCategories(req, res) {
+
+    static async getAllCategories(req, res) {
         try {
-            const categories = await Category.find();
-            res.json({ success: true, categories });
+            const result = await CategoryService.getAllCategoriesService();
+            res.json(result);
         } catch (error) {
-            console.error(error);
-            res.status(500).json({
-                success: false,
-                message: 'Internal server error',
-            });
+            handleErrorResponse(res, error);
         }
     }
-    
-    
 }
 
 module.exports = CategoryController;
