@@ -2,35 +2,14 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+const apiUrl = process.env.REACT_APP_ADMIN_LOGIN;
 
 const Login = () => {
   const navigate = useNavigate();
-  const apiUrl = "http://localhost:3101/api/auth/login/admin";
   const [accountName, setAccountName] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState(""); // State to manage errors
+  const [error, setError] = useState(""); 
 
-  // const handleLogin = () => {
-  //   const data = {
-  //     accountName: accountName,
-  //     password: password,
-  //   };
-
-  //   axios
-  //     .post(apiUrl, data)
-  //     .then((response) => {
-  //       if (response.data.accessToken) {
-  //         // localStorage.setItem("accessToken", response.data.accessToken);
-  //         navigate("/admin/dashboard");
-  //         console.log(response.data.accessToken);
-  //       } else {
-  //         setError("Đăng nhập thất bại");
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       setError("Đăng nhập thất bại");
-  //     });
-  // };
   const handleLogin = () => {
     const data = {
       accountName: accountName,
@@ -41,18 +20,13 @@ const Login = () => {
       .post(apiUrl, data)
       .then((response) => {
         if (response.data.accessToken) {
-          // Store the access token in local storage if needed
           localStorage.setItem("accessToken", response.data.accessToken);
   
-          // Display a success message or perform other actions
-          console.log(response.data.accessToken);
   
-          // Redirect to another page after a delay (e.g., 2 seconds)
           setTimeout(() => {
-            //reload
             navigate("/admin/dashboard");
             window.location.reload();
-          }, 1000); // 2000 milliseconds = 2 seconds
+          }, 1000); 
           
         } else {
           setError("Đăng nhập thất bại");
