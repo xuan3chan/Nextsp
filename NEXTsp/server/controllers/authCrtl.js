@@ -1,13 +1,6 @@
 // controllers/authCtrl.js
-const User = require('../models/User');
-const Admin = require('../models/adminModel');
-const argon2d = require('argon2');
-const jwt = require('jsonwebtoken');
-
-const handleErrorResponse = (res, message) => {
-    console.error(message);
-    res.status(500).json({ success: false, message: 'Internal server error' });
-};
+const authService = require('../service/authService');
+const handleErrorResponse = require('../middleware/errorHandling');
 
 const registerUser = async (req, res) => {
     const { fullName, email, accountName, password } = req.body;
@@ -17,19 +10,8 @@ const registerUser = async (req, res) => {
     }
 
     try {
-        const user = await User.findOne({ $or: [{ email }, { accountName }] });
-
-        if (user) {
-            return res.status(400).json({ success: false, message: 'Email or accountName already taken' });
-        }
-
-        const hashedPassword = await argon2d.hash(password);
-        const newUser = new User({ fullName, email, accountName, password: hashedPassword });
-        await newUser.save();
-
-        const accessToken = jwt.sign({ userId: newUser._id }, process.env.ACCESS_TOKEN_SECRET);
-
-        res.json({ success: true, message: 'User created successfully', accessToken });
+        const result = await authService.registerUserService({ fullName, email, accountName, password });
+        res.json(result);
     } catch (error) {
         handleErrorResponse(res, error);
     }
@@ -43,21 +25,8 @@ const loginUser = async (req, res) => {
     }
 
     try {
-        const user = await User.findOne({ $or: [{ email }, { accountName }] });
-
-        if (!user) {
-            return res.status(400).json({ success: false, message: 'Incorrect email or accountName' });
-        }
-
-        const passwordValid = await argon2d.verify(user.password, password);
-
-        if (!passwordValid) {
-            return res.status(400).json({ success: false, message: 'Incorrect password' });
-        }
-
-        const accessToken = jwt.sign({ userId: user._id }, process.env.ACCESS_TOKEN_SECRET);
-
-        res.json({ success: true, message: 'User logged in successfully', accessToken });
+        const result = await authService.loginUserService({ accountName, email, password });
+        res.json(result);
     } catch (error) {
         handleErrorResponse(res, error);
     }
@@ -73,41 +42,12 @@ const loginAdmin = async (req, res) => {
     }
 
     try {
-        const admin = await Admin.findOne({ accountName });
-
-        console.log('Admin:', admin);
-
-        if (!admin) {
-            return res.status(400).json({ success: false, message: 'Admin account not found' });
-        }
-
-        console.log('Stored Hashed Password:', admin.password);
-
-        // Check if the stored password has the correct format
-        if (!admin.password.startsWith('$argon2i$')) {
-            // If not, rehash the password and update the record in the database
-            const hashedPassword = await argon2d.hash(password, { type: argon2d.argon2i });
-            admin.password = hashedPassword;
-            await admin.save();
-        }
-
-        // Now verify the password
-        const passwordValid = await argon2d.verify(admin.password, password);
-
-        console.log('Password Valid:', passwordValid);
-
-        if (!passwordValid) {
-            return res.status(400).json({ success: false, message: 'Incorrect password' });
-        }
-
-        const accessToken = jwt.sign({ adminId: admin._id }, process.env.ACCESS_TOKEN_SECRET);
-
-        res.json({ success: true, message: 'Admin logged in successfully', accessToken });
+        const result = await authService.loginAdminService({ accountName, password });
+        res.json(result);
     } catch (error) {
         handleErrorResponse(res, error);
     }
 };
-
 
 module.exports = {
     registerUser,
