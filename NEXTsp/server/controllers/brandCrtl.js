@@ -8,7 +8,7 @@ class BrandController {
             if (!nameBrand)
                 return res
                     .status(400)
-                    .json({ success: false, message: 'Missing nameBrand and/or description' });
+                    .json({ success: false, message: 'Missing nameBrand' });
 
             const newBrand = new Brand({ nameBrand, description });
             await newBrand.save();
