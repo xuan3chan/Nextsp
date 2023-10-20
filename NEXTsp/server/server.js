@@ -11,6 +11,7 @@ app.use(cors());
 const authRoutes = require('./Routes/authRo');
 const categoryRoutes = require('./Routes/categoryRo');
 const brandRoutes = require('./Routes/brandRo');
+const productRoutes = require('./Routes/productRo');
 
 // Connect to MongoDB
 const connectDB = async () => {
@@ -31,8 +32,9 @@ connectDB();
 
 // Routes
 app.use('/api/auth', authRoutes);
-app.use('/api', categoryRoutes);
-app.use('/api', brandRoutes);
+app.use('/api/categorys', categoryRoutes,);
+app.use('/api/brands', brandRoutes);
+app.use('/api/products', productRoutes);
 
 
 app.post('/', (req, res) => {
