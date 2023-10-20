@@ -82,13 +82,7 @@ class CategoryController {
     static async getallCategories(req, res) {
         try {
             const categories = await Category.find();
-            const extractedCategories = categories.map(category => {
-                return {
-                    nameCategory: category.nameCategory,
-                    description: category.description,
-                };
-            });
-            res.json({ success: true, categories: extractedCategories });
+            res.json({ success: true, categories });
         } catch (error) {
             console.error(error);
             res.status(500).json({
@@ -97,6 +91,7 @@ class CategoryController {
             });
         }
     }
+    
     
 }
 
