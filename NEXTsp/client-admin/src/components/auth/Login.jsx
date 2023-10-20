@@ -10,31 +10,56 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(""); // State to manage errors
 
+  // const handleLogin = () => {
+  //   const data = {
+  //     accountName: accountName,
+  //     password: password,
+  //   };
+
+  //   axios
+  //     .post(apiUrl, data)
+  //     .then((response) => {
+  //       if (response.data.accessToken) {
+  //         // localStorage.setItem("accessToken", response.data.accessToken);
+  //         navigate("/admin/dashboard");
+  //         console.log(response.data.accessToken);
+  //       } else {
+  //         setError("Đăng nhập thất bại");
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       setError("Đăng nhập thất bại");
+  //     });
+  // };
   const handleLogin = () => {
-
-    const postData = {
-      accountName,
-      password,
+    const data = {
+      accountName: accountName,
+      password: password,
     };
-
+  
     axios
-      .post(apiUrl, postData)
+      .post(apiUrl, data)
       .then((response) => {
-        console.log("Response data:", response.data);
-
-        // Reset input fields
-        setAccountName("");
-        setPassword("");
-
-        // Store the token in local storage
-        localStorage.setItem("accessToken", response.data.accessToken);
-
-        // Navigate to the homepage
-        navigate("/Dashboard");
+        if (response.data.accessToken) {
+          // Store the access token in local storage if needed
+          localStorage.setItem("accessToken", response.data.accessToken);
+  
+          // Display a success message or perform other actions
+          console.log(response.data.accessToken);
+  
+          // Redirect to another page after a delay (e.g., 2 seconds)
+          setTimeout(() => {
+            //reload
+            navigate("/admin/dashboard");
+            window.location.reload();
+          }, 1000); // 2000 milliseconds = 2 seconds
+          
+        } else {
+          setError("Đăng nhập thất bại");
+        }
       })
       .catch((error) => {
-        console.error("Error:", error.response.data.message);
-        setError("Tên tài khoản hoặc mật khẩu không đúng. Vui lòng thử lại.");
+        setError("Đăng nhập thất bại");
       });
   };
 
