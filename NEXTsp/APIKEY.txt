@@ -1,7 +1,7 @@
 Thêm danh mục : " http://localhost:3101/api/addcategory "
 sửa danh mục : "http://localhost:3101/api/updatecategory"
 xoa danh muc "http://localhost:3101/api/deletecategory"
-xem toàn bộ : http://localhost:3101/api/gerallcategory
+xem toàn bộ : http://localhost:3101/api/getallcategory
 
 
 Thêm brand : " http://localhost:3101/api/addbrand "
