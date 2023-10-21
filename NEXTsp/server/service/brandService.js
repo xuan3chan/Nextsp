@@ -1,4 +1,3 @@
-// services/brandService.js
 const Brand = require('../models/brandModel');
 
 class BrandService {
