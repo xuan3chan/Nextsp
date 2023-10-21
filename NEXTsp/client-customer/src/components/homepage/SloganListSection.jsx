@@ -1,11 +1,11 @@
 import React from "react";
 import SloganItem from "./SloganItem";
 import "../../assets/css/homepage.css";
-function SloganListSection(props) {
+function SloganListSection() {
   return (
-    <div className="flex items-center bg-w">
+    <div className="flex contents-center justify-center bg-w">
       <div className="SloganListSection flex flex-wrap ">
-        <SloganItem
+        <SloganItem 
           title="Giao hàng miễn phí"
           desc="Cho đơn hàng từ 500.000đ trở lên"
         />

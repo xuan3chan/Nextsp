@@ -56,27 +56,136 @@
   "products": [
     {
       "id": 1,
-      "title": "Iphone 12 Pro Max",
+      "title": "Laptop Acer Gaming Nitro 5",
+      "oldPrice": 2000000,
       "price": 30000000,
-      "imageUrl": "URL của hình ảnh sản phẩm 1"
+      "imageUrl": "https://hc.com.vn/i/ecommerce/media/GS.009054_FEATURE_117958.png",
+      "type":"Laptop"
     },
     {
       "id": 2,
-      "title": "Iphone 12 Pro Max",
+      "title": "Laptop Acer Gaming Nitro 5 AN515-45-R6EV Ryzen 5 5600H",
+      "oldPrice": 20000000,
       "price": 30000000,
-      "imageUrl": "URL của hình ảnh sản phẩm 1"
+      "imageUrl": "https://hc.com.vn/i/ecommerce/media/GS.009054_FEATURE_117958.png",
+      "type":"Laptop"
     },
     {
       "id": 3,
-      "title": "Iphone 12 Pro Max",
+      "title": "Laptop Acer Gaming Nitro 5 AN515-45-R6EV Ryzen 5 5600H",
+      "oldPrice": 20000000,
       "price": 30000000,
-      "imageUrl": "URL của hình ảnh sản phẩm 1"
+      "imageUrl": "https://hc.com.vn/i/ecommerce/media/GS.009054_FEATURE_117958.png",
+      "type":"Laptop"
+
+
+      
     },
     {
       "id": 4,
-      "title": "Iphone 12 Pro Max",
+      "title": "Laptop Gaming HP VICTUS 16-e1104AX-7C0S9PA",
+      "oldPrice": 20000000,
       "price": 30000000,
-      "imageUrl": "URL của hình ảnh sản phẩm 1"
+      "imageUrl": "https://hoanghamobile.com/Uploads/2023/03/14/laptop-gaming-hp-victus-16-e1104ax-7c0s9pa-01.jpg",
+      "type":"Laptop"
+    }
+    ,
+    {
+      "id": 5,
+      "title": "Laptop Gaming HP VICTUS 16-e1104AX-7C0S9PA",
+      "oldPrice": 20000000,
+      "price": 30000000,
+      "imageUrl": "https://hoanghamobile.com/Uploads/2023/03/14/laptop-gaming-hp-victus-16-e1104ax-7c0s9pa-01.jpg",
+      "type":"Laptop"
+    }
+    ,
+    {
+      "id": 6,
+      "title": "Laptop Gaming HP VICTUS 16-e1104AX-7C0S9PA",
+      "oldPrice": 20000000,
+      "price": 30000000,
+      "imageUrl": "https://hoanghamobile.com/Uploads/2023/03/14/laptop-gaming-hp-victus-16-e1104ax-7c0s9pa-01.jpg",
+      "type":"Laptop"
+    }
+    ,
+    {
+      "id": 7,
+      "title": "Laptop Gaming HP VICTUS 16-e1104AX-7C0S9PA",
+      "oldPrice": 20000000,
+      "price": 30000000,
+      "imageUrl": "https://hoanghamobile.com/Uploads/2023/03/14/laptop-gaming-hp-victus-16-e1104ax-7c0s9pa-01.jpg",
+      "type":"Laptop"
+    }
+    ,
+    {
+      "id": 8,
+      "title": "Laptop Gaming HP VICTUS 16-e1104AX-7C0S9PA",
+      "oldPrice": 20000000,
+      "price": 30000000,
+      "imageUrl": "https://hoanghamobile.com/Uploads/2023/03/14/laptop-gaming-hp-victus-16-e1104ax-7c0s9pa-01.jpg",
+      "type":"Phone"
+    }
+    ,
+    {
+      "id": 9,
+      "title": "Laptop Gaming HP VICTUS 16-e1104AX-7C0S9PA",
+      "oldPrice": 20000000,
+      "price": 30000000,
+      "imageUrl": "https://hoanghamobile.com/Uploads/2023/03/14/laptop-gaming-hp-victus-16-e1104ax-7c0s9pa-01.jpg",
+      "type":"Phone"
+    }
+    ,
+    {
+      "id": 10,
+      "title": "Laptop Gaming HP VICTUS 16-e1104AX-7C0S9PA",
+      "oldPrice": 20000000,
+      "price": 30000000,
+      "imageUrl": "https://hoanghamobile.com/Uploads/2023/03/14/laptop-gaming-hp-victus-16-e1104ax-7c0s9pa-01.jpg",
+      "type":"Phone"
+
+    }
+  ]
+  ,
+  "Categories": [
+    {
+      "id": 1,
+      "categoryName": "Máy Tính Bàn",
+      "categoryLink": "PC"
+    },
+    {
+      "id": 2,
+      "categoryName": "Laptop",
+      "categoryLink": "Laptop"
+
+    },
+    {
+      "id": 3,
+      "categoryName": "Linh Kiện Máy Tính",
+      "categoryLink": "LinhKien"
+    },
+    {
+      "id": 4,
+      "categoryName": "Phụ Kiện Máy Tính",
+      "categoryLink": "PhuKien"
+    }
+  ],
+  "Brands":[
+    {
+      "id":1,
+      "brandName":"Apple"
+    },
+    {
+      "id":2,
+      "brandName":"Samsung"
+    },
+    {
+      "id":3,
+      "brandName":"Dell"
+    }
+    ,
+    {
+      "id":4,
+      "brandName":"Asus"
     }
   ]
 }
