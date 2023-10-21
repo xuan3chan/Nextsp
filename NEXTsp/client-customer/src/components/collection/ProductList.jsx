@@ -1,201 +1,60 @@
 import React from "react";
 import "../../assets/css/collection.css";
+import axios from "axios";
+import FilterButtonSection from "./FilterButtonSection";
+import "../../assets/css/main.css";
+
+
 function ProductList(props) {
-  const products = [
-    {
-      id: 1,
-      type: "laptop",
-      title: "Laptop Asus Vivobook 15X OLED A1505VA L1114W",
-      oldPrice: "4.000.000",
-      price: "3.000.000",
-      imageUrl:
-        "https://vcdn-sohoa.vnecdn.net/2021/12/30/Image-ExtractWord-0-Out-7288-1640840203.png",
-    },
-    {
-      id: 2,
-      type: "laptop",
-      title: "Laptop Asus Vivobook 15X OLED A1505VA L1114W",
-      oldPrice: "4.000.000",
-      price: "3.000.000",
-      imageUrl:
-        "https://cdn.originpc.com/img/compare-all/gaming-desktops/genesis-7000-series-system-image.png",
-    },
-    {
-      id: 3,
-      type: "laptop",
+  const [products, setProducts] = React.useState([]);
 
-      title: "Laptop gaming MSI GF63 12UCX 841VN",
-      oldPrice: "4.000.000",
-      price: "3.000.000",
-      imageUrl:
-        "https://vcdn-sohoa.vnecdn.net/2021/12/30/Image-ExtractWord-0-Out-7288-1640840203.png",
-    },
-    {
-      id: 4,
-      type: "laptop",
-      title: "Laptop gaming ASUS TUF Gaming F15 FX507ZV4",
-      oldPrice: "4.000.000",
-      price: "3.000.000",
-      imageUrl:
-        "https://product.hstatic.net/200000478869/product/-gallery-650wl-top.png__1920x1080_q100_crop-fit_optimize_subsampling-2_fa701dafb7a944e19962532afc446fcd.png",
-    },
-    {
-      id: 5,
-      type: "laptop",
-      title: "Laptop Asus Vivobook 15X OLED A1505VA L1114W",
-      oldPrice: "4.000.000",
-      price: "3.000.000",
-      imageUrl:
-        "https://vcdn-sohoa.vnecdn.net/2021/12/30/Image-ExtractWord-0-Out-7288-1640840203.png",
-    },
-    {
-      id: 6,
-      type: "PC",
-      title: "Laptop Asus Vivobook 15X OLED A1505VA L1114W",
-      oldPrice: "4.000.000",
-      price: "3.000.000",
-      imageUrl:
-        "https://product.hstatic.net/200000478869/product/-gallery-650wl-top.png__1920x1080_q100_crop-fit_optimize_subsampling-2_fa701dafb7a944e19962532afc446fcd.png",
-    },
-    {
-      id: 7,
-      type: "PC",
-      title: "Laptop Asus Vivobook 15X OLED A1505VA L1114W",
-      oldPrice: "4.000.000",
-      price: "3.000.000",
-      imageUrl:
-        "https://vcdn-sohoa.vnecdn.net/2021/12/30/Image-ExtractWord-0-Out-7288-1640840203.png",
-    },
-    {
-        id: 8,
-        type: "PC",
-        title: "Laptop Asus Vivobook 15X OLED A1505VA L1114W",
-        oldPrice: "4.000.000",
-        price: "3.000.000",
-        imageUrl:
-          "https://vcdn-sohoa.vnecdn.net/2021/12/30/Image-ExtractWord-0-Out-7288-1640840203.png",
-      },
-      {
-        id: 9,
-        type: "PC",
-        title: "Laptop Asus Vivobook 15X OLED A1505VA L1114W",
-        oldPrice: "4.000.000",
-        price: "3.000.000",
-        imageUrl:
-          "https://vcdn-sohoa.vnecdn.net/2021/12/30/Image-ExtractWord-0-Out-7288-1640840203.png",
-      },
-      {
-        id: 10,
-        type: "PC",
-        title: "Laptop Asus Vivobook 15X OLED A1505VA L1114W",
-        oldPrice: "4.000.000",
-        price: "3.000.000",
-        imageUrl:
-          "https://vcdn-sohoa.vnecdn.net/2021/12/30/Image-ExtractWord-0-Out-7288-1640840203.png",
-      },
-      {
-        id: 11,
-        type: "PC",
-        title: "Laptop Asus Vivobook 15X OLED A1505VA L1114W",
-        oldPrice: "4.000.000",
-        price: "3.000.000",
-        imageUrl:
-          "https://vcdn-sohoa.vnecdn.net/2021/12/30/Image-ExtractWord-0-Out-7288-1640840203.png",
-      },
-      {
-        id: 12,
-        type: "PC",
-        title: "Laptop Asus Vivobook 15X OLED A1505VA L1114W",
-        oldPrice: "4.000.000",
-        price: "3.000.000",
-        imageUrl:
-          "https://vcdn-sohoa.vnecdn.net/2021/12/30/Image-ExtractWord-0-Out-7288-1640840203.png",
-      },
-      {
-        id: 13,
-        type: "PC",
-        title: "Laptop Asus Vivobook 15X OLED A1505VA L1114W",
-        oldPrice: "4.000.000",
-        price: "3.000.000",
-        imageUrl:
-          "https://vcdn-sohoa.vnecdn.net/2021/12/30/Image-ExtractWord-0-Out-7288-1640840203.png",
-      },
-      {
-        id: 14,
-        type: "PC",
-        title: "Laptop Asus Vivobook 15X OLED A1505VA L1114W",
-        oldPrice: "4.000.000",
-        price: "3.000.000",
-        imageUrl:
-          "https://vcdn-sohoa.vnecdn.net/2021/12/30/Image-ExtractWord-0-Out-7288-1640840203.png",
-      },
-      {
-        id: 15,
-        type: "PC",
-        title: "Laptop Asus Vivobook 15X OLED A1505VA L1114W",
-        oldPrice: "4.000.000",
-        price: "3.000.000",
-        imageUrl:
-          "https://vcdn-sohoa.vnecdn.net/2021/12/30/Image-ExtractWord-0-Out-7288-1640840203.png",
-      },
-      {
-        id: 16,
-        type: "PC",
-        title: "Laptop Asus Vivobook 15X OLED A1505VA L1114W",
-        oldPrice: "4.000.000",
-        price: "3.000.000",
-        imageUrl:
-          "https://vcdn-sohoa.vnecdn.net/2021/12/30/Image-ExtractWord-0-Out-7288-1640840203.png",
-      },
-      {
-        id: 17,
-        type: "PC",
-        title: "Laptop Asus Vivobook 15X OLED A1505VA L1114W",
-        oldPrice: "4.000.000",
-        price: "3.000.000",
-        imageUrl:
-          "https://vcdn-sohoa.vnecdn.net/2021/12/30/Image-ExtractWord-0-Out-7288-1640840203.png",
-      },
+  React.useEffect(() => {
+    const fetchData = async () => {
+      const result = await axios.get("http://localhost:3003/Products");
 
+      setProducts(result.data);
+    };
 
-
-    // Thêm các sản phẩm khác tương tự
-  ];
-
+    fetchData();
+  }, []);
+  function formatPrice(price) {
+    return `${price.toLocaleString()}đ`;
+  }
   return (
-    <div className="productList mx-auto bg-white rounded-md">
-      <h2 className="titleList mb-4">{props.title}</h2>
-      <div className=" flex flex-wrap gap-1 content-center justify-center">
-        {products.map(
-          (product, index) =>
-            index < 10 && (
+    <div className="productList max-h-full mx-auto w-full bg-white rounded-md pb-4">
+      <h1 className="CategoryTitle ">Máy Tính Laptop</h1>
+      <FilterButtonSection></FilterButtonSection>
+      <div className=" flex flex-wrap  gap-1 content-center justify-center pt-12">
+      {products
+        .filter(product => product.type === "Laptop")
+        .map((product, index) => (
               <div
-                key={product.id}
-                className="productItem flex flex-col  border-4 border-black-500/100 p-4 gap-1 "
+                key={products.id}
+                className="productItem-collection w-2/12 flex flex-col p-4 gap-1 "
               >
-              <div className="product_image w-72 h-52 object-contain">
-              <img
-                src={product.imageUrl}
-                alt=""
-                className="w-full h-44 object-contain "
-              />
-              </div>
-              <div className ="product_title">
-              <h1 className=" ">{product.title} </h1>
-              </div>
+                <div className="product_image w-72 h-52 object-contain">
+                  <img
+                    src={product.imageUrl}
+                    alt=""
+                    className="w-full h-44 object-contain "
+                  />
+                </div>
+                <div className="product_title">
+                  <h1 className=" max-[]: h-16 truncate ">{product.title} </h1>
+                </div>
                 <div>
-                  <p className="product_oldPrice">{product.oldPrice}đ</p>
-                  <p className="product_price">{product.price}đ</p>
+                  <p className="product_oldPrice">{formatPrice(product.oldPrice)}</p>
+                  <p className="product_price font-sans">{formatPrice(product.price)}</p>
                 </div>
                 <div className="product_rating flex gap-1 items-center">
-                  <p>⭐</p>
-                  <p>⭐</p>
-                  <p>⭐</p>
-                  <p>⭐</p>
-                  <p>⭐</p>
+                <img src="https://static.vecteezy.com/system/resources/previews/013/743/605/original/golden-star-icon-png.png" alt="" className="w-6 h-6"/>
+                <img src="https://static.vecteezy.com/system/resources/previews/013/743/605/original/golden-star-icon-png.png" alt="" className="w-6 h-6"/>
+                <img src="https://static.vecteezy.com/system/resources/previews/013/743/605/original/golden-star-icon-png.png" alt="" className="w-6 h-6"/>
+                <img src="https://static.vecteezy.com/system/resources/previews/013/743/605/original/golden-star-icon-png.png" alt="" className="w-6 h-6"/>
+                <img src="https://static.vecteezy.com/system/resources/previews/013/743/605/original/golden-star-icon-png.png" alt="" className="w-6 h-6"/>
                   <p className="text-xs	">(5 đánh giá)</p>
                 </div>
-                <div className="over-button flex gap-4 items-center justify-center">
+                <div className="over-button flex gap-4 items-center justify-center mt-6">
                   <div className="btn p-1  flex justify-center btn-sell ">
                     Mua Ngay
                   </div>
