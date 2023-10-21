@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const apiURL = "http://localhost:3101/api/getallcategory";
+const apiURL = "http://localhost:3101/api/categorys/getall";
 
 const AllCategories = () => {
   const [categories, setCategories] = useState([]);
