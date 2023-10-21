@@ -1,13 +1,13 @@
-Thêm danh mục : " http://localhost:3101/api/category/add "
-sửa danh mục : "http://localhost:3101/api/category/update"
-xoa danh muc "http://localhost:3101/api/category/delete "
-xem toàn bộ : http://localhost:3101/api/category/getall "
+Thêm danh mục : " http://localhost:3101/api/categorys/add "
+sửa danh mục : "http://localhost:3101/api/categorys/update"
+xoa danh muc "http://localhost:3101/api/categorys/delete "
+xem toàn bộ : http://localhost:3101/api/categorys/getall "
 
 
-Thêm brand : " http://localhost:3101/api/brand/add "
-sửa brand : "http://localhost:3101/api/brand/update "
-xoa brand "http://localhost:3101/api/brand/delete "
-xem toan bo brand : http://localhost:3101/api/brand/getall "
+Thêm brand : " http://localhost:3101/api/brands/add "
+sửa brand : "http://localhost:3101/api/brands/update "
+xoa brand "http://localhost:3101/api/brands/delete "
+xem toan bo brand : http://localhost:3101/api/brands/getall "
 
 thêm sản phẩm 
 xóa sản phẩm 
