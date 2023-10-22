@@ -4,11 +4,15 @@ const app = express();
 const mongoose = require('mongoose');
 const cors = require('cors');
 const port = 3101;
+const admin = require('./Routes/authRo');
 app.use(express.json()); 
 app.use(cors());
 // Import routes
 const authRoutes = require('./Routes/authRo');
 const categoryRoutes = require('./Routes/categoryRo');
+const brandRoutes = require('./Routes/brandRo');
+const productRoutes = require('./Routes/productRo');
+
 // Connect to MongoDB
 const connectDB = async () => {
     try {
@@ -25,9 +29,13 @@ const connectDB = async () => {
 }
 connectDB();
 
+
 // Routes
 app.use('/api/auth', authRoutes);
-app.use('/api', categoryRoutes);
+app.use('/api/categorys', categoryRoutes,);
+app.use('/api/brands', brandRoutes);
+app.use('/api/products', productRoutes);
+
 
 app.post('/', (req, res) => {
     res.send('Hello World!');

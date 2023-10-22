@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'Roboto Viet';
+    src: url('../fonts/Roboto-Black.ttf') format('ttf');
+    /* Add additional font formats here if needed */
+    font-weight: normal;
+    font-style: normal;
+  }
+:root{ 
+}
