@@ -10,6 +10,11 @@ const categorySchema = new Schema({
     description: {
         type: String,
     },
+    status: {
+        type: String,
+        enum: ['active', 'inactive'],
+        default: 'active',
+    },
 });
 
 module.exports = mongoose.model('Category', categorySchema);
