@@ -9,10 +9,10 @@ function Breadcrumb(props) {
             <a href="/Homepage">Trang Chủ</a>
           </li>
           <li class="breadcrumb-item">
-            <a href="/products">Collection</a>
+            <a href="/products">Danh Mục</a>
           </li>
           <li class="breadcrumb-item active" aria-current="page">
-            Laptop
+            {props.titleCollection}
           </li>
         </ol>
       </nav>
