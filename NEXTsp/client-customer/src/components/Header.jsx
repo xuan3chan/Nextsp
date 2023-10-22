@@ -1,38 +1,41 @@
-import React from "react";
+import React, { Fragment } from "react";
 import "../assets/css/homepage.css";
 import "font-awesome/css/font-awesome.min.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faCaretRight, faCartShopping, faSearch, faUser } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-function Header(props) {
+import axios from "axios";
+import { useState, useEffect } from "react";
 
-  const danhmuc = [
-    {
-      id: 1,
-      name: "Laptop",
-      link: "/Laptop",
-      brands: ["HP", "Dell", "Lenovo"]
-    },
-    {
-      id: 2,
-      name: "Điện Thoại",
-      link: "/Dienthoai",
-      brands: ["Samsung", "Apple", "Xiaomi"]
-    },
-    {
-      id: 3,
-      name: "Phụ Kiện",
-      link: "/Phukien",
-      brands: ["Sony", "Logitech", "JBL"]
-    }
-  ];
-  
+function Header(props) {
+  const [Categories, setCategories] = useState(null);
+  const [Brands, setBrands] = useState(null);
+
+  useEffect(() => {
+    // Define the API URLs
+    const apiUrl1 = 'http://localhost:3003/Categories';
+    const apiUrl2 = 'http://localhost:3003/Brands';
+
+    // Make parallel requests
+    const request1 = axios.get(apiUrl1);
+    const request2 = axios.get(apiUrl2);
+
+    // Wait for both requests to complete
+    Promise.all([request1, request2])
+      .then(([response1, response2]) => {
+        setCategories(response1.data);
+        setBrands(response2.data);
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+      });
+  }, []);
   return (
-    <div>
+    <Fragment>
       <div className="header z-20 fixed">
         <div className="header_logo"></div>
         <div class="navbar">
-          <a href="Homepage">Trang Chủ</a>
+          <a href="../Homepage">Trang Chủ</a>
           <a href="/Blog">Bài Viết</a>
           <div className="dropdown">
             <button className="dropbtn">
@@ -40,25 +43,12 @@ function Header(props) {
               Danh Mục
               <i className="fa fa-caret-down"></i>
             </button>
-            <div className="dropdown-content flex flex-col">
-              {danhmuc.map((item, index) => {
-                return (
-                  <Link className="relative group" to={item.link} key={item.id}>
-                    {item.name} <FontAwesomeIcon icon={faCaretRight} />
-                    <div className="category_container shadow-md hidden flex-col absolute top-0 left-full bg-white text-black w-60 group-hover:flex ">
-                      {item.brands.map((brand, index) => {
-                        return (
-                          <Link className="category_item" 
-                            to={`${item.link}/${brand}`} key={index}>
-                            {brand}
-                          </Link>
-                        );
-                      })}
-                    </div>
-                  </Link>
-                );
-              })}
-            </div>
+            <div class="dropdown-content flex flex-col">
+            {Categories && Categories.map((item, index) => (
+                <a className=" text-left	 " href={`/Collection/${item.categoryLink}`}>{item.categoryName}</a>
+               ))
+            }
+          </div>
           </div>
         </div>
         <div className="header_searching_module">
@@ -89,7 +79,7 @@ function Header(props) {
           </div>
         </div>
       </div>
-    </div>
+    </Fragment>
   );
 }
 

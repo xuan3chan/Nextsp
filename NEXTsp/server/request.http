@@ -1,7 +1,40 @@
-PUT http://localhost:3101/api/updatecategory/652cefc663603fda07747a2b
-Content-Type : application/json
+# PUT http://localhost:3101/api/updatecategory/652cefc663603fda07747a2b
+# Content-Type : application/json
+
+# {
+#     "nameCategory":"laptop1",
+#     "description":""
+# }
+# POST http://localhost:3101/api/auth/login/admin
+# Content-Type: application/json
+
+# {
+#     "accountName":"admin2",
+#     "password":"admin"   
+# }
+# # GET http://localhost:3101/api/getallbrands
+
+# POST http://localhost:3101/api/addbrand
+# Content-Type: application/json
+
+# {
+#     "nameBrand":"asus3",
+#     "description":" "
+# }
+POST http://localhost:3101/api/products/add
+Content-Type: multipart/form-data ; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
 
 {
-    "nameCategory":"laptop1",
-    "description":""
+    "nameProduct":"asus3",
+    "description":" ",
+    "price":100000,
+    "oldprice":1100000,
+    "category":"652cefc663603fda07747a2b",
+    "brand":"652cefc663603fda07747a2b",
+    "image":"",
+    "status":"active"
+
+
+
+
 }

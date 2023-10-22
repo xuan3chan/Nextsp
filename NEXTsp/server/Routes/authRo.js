@@ -12,5 +12,7 @@ router.post('/register', authCtrl.registerUser);
 // @desc Login user
 // @access Public
 router.post('/login', authCtrl.loginUser);
+//loginadmin
+router.post('/login/admin', authCtrl.loginAdmin);
 
 module.exports = router;

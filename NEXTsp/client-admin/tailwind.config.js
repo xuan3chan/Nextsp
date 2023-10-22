@@ -22,6 +22,11 @@ module.exports = {
         
       }
     },
+    '@media (min-width: 1024px)': {
+      '.lg\\:block': {
+        display: 'block',
+      },
+    },
   },
   plugins: [],
 };
