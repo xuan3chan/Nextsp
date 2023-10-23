@@ -1,17 +1,17 @@
 import axios from "axios";
 const apiURL = process.env.REACT_APP_CATEGORYIES;
 
-const BearerToken = () =>
-  localStorage.getItem("accessToken")
-    ? JSON.parse(localStorage.getItem("accessToken")).token
-    : false;
-const Headers = () => {
-  return {
-    headers: {
-      token: `Bearer ${BearerToken()}`,
-    },
-  };
-};
+// const BearerToken = () =>
+//   localStorage.getItem("accessToken")
+//     ? JSON.parse(localStorage.getItem("accessToken")).token
+//     : false;
+// const Headers = () => {
+//   return {
+//     headers: {
+//       token: `Bearer ${BearerToken()}`,
+//     },
+//   };
+// };
 
 export const getAllCategory = async () => {
   try {
@@ -35,10 +35,8 @@ export const createCategory = async ({
   try {
     let res = await axios.post(
       `${apiURL}/add`,
-      formData,
-      Headers()
+      formData
     );
-    console.log(res)
     return res.data;
   } catch (error) {
     console.log(error);
