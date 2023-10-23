@@ -1,6 +1,7 @@
 import React from "react";
 import { Breadcrumb, Header } from "../../components";
 import "../../assets/css/collection.css";
+<<<<<<< HEAD
 import "../../assets/css/main.css";
 import ProductList from "../../components/collection/ProductList";
 import Paginnation from "../../components/collection/Paginnation";
@@ -34,6 +35,21 @@ function Collection(props) {
           </div>
         </div>
       )}
+=======
+import ProductList from "../../components/collection/ProductList";
+import Paginnation from "../../components/collection/Paginnation";
+
+function Collection(props) {
+  
+  return (
+    <div className="bg-gray-100 pb-10">
+      <Header></Header>
+      <div className="container_content w-5/6 mr-auto ml-auto">
+      <Breadcrumb></Breadcrumb>
+      <ProductList></ProductList>
+      <Paginnation></Paginnation>
+      </div>
+>>>>>>> d41284d94d63dd98856c2c8e2e05f4c90e7e900c
     </div>
   );
 }

@@ -2,6 +2,7 @@ import React, { Fragment } from "react";
 import "../assets/css/homepage.css";
 import "font-awesome/css/font-awesome.min.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+<<<<<<< HEAD
 import {
   faBars,
   faCaretRight,
@@ -16,14 +17,26 @@ import { BiTask } from "react-icons/bi";
 import { BsHeadphones } from "react-icons/bs";
 import { AiOutlineUser } from "react-icons/ai";
 import { PiShoppingCartSimpleBold } from "react-icons/pi";
+=======
+import { faBars, faCaretRight, faCartShopping, faSearch, faUser } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
+import axios from "axios";
+import { useState, useEffect } from "react";
+
+>>>>>>> d41284d94d63dd98856c2c8e2e05f4c90e7e900c
 function Header(props) {
   const [Categories, setCategories] = useState(null);
   const [Brands, setBrands] = useState(null);
 
   useEffect(() => {
     // Define the API URLs
+<<<<<<< HEAD
     const apiUrl1 = "http://localhost:3000/Categories";
     const apiUrl2 = "http://localhost:3000/Brands";
+=======
+    const apiUrl1 = 'http://localhost:3003/Categories';
+    const apiUrl2 = 'http://localhost:3003/Brands';
+>>>>>>> d41284d94d63dd98856c2c8e2e05f4c90e7e900c
 
     // Make parallel requests
     const request1 = axios.get(apiUrl1);
@@ -35,13 +48,22 @@ function Header(props) {
         setCategories(response1.data);
         setBrands(response2.data);
       })
+<<<<<<< HEAD
       .catch((error) => {
         console.error("Error fetching data:", error);
+=======
+      .catch(error => {
+        console.error('Error fetching data:', error);
+>>>>>>> d41284d94d63dd98856c2c8e2e05f4c90e7e900c
       });
   }, []);
   return (
     <Fragment>
+<<<<<<< HEAD
       <div className="header z-20 fixed flex justify-center ">
+=======
+      <div className="header z-20 fixed">
+>>>>>>> d41284d94d63dd98856c2c8e2e05f4c90e7e900c
         <div className="header_logo"></div>
         <div class="navbar">
           <a href="../Homepage">Trang Chủ</a>
@@ -53,6 +75,7 @@ function Header(props) {
               <i className="fa fa-caret-down"></i>
             </button>
             <div class="dropdown-content flex flex-col">
+<<<<<<< HEAD
               {Categories &&
                 Categories.map((item) => (
                   <a
@@ -67,6 +90,13 @@ function Header(props) {
                   </a>
                 ))}
             </div>
+=======
+            {Categories && Categories.map((item, index) => (
+                <a className=" text-left	 " href={`/Collection/${item.categoryLink}`}>{item.categoryName}</a>
+               ))
+            }
+          </div>
+>>>>>>> d41284d94d63dd98856c2c8e2e05f4c90e7e900c
           </div>
         </div>
         <div className="header_searching_module">
@@ -74,7 +104,11 @@ function Header(props) {
             <div class="search">
               <input
                 type="text"
+<<<<<<< HEAD
                 class="searchTerm text-black"
+=======
+                class="searchTerm"
+>>>>>>> d41284d94d63dd98856c2c8e2e05f4c90e7e900c
                 placeholder="Nhập Thứ Cần Tìm Kiếm"
               ></input>
               <button type="submit" class="searchButton">
@@ -83,6 +117,7 @@ function Header(props) {
             </div>
           </div>
         </div>
+<<<<<<< HEAD
         <div className="header_right_section pl-4 pr-4">
           <div className=" navItem tracking-order opacity-60 hover:cursor-pointer hover:opacity-100">
             <div className="boxIcon">
@@ -109,6 +144,17 @@ function Header(props) {
                   <AiOutlineUser></AiOutlineUser>
                 </div>
                 <p>Đăng Nhập</p>
+=======
+        <div className="header_right_section">
+          <div className="header_cart opacity-60 hover:cursor-pointer hover:opacity-100">
+            <FontAwesomeIcon icon={faCartShopping} />
+            Giỏ Hàng
+          </div>
+          <div className="header_user_module">
+            <Link to='/Login'>
+              <button className="user_module_login">
+                <FontAwesomeIcon icon={faUser} /> Đăng nhập
+>>>>>>> d41284d94d63dd98856c2c8e2e05f4c90e7e900c
               </button>
             </Link>
           </div>
@@ -118,4 +164,8 @@ function Header(props) {
   );
 }
 
+<<<<<<< HEAD
 export default Header;
+=======
+export default Header;
+>>>>>>> d41284d94d63dd98856c2c8e2e05f4c90e7e900c
