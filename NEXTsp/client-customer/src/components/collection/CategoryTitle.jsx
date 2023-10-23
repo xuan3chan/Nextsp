@@ -5,7 +5,7 @@ function CategoryTitle(props) {
         <div>
             <div className="flex justify-center w-full bg-white h-16">
             </div>
-            </div>
+          </div>
     );
 }
 
