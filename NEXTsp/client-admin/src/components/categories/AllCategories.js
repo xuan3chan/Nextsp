@@ -80,13 +80,13 @@ const AllCategories = () => {
   return (
     <Fragment>
       <div className="col-span-1 overflow-auto bg-white shadow-lg p-4">
-        <table className="table-fixed border w-full my-2">
+        <table className="table-auto border w-full my-2">
           <thead>
             <tr>
               <th className="px-4 py-2 border">Category</th>
-              <th className="px-4 py-2 border">Description</th>
-              <th className="px-4 py-2 border">Status</th>
-              <th className="px-4 py-2 border">Action</th>
+              <th className="px-4 py-2 w-2/4 border">Description</th>
+              <th className="px-4 py-2 w-1/6 border">Status</th>
+              <th className="px-4 py-2 w-1/6 border">Action</th>
             </tr>
           </thead>
           <tbody>
@@ -94,8 +94,8 @@ const AllCategories = () => {
               categories.map((category, index) => (
                 <tr key={category._id}>
                   <td className="px-4 py-2 border">{category.nameCategory}</td>
-                  <td className="px-4 py-2 border">{category.description}</td>
-                  <td className="px-4 py-2 border">{category.status}</td>
+                  <td className="px-4 py-2 border whitespace-normal break-words break-all">{category.description}</td>
+                  <td className="px-4 py-2 text-center border">{category.status}</td>
                   <td className="px-4 py-2 border">
                     <button
                       onClick={() => deleteCategory(category._id)}

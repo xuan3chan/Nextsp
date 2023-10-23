@@ -12,8 +12,6 @@ const categorySchema = new Schema({
     },
     status: {
         type: String,
-        enum: ['Active', 'Inactive'],
-        default: 'Active'
     },
 });
 
