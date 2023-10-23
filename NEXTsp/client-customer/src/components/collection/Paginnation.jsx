@@ -2,7 +2,11 @@ import React from "react";
 import '../../assets/css/collection.css';
 function Paginnation(props) {
   return (
+<<<<<<< HEAD
     <div className="flex contents-center justify-center mr-auto ml-auto w-full ">
+=======
+    <div className="flex contents-center justify-center mr-auto ml-auto w-full mt-4">
+>>>>>>> 4d72f579d0da82d2ea58f16fcf48cf514b99e118
       <div class="pagination ">
         <a href="/login">&laquo;</a>
         <a href="/collection/1">1</a>
