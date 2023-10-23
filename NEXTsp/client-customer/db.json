@@ -1,0 +1,197 @@
+<<<<<<< HEAD
+=======
+{
+  "userAccount": [
+    {
+      "fullName": "123123",
+      "email": "123123123",
+      "accountName": "123123",
+      "password": "123123",
+      "confirmPassword": "123123",
+      "id": 1
+    },
+    {
+      "fullName": "123123",
+      "email": "1231231",
+      "accountName": "2312312",
+      "password": "3123123",
+      "confirmPassword": "123123",
+      "id": 2
+    },
+    {
+      "fullName": "1231",
+      "email": "123123@vanlanguni.vn",
+      "accountName": "12312",
+      "password": "123123",
+      "confirmPassword": "123123",
+      "id": 3
+    },
+    {
+      "fullName": "admin ",
+      "email": "adming@gmail.com",
+      "accountName": "admin",
+      "password": "admin",
+      "confirmPassword": "admin",
+      "id": 4
+    }
+  ],
+  "Blog": [
+    {
+      "Postid": "1",
+      "PostName": "iPhone bị mất tiếng loa ngoài phải làm sao? Cùng xem nguyên nhân và 9 cách khắc phục nhanh",
+      "PostImg": "https://www.peacemakersnetwork.org/wp-content/uploads/2019/09/placeholder.jpg",
+      "PostTime": "25 phút trước"
+    },
+    {
+      "Postid": "2",
+      "PostName": "Cách kết nối Bluetooth với MacBook để chia sẻ dữ liệu, nghe nhạc, kết nối với thiết bị điện tử khác",
+      "PostImg": "https://www.peacemakersnetwork.org/wp-content/uploads/2019/09/placeholder.jpg",
+      "PostTime": "25 phút trước"
+    },
+    {
+      "Postid": "3",
+      "PostName": "Đánh giá iOS 17 Beta 3: Ít nâng cấp, hiệu năng không tăng… ",
+      "PostImg": "https://www.peacemakersnetwork.org/wp-content/uploads/2019/09/placeholder.jpg",
+      "PostTime": "25 phút trước"
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "title": "Laptop Acer Gaming Nitro 5",
+      "oldPrice": 2000000,
+      "price": 30000000,
+      "imageUrl": "https://hc.com.vn/i/ecommerce/media/GS.009054_FEATURE_117958.png",
+      "type":"Laptop"
+    },
+    {
+      "id": 2,
+      "title": "Laptop Acer Gaming Nitro 5 AN515-45-R6EV Ryzen 5 5600H",
+      "oldPrice": 20000000,
+      "price": 30000000,
+      "imageUrl": "https://hc.com.vn/i/ecommerce/media/GS.009054_FEATURE_117958.png",
+      "type":"Laptop"
+    },
+    {
+      "id": 3,
+      "title": "Laptop Acer Gaming Nitro 5 AN515-45-R6EV Ryzen 5 5600H",
+      "oldPrice": 20000000,
+      "price": 30000000,
+      "imageUrl": "https://hc.com.vn/i/ecommerce/media/GS.009054_FEATURE_117958.png",
+      "type":"Laptop"
+<<<<<<< HEAD
+=======
+
+
+      
+>>>>>>> d41284d94d63dd98856c2c8e2e05f4c90e7e900c
+    },
+    {
+      "id": 4,
+      "title": "Laptop Gaming HP VICTUS 16-e1104AX-7C0S9PA",
+      "oldPrice": 20000000,
+      "price": 30000000,
+      "imageUrl": "https://hoanghamobile.com/Uploads/2023/03/14/laptop-gaming-hp-victus-16-e1104ax-7c0s9pa-01.jpg",
+      "type":"Laptop"
+    }
+    ,
+    {
+      "id": 5,
+      "title": "Laptop Gaming HP VICTUS 16-e1104AX-7C0S9PA",
+      "oldPrice": 20000000,
+      "price": 30000000,
+      "imageUrl": "https://hoanghamobile.com/Uploads/2023/03/14/laptop-gaming-hp-victus-16-e1104ax-7c0s9pa-01.jpg",
+      "type":"Laptop"
+    }
+    ,
+    {
+      "id": 6,
+      "title": "Laptop Gaming HP VICTUS 16-e1104AX-7C0S9PA",
+      "oldPrice": 20000000,
+      "price": 30000000,
+      "imageUrl": "https://hoanghamobile.com/Uploads/2023/03/14/laptop-gaming-hp-victus-16-e1104ax-7c0s9pa-01.jpg",
+      "type":"Laptop"
+    }
+    ,
+    {
+      "id": 7,
+      "title": "Laptop Gaming HP VICTUS 16-e1104AX-7C0S9PA",
+      "oldPrice": 20000000,
+      "price": 30000000,
+      "imageUrl": "https://hoanghamobile.com/Uploads/2023/03/14/laptop-gaming-hp-victus-16-e1104ax-7c0s9pa-01.jpg",
+      "type":"Laptop"
+    }
+    ,
+    {
+      "id": 8,
+      "title": "Laptop Gaming HP VICTUS 16-e1104AX-7C0S9PA",
+      "oldPrice": 20000000,
+      "price": 30000000,
+      "imageUrl": "https://hoanghamobile.com/Uploads/2023/03/14/laptop-gaming-hp-victus-16-e1104ax-7c0s9pa-01.jpg",
+      "type":"Phone"
+    }
+    ,
+    {
+      "id": 9,
+      "title": "Laptop Gaming HP VICTUS 16-e1104AX-7C0S9PA",
+      "oldPrice": 20000000,
+      "price": 30000000,
+      "imageUrl": "https://hoanghamobile.com/Uploads/2023/03/14/laptop-gaming-hp-victus-16-e1104ax-7c0s9pa-01.jpg",
+      "type":"Phone"
+    }
+    ,
+    {
+      "id": 10,
+      "title": "Laptop Gaming HP VICTUS 16-e1104AX-7C0S9PA",
+      "oldPrice": 20000000,
+      "price": 30000000,
+      "imageUrl": "https://hoanghamobile.com/Uploads/2023/03/14/laptop-gaming-hp-victus-16-e1104ax-7c0s9pa-01.jpg",
+      "type":"Phone"
+
+    }
+  ]
+  ,
+  "Categories": [
+    {
+      "id": 1,
+      "categoryName": "Máy Tính Bàn",
+      "categoryLink": "PC"
+    },
+    {
+      "id": 2,
+      "categoryName": "Laptop",
+      "categoryLink": "Laptop"
+
+    },
+    {
+      "id": 3,
+      "categoryName": "Linh Kiện Máy Tính",
+      "categoryLink": "LinhKien"
+    },
+    {
+      "id": 4,
+      "categoryName": "Phụ Kiện Máy Tính",
+      "categoryLink": "PhuKien"
+    }
+  ],
+  "Brands":[
+    {
+      "id":1,
+      "brandName":"Apple"
+    },
+    {
+      "id":2,
+      "brandName":"Samsung"
+    },
+    {
+      "id":3,
+      "brandName":"Dell"
+    }
+    ,
+    {
+      "id":4,
+      "brandName":"Asus"
+    }
+  ]
+}
+>>>>>>> cf830381dfc55af02a0186b8d0852ca2e5b7a295
