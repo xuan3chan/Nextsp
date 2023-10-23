@@ -2,12 +2,12 @@
 const Category = require('../models/categoryModel');
 
 class CategoryService {
-    static async addCategoryService({ nameCategory, description }) {
+    static async addCategoryService({ nameCategory, description,status }) {
         if (!nameCategory) {
             throw { status: 400, message: 'Missing nameCategory and/or description' };
         }
 
-        const newCategory = new Category({ nameCategory, description });
+        const newCategory = new Category({ nameCategory, description,status});
         await newCategory.save();
 
         return { success: true, message: 'Category created successfully' };
