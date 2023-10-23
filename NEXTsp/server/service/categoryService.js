@@ -13,14 +13,14 @@ class CategoryService {
         return { success: true, message: 'Category created successfully' };
     }
 
-    static async updateCategoryService({ id, nameCategory, description }) {
+    static async updateCategoryService({ id, nameCategory, description, status }) {
         if (!nameCategory) {
             throw { status: 400, message: 'Missing nameCategory and/or description' };
         }
 
         const updatedCategory = await Category.findByIdAndUpdate(
             id,
-            { nameCategory, description },
+            { nameCategory, description, status},
             { new: true, runValidators: true }
         );
 
