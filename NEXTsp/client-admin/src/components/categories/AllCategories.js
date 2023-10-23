@@ -1,10 +1,12 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useState, useEffect, Fragment, useContext } from 'react';
 import { getAllCategory } from './FetchApi';
+import { CategoryContext } from './index';
 import axios from 'axios';
 
 const apiURL = process.env.REACT_APP_CATEGORYIES
 
 const AllCategories = () => {
+  const { data, dispatch } = useContext(CategoryContext);
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
@@ -67,15 +69,17 @@ const AllCategories = () => {
       })
   }
   
-  const updateCategory = (_id, nameCategory, description, status) => {
-    axios.put(`${apiURL}/update/${_id}`, { nameCategory, description, status })
-      .then(res => {
-        console.log(res)
-      })
-      .catch(err => {
-        console.log(err)
-      })
-  }
+  const editCategory = (_id, nameCategory,type, description, status) => {
+    if (type) {
+      dispatch({
+        type: "editCategoryModalOpen",
+        _id: _id,
+        nameCategory: nameCategory,
+        description: description,
+        status: status,
+      });
+    }
+  };
 
   return (
     <Fragment>
@@ -104,7 +108,7 @@ const AllCategories = () => {
                       Delete
                     </button>
                     <button
-                      onClick={() => updateCategory(category._id)}
+                      onClick={() => editCategory(category._id)}
                       className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                     >
                       Update

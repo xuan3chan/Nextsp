@@ -1,13 +1,13 @@
 export const categoryState = {
   categories: [],
   addCategoryModal: false,
-  // editCategoryModal: {
-  //   modal: false,
-  //   _id: null,
-  //   nameCategory: "",
-  //   description: "",
-  //   status: "",
-  // },
+  editCategoryModal: {
+    modal: false,
+    _id: null,
+    nameCategory: "",
+    description: "",
+    status: "",
+  },
   loading: false,
 }
 
@@ -28,6 +28,28 @@ export const categoryReducer = (state, action) => {
       return {
         ...state,
         loading: action.payload,
+      };
+      case "editCategoryModalOpen":
+      return {
+        ...state,
+        editCategoryModal: {
+          modal: true,
+          _id: action._id,
+          nameCategory: action.nameCategory,
+          description: action.description,
+          status: action.status,
+        },
+      };
+      case "editCategoryModalClose":
+      return {
+        ...state,
+        editCategoryModal: {
+          modal: true,
+          _id: action._id,
+          nameCategory: action.nameCategory,
+          description: action.description,
+          status: action.status,
+        },
       };
     default:
       return state;
