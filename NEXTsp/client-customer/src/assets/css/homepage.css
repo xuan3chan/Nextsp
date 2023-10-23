@@ -11,12 +11,7 @@
   --fourth-color: #edf1f3;
   --primary-font: "Lato", sans-serif;
 }
-<<<<<<< HEAD
-<<<<<<< HEAD
 
-=======
-=======
->>>>>>> cf830381dfc55af02a0186b8d0852ca2e5b7a295
 .loading {
   position: fixed;
   top: 50%; /* Đặt vị trí theo chiều dọc giữa màn hình */
@@ -33,13 +28,6 @@
 .color-bg{ 
   background-color: var(--color-body-bg);
 }
-<<<<<<< HEAD
->>>>>>> 4d72f579d0da82d2ea58f16fcf48cf514b99e118
-=======
-=======
-
->>>>>>> d41284d94d63dd98856c2c8e2e05f4c90e7e900c
->>>>>>> cf830381dfc55af02a0186b8d0852ca2e5b7a295
 /* Banner Top */
 .banner_top {
   height: 48px;
@@ -62,11 +50,6 @@
   font-family: var(--primary-font);
   font-weight: 600;
 }
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> cf830381dfc55af02a0186b8d0852ca2e5b7a295
 /* Header*/
 
 .header {
@@ -281,12 +264,6 @@
   flex-direction: column;
   gap: 60px;
 }
-<<<<<<< HEAD
-=======
->>>>>>> 4d72f579d0da82d2ea58f16fcf48cf514b99e118
-=======
->>>>>>> d41284d94d63dd98856c2c8e2e05f4c90e7e900c
->>>>>>> cf830381dfc55af02a0186b8d0852ca2e5b7a295
 
 /* Banner Scrolled Image */
 
@@ -369,28 +346,12 @@
 .titleList {
   color: #212529;
   font-family: Arial, Helvetica, sans-serif;
-<<<<<<< HEAD
-<<<<<<< HEAD
-  font-size: 32px;
-=======
   font-size: 26px;
->>>>>>> 4d72f579d0da82d2ea58f16fcf48cf514b99e118
-=======
-  font-size: 26px;
-=======
-  font-size: 32px;
->>>>>>> d41284d94d63dd98856c2c8e2e05f4c90e7e900c
->>>>>>> cf830381dfc55af02a0186b8d0852ca2e5b7a295
   font-style: normal;
   font-weight: 500;
   line-height: 38.4px; /* 120% */
   text-transform: uppercase;
 }
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> cf830381dfc55af02a0186b8d0852ca2e5b7a295
 .titleList:hover {
   color: #e30019;
 }
@@ -401,12 +362,6 @@
   border-left: #000 solid 2px;
   font-weight: 600;
 }
-<<<<<<< HEAD
->>>>>>> 4d72f579d0da82d2ea58f16fcf48cf514b99e118
-=======
-=======
->>>>>>> d41284d94d63dd98856c2c8e2e05f4c90e7e900c
->>>>>>> cf830381dfc55af02a0186b8d0852ca2e5b7a295
 
 .product_title {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
@@ -422,20 +377,9 @@
   -webkit-box-orient: vertical;
   white-space: normal; /* Display multi-line text */
 }
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 .product_title > svg { 
   fill: #e30019 ;
 }
->>>>>>> 4d72f579d0da82d2ea58f16fcf48cf514b99e118
-=======
-.product_title > svg { 
-  fill: #e30019 ;
-}
-=======
->>>>>>> d41284d94d63dd98856c2c8e2e05f4c90e7e900c
->>>>>>> cf830381dfc55af02a0186b8d0852ca2e5b7a295
 .productList {
 }
 .productItem {

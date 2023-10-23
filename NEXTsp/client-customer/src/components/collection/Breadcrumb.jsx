@@ -8,19 +8,12 @@ function Breadcrumb(props) {
           <li class="breadcrumb-item">
             <a href="/Homepage">Trang Chủ</a>
           </li>
-          <li class="breadcrumb-item">
-            <a href="/products">Collection</a>
-          </li>
           <li class="breadcrumb-item active" aria-current="page">
             Laptop
             <a href="/products">Danh Mục</a>
           </li>
           <li class="breadcrumb-item active" aria-current="page">
             {props.titleCollection}
-            <a href="/products">Collection</a>
-          </li>
-          <li class="breadcrumb-item active" aria-current="page">
-            Laptop
           </li>
         </ol>
       </nav>
