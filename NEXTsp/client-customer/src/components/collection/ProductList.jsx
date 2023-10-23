@@ -70,5 +70,4 @@ function ProductList(props) {
     </div>
   );
 }
-
 export default ProductList;
