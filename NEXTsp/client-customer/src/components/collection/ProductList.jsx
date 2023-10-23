@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React from "react";
 import "../../assets/css/collection.css";
 import axios from "axios";
@@ -90,3 +91,5 @@ function ProductList(props) {
 }
 
 export default ProductList;
+=======
+>>>>>>> cf830381dfc55af02a0186b8d0852ca2e5b7a295
