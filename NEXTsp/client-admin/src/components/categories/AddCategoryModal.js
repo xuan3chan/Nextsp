@@ -11,7 +11,7 @@ const AddCategoryModal = () => {
   const [fData, setFdata] = useState({
     nameCategory: "",
     description: "",
-    status: "Active",
+    status: "",
     success: false,
     error: false,
   });
@@ -28,7 +28,7 @@ const AddCategoryModal = () => {
   if (fData.error || fData.success) {
     setTimeout(() => {
       setFdata({ ...fData, success: false, error: false });
-    }, 2000);
+    }, 3000);
   }
 
   const submitForm = async (e) => {
@@ -36,43 +36,45 @@ const AddCategoryModal = () => {
     // Reset and prevent the form
     e.preventDefault();
     e.target.reset();
-
+  
     if (!fData.nameCategory) {
       dispatch({ type: "loading", payload: false });
       return setFdata({ ...fData, error: "Please Add the name !" });
     }
-
+  
     try {
       let responseData = await createCategory(fData);
-      if (responseData.success) {
+      if (responseData && responseData.success) {
         fetchData();
         setFdata({
           ...fData,
           nameCategory: "",
           description: "",
-          status: "Active",
+          status: "",
           success: responseData.success,
           error: false,
         });
         dispatch({ type: "loading", payload: false });
+        setFdata({
+          ...fData,
+          nameCategory: "",
+          description: "",
+          status: "",
+          success: "Add Category Successfully :3",
+          error: false,
+        });
         setTimeout(() => {
-          setFdata({
-            ...fData,
-            nameCategory: "",
-            description: "",
-            status: "Active",
-            success: responseData.success,
-            error: false,
-          });
-        }, 2000);
-      } else if (responseData.error) {
+          window.location.reload();
+        }, 1000)
+      } else if (responseData && responseData.error) {
         dispatch({ type: "loading", payload: false });
         setFdata({ ...fData, error: responseData.error });
       }
-      } catch (err) {
-        console.log(err);
-      }
-    };
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  
   return (
     <Fragment>
       {/* Black Overlay */}

@@ -22,23 +22,19 @@ export const getAllCategory = async () => {
 };
 
 
-export const createCategory = async ({
-  nameCategory,
-  description,
-  status,
-}) => {
-  let formData = new FormData();
-  formData.append("nameCategory", nameCategory);
-  formData.append("description", description);
-  formData.append("status", status);
-
+export const createCategory = async ({ nameCategory, description, status }) => {
   try {
-    let res = await axios.post(
-      `${apiURL}/add`,
-      formData
-    );
+    const formData = {
+      nameCategory,
+      description,
+      status,
+    };
+
+    const res = await axios.post("http://localhost:3101/api/categorys/add", formData);
+    
     return res.data;
   } catch (error) {
     console.log(error);
+    return { error: "Failed to create the category." };
   }
 };
