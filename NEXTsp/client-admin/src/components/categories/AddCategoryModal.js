@@ -174,8 +174,8 @@ const AddCategoryModal = () => {
                 <option name="status" value="Active">
                   Active
                 </option>
-                <option name="status" value="Disabled">
-                  Disabled
+                <option name="status" value="Inactive">
+                  Inactive
                 </option>
               </select>
             </div>
