@@ -29,10 +29,9 @@ const connectDB = async () => {
 }
 connectDB();
 
-
 // Routes
 app.use('/api/auth', authRoutes);
-app.use('/api/categorys', categoryRoutes,);
+app.use('/api/categories', categoryRoutes,);
 app.use('/api/brands', brandRoutes);
 app.use('/api/products', productRoutes);
 

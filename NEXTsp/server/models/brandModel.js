@@ -14,13 +14,13 @@ const brandSchema = new mongoose.Schema(
         },
         category: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'Category',
+            ref: 'categories',
             required: true,
         },
         status: {
             type: String,
-            enum: ['active', 'inactive'],
-            default: 'active',
+            enum: ['Active', 'Inactive'],
+            default: 'Active',
         },
     },
     {
