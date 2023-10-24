@@ -1,13 +1,13 @@
-POST http://localhost:3101/api/categorys/add
-Content-Type : application/json
+# POST http://localhost:3101/api/categorys/add
+# Content-Type : application/json
 
-{
-    "nameCategory":"asd",
-    "description":"sd",
-    "status":"Inactive"
-}
-# POST http://localhost:3101/api/auth/login/admin
-# Content-Type: application/json
+# {
+#     "nameCategory":"asd",
+#     "description":"sd",
+#     "status":"Inactive"
+# }
+# # POST http://localhost:3101/api/auth/login/admin
+# # Content-Type: application/json
 
 # {
 #     "accountName":"admin2",
@@ -34,8 +34,12 @@ Content-Type : application/json
 #     "brand":"652cefc663603fda07747a2b",
 #     "image":"",
 #     "status":"active"
-
-
-
-
 # }
+ POST http://localhost:3101/api/brands/add
+    application/json
+    
+    {
+        "nameBrand":"asus3",
+        "description":" ",
+        "image":""
+    }
