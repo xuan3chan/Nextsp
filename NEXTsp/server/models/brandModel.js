@@ -1,5 +1,5 @@
-// model brand 
 const mongoose = require('mongoose');
+
 const brandSchema = new mongoose.Schema(
     {
         nameBrand: {
@@ -12,10 +12,16 @@ const brandSchema = new mongoose.Schema(
             type: String,
             trim: true,
         },
-        category: {
+        categoryid: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'categories',
             required: true,
+            validate: {
+                validator: function (value) {
+                    return mongoose.Types.ObjectId.isValid(value);
+                },
+                message: 'Invalid categoryid',
+            },
         },
         status: {
             type: String,
@@ -24,8 +30,9 @@ const brandSchema = new mongoose.Schema(
         },
     },
     {
-        timestamps: true, //important
+        timestamps: true, // important
     }
 );
+
 const Brand = mongoose.model('Brand', brandSchema);
 module.exports = Brand;

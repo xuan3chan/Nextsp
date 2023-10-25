@@ -1,30 +1,30 @@
 const Brand = require('../models/brandModel');
 
 class BrandService {
-    static async addBrandService({ nameBrand, description, category, status }) {
-        if (!nameBrand) {
-            throw new Error(400, 'Missing nameBrand');
+    static async addBrandService({ nameBrand, description, categoryid, status }) {
+        if (!nameBrand || !categoryid || !status) {
+            throw { status: 400, message: 'Missing required parameters' };
         }
 
-        const newBrand = new Brand({ nameBrand, description, category, status });
+        const newBrand = new Brand({ nameBrand, description, categoryid, status });
         await newBrand.save();
 
         return { success: true, message: 'Brand created successfully' };
     }
 
-    static async updateBrandService({ id, nameBrand, description }) {
-        if (!nameBrand) {
-            throw new Error(400, 'Missing nameBrand and/or description');
+    static async updateBrandService({ id, nameBrand, description, categoryid }) {
+        if (!nameBrand || !categoryid) {
+            throw { status: 400, message: 'Missing required parameters' };
         }
 
         const updatedBrand = await Brand.findByIdAndUpdate(
             id,
-            { nameBrand, description },
+            { nameBrand, description, categoryid },
             { new: true, runValidators: true }
         );
 
         if (!updatedBrand) {
-            throw new Error(404, 'Brand not found or user not authorized');
+            throw { status: 404, message: 'Brand not found or user not authorized' };
         }
 
         return { success: true, message: 'Excellent progress!', brand: updatedBrand };
@@ -34,7 +34,7 @@ class BrandService {
         const deletedBrand = await Brand.findByIdAndDelete(id);
 
         if (!deletedBrand) {
-            throw new Error(404, 'Brand not found or user not authorized');
+            throw { status: 404, message: 'Brand not found or user not authorized' };
         }
 
         return { success: true, message: 'Excellent progress!' };
@@ -43,11 +43,36 @@ class BrandService {
     static async getAllBrandsService() {
         const brands = await Brand.find();
         const extractedBrands = brands.map((brand) => ({
+            id: brand._id,
             nameBrand: brand.nameBrand,
             description: brand.description,
+            categoryid: brand.categoryid,
+            status: brand.status,
         }));
 
         return { success: true, brands: extractedBrands };
+    }
+    static async getBrandByIdWithCategory(id) {
+        try {
+            const brand = await Brand.findById(id).populate('categoryid', 'nameCategory');
+            
+            if (!brand) {
+                throw { status: 404, message: 'Brand not found' };
+            }
+
+            return {
+                success: true,
+                brand: {
+                    id: brand._id,
+                    nameBrand: brand.nameBrand,
+                    description: brand.description,
+                    categoryid: brand.categoryid.nameCategory,
+                    status: brand.status,
+                },
+            };
+        } catch (error) {
+            throw { status: 500, message: 'Internal Server Error' };
+        }
     }
 }
 
