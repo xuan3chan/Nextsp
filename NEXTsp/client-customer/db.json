@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-=======
+
 {
   "userAccount": [
     {
@@ -79,12 +78,7 @@
       "price": 30000000,
       "imageUrl": "https://hc.com.vn/i/ecommerce/media/GS.009054_FEATURE_117958.png",
       "type":"Laptop"
-<<<<<<< HEAD
-=======
 
-
-      
->>>>>>> d41284d94d63dd98856c2c8e2e05f4c90e7e900c
     },
     {
       "id": 4,
@@ -194,4 +188,3 @@
     }
   ]
 }
->>>>>>> cf830381dfc55af02a0186b8d0852ca2e5b7a295

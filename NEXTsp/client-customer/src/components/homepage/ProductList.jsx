@@ -5,7 +5,7 @@ import {FaTruckMoving} from "react-icons/fa";
 import {BiSolidRightArrow}  from "react-icons/bi";
 function ProductList(props) {
   const [products, setProducts] = React.useState([]);
-  const ApiProducts = "http://localhost:3000/products";
+  const ApiProducts = "http://localhost:3003/products";
 
   React.useEffect(() => {
     const fetchData = async () => {

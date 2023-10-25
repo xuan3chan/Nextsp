@@ -9,6 +9,7 @@ import CollectionPc from "../src/container/Collections/CollectionPC";
 import CollectionGear from "../src/container/Collections/CollectionGear";
 import CollectionAccessory from "../src/container/Collections/CollectionAccessory";
 import { LoadingProvider } from "./components/LoadingContext";
+import Products from "./container/Products";
 const App = () => {
   return (
     <Router>
@@ -24,7 +25,8 @@ const App = () => {
           <Route path="/collection/PC" element={<CollectionPc />} />
           <Route path="/collection/LinhKien" element={<CollectionGear />} />
           <Route path="/collection/PhuKien" element={<CollectionAccessory />} />
-        </Routes>
+          <Route path="/Products" element={<Products />} />
+          </Routes>
       </LoadingProvider>
     </Router>
   );
