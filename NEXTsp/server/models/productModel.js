@@ -1,6 +1,5 @@
-// productMode
-// Product model
 const mongoose = require('mongoose');
+
 const productSchema = new mongoose.Schema(
     {
         nameProduct: {
@@ -31,19 +30,24 @@ const productSchema = new mongoose.Schema(
             ref: 'Brand',
             required: true,
         },
-        images: {
-            type: String,
-            required: true,
-        },
+        images: [
+            {
+                path: {
+                    type: String,
+                    required: true,
+                },
+            },
+        ],
         status: {
             type: String,
-            enum: ['active', 'inactive'],
-            default: 'active',
+            enum: ['Active', 'Inactive'],
+            default: 'Active',
         },
     },
     {
-        timestamps: true, //important
+        timestamps: true,
     }
 );
+
 const Product = mongoose.model('Product', productSchema);
 module.exports = Product;

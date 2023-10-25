@@ -1,6 +1,6 @@
-Thêm danh mục : " http://localhost:3101/api/categorys/add "
-sửa danh mục : "http://localhost:3101/api/categorys/update"
-xoa danh muc "http://localhost:3101/api/categorys/delete "
+Thêm danh mục : " http://localhost:3101/api/categories/add "
+sửa danh mục : "http://localhost:3101/api/categories/update"
+xoa danh muc "http://localhost:3101/api/categories/delete "
 xem toàn bộ : http://localhost:3101/api/categories/getall "
 
 
@@ -13,6 +13,8 @@ thêm sản phẩm
 xóa sản phẩm 
 sửa sản phẩm
 chi tiết 1 sản phẩm
+
+lấy hết cate có brand:" http://localhost:3101/api/catalog/getlistcateandbrand"
 
 
 loginuser :http://localhost:3101/api/auth/login
