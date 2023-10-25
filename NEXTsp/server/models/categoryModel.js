@@ -7,6 +7,13 @@ const categorySchema = new Schema({
         required: true,
         unique: true,
     },
+    brands: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Brand',
+        },
+    ]
+    ,
     description: {
         type: String,
     },

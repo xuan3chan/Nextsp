@@ -45,6 +45,7 @@ class CategoryService {
         const categories = await Category.find();
         return { success: true, categories };
     }
+    
 }
 
 module.exports = CategoryService;

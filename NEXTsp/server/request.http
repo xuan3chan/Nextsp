@@ -1,14 +1,36 @@
-PUT http://localhost:3101/api/brands/update/6537c0a19883459adcafbf4f
-content-type: application/json
+# PUT http://localhost:3101/api/brands/update/6537c0a19883459adcafbf4f
+# content-type: application/json
 
-{
-    "nameBrand": "Apple5",
-    "description": "Mô tả thương hiệu",
-    "categoryid": "6536401ff03a61e84e773f45",
-    "status": "Active"
-}
+# {
+#     "nameBrand": "Apple5",
+#     "description": "Mô tả thương hiệu",
+#     "categoryid": "6536401ff03a61e84e773f45",
+#     "status": "Active"
+# }
 
 
 # GET http://localhost:3101/api/brands/get/6536401ff03a61e84e773f45
 
+GET http://localhost:3101/api/catalog/getlistcateandbrand
 
+# post http://localhost:3101/api/brands/add
+# content-type: application/json
+
+# {
+#     "nameBrand": "Apple3",
+#     "description": "Mô tả thương hiệu",
+#     "category":"65394a3501cc7134c7daa57d",
+#     "status": "Active"
+# }
+# Get http://localhost:3101/api/brands/getall
+
+# Get http://localhost:3101/api/categories/getall
+
+# POST http://localhost:3101/api/categories/add
+# content-type: application/json
+
+# {
+#     "nameCategory": "Điện thoại",
+#     "description": "Mô tả danh mục",
+#     "status": "Active"
+# }
