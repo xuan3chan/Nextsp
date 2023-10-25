@@ -23,8 +23,8 @@ function Header(props) {
 
   useEffect(() => {
     // Define the API URLs
-    const apiUrl1 = 'http://localhost:3003/Categories';
-    const apiUrl2 = 'http://localhost:3003/Brands';
+    const apiUrl1 = "http://localhost:3003/Categories";
+    const apiUrl2 = "http://localhost:3003/Brands";
     // Make parallel requests
     const request1 = axios.get(apiUrl1);
     const request2 = axios.get(apiUrl2);
@@ -35,9 +35,8 @@ function Header(props) {
         setCategories(response1.data);
         setBrands(response2.data);
       })
-      .catch(error => {
-        console.error('Error fetching data:', error);
-
+      .catch((error) => {
+        console.error("Error fetching data:", error);
       });
   }, []);
   return (
@@ -48,27 +47,46 @@ function Header(props) {
           <a href="../Homepage">Trang Chủ</a>
           <a href="/Blog">Bài Viết</a>
           <div className="dropdown">
-            <button className="dropbtn">
-              <FontAwesomeIcon className="mr-1" icon={faBars} />
-              Danh Mục
-              <i className="fa fa-caret-down"></i>
-            </button>
-            <div class="dropdown-content flex flex-col">
-              {Categories &&
-                Categories.map((item) => (
+          <button className="dropbtn">
+            <FontAwesomeIcon className="mr-1" icon={faBars} />
+            Danh Mục
+            <i className="fa fa-caret-down"></i>
+          </button>
+          <div className="dropdown-content flex flex-col">
+            {Categories &&
+              Categories.map((category) => (
+                <div className="category-item text-black flex contents-center " key={category.categoryName}>
                   <a
-                    className="dropDownItem flex items-center justify-start gap-2 relative "
-                    href={`/Collection/${item.categoryLink}`}
+                    className="category-link"
+                    href={`/Collection/${category.categoryLink}`}
                   >
-                    {item.categoryName}{" "}
+                    {category.categoryName}
                     <FontAwesomeIcon
-                      className="absolute right-3"
+                      className="category-icon"
                       icon={faCaretRight}
                     />
-                  </a>
-                ))}
-            </div>
+                    </a>
+                  <div className="brand-menu">
+                    {Brands &&
+                      Brands.map((brand) => {
+                        if (brand.categoryId === category.categoryId) {
+                          return (
+                            <a
+                              className="brand-link"
+                              href={`/Collection/${brand.brandLink}`}
+                              key={brand.brandName}
+                            >
+                              {brand.brandName}
+                            </a>
+                          );
+                        }
+                      })}
+                  </div>
+                </div>
+              ))}
           </div>
+        </div>
+        
         </div>
         <div className="header_searching_module">
           <div class="wrap">
@@ -120,4 +138,3 @@ function Header(props) {
 }
 
 export default Header;
-
