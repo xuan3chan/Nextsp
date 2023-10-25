@@ -1,5 +1,5 @@
 import axios from "axios";
-const apiURL = process.env.REACT_APP_CATEGORYIES;
+const apiURL = process.env.REACT_APP_CATEGORIES;
 
 // const BearerToken = () =>
 //   localStorage.getItem("accessToken")
@@ -30,7 +30,7 @@ export const createCategory = async ({ nameCategory, description, status }) => {
       status,
     };
 
-    const res = await axios.post("http://localhost:3101/api/categorys/add", formData);
+    const res = await axios.post(`${apiURL}/add`, formData);
     
     return res.data;
   } catch (error) {
