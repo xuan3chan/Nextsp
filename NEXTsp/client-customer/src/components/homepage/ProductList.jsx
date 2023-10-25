@@ -1,12 +1,14 @@
 import React from "react";
 import axios from "axios";
-
+import {FaTruckMoving} from "react-icons/fa";
+import {BiSolidRightArrow}  from "react-icons/bi";
 function ProductList(props) {
   const [products, setProducts] = React.useState([]);
+  const ApiProducts = "http://localhost:3003/products";
 
   React.useEffect(() => {
     const fetchData = async () => {
-      const result = await axios.get("http://localhost:3003/Products");
+      const result = await axios.get(ApiProducts);
 
       setProducts(result.data);
     };
@@ -17,6 +19,9 @@ function ProductList(props) {
     return `${price.toLocaleString()}đ`;
   }
   return (
+
+
+
     <div className="productList p-12 mr-auto ml-auto bg-white rounded-md">
       <h2 className="titleList mb-4 text-center">{props.title}</h2>
       <div className=" flex w-max flex-wrap gap-4 content-center justify-center">
@@ -27,29 +32,25 @@ function ProductList(props) {
                 key={product.id}
                 className="productItem flex flex-col  border-black-500/100 p-4 gap-1 "
               >
-              <div className="product_image w-72 h-52 object-contain">
-              <img
-                src={product.imageUrl}
-                alt=""
-                className="w-full h-44 object-contain "
-              />
-              </div>
-              <div className ="product_title">
-              <h1 className=" ">{product.title} </h1>
-              </div>
+                <div className="product_image w-72 h-52 object-contain">
+                  <img
+                    src={product.imageUrl}
+                    alt=""
+                    className="w-full h-44 object-contain "
+                  />
+                </div>
+                <div className="product_title">
+                  <h1 className=" ">{product.title} </h1>
+                </div>
                 <div>
-                  <p className="product_oldPrice font-bold RobotoViet">{formatPrice(product.oldPrice)}</p>
-                  <p className="product_price font-normal RobotoViet">{formatPrice(product.price)}</p>
+                  <p className="product_oldPrice font-bold RobotoViet">
+                    {formatPrice(product.oldPrice)}
+                  </p>
+                  <p className="product_price font-normal RobotoViet">
+                    {formatPrice(product.price)}
+                  </p>
                 </div>
-                <div className="product_rating flex gap-1 items-center">
-                  <p>⭐</p>
-                  <p>⭐</p>
-                  <p>⭐</p>
-                  <p>⭐</p>
-                  <p>⭐</p>
-                  <p className="text-xs	">(5 đánh giá)</p>
-                </div>
-                <div className="over-button flex gap-4 items-center justify-center">
+                <div className="over-button flex gap-4 items-center justify-center mt-3">
                   <div className="btn p-1  flex justify-center btn-sell ">
                     Mua Ngay
                   </div>

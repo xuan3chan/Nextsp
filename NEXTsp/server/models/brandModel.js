@@ -1,4 +1,3 @@
-// model brand 
 const mongoose = require('mongoose');
 const brandSchema = new mongoose.Schema(
     {
@@ -19,13 +18,14 @@ const brandSchema = new mongoose.Schema(
         },
         status: {
             type: String,
-            enum: ['active', 'inactive'],
-            default: 'active',
+            enum: ['Active', 'Inactive'],
+            default: 'Active',
         },
     },
     {
-        timestamps: true, //important
+        timestamps: true,
     }
 );
+
 const Brand = mongoose.model('Brand', brandSchema);
 module.exports = Brand;

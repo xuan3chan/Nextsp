@@ -1,3 +1,4 @@
+
 import React from "react";
 import "../../assets/css/collection.css";
 import axios from "axios";
@@ -69,5 +70,4 @@ function ProductList(props) {
     </div>
   );
 }
-
 export default ProductList;

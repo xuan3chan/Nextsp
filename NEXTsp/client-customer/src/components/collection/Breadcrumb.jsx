@@ -3,16 +3,16 @@ import "../../assets/css/collection.css";
 function Breadcrumb(props) {
   return (
     <div>
-      <nav aria-label="breadcrumb">
+      <nav aria-label="breadcrumb ">
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
             <a href="/Homepage">Trang Chủ</a>
           </li>
-          <li class="breadcrumb-item">
-            <a href="/products">Collection</a>
+          <li class="breadcrumb-item active" aria-current="page">
+            Danh Mục
           </li>
           <li class="breadcrumb-item active" aria-current="page">
-            Laptop
+            {props.titleCollection}
           </li>
         </ol>
       </nav>
