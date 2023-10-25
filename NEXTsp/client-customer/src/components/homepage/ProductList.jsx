@@ -1,8 +1,6 @@
 import React from "react";
 import axios from "axios";
 
-
-
 function ProductList(props) {
   const [products, setProducts] = React.useState([]);
 
