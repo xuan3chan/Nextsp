@@ -11,7 +11,7 @@
 
 # GET http://localhost:3101/api/brands/get/6536401ff03a61e84e773f45
 
-GET http://localhost:3101/api/catalog/getlistcateandbrand
+# GET http://localhost:3101/api/catalog/getlistcateandbrand
 
 # post http://localhost:3101/api/brands/add
 # content-type: application/json
@@ -34,3 +34,17 @@ GET http://localhost:3101/api/catalog/getlistcateandbrand
 #     "description": "Mô tả danh mục",
 #     "status": "Active"
 # }
+
+POST http://localhost:3101/api/products/add
+content-type: application/json
+
+{
+    "nameProduct": "Iphone 13",
+    "description": "Mô tả sản phẩm",
+    "price": 10000000,
+    "oldprice": 11000000,
+    "imges":["uploads/1698257578682-chandung.jpg"],
+    "status": "Active",
+    "category": "65394a3501cc7134c7daa57d",
+    "brand": "65394f137fb869aad55653af"
+}
