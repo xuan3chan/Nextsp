@@ -2,25 +2,25 @@
 const Category = require('../models/categoryModel');
 
 class CategoryService {
-    static async addCategoryService({ nameCategory, description }) {
+    static async addCategoryService({ nameCategory, description,status }) {
         if (!nameCategory) {
             throw { status: 400, message: 'Missing nameCategory and/or description' };
         }
 
-        const newCategory = new Category({ nameCategory, description });
+        const newCategory = new Category({ nameCategory, description,status});
         await newCategory.save();
 
         return { success: true, message: 'Category created successfully' };
     }
 
-    static async updateCategoryService({ id, nameCategory, description }) {
+    static async updateCategoryService({ id, nameCategory, description, status }) {
         if (!nameCategory) {
             throw { status: 400, message: 'Missing nameCategory and/or description' };
         }
 
         const updatedCategory = await Category.findByIdAndUpdate(
             id,
-            { nameCategory, description },
+            { nameCategory, description, status},
             { new: true, runValidators: true }
         );
 
@@ -45,6 +45,7 @@ class CategoryService {
         const categories = await Category.find();
         return { success: true, categories };
     }
+    
 }
 
 module.exports = CategoryService;

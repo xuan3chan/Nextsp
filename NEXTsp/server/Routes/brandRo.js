@@ -9,4 +9,5 @@ router.put('/update/:id', BrandController.updateBrand); // Assuming execute is t
 router.delete('/delete/:id', BrandController.deleteBrand); // Assuming execute is the method to handle the route
 //getallbrands
 router.get('/getall', BrandController.getAllBrands); // Assuming execute is the method to handle the route
+//getbrandbyid// Assuming execute is the method to handle the rout
 module.exports = router;

@@ -7,13 +7,20 @@ const categorySchema = new Schema({
         required: true,
         unique: true,
     },
+    brands: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Brand',
+        },
+    ]
+    ,
     description: {
         type: String,
     },
     status: {
         type: String,
-        enum: ['active', 'inactive'],
-        default: 'active',
+        enum: ['Active', 'Inactive'],
+        default: 'Active',
     },
 });
 

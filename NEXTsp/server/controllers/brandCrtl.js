@@ -39,6 +39,7 @@ class BrandController {
             handleErrorResponse(res, error);
         }
     }
+   
 }
 
 module.exports = BrandController;
