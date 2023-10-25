@@ -39,14 +39,7 @@ class BrandController {
             handleErrorResponse(res, error);
         }
     }
-    static async getBrandByIdWithCategory(req, res) {
-        try {
-            const result = await BrandService.getBrandByIdWithCategory(req.params.id);
-            res.json(result);
-        } catch (error) {
-            handleErrorResponse(res, error);
-        }
-    }
+   
 }
 
 module.exports = BrandController;

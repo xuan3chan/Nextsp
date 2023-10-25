@@ -52,28 +52,7 @@ class BrandService {
 
         return { success: true, brands: extractedBrands };
     }
-    static async getBrandByIdWithCategory(id) {
-        try {
-            const brand = await Brand.findById(id).populate('categoryid', 'nameCategory');
-            
-            if (!brand) {
-                throw { status: 404, message: 'Brand not found' };
-            }
-
-            return {
-                success: true,
-                brand: {
-                    id: brand._id,
-                    nameBrand: brand.nameBrand,
-                    description: brand.description,
-                    categoryid: brand.categoryid.nameCategory,
-                    status: brand.status,
-                },
-            };
-        } catch (error) {
-            throw { status: 500, message: 'Internal Server Error' };
-        }
-    }
+ 
 }
 
 module.exports = BrandService;
