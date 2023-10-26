@@ -316,7 +316,7 @@
   font-weight: 600;
 }
 .btn-more{
-  colro:var(--secondary-color);
+  color:var(--secondary-color);
   font-size: larger;
   font-weight: 500;
 }
