@@ -164,8 +164,7 @@
 .header_searching_module > .wrap {
   width: 100%;
 }
-.header_user_module {
-}
+
 .user_module_login:hover {
   opacity: 100%;
 }
@@ -249,8 +248,7 @@
   font-weight: 300;
   text-transform: uppercase;
 }
-.btn-sell {
-}
+
 .BannerScroll-right {
   display: flex;
   max-width: 657px;
@@ -278,10 +276,7 @@
   height: 120px;
   padding: 8px;
 }
-.SloganItem {
-}
-.image_slogan {
-}
+
 .tilte_slogan {
   color: #212529;
   font-family: Arial, Helvetica, sans-serif;
@@ -305,22 +300,37 @@
   color: #212529;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 26px;
-  font-style: normal;
-  font-weight: 500;
+  font-style: bold;
+  font-weight: 550;
   line-height: 38.4px; /* 120% */
   text-transform: uppercase;
+  display: flex;
+  align-items: left
 }
 .titleList:hover {
   color: #e30019;
 }
 
-.subTitleList {
-  font-size: 18px;
-  padding-left: 30px;
-  border-left: #000 solid 2px;
+.subtitleList {
+  font-size: 20px;
   font-weight: 600;
 }
-
+<<<<<<< HEAD
+.subtitleList:hover {
+  color: #e30019;
+}
+.btn-more{
+  color:var(--secondary-color);
+=======
+.btn-more{
+  colro:var(--secondary-color);
+>>>>>>> 02e056cd (Changes)
+  font-size: larger;
+  font-weight: 500;
+}
+.btn-more:hover{
+  color: #e30019;
+}
 .product_title {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
@@ -335,10 +345,13 @@
   -webkit-box-orient: vertical;
   white-space: normal; /* Display multi-line text */
 }
-.product_title > svg {
-  fill: #e30019;
+.subTitle { 
+  border-left: solid black 2px ;
 }
-.productList {
+.productList  svg {
+  width: 26px;
+  height: 18px;
+  font-size: 20px;
 }
 .productItem {
   width: 23%;
@@ -372,7 +385,15 @@
 .btn-addCart:hover {
   opacity: 80%;
 }
-
+.btn-seeMore{
+  border: none;
+  color:#1982F9;
+  font-size: 18px;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: 5%;
+  font-family: var(--primary-font);
+}
 /* Slideshow Section */
 .slideshow-container {
   width: 100%;

@@ -1,7 +1,8 @@
 import React from "react";
 import axios from "axios";
-import {FaTruckMoving} from "react-icons/fa";
-import {BiSolidRightArrow}  from "react-icons/bi";
+
+import { FaTruckMoving } from "react-icons/fa";
+import { BiSolidRightArrow } from "react-icons/bi";
 function ProductList(props) {
   const [products, setProducts] = React.useState([]);
   const ApiProducts = "http://localhost:3003/products";
