@@ -315,16 +315,8 @@
   font-size: 20px;
   font-weight: 600;
 }
-<<<<<<< HEAD
-.subtitleList:hover {
-  color: #e30019;
-}
-.btn-more{
-  color:var(--secondary-color);
-=======
 .btn-more{
   colro:var(--secondary-color);
->>>>>>> 02e056cd (Changes)
   font-size: larger;
   font-weight: 500;
 }
