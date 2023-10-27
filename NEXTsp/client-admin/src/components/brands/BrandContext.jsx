@@ -1,6 +1,6 @@
 export const brandState = {
   brands: [],
-
+  
   loading: false
 }
 
@@ -12,6 +12,7 @@ export const brandReducer = (state, action) => {
         ...state,
         categories: action.payload,
       };
+
 
       case "loading":
       return {
