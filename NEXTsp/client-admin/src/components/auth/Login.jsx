@@ -1,33 +1,31 @@
-import React, { useState } from 'react'
-import axios from 'axios'
+import React, { useState } from 'react';
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+
 const apiUrl = process.env.REACT_APP_ADMIN_LOGIN;
 
 const Login = () => {
   const navigate = useNavigate();
   const [accountName, setAccountName] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState(""); 
+  const [error, setError] = useState("");
 
   const handleLogin = () => {
     const data = {
       accountName: accountName,
       password: password,
     };
-  
+
     axios
       .post(apiUrl, data)
       .then((response) => {
         if (response.data.accessToken) {
           localStorage.setItem("accessToken", response.data.accessToken);
-  
-  
+
           setTimeout(() => {
             navigate("/admin/dashboard");
             window.location.reload();
-          }, 1000); 
-          
+          }, 200);
         } else {
           setError("Đăng nhập thất bại");
         }
@@ -35,6 +33,12 @@ const Login = () => {
       .catch((error) => {
         setError("Đăng nhập thất bại");
       });
+  };
+
+  const handleEnterPress = (e) => {
+    if (e.key === "Enter") {
+      handleLogin();
+    }
   };
 
   return (
@@ -51,6 +55,7 @@ const Login = () => {
             placeholder="accountName"
             value={accountName}
             onChange={(e) => setAccountName(e.target.value)}
+            onKeyDown={handleEnterPress}
           />
 
           <label className="ml-1 mb-2" htmlFor="password">
@@ -63,6 +68,7 @@ const Login = () => {
             placeholder="Mật khẩu"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            onKeyDown={handleEnterPress}
           />
           {error && <p className="text-red-500">{error}</p>}
           <button
@@ -71,16 +77,10 @@ const Login = () => {
           >
             Đăng nhập
           </button>
-          <p className="py-4">
-            Bạn chưa có tài khoản?{" "}
-            <Link to="/register" className="text-blue-700">
-              Đăng ký ngay
-            </Link>
-          </p>
         </div>
       </div>
     </div>
   );
 };
 
-export default Login
+export default Login;
