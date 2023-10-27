@@ -24,11 +24,6 @@ export const categoryReducer = (state, action) => {
         ...state,
         addCategoryModal: action.payload,
       };
-      case "loading":
-      return {
-        ...state,
-        loading: action.payload,
-      };
       case "editCategoryModalOpen":
       return {
         ...state,
@@ -44,12 +39,17 @@ export const categoryReducer = (state, action) => {
       return {
         ...state,
         editCategoryModal: {
-          modal: true,
-          _id: action._id,
-          nameCategory: action.nameCategory,
-          description: action.description,
-          status: action.status,
+          modal: false,
+          _id: null,
+          nameCategory: "",
+          description: "",
+          status: "",
         },
+      };
+      case "loading":
+      return {
+        ...state,
+        loading: action.payload,
       };
     default:
       return state;

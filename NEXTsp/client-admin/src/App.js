@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { Login, AdminLayout, Categories, Products } from "./components";
 import Landing from "./components/layout/Landing";
+import Brands from "./components/brands";
 
 const App = () => {
   const isAuthenticated = !!localStorage.getItem("accessToken");
@@ -19,6 +20,10 @@ const App = () => {
         <Route
           path="/admin/dashboard/categories"
           element={isAuthenticated ? <Categories /> : <Navigate to="/login" />}
+        />
+        <Route
+          path="/admin/dashboard/brands"
+          element={isAuthenticated ? <Brands /> : <Navigate to="/login" />}
         />
         <Route
           path="/admin/dashboard/products"

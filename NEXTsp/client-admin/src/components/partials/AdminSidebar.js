@@ -67,9 +67,9 @@ const AdminSidebar = (props) => {
         </div>
         <hr className="border-b border-gray-200" />
         <div
-          onClick={(e) => navigate("/admin/dashboard/categories")}
+          onClick={(e) => navigate("/admin/dashboard/brands")}
           className={`${
-            location.pathname === "/admin/dashboard/categories"
+            location.pathname === "/admin/dashboard/brands"
               ? "border-r-4 border-gray-800 bg-gray-100"
               : ""
           } hover:bg-gray-200 cursor-pointer flex flex-col items-center justify-center py-6`}
@@ -90,7 +90,7 @@ const AdminSidebar = (props) => {
               />
             </svg>
           </span>
-          <span className="hover:text-gray-800">Categories</span>
+          <span className="hover:text-gray-800">Brands</span>
         </div>
         <hr className="border-b border-gray-200" />
         <div

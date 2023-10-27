@@ -3,7 +3,7 @@ import { getAllCategory } from './FetchApi';
 import { CategoryContext } from './index';
 import axios from 'axios';
 
-const apiURL = process.env.REACT_APP_CATEGORYIES
+const apiURL = process.env.REACT_APP_CATEGORIES
 
 const AllCategories = () => {
   const { data, dispatch } = useContext(CategoryContext);
@@ -58,27 +58,26 @@ const AllCategories = () => {
   }
 
   const deleteCategory = (_id) => {
-    axios.delete(`${apiURL}/delete/${_id}`)
-      .then(res => {
-        console.log(res)
-        const del = categories.filter(category => _id !== category._id)
-        setCategories(del)
-      })
-      .catch(err => {
-        console.log(err)
-      })
+    if (window.confirm("Are you sure?")) {
+      axios.delete(`${apiURL}/delete/${_id}`)
+        .then(res => {
+          const del = categories.filter(category => _id !== category._id)
+          setCategories(del)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    }
   }
   
-  const editCategory = (_id, nameCategory,type, description, status) => {
-    if (type) {
-      dispatch({
-        type: "editCategoryModalOpen",
-        _id: _id,
-        nameCategory: nameCategory,
-        description: description,
-        status: status,
-      });
-    }
+  const editCategory = (_id, nameCategory, description, status) => {
+    dispatch({
+      type: "editCategoryModalOpen",
+      _id: _id,
+      nameCategory: nameCategory,
+      description: description,
+      status: status,
+    });
   };
 
   return (
@@ -108,7 +107,14 @@ const AllCategories = () => {
                       Delete
                     </button>
                     <button
-                      onClick={() => editCategory(category._id)}
+                      onClick={() =>
+                        editCategory(
+                          category._id,
+                          category.nameCategory,
+                          category.description,
+                          category.status
+                        )
+                      }
                       className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                     >
                       Update

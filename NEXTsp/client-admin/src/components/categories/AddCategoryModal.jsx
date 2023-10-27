@@ -11,7 +11,7 @@ const AddCategoryModal = () => {
   const [fData, setFdata] = useState({
     nameCategory: "",
     description: "",
-    status: "",
+    status: "Active",
     success: false,
     error: false,
   });
@@ -50,7 +50,7 @@ const AddCategoryModal = () => {
           ...fData,
           nameCategory: "",
           description: "",
-          status: "",
+          status: "Active",
           success: responseData.success,
           error: false,
         });
@@ -59,7 +59,7 @@ const AddCategoryModal = () => {
           ...fData,
           nameCategory: "",
           description: "",
-          status: "",
+          status: "Active",
           success: "Add Category Successfully :3",
           error: false,
         });

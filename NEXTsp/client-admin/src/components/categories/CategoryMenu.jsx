@@ -2,6 +2,7 @@ import React, {Fragment, useContext} from 'react'
 import { CategoryContext } from "./index";
 
 import AddCategoryModal from './AddCategoryModal'
+import EditCategoryModal from './EditCategoryModal'
 
 const CategoryMenu = () => {
 
@@ -35,6 +36,7 @@ const CategoryMenu = () => {
           </div>
         </div>
         <AddCategoryModal />
+        <EditCategoryModal/>
       </div>
     </Fragment>
   );
