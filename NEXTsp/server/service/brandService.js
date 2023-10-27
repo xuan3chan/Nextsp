@@ -1,5 +1,6 @@
 const Brand = require('../models/brandModel');
 const Category = require('../models/categoryModel');
+const slugify = require('slugify'); // Import thư viện slugify
 
 class BrandService {
     static async addBrandService({ nameBrand, description, category, status }) {
@@ -7,7 +8,10 @@ class BrandService {
             return { success: false, status: 400, message: 'Missing required parameters' };
         }
 
-        const newBrand = new Brand({ nameBrand, description, category, status });
+        // Tạo slug từ tên brand
+        const brandSlug = slugify(nameBrand, { lower: true });
+
+        const newBrand = new Brand({ nameBrand, description, category, status, brandSlug });
         const savedBrand = await newBrand.save();
 
         // Lưu id của brand vào trường brands của category
@@ -21,9 +25,12 @@ class BrandService {
             return { success: false, status: 400, message: 'Missing required parameters' };
         }
 
+        // Tạo slug từ tên brand
+        const brandSlug = slugify(nameBrand, { lower: true });
+
         const updatedBrand = await Brand.findByIdAndUpdate(
             id,
-            { nameBrand, description, category },
+            { nameBrand, description, category, brandSlug },
             { new: true, runValidators: true }
         );
 

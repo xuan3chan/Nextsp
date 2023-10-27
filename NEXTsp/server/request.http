@@ -11,15 +11,15 @@
 
 # GET http://localhost:3101/api/brands/get/6536401ff03a61e84e773f45
 
-# GET http://localhost:3101/api/catalog/getlistcateandbrand
+GET http://localhost:3101/api/catalog/getlistcateandbrand
 
 # post http://localhost:3101/api/brands/add
 # content-type: application/json
 
 # {
-#     "nameBrand": "Apple3",
+#     "nameBrand": "Tai nghe Lúc nhúc ",
 #     "description": "Mô tả thương hiệu",
-#     "category":"65394a3501cc7134c7daa57d",
+#     "category":"653b7dce83182db56054de09",
 #     "status": "Active"
 # }
 # Get http://localhost:3101/api/brands/getall
@@ -30,21 +30,21 @@
 # content-type: application/json
 
 # {
-#     "nameCategory": "Điện thoại",
+#     "nameCategory": "Tai Nghe",
 #     "description": "Mô tả danh mục",
 #     "status": "Active"
 # }
 
-POST http://localhost:3101/api/products/add
-content-type: application/json
+# POST http://localhost:3101/api/products/add
+# content-type: application/json
 
-{
-    "nameProduct": "Iphone 13",
-    "description": "Mô tả sản phẩm",
-    "price": 10000000,
-    "oldprice": 11000000,
-    "imges":["uploads/1698257578682-chandung.jpg"],
-    "status": "Active",
-    "category": "65394a3501cc7134c7daa57d",
-    "brand": "65394f137fb869aad55653af"
-}
+# {
+#     "nameProduct": "Iphone 13",
+#     "description": "Mô tả sản phẩm",
+#     "price": 10000000,
+#     "oldprice": 11000000,
+#     "imges":["uploads/1698257578682-chandung.jpg"],
+#     "status": "Active",
+#     "category": "65394a3501cc7134c7daa57d",
+#     "brand": "65394f137fb869aad55653af"
+# }
