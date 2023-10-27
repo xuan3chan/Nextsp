@@ -18,12 +18,12 @@ import { BsHeadphones } from "react-icons/bs";
 import { AiOutlineUser } from "react-icons/ai";
 import { PiShoppingCartSimpleBold } from "react-icons/pi";
 function Header(props) {
-  const [Categories, setCategories] = useState(null);
-  const [Brands, setBrands] = useState(null);
-
+  const [Categories, setCategories] = useState([]); // Initialize as an empty array
+  const [Brands, setBrands] = useState([]);
+  
   useEffect(() => {
     // Define the API URLs
-    const apiUrl1 = "http://localhost:3003/Categories";
+    const apiUrl1 = "http://localhost:3101/api/categories/getall";
     const apiUrl2 = "http://localhost:3003/Brands";
     // Make parallel requests
     const request1 = axios.get(apiUrl1);
@@ -32,8 +32,8 @@ function Header(props) {
     // Wait for both requests to complete
     Promise.all([request1, request2])
       .then(([response1, response2]) => {
-        setCategories(response1.data);
-        setBrands(response2.data);
+        setCategories(response1.data.categories);
+        setBrands(response2.data.categories.brands);
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
@@ -47,46 +47,46 @@ function Header(props) {
           <a href="../Homepage">Trang Chủ</a>
           <a href="/Blog">Bài Viết</a>
           <div className="dropdown">
-          <button className="dropbtn">
-            <FontAwesomeIcon className="mr-1" icon={faBars} />
-            Danh Mục
-            <i className="fa fa-caret-down"></i>
-          </button>
-          <div className="dropdown-content flex flex-col">
-            {Categories &&
-              Categories.map((category) => (
-                <div className="category-item text-black flex contents-center " key={category.categoryName}>
-                  <a
-                    className="category-link"
-                    href={`/Collection/${category.categoryLink}`}
+            <button className="dropbtn">
+              <FontAwesomeIcon className="mr-1" icon={faBars} />
+              Danh Mục
+              <i className="fa fa-caret-down"></i>
+            </button>
+            <div className="dropdown-content flex flex-col">
+              {Categories &&
+                Categories.map((category) => (
+                  <div
+                    className="category-item text-black flex contents-center"
+                    key={category._id}
                   >
-                    {category.categoryName}
-                    <FontAwesomeIcon
-                      className="category-icon"
-                      icon={faCaretRight}
-                    />
+                    <a
+                      className="category-link"
+                      href={`/Collection/${category.nameCategory}`}
+                    >
+                      {category.nameCategory}
+                      <FontAwesomeIcon
+                        className="category-icon"
+                        icon={faCaretRight}
+                      />
                     </a>
-                  <div className="brand-menu">
-                    {Brands &&
-                      Brands.map((brand) => {
-                        if (brand.categoryId === category.categoryId) {
+                    <div className="brand-menu">
+                      {category.brands &&
+                        category.brands.map((brand) => {
                           return (
                             <a
                               className="brand-link"
-                              href={`/Collection/${brand.brandLink}`}
-                              key={brand.brandName}
+                              href={`/Collection/${brand.brandName}`}
+                              key={brand._id}
                             >
                               {brand.brandName}
                             </a>
                           );
-                        }
-                      })}
+                        })}
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+            </div>
           </div>
-        </div>
-        
         </div>
         <div className="header_searching_module">
           <div class="wrap">

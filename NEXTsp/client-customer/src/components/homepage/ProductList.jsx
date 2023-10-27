@@ -19,11 +19,22 @@ function ProductList(props) {
     return `${price.toLocaleString()}đ`;
   }
   return (
-
-
-
-    <div className="productList p-12 mr-auto ml-auto bg-white rounded-md">
-      <h2 className="titleList mb-4 text-center">{props.title}</h2>
+    <div className="productList p-4 mr-auto ml-auto bg-white rounded-md">
+      <div className="title-Section flex items-center relative pb-4 ml-6">
+        <h2 className="titleList text-center">{props.title}</h2>
+        <div className="subTitle flex content-center items-center h-10 ml-8 pl-8 gap-3 ">
+          <div className="icon">
+            <FaTruckMoving className=" fill-red-600" />
+          </div>
+          <p className="subtitleList">Giao hàng miễn phí</p>
+        </div>
+        <div className="flex justify-center gap-4 mt-4 mb- absolute right-0">
+          <div className="btn-seeMore flex justify-center items-center gap-2">
+            Xem Thêm
+            <BiSolidRightArrow className="" />
+          </div>
+        </div>
+      </div>
       <div className=" flex w-max flex-wrap gap-4 content-center justify-center">
         {products.map(
           (product, index) =>
