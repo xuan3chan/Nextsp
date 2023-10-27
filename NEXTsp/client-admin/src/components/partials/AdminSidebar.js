@@ -91,7 +91,6 @@ const AdminSidebar = (props) => {
             </svg>
           </span>
           <span className="hover:text-gray-800">Brands</span>
-          <span className="hover:text-gray-800">Categories</span>
         </div>
         <hr className="border-b border-gray-200" />
         <div
