@@ -17,7 +17,7 @@ const BrandComponent = () => {
 }
 
 const Brands = (props) => {
-  const [data, dispatch] = useReducer(brandState, brandReducer);
+  const [data, dispatch] = useReducer(brandReducer,brandState);
   return (
     <Fragment>
       <BrandContext.Provider value={{ data, dispatch }}>

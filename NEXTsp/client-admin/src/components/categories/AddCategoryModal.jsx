@@ -193,7 +193,6 @@ const AddCategoryModal = () => {
           </form>
         </div>
       </div>
-
     </Fragment>
   );
 };
