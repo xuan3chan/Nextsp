@@ -1,6 +1,3 @@
 client-customer\node_modules
 client-admin\node_modules
-client-customer\node_modules\.cache
-client-customer\node_modules\.cache\default-development\1.pack
-client-customer\node_modules\.cache\default-development\0.pack
-client-customer\node_modules\.cache\default-development\2.pack
+server\node_modules
