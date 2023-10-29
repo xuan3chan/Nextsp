@@ -20,10 +20,10 @@ import { PiShoppingCartSimpleBold } from "react-icons/pi";
 function Header(props) {
   const [Categories, setCategories] = useState([]); // Initialize as an empty array
   const [Brands, setBrands] = useState([]);
-  
+
   useEffect(() => {
     // Define the API URLs
-    const apiUrl1 = "http://localhost:3101/api/categories/getall";
+    const apiUrl1 = "http://localhost:3101/api/catalog/getlistcateandbrand";
     const apiUrl2 = "http://localhost:3003/Brands";
     // Make parallel requests
     const request1 = axios.get(apiUrl1);
@@ -61,7 +61,7 @@ function Header(props) {
                   >
                     <a
                       className="category-link"
-                      href={`/Collection/${category.nameCategory}`}
+                      href={`/Collection/${category._id}`}
                     >
                       {category.nameCategory}
                       <FontAwesomeIcon
@@ -71,17 +71,15 @@ function Header(props) {
                     </a>
                     <div className="brand-menu">
                       {category.brands &&
-                        category.brands.map((brand) => {
-                          return (
-                            <a
-                              className="brand-link"
-                              href={`/Collection/${brand.brandName}`}
-                              key={brand._id}
-                            >
-                              {brand.brandName}
-                            </a>
-                          );
-                        })}
+                        category.brands.map((brand) => (
+                          <a
+                            className="brand-link"
+                            href={`/Collection/${brand._id}`}
+                            key={brand._id}
+                          >
+                            {brand.nameBrand}
+                          </a>
+                        ))}
                     </div>
                   </div>
                 ))}
