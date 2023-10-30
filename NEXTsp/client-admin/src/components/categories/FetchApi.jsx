@@ -29,18 +29,6 @@ export const createCategory = async ({ nameCategory, description, status }) => {
   }
 };
 
-export const getToEdit = async (_id,nameCategory, description, status) => {
-  let data = { _id: _id, nameCategory: nameCategory ,description: description, status: status };
-  try {
-    let res = await axios.post(
-      `${apiURL}/getall`,
-      data,
-    );
-    return res.data.categories;
-  } catch (error) {
-    console.log(error);
-  }
-};
 
 export const editCategory = async (_id, nameCategory, description, status) => {
   let data = { _id: _id, nameCategory: nameCategory ,description: description, status: status };
@@ -54,18 +42,3 @@ export const editCategory = async (_id, nameCategory, description, status) => {
     console.log(error);
   }
 }
-
-// export const editCategory = async ({ nameCategory, description, status }, _id) => {
-//   try {
-//     const formData = {
-//       nameCategory,
-//       description,
-//       status,
-//     };
-//     const res = await axios.put(`${apiURL}/update/${_id}`, formData);
-//     return res.data;
-//   } catch (error) {
-//     console.log(error);
-//     return { error: "Failed to edit the category." };
-//   }
-// }

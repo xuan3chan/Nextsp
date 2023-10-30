@@ -1,6 +1,5 @@
 export const brandState = {
   brands: null,
-  categories: [],
   addBrandModal: false,
   editBrandModal: {
     modal: false,

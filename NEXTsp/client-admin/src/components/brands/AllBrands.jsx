@@ -122,7 +122,7 @@ const AllBrands = () => {
                               <button
                                 onClick={() =>
                                   editBrand(
-                                    brand._id,
+                                    brand.id,
                                     brand.nameBrand,
                                     brand.description,
                                     brand.category,

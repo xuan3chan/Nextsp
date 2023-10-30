@@ -30,8 +30,8 @@ export const createBrand = async ({nameBrand, description, category, status}) =>
   }
 }
 
-export const editBrand = async (id, nameBrand, description, category, status) => {
-  let data = { id: id, nameBrand: nameBrand ,description: description, category: category, status: status };
+export const editBrand = async (id, nameBrand, description, status, category) => {
+  let data = { id: id, nameBrand: nameBrand ,description: description, status: status, category: category };
   try {
     let res = await axios.put(
       `${apiURL}/update/${id}`,
