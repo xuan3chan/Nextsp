@@ -1,6 +1,7 @@
 import React, {Fragment, useContext} from 'react'
 import { BrandContext } from "./index";
 import AddBrandModal from './AddBrandModal';
+import EditBrandModal from './EditBrandModal';
 
 const BrandMenu = () => {
   
@@ -33,7 +34,8 @@ const BrandMenu = () => {
             Add Brand
           </div>
         </div>
-        <AddBrandModal />
+        <AddBrandModal/>
+        <EditBrandModal/>
       </div>
     </Fragment>
   )

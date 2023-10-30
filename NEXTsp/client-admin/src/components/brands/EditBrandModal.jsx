@@ -1,9 +1,10 @@
 import React, { Fragment, useContext, useState, useEffect } from "react";
 import { BrandContext } from "./index";
-import { createBrand, getAllBrand } from "./FetchAPI";
+import { editBrand, getAllBrand } from "./FetchAPI";
 import { getAllCategory } from "../categories/FetchApi";
+const apiURL = process.env.REACT_APP_API_URL;
 
-const AddBrandDetail = ({ categories }) => {
+const EditBrandDetail = ({categories}) => {
   const { data, dispatch } = useContext(BrandContext);
 
   const alert = (msg, type) => (
@@ -43,7 +44,7 @@ const AddBrandDetail = ({ categories }) => {
     }
 
     try {
-      let responseData = await createBrand(fData);
+      let responseData = await editBrand(fData);
       if (responseData.success) {
         fetchData();
         setFdata({
@@ -82,7 +83,7 @@ const AddBrandDetail = ({ categories }) => {
     <Fragment>
       {/* Black Overlay */}
       <div
-        onClick={(e) => dispatch({ type: "addBrandModal", payload: false })}
+        onClick={(e) => dispatch({ type: "editBrandModalOpen", payload: false })}
         className={`${
           data.addBrandModal ? "" : "hidden"
         } fixed top-0 left-0 z-30 w-full h-full bg-black opacity-50`}
@@ -236,7 +237,7 @@ const AddBrandDetail = ({ categories }) => {
   );
 };
 
-const AddBrandModal = (props) => {
+const EditBrandModal = (props) => {
   useEffect(() => {
     fetchCategoryData();
   }, []);
@@ -252,9 +253,9 @@ const AddBrandModal = (props) => {
 
   return (
     <Fragment>
-      <AddBrandDetail categories={allCat} />
+      <EditBrandDetail categories={allCat} />
     </Fragment>
   );
 };
 
-export default AddBrandModal;
+export default EditBrandModal;

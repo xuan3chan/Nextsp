@@ -4,8 +4,8 @@ import BrandMenu from './BrandMenu'
 import AllBrand from './AllBrands'
 import { brandState, brandReducer } from "./BrandContext";
 
-export const BrandContext = createContext();
 
+export const BrandContext = createContext();
 
 const BrandComponent = () => {
   return (

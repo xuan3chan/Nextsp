@@ -2,6 +2,7 @@ import axios from "axios";
 const apiURL = process.env.REACT_APP_BRANDS
 
 
+
 export const getAllBrand = async () => {
   try {
     let res = await axios.get(`${apiURL}/getall`);
@@ -11,12 +12,12 @@ export const getAllBrand = async () => {
   }
 }
 
-export const createBrand = async ({nameBrand, description, nameCategory, status}) => {
+export const createBrand = async ({nameBrand, description, category, status}) => {
   try {
     const formData = {
       nameBrand,
       description,
-      nameCategory,
+      category,
       status,
     };
 
@@ -26,5 +27,18 @@ export const createBrand = async ({nameBrand, description, nameCategory, status}
   } catch (error) {
     console.log(error);
     return { error: "Failed to create the brand." };
+  }
+}
+
+export const editBrand = async (id, nameBrand, description, category, status) => {
+  let data = { id: id, nameBrand: nameBrand ,description: description, category: category, status: status };
+  try {
+    let res = await axios.put(
+      `${apiURL}/update/${id}`,
+      data,
+    );
+    return res.data.brands;
+  } catch (error) {
+    console.log(error);
   }
 }

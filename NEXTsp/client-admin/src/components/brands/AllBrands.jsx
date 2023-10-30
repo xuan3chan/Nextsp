@@ -57,17 +57,28 @@ const AllBrands = () => {
   // Delete brand
   const deleteBrand = (id) => {
     if (window.confirm("Are you sure?")) {
-      axios
-        .delete(`${apiURL}/delete/${id}`)
-        .then((res) => {
-          const del = brands.filter((brand) => id !== brand.id);
-          setBrands(del);
+      axios.delete(`${apiURL}/delete/${id}`)
+        .then(res => {
+          const del = brands.filter(brand => id !== brand.id)
+          setBrands(del)
         })
-        .catch((err) => {
-          console.log(err);
-        });
+        .catch(err => {
+          console.log(err)
+        })
     }
   };
+  
+  //Edit Brand
+  const editBrand = (id, nameBrand, description, category, status) => [
+    dispatch({ 
+      type: "editBrandModalOpen", 
+      id: id,
+      nameBrand: nameBrand,
+      description: description,
+      category: category,
+      status: status
+  })
+  ]
 
 
   return (
@@ -110,20 +121,20 @@ const AllBrands = () => {
                             <td className="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
                               <button
                                 onClick={() =>
-                                  dispatch({
-                                    type: "editBrandModalOpen",
-                                    _id: brand._id,
-                                    nameBrand: brand.nameBrand,
-                                    description: brand.description,
-                                    status: brand.status,
-                                  })
+                                  editBrand(
+                                    brand._id,
+                                    brand.nameBrand,
+                                    brand.description,
+                                    brand.category,
+                                    brand.status
+                                  )
                                 }
                                 className="text-indigo-600 hover:text-indigo-900"
                               >
                                 Edit
                               </button>
                               <button
-                                onClick={() => deleteBrand(brand._id)}
+                                onClick={() => deleteBrand(brand.id)}
                                 className="ml-4 text-red-600 hover:text-red-900"
                               >
                                 Delete

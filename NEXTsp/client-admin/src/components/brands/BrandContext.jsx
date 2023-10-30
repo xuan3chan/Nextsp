@@ -1,13 +1,13 @@
 export const brandState = {
-  brands: [],
+  brands: null,
   categories: [],
   addBrandModal: false,
   editBrandModal: {
     modal: false,
-    id: null,
+    id: "",
     nameBrand: "",
     description: "",
-    nameCategory: "",
+    category: "",
     status: "",
   },
   loading: false
@@ -20,11 +20,6 @@ export const brandReducer = (state, action) => {
       return {
         ...state,
         brands: action.payload,
-      };
-      case "fetchCategories":
-      return {
-        ...state,
-        categories: action.payload,
       };
       case "addBrandModal":
       return {
@@ -39,7 +34,7 @@ export const brandReducer = (state, action) => {
           id: action.id,
           nameBrand: action.nameBrand,
           description: action.description,
-          nameCategory: action.nameCategory,
+          category: action.category,
           status: action.status,
         },
       };
@@ -48,10 +43,10 @@ export const brandReducer = (state, action) => {
         ...state,
         editBrandModal: {
           modal: false,
-          id: null,
+          id: "",
           nameBrand: "",
           description: "",
-          nameCategory: "",
+          category: "",
           status: "",
         },
       };
