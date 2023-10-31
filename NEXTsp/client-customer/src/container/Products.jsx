@@ -2,7 +2,6 @@ import React from 'react';
 import Header from '../components/Header';
 import { Breadcrumb } from '../components';
 import ImageSection from '../components/Products/ImageSection';
-
 function Products(props) {
     const images = [
         'https://product.hstatic.net/200000722513/product/n-msi-geforce-rtx-3080-suprim-x-10g-3_7f9133eecca34daabde832df47700a6e_796e5d1e3de34980b782df714bd8010f_grande.png',

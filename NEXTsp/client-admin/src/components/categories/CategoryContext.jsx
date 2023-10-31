@@ -3,7 +3,7 @@ export const categoryState = {
   addCategoryModal: false,
   editCategoryModal: {
     modal: false,
-    _id: null,
+    _id: "",
     nameCategory: "",
     description: "",
     status: "",
@@ -40,7 +40,7 @@ export const categoryReducer = (state, action) => {
         ...state,
         editCategoryModal: {
           modal: false,
-          _id: null,
+          _id: "",
           nameCategory: "",
           description: "",
           status: "",
