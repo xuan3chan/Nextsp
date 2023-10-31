@@ -21,9 +21,9 @@ class BrandService {
     }
 
     static async updateBrandService({ id, nameBrand, description, category }) {
-        if (!nameBrand || !category) {
-            return { success: false, status: 400, message: 'Missing required parameters' };
-        }
+  // if (!nameBrand || !category) {
+        //     return { success: false, status: 400, message: 'Missing required parameters' };
+        // }
 
         // Tạo slug từ tên brand
         const brandSlug = slugify(nameBrand, { lower: true });

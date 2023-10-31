@@ -1,17 +1,17 @@
-# PUT http://localhost:3101/api/brands/update/6537c0a19883459adcafbf4f
-# content-type: application/json
 
-# {
-#     "nameBrand": "Apple5",
-#     "description": "Mô tả thương hiệu",
-#     "categoryid": "6536401ff03a61e84e773f45",
-#     "status": "Active"
-# }
+PUT http://localhost:3101/api/brands/update/653b7e0d83182db56054de0c
+content-type: application/json
+
+{
+    "nameBrand": "Tai nghe của Anh Độ ",
+    "description": "Mô tả thương hiệu",
+    "status": "Active"
+}
 
 
 # GET http://localhost:3101/api/brands/get/6536401ff03a61e84e773f45
 
-GET http://localhost:3101/api/catalog/getlistcateandbrand
+# GET http://localhost:3101/api/catalog/getlistcateandbrand
 
 # post http://localhost:3101/api/brands/add
 # content-type: application/json
