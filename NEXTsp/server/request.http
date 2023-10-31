@@ -1,12 +1,12 @@
 
-PUT http://localhost:3101/api/brands/update/653b7e0d83182db56054de0c
-content-type: application/json
+# PUT http://localhost:3101/api/brands/update/653b7e0d83182db56054de0c
+# content-type: application/json
 
-{
-    "nameBrand": "Tai nghe của Anh Độ ",
-    "description": "Mô tả thương hiệu",
-    "status": "Active"
-}
+# {
+#     "nameBrand": "Tai nghe của Anh Độ ",
+#     "description": "Mô tả thương hiệu",
+#     "status": "Active"
+# }
 
 
 # GET http://localhost:3101/api/brands/get/6536401ff03a61e84e773f45
@@ -47,5 +47,17 @@ content-type: application/json
 #     "status": "Active",
 #     "category": "65394a3501cc7134c7daa57d",
 #     "brand": "65394f137fb869aad55653af"
-# }
-asdasdasdasd
+# 
+Post http://localhost:3101/api/products/add
+content-type: application/json
+
+{
+    "nameProduct": "minhxuan123",
+    "description": "Mô tả sản phẩm",
+    "price": 10000000,
+    "oldprice": 11000000,
+    "status": "Active",
+    "category": "65394a3501cc7134c7daa57d",
+    "brand": "65394f137fb869aad55653af"
+}
+# GET http://localhost:3101/api/products/getall
