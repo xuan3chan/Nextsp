@@ -43,7 +43,7 @@ const EditBrandModal = () => {
       status: data.editBrandModal.status,
       category: data.editBrandModal.category,
     });
-  }, [data.editBrandModal]);  
+  }, [data.editBrandModal]);
 
   const fetchData = async () => {
     let responseData = await getAllBrand();
@@ -76,7 +76,7 @@ const EditBrandModal = () => {
       }, 3000);
     }
   };
-  
+
   return (
     <Fragment>
       {/* Black Overlay */}
@@ -205,7 +205,9 @@ const EditBrandModal = () => {
                   id="status"
                 >
                   <option disabled value="">
-                    Select a category
+                    {categories && categories.length > 0
+                      ? "Select a category"
+                      : "Select a category"}
                   </option>
                   {categories && categories.length > 0
                     ? categories.map((elem) => {
@@ -233,7 +235,7 @@ const EditBrandModal = () => {
                           </Fragment>
                         );
                       })
-                    : ""}
+                    : "No Category Found"}
                 </select>
               </div>
             </div>

@@ -6,7 +6,6 @@ const images = [
 
 
 const ProductsMenu = () => {
-  // hàm lưu hình vào thư mục images có đường dẫn ./image và tên hình được lưu vào images.json
   const handleUploadImage = (e) => {
     const file = e.target.files[0];
     const formData = new FormData();
