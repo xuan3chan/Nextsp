@@ -30,14 +30,18 @@ const AllProducts = () => {
   }
 
   const deleteProductReq = async (_id) => {
-    let deleteC = await deleteProduct(_id);
-    if (deleteC.error) {
-      console.log(deleteC.error);
-    } else if (deleteC.success) {
-      console.log(deleteC.success);
-      fetchData();
+    try{
+      let res = await deleteProduct(_id);
+      console.log('res', res);
+      const confirmed = window.confirm("Chắc chắn xóa ?");
+      if (confirmed) {
+        window.location.reload();
+      }
     }
-  }
+    catch(err){
+        alert("Xóa không được !")
+    }
+  };
 
 
   if(loading) {
@@ -167,4 +171,4 @@ const ProductTable = ({ product, deleteProduct }) => {
   )
 }
 
-export default AllProducts
+export default AllProducts;

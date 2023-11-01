@@ -273,3 +273,23 @@
 dropDownItem2 {
   width: 216;
 }
+
+/* Footer Section */
+
+.footerSection  h1{
+  font-size: large;
+  font-style: bold;
+  font-weight: 600;
+}
+.footerSection p { 
+  font-size: 16px;
+  font-style: normal;
+}
+.footerSection img{ 
+  width: 80px;
+}
+
+.phoneNumber{
+  font-weight: 500;
+  color:cornflowerblue
+}

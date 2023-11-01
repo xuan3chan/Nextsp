@@ -6,6 +6,9 @@
 .container {
   position: relative;
 }
+.bg-product{ 
+  background-color: #ECECEC;
+}
 
 /* Hide the images by default */
 .mySlides {
@@ -83,4 +86,93 @@
 .active,
 .demo:hover {
   opacity: 1;
+}
+
+/* Detail Product section */
+
+.productTitle{
+  font-size: 26px;
+  font-style:bold;
+  font-weight: 700;
+}
+.productPrice{
+  font-size: 26px;
+  font-style:bold;
+  font-weight: 700;
+  color:var(--primary-color);
+  line-height: 30px;
+
+
+}
+.productOldPrice{
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--third-color);
+  text-decoration: line-through;
+  line-height: 30px;
+}
+.productSale{
+  font-size: 14px;
+  color: var(--primary-color);
+  padding: 0 6px 0 6px;
+  border: 1px solid var(--primary-color);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+}
+.btnSection{
+
+}
+.productPolicySection{
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--second-color);
+}
+
+/* Description section */
+.containerDescSection{ 
+  width: 600px;
+  border: #ECECEC 1px solid;
+  margin-left: 24px;
+  border-radius: 10px;
+}
+.descTitle{ 
+  line-height: 64px;
+  background-color: #ECECEC;
+  border: #ECECEC 1px solid;
+  padding-left: 10px;
+  border-radius: 10px 10px 0 0;
+  color:var(--second-color);
+  font-size: 20px;
+  font-weight: 600;
+  text-align: center;
+}
+.productDesc {
+  padding: 20px;
+  border: 1px solid #ddd;
+  font-family: Arial, sans-serif;
+  color: #333;
+  line-height: 1.6;
+}
+
+.productDesc h2 {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0 0 10px;
+  color: #333;
+}
+
+.productDesc p {
+  font-size: 16px;
+  margin: 0 0 15px;
+}
+
+.productDesc a {
+  text-decoration: none;
+  color: #007bff;
+}
+
+.productDesc a:hover {
+  text-decoration: underline;
+  color: #0056b3;
 }
