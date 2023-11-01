@@ -42,8 +42,11 @@ const ImageSection = (props) => {
     const newIndex = isLastSlide ? 0 : CurrentIndex + 1;
     setCurrentIndex(newIndex);
   };
+  const goToSlide = (index) => {
+    setCurrentIndex(index);
+  };
   return (
-    <div className="max-w-[600px] h-[600px] w-full m-auto py-16 px-4 relative">
+    <div className="max-w-[500px] h-[500px] py-16 px-4 relative pl-9">
       <div
         style={{ backgroundImage: `url(${slides[CurrentIndex].url})` }}
         className=" w-full h-full rouded-2xl bg-center bg-cover duration-500"
@@ -57,8 +60,14 @@ const ImageSection = (props) => {
       </div>
       <div className="flex flex-row ">
         {slides.map((slide, index) => (
-          <div key={index} className="imgList ">
-            <img src={slide.url} alt="" className="subImgBottom w-20 h-20" />
+          <div className="imgList ">
+            <img
+              key={index}
+              onClick={() => goToSlide(index)}
+              src={slide.url}
+              alt=""
+              className="subImgBottom w-20 h-20"
+            />
           </div>
         ))}
       </div>

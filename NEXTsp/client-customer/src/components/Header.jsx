@@ -24,16 +24,13 @@ function Header(props) {
   useEffect(() => {
     // Define the API URLs
     const apiUrl1 = "http://localhost:3101/api/catalog/getlistcateandbrand";
-    const apiUrl2 = "http://localhost:3003/Brands";
     // Make parallel requests
     const request1 = axios.get(apiUrl1);
-    const request2 = axios.get(apiUrl2);
 
     // Wait for both requests to complete
-    Promise.all([request1, request2])
-      .then(([response1, response2]) => {
+    Promise.all([request1])
+      .then(([response1]) => {
         setCategories(response1.data.categories);
-        setBrands(response2.data.categories.brands);
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
