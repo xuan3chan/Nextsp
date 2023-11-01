@@ -20,24 +20,15 @@ const productSchema = new mongoose.Schema(
             type: Number,
             trim: true,
         },
-        category: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Category',
-            required: true,
-        },
         brand: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Brand',
             required: true,
         },
-        images: [
-            {
-                path: {
-                    type: String,
-                    required: true,
-                },
-            },
-        ],
+        images: {
+            type: Array,
+            default: [],
+        },
         status: {
             type: String,
             enum: ['Active', 'Inactive'],

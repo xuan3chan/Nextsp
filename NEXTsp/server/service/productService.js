@@ -1,85 +1,81 @@
 const Products = require('../models/productModel');
 
 class ProductService {
-    static async addProductService({ nameProduct, description, price, category, brand, request }) {
-        if (!nameProduct || !description || !price || !category || !brand) {
-            throw { status: 400, message: 'Missing required fields for product creation' };
+    static deleteImages(images, mode) {
+        var basePath =
+          path.resolve(__dirname + "../../") + "/public/uploads/products/";
+        console.log(basePath);
+        for (var i = 0; i < images.length; i++) {
+          let filePath = "";
+          if (mode == "file") {
+            filePath = basePath + `${images[i].filename}`;
+          } else {
+            filePath = basePath + `${images[i]}`;
+          }
+          console.log(filePath);
+          if (fs.existsSync(filePath)) {
+            console.log("Exists image");
+          }
+          fs.unlink(filePath, (err) => {
+            if (err) {
+              return err;
+            }
+          });
         }
+      }
 
-        const newProduct = new Products({
+      async addProduct(req, res) {
+        try {
+          const { nameProduct, description, price, brand, status } = req.body;
+          const images = req.files;
+      
+          // Validation
+          if (!nameProduct || !price || !brand || !status) {
+            ProductService.deleteImages(images, "file");
+            return res.json({ error: "All fields must be required" });
+          }
+      
+          // Validate Name and description
+          else if (nameProduct.length > 255 || description.length > 3000) {
+            ProductService.deleteImages(images, "file");
+            return res.json({
+              error: "Name must be 255 characters & Description must not be 3000 characters long",
+            });
+          }
+      
+          // Validate Images
+          else if (!images || images.length !== 2) {
+            ProductService.deleteImages(images, "file");
+            return res.json({ error: "Must provide exactly 2 images" });
+          }
+      
+          // Process images
+          let allImages = images.map(img => img.filename);
+      
+          // Create new product instance
+          const newProduct = new Product({
             nameProduct,
             description,
             price,
-            category,
             brand,
-        });
-
-        // Nếu Multer đã xử lý và có ảnh, thêm vào sản phẩm
-        if (request.file) {
-            newProduct.images = [{ path: request.file.filename }];
+            images: allImages,
+            status,
+          });
+      
+          // Save the new product
+          const save = await newProduct.save();
+      
+          if (save) {
+            return res.json({ success: "Product created successfully" });
+          }
+        } catch (err) {
+          console.error(err);
+          return res.status(500).json({ error: "Internal Server Error" });
         }
+      }
+      
 
-        const savedProduct = await newProduct.save();
-        return { success: true, message: 'Product created successfully', product: savedProduct };
-    }
-    static async updateProductService({ id, nameProduct, description, price, oldprice, category, brand, request, status }) {
-        if (!id || !nameProduct || !description || !price || !oldprice || !category || !brand || !request.file || !status) {
-            throw { status: 400, message: 'Missing required fields for product update' };
-        }
-
-        const existingProduct = await Products.findById(id);
-
-        if (!existingProduct) {
-            throw { status: 404, message: 'Product not found or user not authorized' };
-        }
-
-        // Nếu Multer đã xử lý và có ảnh, cập nhật vào sản phẩm
-        if (request.file) {
-            existingProduct.images = [{ path: request.file.filename }];
-        }
-
-        // Cập nhật các trường khác
-        existingProduct.nameProduct = nameProduct;
-        existingProduct.description = description;
-        existingProduct.price = price;
-        existingProduct.oldprice = oldprice;
-        existingProduct.category = category;
-        existingProduct.brand = brand;
-        existingProduct.status = status;
-
-        const updatedProduct = await existingProduct.save();
-
-        return { success: true, message: 'Product updated successfully', product: updatedProduct };
-    }
-
-    static async deleteProductService(id) {
-        if (!id) {
-            throw { status: 400, message: 'Missing product ID for deletion' };
-        }
-
-        const deletedProduct = await Products.findByIdAndDelete(id);
-
-        if (!deletedProduct) {
-            throw { status: 404, message: 'Product not found or user not authorized' };
-        }
-
-        return { success: true, message: 'Product deleted successfully', product: deletedProduct };
-    }
-
-    static async getDetailsProductService(id) {
-        if (!id) {
-            throw { status: 400, message: 'Missing product ID for details' };
-        }
-
-        const productDetails = await Products.findById(id);
-
-        if (!productDetails) {
-            throw { status: 404, message: 'Product not found' };
-        }
-
-        return { success: true, product: productDetails };
-    }
-
+    
     static async getAllProductsService() {
         const products = await Products.find();
         return { success: true, products };

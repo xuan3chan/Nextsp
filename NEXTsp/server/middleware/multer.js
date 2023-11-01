@@ -9,7 +9,7 @@ const storage = multer.diskStorage({
     // Generate a unique filename based on current timestamp and original filename
     const uniqueFilename = Date.now() + '-' + file.originalname;
     cb(null, uniqueFilename);
-    
+
     // Add the filename to the request object for later use in the service
     req.filename = uniqueFilename;
   },
