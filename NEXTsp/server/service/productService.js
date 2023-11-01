@@ -123,6 +123,14 @@ class ProductService {
     }
     return { success: true, message: 'Product deleted successfully', product };
   }
+  //getdetails product by id
+  static async getDetailsProductService(id) {
+    const product = await Products.findById(id);
+    if (!product) {
+      throw { status: 404, message: 'Product not found' };
+    }
+    return { success: true, message: 'Product details', product };
+  }
 }
 
 module.exports = ProductService;

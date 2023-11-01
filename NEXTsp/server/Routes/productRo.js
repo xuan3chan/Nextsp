@@ -9,7 +9,7 @@ const productservice = require('../service/productService');
 router.post('/add',uploader.array('images',10),ProductController.addProduct);
 router.put('/update/:id',uploader.array('images',10), ProductController.updateProduct);
 router.delete('/delete/:id', ProductController.deleteProduct);
-router.get('/details/:id', ProductController.getDetailsProduct);
+router.get('/getdetails/:id', ProductController.getDetailsProduct);
 router.get('/getAll', ProductController.getAllProducts);
 
 module.exports = router;
