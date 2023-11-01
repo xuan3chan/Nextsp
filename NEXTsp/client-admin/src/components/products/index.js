@@ -1,6 +1,7 @@
 import React, { Fragment, createContext, useReducer } from "react";
 import AdminLayout from "../layout/AdminLayout";
 import AllProducts from "./AllProducts";
+import ProductsMenu from "./ProductsMenu";
 import { productState, productReducer } from "./ProductContext";
 
 export const ProductContext = createContext();
@@ -8,6 +9,7 @@ export const ProductContext = createContext();
 const ProductComponent = () => {
   return (
     <div className="grid grid-cols-1 space-y-4 p-4">
+      <ProductsMenu/>
       <AllProducts />
     </div>
   );
