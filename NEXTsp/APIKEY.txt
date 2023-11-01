@@ -9,10 +9,10 @@ sửa brand : "http://localhost:3101/api/brands/update "
 xoa brand "http://localhost:3101/api/brands/delete "
 xem toan bo brand : http://localhost:3101/api/brands/getall "
 
-thêm sản phẩm 
-xóa sản phẩm 
-sửa sản phẩm
-chi tiết 1 sản phẩm
+thêm sản phẩm http://localhost:3101/api/products/add
+xóa sản phẩm http://localhost:3101/api/products/delete/id
+sửa sản phẩm http://localhost:3101/api/products/update/id
+chi tiết 1 sản phẩm 
 
 lấy hết cate có brand:" http://localhost:3101/api/catalog/getlistcateandbrand"
 

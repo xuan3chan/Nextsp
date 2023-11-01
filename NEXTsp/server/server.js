@@ -4,8 +4,9 @@ const app = express();
 const mongoose = require('mongoose');
 const cors = require('cors');
 const port = 3101;
-const admin = require('./Routes/authRo');
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json()); 
+
 app.use(cors());
 // Import routes
 const authRoutes = require('./Routes/authRo');

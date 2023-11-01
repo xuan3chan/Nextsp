@@ -5,7 +5,7 @@ const handleErrorResponse = require('../middleware/errorHandling');
 class ProductController {
     static async addProduct(req, res) {
         try {
-            const result = await ProductService.addProductService(req.body);
+            const result = await ProductService.addProductService(req,req.body);
             res.json(result);
         } catch (error) {
             handleErrorResponse(res, error);
@@ -15,7 +15,7 @@ class ProductController {
     static async updateProduct(req, res) {
         try {
             const { id } = req.params;
-            const result = await ProductService.updateProductService({ id, ...req.body });
+            const result = await ProductService.updateProductService(req,{ id, ...req.body });
             res.json(result);
         } catch (error) {
             handleErrorResponse(res, error);

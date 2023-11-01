@@ -2,11 +2,12 @@
 const express = require('express');
 const router = express.Router();
 const ProductController = require('../controllers/productCrtl');
-const upload = require('../middleware/multer');
+const uploader = require('../config/cloudinary.config');
+const productservice = require('../service/productService');
 
 // Routes for product operations
-router.post('/add',upload.single('image'), ProductController.addProduct);
-router.put('/update/:id',upload.single('image'), ProductController.updateProduct);
+router.post('/add',uploader.array('images',10),ProductController.addProduct);
+router.put('/update/:id',uploader.array('images',10), ProductController.updateProduct);
 router.delete('/delete/:id', ProductController.deleteProduct);
 router.get('/details/:id', ProductController.getDetailsProduct);
 router.get('/getAll', ProductController.getAllProducts);
