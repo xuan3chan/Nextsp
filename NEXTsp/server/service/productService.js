@@ -59,57 +59,68 @@ class ProductService {
 
   // Update a product
   static async updateProductService(req,  {id, nameProduct, description, price, oldprice, brand, status }) {
-    try {
-      // Find the product
-      const product = await Products.findById(id);
-      if (!product) {
-        throw { status: 404, message: 'Product not found' };
-      }
-      const duplicateProduct = await Products.findOne({ nameProduct });
-      if (duplicateProduct) {
-        throw { status: 400, message: 'A product with this name already exists' };
-      }
-
-      // Update the product fields
-      if (nameProduct) product.nameProduct = nameProduct;
-      if (description) product.description = description;
-      if (price) product.price = price;
-      if (oldprice) product.oldprice = oldprice;
-      if (brand) product.brand = brand;
-      if (status) product.status = status;
-
-      // Check for duplicate originalnames in req.files
-      if (req.files) {
-        const originalnames = req.files.map(file => file.originalname);
-        const uniqueOriginalnames = new Set(originalnames);
-        if (uniqueOriginalnames.size < originalnames.length) {
-          throw { status: 400, message: 'Duplicate file names are not allowed' };
+      try {
+        // Find the product
+        const product = await Products.findById(id);
+        if (!product) {
+          throw { status: 404, message: 'Product not found' };
+        }
+        const duplicateProduct = await Products.findOne({ nameProduct });
+        if (duplicateProduct) {
+          throw { status: 400, message: 'A product with this name already exists' };
         }
 
-        // Update the product images
-        const imagePaths = req.files.map(el => el.path);
-        product.images.push(...imagePaths);
-      }
+        // Update the product fields
+        if (nameProduct) product.nameProduct = nameProduct;
+        if (description) product.description = description;
+        if (price) product.price = price;
+        if (oldprice) product.oldprice = oldprice;
+        if (brand) product.brand = brand;
+        if (status) product.status = status;
 
-      // Save the updated product
-      const updatedProduct = await product.save();
+        // Check for duplicate originalnames in req.files
+        if (req.files) {
+          // Delete the existing images from Cloudinary
+          for (const imagePath of product.images) {
+            const publicId = imagePath; // replace with the correct public ID
+            cloudinary.uploader.destroy(publicId, function (error, result) {
+              console.log(result, error);
+            });
+          }
 
-      return { success: true, message: 'Product updated successfully', product: updatedProduct };
-    } catch (error) {
-      // If an error occurs, delete the files from Cloudinary
-      if (req.files && req.files.length > 0) {
-        for (const file of req.files) {
-          const publicId = file.filename; // replace with the correct public ID
-          cloudinary.uploader.destroy(publicId, function (error, result) {
-            console.log(result, error);
-          });
+          // Clear the product images
+          product.images = [];
+
+          const originalnames = req.files.map(file => file.originalname);
+          const uniqueOriginalnames = new Set(originalnames);
+          if (uniqueOriginalnames.size < originalnames.length) {
+            throw { status: 400, message: 'Duplicate file names are not allowed' };
+          }
+
+          // Update the product images
+          const imagePaths = req.files.map(el => el.path);
+          product.images.push(...imagePaths);
         }
-      }
 
-      // Re-throw the error
-      throw error;
+        // Save the updated product
+        const updatedProduct = await product.save();
+
+        return { success: true, message: 'Product updated successfully', product: updatedProduct };
+      } catch (error) {
+        // If an error occurs, delete the files from Cloudinary
+        if (req.files && req.files.length > 0) {
+          for (const file of req.files) {
+            const publicId = file.filename; // replace with the correct public ID
+            cloudinary.uploader.destroy(publicId, function (error, result) {
+              console.log(result, error);
+            });
+          }
+        }
+
+        // Re-throw the error
+        throw error;
+      }
     }
-  }
   //get all products
   static async getAllProductsService() {
     const products = await Products.find().populate('brand', 'nameBrand _id');
@@ -124,6 +135,7 @@ class ProductService {
       description: product.description,
       price: product.price,
       oldprice: product.oldprice,
+      images: product.images,
       brand: product.brand ? { name: product.brand.nameBrand, id: product.brand._id } : null,
       status: product.status,
     }));
