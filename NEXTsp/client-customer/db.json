@@ -1,4 +1,3 @@
-
 {
   "userAccount": [
     {
@@ -32,6 +31,383 @@
       "password": "admin",
       "confirmPassword": "admin",
       "id": 4
+    },
+    {
+      "accountName": "admin",
+      "password": "admin",
+      "id": 5
+    },
+    {
+      "accountName": "admin",
+      "password": "admin",
+      "id": 6
+    },
+    {
+      "accountName": "admin",
+      "password": "admin",
+      "id": 7
+    },
+    {
+      "accountName": "admin",
+      "password": "admin",
+      "id": 8
+    },
+    {
+      "accountName": "admin",
+      "password": "admin",
+      "id": 9
+    },
+    {
+      "accountName": "admin",
+      "password": "admin",
+      "id": 10
+    },
+    {
+      "accountName": "admin",
+      "password": "admin",
+      "id": 11
+    },
+    {
+      "accountName": "admin2",
+      "password": "admin",
+      "id": 12
+    },
+    {
+      "accountName": "admin",
+      "password": "admin",
+      "id": 13
+    },
+    {
+      "accountName": "admin",
+      "password": "admin",
+      "id": 14
+    },
+    {
+      "accountName": "admin",
+      "password": "admin",
+      "id": 15
+    },
+    {
+      "accountName": "admin",
+      "password": "admin",
+      "id": 16
+    },
+    {
+      "accountName": "admin",
+      "password": "admin",
+      "id": 17
+    },
+    {
+      "accountName": "admin",
+      "password": "admin",
+      "id": 18
+    },
+    {
+      "accountName": "admin",
+      "password": "admin",
+      "id": 19
+    },
+    {
+      "accountName": "admin",
+      "password": "admin",
+      "id": 20
+    },
+    {
+      "accountName": "admin",
+      "password": "admin",
+      "id": 21
+    },
+    {
+      "accountName": "admin",
+      "password": "admin",
+      "id": 22
+    },
+    {
+      "accountName": "admin",
+      "password": "admin",
+      "id": 23
+    },
+    {
+      "accountName": "admin",
+      "password": "admin",
+      "id": 24
+    },
+    {
+      "accountName": "",
+      "password": "",
+      "id": 25
+    },
+    {
+      "accountName": "",
+      "password": "",
+      "id": 26
+    },
+    {
+      "accountName": "",
+      "password": "",
+      "id": 27
+    },
+    {
+      "accountName": "",
+      "password": "",
+      "id": 28
+    },
+    {
+      "accountName": "",
+      "password": "",
+      "id": 29
+    },
+    {
+      "accountName": "",
+      "password": "",
+      "id": 30
+    },
+    {
+      "accountName": "",
+      "password": "",
+      "id": 31
+    },
+    {
+      "accountName": "",
+      "password": "",
+      "id": 32
+    },
+    {
+      "accountName": "a",
+      "password": "",
+      "id": 33
+    },
+    {
+      "accountName": "a",
+      "password": "",
+      "id": 34
+    },
+    {
+      "accountName": "a",
+      "password": "",
+      "id": 35
+    },
+    {
+      "accountName": "a",
+      "password": "",
+      "id": 36
+    },
+    {
+      "accountName": "ad",
+      "password": "",
+      "id": 37
+    },
+    {
+      "accountName": "ad",
+      "password": "",
+      "id": 38
+    },
+    {
+      "accountName": "",
+      "password": "",
+      "id": 39
+    },
+    {
+      "accountName": "",
+      "password": "",
+      "id": 40
+    },
+    {
+      "accountName": "",
+      "password": "",
+      "id": 41
+    },
+    {
+      "accountName": "",
+      "password": "",
+      "id": 42
+    },
+    {
+      "accountName": "",
+      "password": "",
+      "id": 43
+    },
+    {
+      "accountName": "",
+      "password": "",
+      "id": 44
+    },
+    {
+      "accountName": "",
+      "password": "",
+      "id": 45
+    },
+    {
+      "accountName": "a",
+      "password": "",
+      "id": 46
+    },
+    {
+      "accountName": "a",
+      "password": "",
+      "id": 47
+    },
+    {
+      "accountName": "ad",
+      "password": "",
+      "id": 48
+    },
+    {
+      "accountName": "ad",
+      "password": "",
+      "id": 49
+    },
+    {
+      "accountName": "ad",
+      "password": "",
+      "id": 50
+    },
+    {
+      "accountName": "ad",
+      "password": "",
+      "id": 51
+    },
+    {
+      "accountName": "ad",
+      "password": "",
+      "id": 52
+    },
+    {
+      "accountName": "adm",
+      "password": "",
+      "id": 53
+    },
+    {
+      "accountName": "adm",
+      "password": "",
+      "id": 54
+    },
+    {
+      "accountName": "adm",
+      "password": "",
+      "id": 55
+    },
+    {
+      "accountName": "adm",
+      "password": "",
+      "id": 56
+    },
+    {
+      "accountName": "adm",
+      "password": "",
+      "id": 57
+    },
+    {
+      "accountName": "admi",
+      "password": "",
+      "id": 58
+    },
+    {
+      "accountName": "admi",
+      "password": "",
+      "id": 59
+    },
+    {
+      "accountName": "admi",
+      "password": "",
+      "id": 60
+    },
+    {
+      "accountName": "admi",
+      "password": "",
+      "id": 61
+    },
+    {
+      "accountName": "admi",
+      "password": "",
+      "id": 62
+    },
+    {
+      "accountName": "admin",
+      "password": "",
+      "id": 63
+    },
+    {
+      "accountName": "admin",
+      "password": "",
+      "id": 64
+    },
+    {
+      "accountName": "admin",
+      "password": "",
+      "id": 65
+    },
+    {
+      "accountName": "admin",
+      "password": "a",
+      "id": 66
+    },
+    {
+      "accountName": "admin",
+      "password": "a",
+      "id": 67
+    },
+    {
+      "accountName": "admin",
+      "password": "a",
+      "id": 68
+    },
+    {
+      "accountName": "admin",
+      "password": "a",
+      "id": 69
+    },
+    {
+      "accountName": "admin",
+      "password": "ad",
+      "id": 70
+    },
+    {
+      "accountName": "admin",
+      "password": "ad",
+      "id": 71
+    },
+    {
+      "accountName": "admin",
+      "password": "adm",
+      "id": 72
+    },
+    {
+      "accountName": "admin",
+      "email": "",
+      "password": "admin",
+      "id": 73
+    },
+    {
+      "accountName": "admin123",
+      "email": "",
+      "password": "123123",
+      "id": 74
+    },
+    {
+      "accountName": "adm123",
+      "password": "123",
+      "id": 75
+    },
+    {
+      "accountName": "adm123",
+      "password": "123",
+      "id": 76
+    },
+    {
+      "accountName": "adm123",
+      "password": "123",
+      "id": 77
+    },
+    {
+      "accountName": "admin",
+      "password": "admin",
+      "id": 78
+    },
+    {
+      "accountName": "admin2",
+      "password": "admin",
+      "id": 79
     }
   ],
   "Blog": [
@@ -61,7 +437,7 @@
       "oldPrice": 2000000,
       "price": 30000000,
       "imageUrl": "https://hc.com.vn/i/ecommerce/media/GS.009054_FEATURE_117958.png",
-      "type":"Laptop"
+      "type": "Laptop"
     },
     {
       "id": 2,
@@ -69,7 +445,7 @@
       "oldPrice": 20000000,
       "price": 30000000,
       "imageUrl": "https://hc.com.vn/i/ecommerce/media/GS.009054_FEATURE_117958.png",
-      "type":"Laptop"
+      "type": "Laptop"
     },
     {
       "id": 3,
@@ -77,8 +453,7 @@
       "oldPrice": 20000000,
       "price": 30000000,
       "imageUrl": "https://hc.com.vn/i/ecommerce/media/GS.009054_FEATURE_117958.png",
-      "type":"Laptop"
-
+      "type": "Laptop"
     },
     {
       "id": 4,
@@ -86,65 +461,57 @@
       "oldPrice": 20000000,
       "price": 30000000,
       "imageUrl": "https://hoanghamobile.com/Uploads/2023/03/14/laptop-gaming-hp-victus-16-e1104ax-7c0s9pa-01.jpg",
-      "type":"Laptop"
-    }
-    ,
+      "type": "Laptop"
+    },
     {
       "id": 5,
       "title": "Laptop Gaming HP VICTUS 16-e1104AX-7C0S9PA",
       "oldPrice": 20000000,
       "price": 30000000,
       "imageUrl": "https://hoanghamobile.com/Uploads/2023/03/14/laptop-gaming-hp-victus-16-e1104ax-7c0s9pa-01.jpg",
-      "type":"Laptop"
-    }
-    ,
+      "type": "Laptop"
+    },
     {
       "id": 6,
       "title": "Laptop Gaming HP VICTUS 16-e1104AX-7C0S9PA",
       "oldPrice": 20000000,
       "price": 30000000,
       "imageUrl": "https://hoanghamobile.com/Uploads/2023/03/14/laptop-gaming-hp-victus-16-e1104ax-7c0s9pa-01.jpg",
-      "type":"Laptop"
-    }
-    ,
+      "type": "Laptop"
+    },
     {
       "id": 7,
       "title": "Laptop Gaming HP VICTUS 16-e1104AX-7C0S9PA",
       "oldPrice": 20000000,
       "price": 30000000,
       "imageUrl": "https://hoanghamobile.com/Uploads/2023/03/14/laptop-gaming-hp-victus-16-e1104ax-7c0s9pa-01.jpg",
-      "type":"Laptop"
-    }
-    ,
+      "type": "Laptop"
+    },
     {
       "id": 8,
       "title": "Laptop Gaming HP VICTUS 16-e1104AX-7C0S9PA",
       "oldPrice": 20000000,
       "price": 30000000,
       "imageUrl": "https://hoanghamobile.com/Uploads/2023/03/14/laptop-gaming-hp-victus-16-e1104ax-7c0s9pa-01.jpg",
-      "type":"Phone"
-    }
-    ,
+      "type": "Phone"
+    },
     {
       "id": 9,
       "title": "Laptop Gaming HP VICTUS 16-e1104AX-7C0S9PA",
       "oldPrice": 20000000,
       "price": 30000000,
       "imageUrl": "https://hoanghamobile.com/Uploads/2023/03/14/laptop-gaming-hp-victus-16-e1104ax-7c0s9pa-01.jpg",
-      "type":"Phone"
-    }
-    ,
+      "type": "Phone"
+    },
     {
       "id": 10,
       "title": "Laptop Gaming HP VICTUS 16-e1104AX-7C0S9PA",
       "oldPrice": 20000000,
       "price": 30000000,
       "imageUrl": "https://hoanghamobile.com/Uploads/2023/03/14/laptop-gaming-hp-victus-16-e1104ax-7c0s9pa-01.jpg",
-      "type":"Phone"
-
+      "type": "Phone"
     }
-  ]
-  ,
+  ],
   "Categories": [
     {
       "id": 1,
@@ -155,7 +522,6 @@
       "id": 2,
       "categoryName": "Laptop",
       "categoryLink": "Laptop"
-
     },
     {
       "id": 3,
@@ -168,23 +534,22 @@
       "categoryLink": "PhuKien"
     }
   ],
-  "Brands":[
+  "Brands": [
     {
-      "id":1,
-      "brandName":"Apple"
+      "id": 1,
+      "brandName": "Apple"
     },
     {
-      "id":2,
-      "brandName":"Samsung"
+      "id": 2,
+      "brandName": "Samsung"
     },
     {
-      "id":3,
-      "brandName":"Dell"
-    }
-    ,
+      "id": 3,
+      "brandName": "Dell"
+    },
     {
-      "id":4,
-      "brandName":"Asus"
+      "id": 4,
+      "brandName": "Asus"
     }
   ]
 }

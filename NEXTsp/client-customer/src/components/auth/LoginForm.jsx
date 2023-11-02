@@ -1,37 +1,44 @@
-import React, { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import axios from "axios";
+import React, { useState } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
-const LoginForm = () => {
+const apiUrl = 'http://localhost:3101/api/auth/login/admin';
+
+const Login = () => {
   const navigate = useNavigate();
-  const apiUrl = "http://localhost:3101/api/auth/login/admin";
   const [accountName, setAccountName] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState(""); ``
+  const [error, setError] = useState("");
 
   const handleLogin = () => {
-    const postData = {
-      accountName,
-      email: "",
-      password,
+    const data = {
+      accountName: accountName,
+      password: password,
     };
 
     axios
-      .post(apiUrl, postData)
+      .post(apiUrl, data)
       .then((response) => {
-        console.log("Response data:", response.data);
+        if (response.data.accessToken) {
+          localStorage.setItem("accessToken", response.data.accessToken);
 
-        setAccountName("");
-        setPassword("");
-
-        localStorage.setItem("accessToken", response.data.accessToken);
-
-        navigate("/Homepage");
+          setTimeout(() => {
+            navigate("/homepage");
+            window.location.reload();
+          }, 200);
+        } else {
+          setError("Đăng nhập thất bại");
+        }
       })
       .catch((error) => {
-        console.error("Error:", error.response.data.message);
-        setError("Tên tài khoản hoặc mật khẩu không đúng. Vui lòng thử lại.");
+        setError("Đăng nhập thất bại");
       });
+  };
+
+  const handleEnterPress = (e) => {
+    if (e.key === "Enter") {
+      handleLogin();
+    }
   };
 
   return (
@@ -48,6 +55,7 @@ const LoginForm = () => {
             placeholder="accountName"
             value={accountName}
             onChange={(e) => setAccountName(e.target.value)}
+            onKeyDown={handleEnterPress}
           />
 
           <label className="ml-1 mb-2" htmlFor="password">
@@ -60,6 +68,7 @@ const LoginForm = () => {
             placeholder="Mật khẩu"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            onKeyDown={handleEnterPress}
           />
           {error && <p className="text-red-500">{error}</p>}
           <button
@@ -68,16 +77,10 @@ const LoginForm = () => {
           >
             Đăng nhập
           </button>
-          <p className="py-4">
-            Bạn chưa có tài khoản?{" "}
-            <Link to="/register" className="text-blue-700">
-              Đăng ký ngay
-            </Link>
-          </p>
         </div>
       </div>
     </div>
   );
 };
 
-export default LoginForm;
+export default Login;

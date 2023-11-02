@@ -25,9 +25,7 @@ function ProductList(props) {
     }
     return 'Not Available '; // You can change this message to your preferred text
   }
-  const changeCategoryTitle = (newTitle) => {
-    setCategoryTitle(newTitle);
-  };
+
   return (
     <div className="productList max-h-full mx-auto w-full bg-white rounded-md pb-4">
     <h1 className={categoryTitle}>{categoryTitle}</h1>

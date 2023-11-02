@@ -8,7 +8,7 @@ import {
   faCaretRight,
   faSearch,
 } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { BiTask } from "react-icons/bi";
@@ -17,8 +17,8 @@ import { AiOutlineUser } from "react-icons/ai";
 import { PiShoppingCartSimpleBold } from "react-icons/pi";
 
 function Header(props) {
-  const [Categories, setCategories] = useState([]); // Initialize as an empty array
-  const isUserLoggedIn = true; // Change this based on your authentication logic
+  const [Categories, setCategories] = useState([]);
+
   useEffect(() => {
     const apiUrl1 = "http://localhost:3101/api/catalog/getlistcateandbrand";
     const request1 = axios.get(apiUrl1);
@@ -45,43 +45,40 @@ function Header(props) {
               <i className="fa fa-caret-down"></i>
             </button>
             <div className="dropdown-content flex flex-col">
-            {
-              Categories &&
-              Categories.map((category) => {
-                if (category.status === 'Active') {
-                  return (
-                    <div
-                      className="category-item text-black flex contents-center"
-                      key={category._id}
-                    >
-                      <a
-                        className="category-link"
-                        href={`/Collection/${category.nameCategory}`}
+              {Categories &&
+                Categories.map((category) => {
+                  if (category.status === "Active") {
+                    return (
+                      <div
+                        className="category-item text-black flex contents-center"
+                        key={category._id}
                       >
-                        {category.nameCategory}
-                        <FontAwesomeIcon
-                          className="category-icon"
-                          icon={faCaretRight}
-                        />
-                      </a>
-                      <div className="brand-menu">
-                        {category.brands &&
-                          category.brands.map((brand) => (
-                            <a
-                              className="brand-link"
-                              href={`/Collection/${brand.nameBrand}`}
-                              key={brand._id}
-                            >
-                              {brand.nameBrand}
-                            </a>
-                          ))}
+                        <a
+                          className="category-link"
+                          href={`/Collection/${category.nameCategory}`}
+                        >
+                          {category.nameCategory}
+                          <FontAwesomeIcon
+                            className="category-icon"
+                            icon={faCaretRight}
+                          />
+                        </a>
+                        <div className="brand-menu">
+                          {category.brands &&
+                            category.brands.map((brand) => (
+                              <a
+                                className="brand-link"
+                                href={`/Collection/${brand.nameBrand}`}
+                                key={brand._id}
+                              >
+                                {brand.nameBrand}
+                              </a>
+                            ))}
+                        </div>
                       </div>
-                    </div>
-                  );
-                }
-              })
-            }
-            
+                    );
+                  }
+                })}
             </div>
           </div>
         </div>
@@ -119,7 +116,7 @@ function Header(props) {
             <p>Giỏ Hàng</p>
           </div>
           <div className="header_user_module">
-            <Link to="/Login">
+            <Link to="/LoginUser">
               <button className="user_module_login">
                 <div className="boxIcon">
                   <AiOutlineUser />
@@ -127,7 +124,7 @@ function Header(props) {
                 <p>Đăng Nhập</p>
               </button>
             </Link>
-        </div>
+          </div>
         </div>
       </div>
     </Fragment>

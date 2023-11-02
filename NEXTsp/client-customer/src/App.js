@@ -10,8 +10,8 @@ import CollectionGear from "../src/container/Collections/CollectionGear";
 import CollectionAccessory from "../src/container/Collections/CollectionAccessory";
 import { LoadingProvider } from "./components/LoadingContext";
 import Products from "./container/Products";
-import Cart from "./components/Cart/Cart";
 const App = () => {
+
   return (
     <Router>
       <LoadingProvider>
@@ -19,7 +19,6 @@ const App = () => {
             <Route path="/Homepage" element={<Homepage />} />
             {/* <Route path="/Homepage/laptop" element={<SloganListSection/>} /> */}
             <Route path="/" element={<Landing />} />
-            <Route path="/login" element={<LoginForm />} />
             <Route path="/register" element={<RegisterFrom />} />
             <Route path="/collection" element={<Collection />} />
             <Route path="/collection/laptop" element={<CollectionLaptop />} />
@@ -29,7 +28,7 @@ const App = () => {
               path="/collection/PhuKien"
               element={<CollectionAccessory />}
             />
-            <Route path="/Cart" element={<Cart />} />
+            <Route path="/LoginUser" element={<LoginForm />} />
             <Route path="/Products" element={<Products />} />
           </Routes>
       </LoadingProvider>
