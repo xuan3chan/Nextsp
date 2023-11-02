@@ -112,8 +112,23 @@ class ProductService {
   }
   //get all products
   static async getAllProductsService() {
-    const products = await Products.find();
-    return { success: true, message: 'All products', products };
+    const products = await Products.find().populate('brand', 'nameBrand _id');
+
+    if (!products.length) {
+      return { success: false, message: 'No products found' };
+    }
+
+    const extractedProducts = products.map(product => ({
+      id: product.id,
+      nameProduct: product.nameProduct,
+      description: product.description,
+      price: product.price,
+      oldprice: product.oldprice,
+      brand: product.brand ? { name: product.brand.nameBrand, id: product.brand._id } : null,
+      status: product.status,
+    }));
+
+    return { success: true, message: 'Product details', products: extractedProducts };
   }
   //delete product
   static async deleteProductService(id) {

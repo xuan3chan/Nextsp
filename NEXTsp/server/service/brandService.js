@@ -55,12 +55,12 @@ class BrandService {
     }
 
     static async getAllBrandsService() {
-        const brands = await Brand.find().populate('category');
+        const brands = await Brand.find().populate('category','nameCategory _id');
         const extractedBrands = brands.map((brand) => ({
             id: brand.id,
             nameBrand: brand.nameBrand,
             description: brand.description,
-            category: brand.category,
+            category: brand.category ? {name: brand.category.nameCategory,id: brand.category._id} : null,
             status: brand.status,
         }));
 

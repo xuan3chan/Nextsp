@@ -13,6 +13,7 @@ thêm sản phẩm http://localhost:3101/api/products/add
 xóa sản phẩm http://localhost:3101/api/products/delete/id
 sửa sản phẩm http://localhost:3101/api/products/update/id
 chi tiết 1 sản phẩm http://localhost:3101/api/products/getdetails/id
+lay het san pham :http://localhost:3101/api/products/getall
 
 lấy hết cate có brand:" http://localhost:3101/api/catalog/getlistcateandbrand"
 

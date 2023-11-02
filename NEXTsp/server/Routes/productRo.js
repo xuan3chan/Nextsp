@@ -10,6 +10,6 @@ router.post('/add',uploader.array('images',10),ProductController.addProduct);
 router.put('/update/:id',uploader.array('images',10), ProductController.updateProduct);
 router.delete('/delete/:id', ProductController.deleteProduct);
 router.get('/getdetails/:id', ProductController.getDetailsProduct);
-router.get('/getAll', ProductController.getAllProducts);
+router.get('/getall', ProductController.getAllProducts);
 
 module.exports = router;
