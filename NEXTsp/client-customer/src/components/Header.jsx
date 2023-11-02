@@ -45,36 +45,43 @@ function Header(props) {
               <i className="fa fa-caret-down"></i>
             </button>
             <div className="dropdown-content flex flex-col">
-              {Categories &&
-                Categories.map((category) => (
-                  <div
-                    className="category-item text-black flex contents-center"
-                    key={category._id}
-                  >
-                    <a
-                      className="category-link"
-                      href={`/Collection/${category._id}`}
+            {
+              Categories &&
+              Categories.map((category) => {
+                if (category.status === 'Active') {
+                  return (
+                    <div
+                      className="category-item text-black flex contents-center"
+                      key={category._id}
                     >
-                      {category.nameCategory}
-                      <FontAwesomeIcon
-                        className="category-icon"
-                        icon={faCaretRight}
-                      />
-                    </a>
-                    <div className="brand-menu">
-                      {category.brands &&
-                        category.brands.map((brand) => (
-                          <a
-                            className="brand-link"
-                            href={`/Collection/${brand._id}`}
-                            key={brand._id}
-                          >
-                            {brand.nameBrand}
-                          </a>
-                        ))}
+                      <a
+                        className="category-link"
+                        href={`/Collection/${category._id}`}
+                      >
+                        {category.nameCategory}
+                        <FontAwesomeIcon
+                          className="category-icon"
+                          icon={faCaretRight}
+                        />
+                      </a>
+                      <div className="brand-menu">
+                        {category.brands &&
+                          category.brands.map((brand) => (
+                            <a
+                              className="brand-link"
+                              href={`/Collection/${brand._id}`}
+                              key={brand._id}
+                            >
+                              {brand.nameBrand}
+                            </a>
+                          ))}
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  );
+                }
+              })
+            }
+            
             </div>
           </div>
         </div>
