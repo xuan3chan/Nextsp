@@ -56,7 +56,7 @@ function Header(props) {
                     >
                       <a
                         className="category-link"
-                        href={`/Collection/${category._id}`}
+                        href={`/Collection/${category.nameCategory}`}
                       >
                         {category.nameCategory}
                         <FontAwesomeIcon
@@ -69,7 +69,7 @@ function Header(props) {
                           category.brands.map((brand) => (
                             <a
                               className="brand-link"
-                              href={`/Collection/${brand._id}`}
+                              href={`/Collection/${brand.nameBrand}`}
                               key={brand._id}
                             >
                               {brand.nameBrand}

@@ -11,3 +11,4 @@ export { default as SloganListSection } from './homepage/SloganListSection';
 export { default as ProductList } from './homepage/ProductList';
 export { default as ProductSlide } from './homepage/ProductSlide';
 export {default as Breadcrumb} from './collection/Breadcrumb' ;
+export {default as Cart}    from './Cart/Cart' ;

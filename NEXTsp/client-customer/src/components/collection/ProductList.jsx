@@ -4,30 +4,38 @@ import "../../assets/css/collection.css";
 import axios from "axios";
 import FilterButtonSection from "./FilterButtonSection";
 import "../../assets/css/main.css";
-
+import { useState } from "react";
 
 function ProductList(props) {
   const [products, setProducts] = React.useState([]);
+  const [categoryTitle, setCategoryTitle] = useState("CategoryTitle"); 
 
   React.useEffect(() => {
     const fetchData = async () => {
       const result = await axios.get("http://localhost:3101/api/products/getall");
-
-      setProducts(result.data);
+      setProducts(result.data.products);
     };
 
     fetchData();
   }, []);
+
   function formatPrice(price) {
-    return `${price.toLocaleString()}đ`;
+    if (price) {
+      return `${price.toLocaleString()}đ`;
+    }
+    return 'Not Available '; // You can change this message to your preferred text
   }
+  const changeCategoryTitle = (newTitle) => {
+    setCategoryTitle(newTitle);
+  };
   return (
     <div className="productList max-h-full mx-auto w-full bg-white rounded-md pb-4">
-      <h1 className="CategoryTitle ">Máy Tính Laptop</h1>
-      <FilterButtonSection></FilterButtonSection>
-      <div className=" flex flex-wrap  gap-1 content-center justify-center pt-12">
-      {products
-        .map((product, index) => (
+    <h1 className={categoryTitle}>{categoryTitle}</h1>
+    <FilterButtonSection/>
+    <div className=" flex flex-wrap  gap-1 content-center justify-center pt-12">
+      {Array. isArray(products) &&
+        products
+        .map((product) => (
               <div
                 key={products.id}
                 className="productItem-collection w-2/12 flex flex-col p-4 gap-1 "

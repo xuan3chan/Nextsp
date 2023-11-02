@@ -5,20 +5,32 @@ import { FaTruckMoving } from "react-icons/fa";
 import { BiSolidRightArrow } from "react-icons/bi";
 function ProductList(props) {
   const [products, setProducts] = React.useState([]);
-  const ApiProducts = "http://localhost:3003/products";
+  const ApiProducts = "http://localhost:3101/api/products/getall";
 
   React.useEffect(() => {
     const fetchData = async () => {
       const result = await axios.get(ApiProducts);
 
-      setProducts(result.data);
+      setProducts(result.data.products);
     };
 
     fetchData();
   }, []);
   function formatPrice(price) {
-    return `${price.toLocaleString()}đ`;
+    if (price) {
+      return `${price.toLocaleString()}đ`;
+    }
+    return 'Not Available ';
   }
+  const { dispatch } = useCart(); // Access the cart dispatch function from the context
+
+  // ...
+
+  // Function to handle the "Thêm vào giỏ" click event
+  const handleAddToCart = (product) => {
+    dispatch({ type: "ADD_TO_CART", payload: product });
+  };
+
   return (
     <div className="productList p-4 mr-auto ml-auto bg-white rounded-md">
       <div className="title-Section flex items-center relative pb-4 ml-6">
@@ -46,13 +58,13 @@ function ProductList(props) {
               >
                 <div className="product_image w-72 h-52 object-contain">
                   <img
-                    src={product.imageUrl}
+                    src={product.images[0]}
                     alt=""
                     className="w-full h-44 object-contain "
                   />
                 </div>
                 <div className="product_title">
-                  <h1 className=" ">{product.title} </h1>
+                  <h1 className=" ">{product.nameProduct} </h1>
                 </div>
                 <div>
                   <p className="product_oldPrice font-bold RobotoViet">
@@ -66,7 +78,9 @@ function ProductList(props) {
                   <div className="btn p-1  flex justify-center btn-sell ">
                     Mua Ngay
                   </div>
-                  <div className="btn p-1 flex justify-center btn-addCart">
+                  <div className="btn p-1 flex justify-center btn-addCart"
+                  onClick={() => handleAddToCart(product)}
+                  >
                     Thêm Vào Giỏ
                   </div>
                 </div>
