@@ -13,6 +13,8 @@ import {
 } from "../components";
 import "../assets/css/homepage.css";
 import "../assets/css/main.css";
+import "../components/Cart/Cart.css";
+import {cart} from "../components/Cart/Cart";
 function Homepage(props) {
   const [isLoading, setIsLoading] = useState(true);
 
@@ -36,6 +38,7 @@ function Homepage(props) {
             <div className="container-product-section inline-block relative">
               <div className="flex flex-col w-4/5 contents-center mr-auto ml-auto gap-10">
                 <SloganListSection></SloganListSection>
+                
                 <ProductList
                   title="Sản phẩm mới"
                   CollectionName=""
