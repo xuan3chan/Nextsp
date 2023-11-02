@@ -3,7 +3,7 @@ import React from "react";
 function DescriptionSection(props) {
   return (
     <div>
-      <div className="containerDescSection w-96">
+      <div className="containerDescSection w-96 mb-8">
         <div className="descTitle">Mô Tả Sản Phẩm</div>
         <div class="productDesc">
           <h2>Đánh giá chi tiết laptop ASUS TUF Gaming F15 FX507VV4 LP382W</h2>
