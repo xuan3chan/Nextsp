@@ -7,12 +7,12 @@ const LoginForm = () => {
   const apiUrl = "http://localhost:3101/api/auth/login/admin";
   const [accountName, setAccountName] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState(""); // State to manage errors
+  const [error, setError] = useState(""); ``
 
   const handleLogin = () => {
     const postData = {
       accountName,
-      email: "", // You can send an empty string for email or remove it from the request if not needed
+      email: "",
       password,
     };
 
@@ -21,14 +21,11 @@ const LoginForm = () => {
       .then((response) => {
         console.log("Response data:", response.data);
 
-        // Reset input fields
         setAccountName("");
         setPassword("");
 
-        // Store the token in local storage
         localStorage.setItem("accessToken", response.data.accessToken);
 
-        // Navigate to the homepage
         navigate("/Homepage");
       })
       .catch((error) => {

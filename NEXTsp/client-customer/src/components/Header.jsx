@@ -6,9 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBars,
   faCaretRight,
-  faCartShopping,
   faSearch,
-  faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -17,17 +15,14 @@ import { BiTask } from "react-icons/bi";
 import { BsHeadphones } from "react-icons/bs";
 import { AiOutlineUser } from "react-icons/ai";
 import { PiShoppingCartSimpleBold } from "react-icons/pi";
+
 function Header(props) {
   const [Categories, setCategories] = useState([]); // Initialize as an empty array
-  const [Brands, setBrands] = useState([]);
-
+  const isUserLoggedIn = true; // Change this based on your authentication logic
   useEffect(() => {
-    // Define the API URLs
     const apiUrl1 = "http://localhost:3101/api/catalog/getlistcateandbrand";
-    // Make parallel requests
     const request1 = axios.get(apiUrl1);
 
-    // Wait for both requests to complete
     Promise.all([request1])
       .then(([response1]) => {
         setCategories(response1.data.categories);
@@ -120,12 +115,12 @@ function Header(props) {
             <Link to="/Login">
               <button className="user_module_login">
                 <div className="boxIcon">
-                  <AiOutlineUser></AiOutlineUser>
+                  <AiOutlineUser />
                 </div>
                 <p>Đăng Nhập</p>
               </button>
             </Link>
-          </div>
+        </div>
         </div>
       </div>
     </Fragment>

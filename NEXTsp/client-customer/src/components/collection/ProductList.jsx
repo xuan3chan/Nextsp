@@ -11,7 +11,7 @@ function ProductList(props) {
 
   React.useEffect(() => {
     const fetchData = async () => {
-      const result = await axios.get("http://localhost:3003/Products");
+      const result = await axios.get("http://localhost:3101/api/products/getall");
 
       setProducts(result.data);
     };
@@ -27,7 +27,6 @@ function ProductList(props) {
       <FilterButtonSection></FilterButtonSection>
       <div className=" flex flex-wrap  gap-1 content-center justify-center pt-12">
       {products
-        .filter(product => product.type === "Laptop")
         .map((product, index) => (
               <div
                 key={products.id}
