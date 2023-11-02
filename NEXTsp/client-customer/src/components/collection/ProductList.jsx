@@ -34,13 +34,13 @@ function ProductList(props) {
               >
                 <div className="product_image w-72 h-52 object-contain">
                   <img
-                    src={product.imageUrl}
+                    src={product.images}
                     alt=""
                     className="w-full h-44 object-contain "
                   />
                 </div>
                 <div className="product_title">
-                  <h1 className=" max-[]: h-16 truncate ">{product.title} </h1>
+                  <h1 className=" max-[]: h-16 truncate ">{product.nameProduct} </h1>
                 </div>
                 <div>
                   <p className="product_oldPrice">{formatPrice(product.oldPrice)}</p>
