@@ -12,7 +12,7 @@ const AddProductDetail = ({brands}) => {
   const [fData, setFdata] = useState({
     nameProduct: "",
     description: "",
-    images: null,
+    image: null,
     status: "Active",
     brand: "",
     price: "",
@@ -34,7 +34,7 @@ const AddProductDetail = ({brands}) => {
     e.preventDefault();
     e.target.reset();
 
-    if (!fData.images) {
+    if (!fData.image) {
       setFdata({ ...fData, error: "Please upload at least 2 image" });
       setTimeout(() => {
         setFdata({ ...fData, error: false });
@@ -43,13 +43,13 @@ const AddProductDetail = ({brands}) => {
 
     try {
       let responseData = await createProduct(fData);
-      if (responseData.success) {
+      if (responseData && responseData.success) {
         fetchData();
         setFdata({
           ...fData,
           nameProduct: "",
           description: "",
-          images: null,
+          image: "",
           status: "",
           brand: "",
           price: "",
@@ -61,15 +61,18 @@ const AddProductDetail = ({brands}) => {
             ...fData,
             nameProduct: "",
             description: "",
-            images: null,
+            image: "",
             status: "",
             brand: "",
             price: "",
-            success: false,
+            success: "Add Category Successfully :3",
             error: false,
           });
+          setTimeout(() => {
+            window.location.reload();
+          }, 1000)
         }, 2000);
-      } else if (responseData.error) {
+      } else if (responseData && responseData.error) {
         setFdata({ ...fData, success: false, error: responseData.error });
         setTimeout(() => {
           return setFdata({ ...fData, error: false, success: false });
@@ -169,14 +172,14 @@ const AddProductDetail = ({brands}) => {
                 >
                   <option value="">Select Brand</option>
                   {brands && brands.length > 0
-                    ? brands.map(function (elem) {
+                    ? brands.map((brand, index) => {
                         return (
-                          <option name="status" value={elem.id} key={elem.id}>
-                            {elem.nameBrand}
+                          <option name="status" value={brand.id} key={brand.id}>
+                            {brand.nameBrand}
                           </option>
                         );
                       })
-                    : ""}
+                    : "No brands found"}
                 </select>
               </div>
               <div className="w-1/2 flex flex-col space-y-1 space-x-1">
@@ -211,14 +214,14 @@ const AddProductDetail = ({brands}) => {
             </div>
             <div className="flex space-x-1 py-4">
               <div className="w-full flex flex-col space-y-1 space-x-1">
-                <label htmlFor="images">Images *</label>
+                <label htmlFor="image">Image *</label>
                 <input
                   onChange={(e) =>
-                    setFdata({ ...fData, images: e.target.files })
+                    setFdata({ ...fData, image: [...e.target.files] })
                   }
                   type="file"
-                  id="images"
-                  placeholder="Images"
+                  id="image"
+                  placeholder="Image"
                   className="px-4 py-2 border focus:outline-none"
                   multiple
                   required
@@ -257,7 +260,7 @@ const AddProductModal = (props) => {
 
   return (
     <Fragment>
-      <AddProductDetail Brands={allBrand} />
+      <AddProductDetail brands={allBrand} />
     </Fragment>
   );
 };

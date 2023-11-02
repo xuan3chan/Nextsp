@@ -1,10 +1,11 @@
-import React, { Fragment, useContext, useEffect, useState } from 'react'
-import { getAllProduct, deleteProduct } from './FetchApi'
-import moment from 'moment';
-import { ProductContext } from './index';
-
+import React, { Fragment, useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { getAllProduct, deleteProduct } from "./FetchApi";
+import moment from "moment";
+import { ProductContext } from "./index";
 
 const AllProducts = () => {
+  const navigate = useNavigate();
   const { data, dispatch } = useContext(ProductContext);
   const { products } = data;
 
@@ -13,7 +14,7 @@ const AllProducts = () => {
   useEffect(() => {
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[]);
+  }, []);
 
   const fetchData = async () => {
     setLoading(true);
@@ -27,24 +28,26 @@ const AllProducts = () => {
         setLoading(false);
       }
     }, 1000);
-  }
+  };
 
   const deleteProductReq = async (_id) => {
-    try{
-      let res = await deleteProduct(_id);
-      console.log('res', res);
-      const confirmed = window.confirm("Chắc chắn xóa ?");
+    try {
+      
+      // Hiển thị xác nhận
+      const confirmed = window.confirm("Are you sure ?");
       if (confirmed) {
-        window.location.reload();
+        // Gọi hàm xóa sản phẩm
+        await deleteProduct(_id);
+        navigate(
+          "/admin/dashboard/products",
+        );
       }
-    }
-    catch(err){
-        alert("Xóa không được !")
+    } catch (err) {
+      alert("Xóa không được !");
     }
   };
 
-
-  if(loading) {
+  if (loading) {
     return (
       <div className="flex items-center justify-center p-8">
         <svg
@@ -67,19 +70,13 @@ const AllProducts = () => {
           ></path>
         </svg>
       </div>
-    )
+    );
   }
 
   return (
     <Fragment>
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-semibold text-gray-800">All Products</h1>
-        <button
-          onClick={(e) => dispatch({ type: "addProductModalOpen" })}
-          className="px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded"
-        >
-          Add Product
-        </button>
       </div>
       <div className="col-span-1 overflow-auto bg-white shadow-lg p-4">
         <table className="table-auto border w-full my-2">
@@ -87,10 +84,9 @@ const AllProducts = () => {
             <tr>
               <th className="px-4 py-2 border">Product</th>
               <th className="px-4 py-2 border">Description</th>
-              <th className="px-4 py-2 border">Image</th>
+              <th className="px-4 py-2 border w-5 h-2">Image</th>
               <th className="px-4 py-2 border">Status</th>
               <th className="px-4 py-2 border">Brand</th>
-              <th className="px-4 py-2 border">Category</th>
               <th className="px-4 py-2 border">Created At</th>
               <th className="px-4 py-2 border">Updated At</th>
               <th className="px-4 py-2 border">Action</th>
@@ -109,28 +105,30 @@ const AllProducts = () => {
         </table>
       </div>
     </Fragment>
-  )
-}
-
+  );
+};
 
 const ProductTable = ({ product, deleteProduct }) => {
+  const imageCount = product.images.length;
   return (
     <Fragment>
-      <tr>
+      <tr className="border border-spacing-1">
         <td className="p-2 text-left">
           {product.nameProduct.length > 15
             ? product.nameProduct.substring(1, 15) + "..."
             : product.nameProduct}
         </td>
-        <td className="p-2 text-left">
-          {product.description.slice(0, 15)}...
-        </td>
-        <td className="p-2 text-center">
-          <img
-            className="w-12 h-12 object-cover object-center"
-            src="../../../../server/uploads/1698257578682-chandung.jpg"
-            alt="pic"
-          />
+        <td className="p-2 text-left">{product.description.slice(0, 15)}...</td>
+        <td className="p-2 text-center relative">
+          {product.images.length > 0 ? (
+            <Fragment><img
+              className="w-auto h-auto object-fill object-center "
+              src={product.images[0]}
+              alt="pic" /><span className="absolute top-0 bottom-0 left-0 right-0 bg-gray-800/70 text-white flex justify-center items-center p-1 ">
+                {imageCount}
+              </span></Fragment>
+            
+            ) : "N/A"}
         </td>
         <td className="p-2 text-center">
           {product.status === "Active" ? (
@@ -144,14 +142,13 @@ const ProductTable = ({ product, deleteProduct }) => {
           )}
         </td>
         <td className="p-2 text-center">{product.brand}</td>
-        <td className="p-2 text-center">{product.category}</td>
         <td className="p-2 text-center">
           {moment(product.createdAt).format("lll")}
         </td>
         <td className="p-2 text-center">
           {moment(product.updatedAt).format("lll")}
         </td>
-        <td className="p-2 flex items-center justify-center">
+        <td className="p-2">
           <span
             // onClick={(e) => editProduct(product._id, product, true
             // )}
@@ -168,7 +165,7 @@ const ProductTable = ({ product, deleteProduct }) => {
         </td>
       </tr>
     </Fragment>
-  )
-}
+  );
+};
 
 export default AllProducts;

@@ -19,16 +19,25 @@ export const deleteProduct = async (_id) => {
   }
 }
 
+export const createPorductImage = async ({ image }) => {
+  /* Most important part for uploading multiple image  */
+  let formData = new FormData();
+  for (const file of image) {
+    formData.append("image", file);
+  }
+  /* Most important part for uploading multiple image  */
+};
+
 export const createProduct = async ({
   nameProduct,
   description,
-  images,
+  image,
   status,
   brand,
   price,
 }) => {
   let formData = new FormData();
-  for (const file of images) {
+  for (const file of image) {
     formData.append("images", file);
   }
   formData.append("nameProduct", nameProduct);
