@@ -3,7 +3,7 @@ export const productState = {
   addProductModal: false,
   editProductModal: {
     modal: false,
-    _id: "",
+    id: "",
     nameProduct: "",
     description: "",
     images: null,
@@ -30,7 +30,7 @@ export const productReducer = (state, action) => {
         ...state,
         editProductModal: {
           modal: true,
-          _id: action.product._id,
+          id: action.product.id,
           nameProduct: action.product.nameProduct,
           description: action.product.description,
           images: action.product.images,
@@ -44,7 +44,7 @@ export const productReducer = (state, action) => {
         ...state,
         editProductModal: {
           modal: false,
-          _id: "",
+          id: "",
           nameProduct: "",
           description: "",
           images: null,
@@ -52,6 +52,11 @@ export const productReducer = (state, action) => {
           brand: "",
           price: "",
         }
+      };
+      case "loading":
+      return {
+        ...state,
+        loading: action.payload,
       };
     default:
       return state

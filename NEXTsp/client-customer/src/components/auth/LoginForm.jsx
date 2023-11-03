@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-const apiUrl = 'http://localhost:3101/api/auth/login/admin';
+const apiUrl = 'http://localhost:3003/userAccount';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -15,13 +15,13 @@ const Login = () => {
       accountName: accountName,
       password: password,
     };
-
     axios
       .post(apiUrl, data)
       .then((response) => {
         if (response.data.accessToken) {
           localStorage.setItem("accessToken", response.data.accessToken);
-
+          localStorage.setItem("accountName", response.data.accountName);
+          console.log(response.data)
           setTimeout(() => {
             navigate("/homepage");
             window.location.reload();
@@ -29,6 +29,13 @@ const Login = () => {
         } else {
           setError("Đăng nhập thất bại");
         }
+      })
+      .then(response => {
+        console.log('response', response);
+        return response.json();
+      })
+      .then(data => {
+        console.log('data', data);
       })
       .catch((error) => {
         setError("Đăng nhập thất bại");

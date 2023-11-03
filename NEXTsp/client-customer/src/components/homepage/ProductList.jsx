@@ -3,17 +3,18 @@ import axios from "axios";
 
 import { FaTruckMoving } from "react-icons/fa";
 import { BiSolidRightArrow } from "react-icons/bi";
+import {Link} from "react-router-dom";
+
 
 function ProductList(props) {
   const [products, setProducts] = React.useState([]);
   const ApiProducts = "http://localhost:3101/api/products/getall";
+
   React.useEffect(() => {
     const fetchData = async () => {
       const result = await axios.get(ApiProducts);
-
       setProducts(result.data.products);
     };
-
     fetchData();
   }, []);
   function formatPrice(price) {
@@ -44,8 +45,9 @@ function ProductList(props) {
         {products.map(
           (product, index) =>
             index < 4 && (
-              <div
-                key={product.id}
+              <Link
+                to = {`/products/${product.id}`}
+                key={index}
                 className="productItem flex flex-col  border-black-500/100 p-4 gap-1 "
               >
                 <div className="product_image w-72 h-52 object-contain">
@@ -74,7 +76,7 @@ function ProductList(props) {
                     Thêm Vào Giỏ
                   </div>
                 </div>
-              </div>
+              </Link>
             )
         )}
       </div>

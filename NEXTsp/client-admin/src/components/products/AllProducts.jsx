@@ -1,14 +1,14 @@
 import React, { Fragment, useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { getAllProduct, deleteProduct } from "./FetchApi";
+import { getAllProduct } from "./FetchApi";
 import moment from "moment";
 import { ProductContext } from "./index";
+import axios from "axios";
+const apiURL = process.env.REACT_APP_PRODUCTS
 
 const AllProducts = () => {
-  const navigate = useNavigate();
   const { data, dispatch } = useContext(ProductContext);
-  const { products } = data;
-
+  const [ products, setProducts ] = useState([])
+  const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -18,34 +18,39 @@ const AllProducts = () => {
 
   const fetchData = async () => {
     setLoading(true);
-    let responseData = await getAllProduct();
-    setTimeout(() => {
-      if (responseData && responseData) {
-        dispatch({
-          type: "fetchProductsAndChangeState",
-          payload: responseData,
-        });
-        setLoading(false);
-      }
-    }, 1000);
-  };
-
-  const deleteProductReq = async (_id) => {
     try {
-      
-      // Hiển thị xác nhận
-      const confirmed = window.confirm("Are you sure ?");
-      if (confirmed) {
-        // Gọi hàm xóa sản phẩm
-        await deleteProduct(_id);
-        navigate(
-          "/admin/dashboard/products",
-        );
-      }
+      const responseData = await getAllProduct();
+      setProducts(responseData);
+      setLoading(false);
     } catch (err) {
-      alert("Xóa không được !");
+      setError(true);
+      setLoading(false);
     }
   };
+
+  const deleteProduct = (id) => {
+    if (window.confirm("Are you sure?")) {
+      axios.delete(`${apiURL}/delete/${id}`)
+      .then(res => {
+        const del = products.filter(product => id !== product.id)
+        setProducts(del)
+        fetchData();
+        setLoading(false)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    }
+  }
+
+  const editProduct = (id, product, type) => {
+    if (type) {
+      dispatch({
+        type: "editProductModalOpen",
+        product: { ...product, id: id },
+      });
+    }
+  }
 
   if (loading) {
     return (
@@ -72,6 +77,11 @@ const AllProducts = () => {
       </div>
     );
   }
+  if (!products || error) {
+    return (
+      <div>ERROR...</div>
+    )
+  }
 
   return (
     <Fragment>
@@ -87,19 +97,72 @@ const AllProducts = () => {
               <th className="px-4 py-2 border w-5 h-2">Image</th>
               <th className="px-4 py-2 border">Status</th>
               <th className="px-4 py-2 border">Brand</th>
+              <th className="px-4 py-2 border">Price</th>
               <th className="px-4 py-2 border">Created At</th>
               <th className="px-4 py-2 border">Updated At</th>
               <th className="px-4 py-2 border">Action</th>
             </tr>
           </thead>
           <tbody>
-            {products &&
-              products.map((product, index) => (
-                <ProductTable
-                  key={index}
-                  product={product}
-                  deleteProduct={deleteProductReq}
-                />
+              {products && products.map((product) => (
+                <tr className="border border-spacing-1" key={product.id}>
+                  <td className="p-2 text-left">
+                    {product.nameProduct.length > 15
+                      ? product.nameProduct.substring(1, 15) + "..."
+                      : product.nameProduct}
+                  </td>
+                  <td className="p-2 text-left">
+                    {product.description.slice(0, 15)}...
+                  </td>
+                  <td className="p-2 text-center relative">
+                    {product.images.length > 0 ? (
+                      <Fragment>
+                        <img
+                          className="w-auto h-auto object-fill object-center "
+                          src={product.images[0]}
+                          alt="pic"
+                        />
+                        <div className="image-count absolute top-1 right-1 left-1 bottom-1 flex items-center justify-center text-white bg-black/30">{`${product.images.length} images`}</div>
+                      </Fragment>
+                    ) : (
+                      "N/A"
+                    )}
+                  </td>
+                  <td className="p-2 text-center">
+                    {product.status === "Active" ? (
+                      <span className="bg-green-200 rounded-full text-center text-xs px-2 font-semibold">
+                        {product.status}
+                      </span>
+                    ) : (
+                      <span className="bg-red-200 rounded-full text-center text-xs px-2 font-semibold">
+                        {product.status}
+                      </span>
+                    )}
+                  </td>
+                  <td className="p-2 text-center">{product.brand.name}</td>
+                  <td className="p-2 text-center">{product.price}</td>
+                  <td className="p-2 text-center">
+                    {moment(product.createdAt).format("lll")}
+                  </td>
+                  <td className="p-2 text-center">
+                    {moment(product.updatedAt).format("lll")}
+                  </td>
+                  <td className="p-2">
+                    <span
+                      onClick={(e) => editProduct(product.id, product, true
+                      )}
+                      className="cursor-pointer bg-green-500 hover:bg-green-600 px-2 py-1 text-white rounded mr-2"
+                    >
+                      Edit
+                    </span>
+                    <span
+                      onClick={(e) => deleteProduct(product.id)}
+                      className="cursor-pointer bg-red-500 hover:bg-red-600 px-2 py-1 text-white rounded"
+                    >
+                      Delete
+                    </span>
+                  </td>
+                </tr>
               ))}
           </tbody>
         </table>
@@ -108,64 +171,6 @@ const AllProducts = () => {
   );
 };
 
-const ProductTable = ({ product, deleteProduct }) => {
-  const imageCount = product.images.length;
-  return (
-    <Fragment>
-      <tr className="border border-spacing-1">
-        <td className="p-2 text-left">
-          {product.nameProduct.length > 15
-            ? product.nameProduct.substring(1, 15) + "..."
-            : product.nameProduct}
-        </td>
-        <td className="p-2 text-left">{product.description.slice(0, 15)}...</td>
-        <td className="p-2 text-center relative">
-          {product.images.length > 0 ? (
-            <Fragment><img
-              className="w-auto h-auto object-fill object-center "
-              src={product.images[0]}
-              alt="pic" /><span className="absolute top-0 bottom-0 left-0 right-0 bg-gray-800/70 text-white flex justify-center items-center p-1 ">
-                {imageCount}
-              </span></Fragment>
-            
-            ) : "N/A"}
-        </td>
-        <td className="p-2 text-center">
-          {product.status === "Active" ? (
-            <span className="bg-green-200 rounded-full text-center text-xs px-2 font-semibold">
-              {product.status}
-            </span>
-          ) : (
-            <span className="bg-red-200 rounded-full text-center text-xs px-2 font-semibold">
-              {product.status}
-            </span>
-          )}
-        </td>
-        <td className="p-2 text-center">{product.brand}</td>
-        <td className="p-2 text-center">
-          {moment(product.createdAt).format("lll")}
-        </td>
-        <td className="p-2 text-center">
-          {moment(product.updatedAt).format("lll")}
-        </td>
-        <td className="p-2">
-          <span
-            // onClick={(e) => editProduct(product._id, product, true
-            // )}
-            className="cursor-pointer bg-green-500 hover:bg-green-600 px-2 py-1 text-white rounded mr-2"
-          >
-            Edit
-          </span>
-          <span
-            onClick={(e) => deleteProduct(product._id)}
-            className="cursor-pointer bg-red-500 hover:bg-red-600 px-2 py-1 text-white rounded"
-          >
-            Delete
-          </span>
-        </td>
-      </tr>
-    </Fragment>
-  );
-};
+
 
 export default AllProducts;

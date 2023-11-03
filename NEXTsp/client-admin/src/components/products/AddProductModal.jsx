@@ -6,7 +6,7 @@ import { getAllBrand } from '../brands/FetchAPI'
 const AddProductDetail = ({brands}) => {
   const { data, dispatch } = useContext(ProductContext);
 
-  const alert = (msg, type) => (
+  const message = (msg, type) => (
     <div className={`bg-${type}-200 py-2 px-4 w-full`}>{msg}</div>
   );
   const [fData, setFdata] = useState({
@@ -16,6 +16,8 @@ const AddProductDetail = ({brands}) => {
     status: "Active",
     brand: "",
     price: "",
+    success: false,
+    error: false,
   });
   
   const fetchData = async () => {
@@ -27,66 +29,60 @@ const AddProductDetail = ({brands}) => {
           payload: responseData.Products,
         });
       }
-    }, 1000);
+    },1000);
   };
 
   const submitForm = async (e) => {
     e.preventDefault();
     e.target.reset();
 
-    if (!fData.image) {
-      setFdata({ ...fData, error: "Please upload at least 2 image" });
-      setTimeout(() => {
-        setFdata({ ...fData, error: false });
-      }, 2000);
+    if (!fData.nameProduct) {
+      setFdata({ ...fData, error: "Please give the name!" });
+      setFdata({ ...fData, error: false });
     }
 
     try {
       let responseData = await createProduct(fData);
-      if (responseData && responseData.success) {
-        fetchData();
-        setFdata({
-          ...fData,
-          nameProduct: "",
-          description: "",
-          image: "",
-          status: "",
-          brand: "",
-          price: "",
-          success: responseData.success,
-          error: false,
-        });
+      if (responseData.success) {
         setTimeout(() => {
           setFdata({
             ...fData,
             nameProduct: "",
             description: "",
-            image: "",
-            status: "",
+            image: null,
+            status: "Active",
             brand: "",
             price: "",
-            success: "Add Category Successfully :3",
+            success: "Add product complete !",
             error: false,
           });
-          setTimeout(() => {
-            window.location.reload();
-          }, 1000)
-        }, 2000);
-      } else if (responseData && responseData.error) {
-        setFdata({ ...fData, success: false, error: responseData.error });
-        setTimeout(() => {
-          return setFdata({ ...fData, error: false, success: false });
-        }, 2000);
+        },1000)
+        setFdata({
+          ...fData,
+          nameProduct: "",
+          description: "",
+          image: null,
+          status: "Active",
+          brand: "",
+          price: "",
+          success: "Add product complete !",
+          error: false,
+        });
+        dispatch({ type: "addProductModal", payload: true });
+        fetchData();
+        window.location.reload()
       }
     } catch (error) {
-      console.log(error);
+      alert(`Product with name ${fData.nameProduct} already exists`)
     }
   };
+
+  
   return (
     <Fragment>
       {/* Black Overlay */}
       <div
-        onClick={(e) => dispatch({ type: "addProductModal", payload: false })}
+        onClick={(e) => dispatch({ type: "addProductModal", payload: true })}
         className={`${
           data.addProductModal ? "" : "hidden"
         } fixed top-0 left-0 z-30 w-full h-full bg-black opacity-50`}
@@ -128,8 +124,8 @@ const AddProductDetail = ({brands}) => {
               </svg>
             </span>
           </div>
-          {fData.error ? alert(fData.error, "red") : ""}
-          {fData.success ? alert(fData.success, "green") : ""}
+          {fData.error ? message(fData.error, "red") : ""}
+          {fData.success ? message(fData.success, "green") : ""}
           <form className="w-full" onSubmit={(e) => submitForm(e)}>
             <div className="flex space-x-1 py-4">
               <div className="w-1/2 flex flex-col space-y-1 space-x-1">
@@ -172,7 +168,7 @@ const AddProductDetail = ({brands}) => {
                 >
                   <option value="">Select Brand</option>
                   {brands && brands.length > 0
-                    ? brands.map((brand, index) => {
+                    ? brands.map((brand) => {
                         return (
                           <option name="status" value={brand.id} key={brand.id}>
                             {brand.nameBrand}
@@ -216,9 +212,16 @@ const AddProductDetail = ({brands}) => {
               <div className="w-full flex flex-col space-y-1 space-x-1">
                 <label htmlFor="image">Image *</label>
                 <input
-                  onChange={(e) =>
-                    setFdata({ ...fData, image: [...e.target.files] })
-                  }
+                  onChange={(e) => {
+                    const selectedFiles = e.target.files;
+                    if (selectedFiles.length <= 10) {
+                      setFdata({ ...fData, image: [...selectedFiles] });
+                    } else {
+                      // Hiển thị thông báo hoặc xử lý khác ở đây nếu số lượng tệp vượt quá 10.
+                      alert("Tối đa 10 tệp được chấp nhận.");
+                      e.target.value = null; // Đặt lại giá trị của trường file input
+                    }
+                  }}
                   type="file"
                   id="image"
                   placeholder="Image"

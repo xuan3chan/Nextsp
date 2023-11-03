@@ -31,11 +31,12 @@ function Header(props) {
         console.error("Error fetching data:", error);
       });
   }, []);
+
   return (
     <Fragment>
       <div className="header z-20 fixed flex justify-center ">
         <div className="header_logo"></div>
-        <div class="navbar">
+        <div className="navbar">
           <a href="../Homepage">Trang Chủ</a>
           <a href="/Blog">Bài Viết</a>
           <div className="dropdown">
