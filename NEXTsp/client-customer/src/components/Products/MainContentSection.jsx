@@ -2,12 +2,10 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 
 function MainContentSection(props) {
-  const [product, setProduct] = useState(
-null);
-  const ApiProducts = `http://localhost:3101/api/products/getdetails/6541feac6b7e3b1d338f48a9`;
+  const [product, setProduct] = useState(null);
 
+  const ApiProducts = `http://localhost:3101/api/products/getdetails`;
   useEffect(() => {
-    console.log(ApiProducts);
     const fetchData = async () => {
       try {
         const result = await axios.get(ApiProducts);
@@ -25,9 +23,12 @@ null);
   }, [ApiProducts]);
 
   return (
-    <div>~
+    <div>
       {product && (
-        <div key = {product.id} className="flex flex-col gap-6 mt-8 mr-8 ml-8 border-b-2 h-96">
+        <div
+          key={product._id}
+          className="flex flex-col gap-6 mt-8 mr-8 ml-8 border-b-2 h-96"
+        >
           <div className="productTitle h-22">{product.nameProduct}</div>
           <div className="priceSection flex gap-2 h-8">
             <div className="productPrice">{product.price}</div>

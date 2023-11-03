@@ -3,8 +3,7 @@ import axios from "axios";
 
 import { FaTruckMoving } from "react-icons/fa";
 import { BiSolidRightArrow } from "react-icons/bi";
-import {Link} from "react-router-dom";
-
+import { Link } from "react-router-dom";
 
 function ProductList(props) {
   const [products, setProducts] = React.useState([]);
@@ -46,7 +45,7 @@ function ProductList(props) {
           (product, index) =>
             index < 4 && (
               <Link
-                to = {`/products/${product.id}`}
+                to={`/products/${product.id}`}
                 key={index}
                 className="productItem flex flex-col  border-black-500/100 p-4 gap-1 "
               >
