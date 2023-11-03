@@ -23,7 +23,7 @@ function Products(props) {
           <div className="flex bg-white w-full rounded-md h-full mb-8">
             <ImageSection images={images}></ImageSection>
             <div className="flex flex-col gap-8">
-              <MainContentSection Idd = "6541431b27d2e2b9ccc18b76"></MainContentSection>
+              <MainContentSection ></MainContentSection>
               <DescriptionSection></DescriptionSection>
             </div>
           </div>

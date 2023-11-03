@@ -49,12 +49,13 @@
   white-space: normal;
 }
 .productItem-collection {
-  width: 19%;
+  max-width: 18%;
 }
 .productItem-collection:hover {
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
 }
 .productList {
+  width: 100%;
 }
 
 /* Pagination section */
@@ -162,9 +163,7 @@
     -webkit-box-orient: vertical;
     white-space: normal; 
   }
-  .productItem-collection{ 
-    width: 19%;
-  }
+
   .productItem-collection:hover{
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
     
@@ -284,9 +283,7 @@
   -webkit-box-orient: vertical;
   white-space: normal;
 }
-.productItem-collection {
-  width: 19%;
-}
+
 .productItem-collection:hover {
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
 }

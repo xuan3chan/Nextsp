@@ -2,14 +2,16 @@ import React from "react";
 import { Breadcrumb, Header } from "../../components";
 import "../../assets/css/collection.css";
 import "../../assets/css/main.css";
-import ProductList from "../../components/collection/ProductList";
 import Paginnation from "../../components/collection/Paginnation";
+import ProductListAll from "../../components/collection/ProductListAll";
+import ProductList from "../../components/collection/ProductList";
 import RiseLoader from "react-spinners/RiseLoader";
 import { useState, useEffect, override } from "react";
+import { useParams } from "react-router-dom"; 
 function Collection(props) {
-  const titleCollection = "Tất Cả Sản Phẩm";
-  const [isLoading, setIsLoading] = useState(true);
 
+  const [isLoading, setIsLoading] = useState(true);
+  const params = useParams()
   useEffect(() => {
     // Simulate a data loading delay
     setTimeout(() => {
@@ -26,9 +28,12 @@ function Collection(props) {
         <div className="color-bg bg-slate-200 w-full">
           <div className="w-5/6 mr-auto ml-auto flex flex-col ">
             <Header></Header>
-            <Breadcrumb titleCollection={titleCollection}></Breadcrumb>
-            <div className="container_content mr-auto ml-auto">
-              <ProductList titleCollection={titleCollection}></ProductList>
+            <Breadcrumb></Breadcrumb>
+            <div className="container_content ">
+            {
+              params.nameCategory !== undefined ? <ProductList></ProductList> :
+              <ProductListAll amountProduct = "999" ></ProductListAll>
+            }
             </div>
             <Paginnation></Paginnation>
           </div>

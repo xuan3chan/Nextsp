@@ -5,9 +5,9 @@ import { FaTruckMoving } from "react-icons/fa";
 import { BiSolidRightArrow } from "react-icons/bi";
 import { Link } from "react-router-dom";
 
-function ProductList(props) {
-  const starUrl = "https://static.vecteezy.com/system/resources/previews/013/743/605/original/golden-star-icon-png.png"
+function ProductListAll(props) {
 
+  const starUrl = "https://static.vecteezy.com/system/resources/previews/013/743/605/original/golden-star-icon-png.png"
   const [products, setProducts] = React.useState([]);
   const ApiProducts = "http://localhost:3101/api/products/getall";
   React.useEffect(() => {
@@ -35,8 +35,9 @@ function ProductList(props) {
         </div>
         <div className="flex justify-center gap-4 mt-4 mb- absolute right-0">
           <Link
-          to={`/Collection`}
-          className="btn-seeMore flex justify-center items-center gap-2">
+            to={`/Collection`}
+            className="btn-seeMore flex justify-center items-center gap-2"
+          >
             Xem Thêm
             <BiSolidRightArrow className="" />
           </Link>
@@ -44,7 +45,8 @@ function ProductList(props) {
       </div>
       <div className=" flex flex-wrap gap-4 content-center justify-center">
         {products
-          .filter((product) => product.brand.name === props.CollectionBrand)
+          .slice()
+          .reverse()
           .map(
             (product, index) =>
               index < 5 && (
@@ -72,38 +74,33 @@ function ProductList(props) {
                     </p>
                   </div>
                   <div className="product_rating flex gap-1 items-center">
-                  <img
-                    src={starUrl}
-
-                    alt=""
-                    className="w-6 h-6"
-                  />
-                  <img
-                    src={starUrl}
-
-                    alt=""
-                    className="w-6 h-6"
-                  />
-                  <img
-                    src={starUrl}
-
-                    alt=""
-                    className="w-6 h-6"
-                  />
-                  <img
-                    src={starUrl}
-
-                    alt=""
-                    className="w-6 h-6"
-                  />
-                  <img
-                    src={starUrl}
-
-                    alt=""
-                    className="w-6 h-6"
-                  />
-                  <p className="text-xs	">(5 đánh giá)</p>
-                </div>
+                    <img
+                      src={starUrl}
+                      alt=""
+                      className="w-6 h-6"
+                    />
+                    <img
+                      src={starUrl}
+                      alt=""
+                      className="w-6 h-6"
+                    />
+                    <img
+                      src={starUrl}
+                      alt=""
+                      className="w-6 h-6"
+                    />
+                    <img
+                      src={starUrl}
+                      alt=""
+                      className="w-6 h-6"
+                    />
+                    <img
+                      src={starUrl}
+                      alt=""
+                      className="w-6 h-6"
+                    />
+                    <p className="text-xs	">(5 đánh giá)</p>
+                  </div>
                   <div className="over-button flex gap-4 items-center justify-center mt-3">
                     <div className="btn p-1  flex justify-center btn-sell ">
                       Mua Ngay
@@ -120,4 +117,4 @@ function ProductList(props) {
   );
 }
 
-export default ProductList;
+export default ProductListAll;

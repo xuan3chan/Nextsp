@@ -31,7 +31,7 @@ function Header(props) {
         console.error("Error fetching data:", error);
       });
   }, []);
-
+  const accountName = localStorage.getItem("accountName");
   return (
     <Fragment>
       <div className="header z-20 fixed flex justify-center ">
@@ -116,15 +116,25 @@ function Header(props) {
             </div>
             <p>Giỏ Hàng</p>
           </div>
+
           <div className="header_user_module">
-            <Link to="/LoginUser">
+            {localStorage.getItem("accessToken") === null ? (
+              <Link to="/LoginUser">
+                <button className="user_module_login">
+                  <div className="boxIcon">
+                    <AiOutlineUser />
+                  </div>
+                  <p>Đăng Nhập</p>
+                </button>
+              </Link>
+            ) : (
               <button className="user_module_login">
                 <div className="boxIcon">
                   <AiOutlineUser />
-                </div>
-                <p>Đăng Nhập</p>
+                  </div>
+                  <p>Hello, {accountName}</p>
               </button>
-            </Link>
+            )}
           </div>
         </div>
       </div>

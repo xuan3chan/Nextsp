@@ -1,10 +1,13 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-
+import {useParams} from "react-router-dom";
 function MainContentSection(props) {
   const [product, setProduct] = useState(null);
+  const param = useParams();
 
-  const ApiProducts = `http://localhost:3101/api/products/getdetails`;
+  console.log(param);
+
+  const ApiProducts = `http://localhost:3101/api/products/getdetails/${param.id}/`;
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -21,7 +24,12 @@ function MainContentSection(props) {
 
     fetchData();
   }, [ApiProducts]);
-
+  function formatPrice(price) {
+    if (price) {
+      return `${price.toLocaleString()}đ`;
+    }
+    return "Not Available "; // You can change this message to your preferred text
+  }
   return (
     <div>
       {product && (
@@ -31,8 +39,8 @@ function MainContentSection(props) {
         >
           <div className="productTitle h-22">{product.nameProduct}</div>
           <div className="priceSection flex gap-2 h-8">
-            <div className="productPrice">{product.price}</div>
-            <div className="productOldPrice">{product.oldPrice}</div>
+            <div className="productPrice">{formatPrice(product.price)}</div>
+            <div className="productOldPrice">{formatPrice(product.oldprice)}</div>
             <div className="productSale">-17%</div>
           </div>
           <div className="btnSection flex gap-2">

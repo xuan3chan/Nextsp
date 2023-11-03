@@ -4,10 +4,6 @@ import { Landing } from "./components";
 import { LoginForm, RegisterFrom } from "./components";
 import Homepage from "./container/Homepage";
 import Collection from "../src/container/Collections/Collection";
-import CollectionLaptop from "../src/container/Collections/CollectionLaptop";
-import CollectionPc from "../src/container/Collections/CollectionPC";
-import CollectionGear from "../src/container/Collections/CollectionGear";
-import CollectionAccessory from "../src/container/Collections/CollectionAccessory";
 import { LoadingProvider } from "./components/LoadingContext";
 import Products from "./container/Products";
 const App = () => {
@@ -20,14 +16,8 @@ const App = () => {
             {/* <Route path="/Homepage/laptop" element={<SloganListSection/>} /> */}
             <Route path="/" element={<Landing />} />
             <Route path="/register" element={<RegisterFrom />} />
-            <Route path="/collection" element={<Collection />} />
-            <Route path="/collection/:nameCategory" element={<Collection />} />
-            <Route path="/collection/:nameCategory" element={<Collection />} />
-            <Route path="/collection/:nameCategory" element={<Collection />} />
-            <Route
-              path="/collection/:nameCategory"
-              element={<Collection />}
-            />
+            <Route path="/Collection/" element={<Collection />} />
+            <Route path="/collection/:nameCategory" element={<Collection/>} />
             <Route path="/LoginUser" element={<LoginForm />} />
             <Route path="/Products/:id"  element={<Products />} />
           </Routes>

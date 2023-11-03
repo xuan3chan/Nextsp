@@ -12,9 +12,11 @@ import {
 } from "../components";
 import "../assets/css/homepage.css";
 import "../assets/css/main.css";
-
+import ProductListAll from "../components/homepage/ProductListAll";
 
 function Homepage(props) {
+  const CollectionBrand = ["Apple", "Apple2", "Apple3"];
+  const title = ["Apple", "Apple2", "Apple3"];
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     setTimeout(() => {
@@ -35,26 +37,16 @@ function Homepage(props) {
             <div className="container-product-section inline-block relative">
               <div className="flex flex-col w-4/5 contents-center mr-auto ml-auto gap-10">
                 <SloganListSection></SloganListSection>
+                <ProductListAll
+                  title="Sản Phẩm Nổi Bật"
+                ></ProductListAll>
                 <ProductList
-                  title="Sản phẩm mới"
-                  CollectionName=""
+                  title={title[1]}
+                  CollectionBrand={CollectionBrand[1]}
                 ></ProductList>
-                <ProductList
-                  title="Laptop"
-                  CollectionName="Laptop"
-                ></ProductList>
-                <ProductList
-                  title="PC - Máy Bàn"
-                  CollectionName="PC"
-                ></ProductList>
-                <ProductList
-                  title="Gear Gaming"
-                  CollectionName="PhuKien"
-                ></ProductList>
-                <ProductList
-                  title="Linh Kiện Máy Tính"
-                  CollectionName="LinhKien"
-                ></ProductList>
+                <ProductList title="PC - Máy Bàn"></ProductList>
+                <ProductList title="Gear Gaming"></ProductList>
+                <ProductList title="Linh Kiện Máy Tính"></ProductList>
               </div>
             </div>
             <BannerSales />
