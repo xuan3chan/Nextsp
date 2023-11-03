@@ -4,7 +4,6 @@ import RiseLoader from "react-spinners/RiseLoader";
 import {
   Header,
   BannerSales,
-  BlogSection,
   BannerScroll,
   SloganListSection,
   ProductList,
@@ -58,7 +57,6 @@ function Homepage(props) {
               </div>
             </div>
             <BannerSales />
-            <BlogSection />
           </div>
           <Footer />
         </div>

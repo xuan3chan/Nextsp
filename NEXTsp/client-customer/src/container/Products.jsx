@@ -5,7 +5,7 @@ import { Breadcrumb } from "../components";
 import ImageSection from "../components/Products/ImageSection";
 import MainContentSection from "../components/Products/MainContentSection";
 import DescriptionSection from "../components/Products/DescriptionSection";
-import axios from "axios";
+import { useParams } from "react-router-dom";
 
 function Products(props) {
   const images = [

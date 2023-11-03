@@ -21,15 +21,15 @@ const App = () => {
             <Route path="/" element={<Landing />} />
             <Route path="/register" element={<RegisterFrom />} />
             <Route path="/collection" element={<Collection />} />
-            <Route path="/collection/laptop" element={<CollectionLaptop />} />
-            <Route path="/collection/PC" element={<CollectionPc />} />
-            <Route path="/collection/LinhKien" element={<CollectionGear />} />
+            <Route path="/collection/:nameCategory" element={<Collection />} />
+            <Route path="/collection/:nameCategory" element={<Collection />} />
+            <Route path="/collection/:nameCategory" element={<Collection />} />
             <Route
-              path="/collection/PhuKien"
-              element={<CollectionAccessory />}
+              path="/collection/:nameCategory"
+              element={<Collection />}
             />
             <Route path="/LoginUser" element={<LoginForm />} />
-            <Route path="/Products" element={<Products />} />
+            <Route path="/Products/:id"  element={<Products />} />
           </Routes>
       </LoadingProvider>
     </Router>
