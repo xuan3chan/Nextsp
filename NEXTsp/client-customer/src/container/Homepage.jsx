@@ -9,6 +9,7 @@ import {
   SloganListSection,
   ProductList,
   Footer,
+  BannerTop,
 } from "../components";
 import "../assets/css/homepage.css";
 import "../assets/css/main.css";
