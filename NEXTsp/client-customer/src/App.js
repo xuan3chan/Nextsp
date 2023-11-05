@@ -6,6 +6,8 @@ import Homepage from "./container/Homepage";
 import Collection from "../src/container/Collections/Collection";
 import { LoadingProvider } from "./components/LoadingContext";
 import Products from "./container/Products";
+import CartPage from "../src/container/CartPage"
+
 const App = () => {
 
   return (
@@ -20,6 +22,7 @@ const App = () => {
             <Route path="/collection/:nameCategory" element={<Collection/>} />
             <Route path="/LoginUser" element={<LoginForm />} />
             <Route path="/Products/:id"  element={<Products />} />
+            <Route path="/CartPage" element={<CartPage />} />
           </Routes>
       </LoadingProvider>
     </Router>

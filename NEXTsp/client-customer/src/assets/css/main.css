@@ -6,7 +6,7 @@
   font-style: normal;
 }
 :root {
-  --color-body-bg: #ececec;
+  --color-body-bg: ##f6f7fa;
 }
 
 /* Header*/
@@ -292,4 +292,16 @@ dropDownItem2 {
 .phoneNumber{
   font-weight: 500;
   color:cornflowerblue
+}
+.logOutSection{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 0 4px;
+  height: 44px;
+  color: white;
+  opacity: 70%;
+  border-radius: 10px;
+  font-size: 12px;
 }

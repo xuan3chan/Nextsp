@@ -24,6 +24,9 @@ function MainContentSection(props) {
 
     fetchData();
   }, [ApiProducts]);
+  const handleBuyBtn = () => {
+    alert("Không Bán");
+  };
   function formatPrice(price) {
     if (price) {
       return `${price.toLocaleString()}đ`;
@@ -45,7 +48,7 @@ function MainContentSection(props) {
           </div>
           <div className="btnSection flex gap-2">
             <div className="btn-BuyNow bg-black text-white text-center p-2 flex flex-col items-center rounded-sm">
-              <p>Mua Ngay</p>
+              <a className =" cursor-pointer" onClick={handleBuyBtn}>Mua Ngay</a>
               <p>Giao hàng tận nơi hoặc nhận tại cửa hàng</p>
             </div>
             <div className="btn-AddToCart bg-black text-white text-center p-2 flex items-center rounded-sm">

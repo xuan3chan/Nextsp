@@ -5,6 +5,7 @@ import { Breadcrumb } from "../components";
 import ImageSection from "../components/Products/ImageSection";
 import MainContentSection from "../components/Products/MainContentSection";
 import DescriptionSection from "../components/Products/DescriptionSection";
+import FlaskSale from "../components/Products/FlaskSale";
 
 function Products(props) {
   const images = [
@@ -21,7 +22,11 @@ function Products(props) {
         <div className="container flex flex-col w-3/5 mx-auto h-max ">
           <Breadcrumb titleCollection ="Sản Phẩm"></Breadcrumb>
           <div className="flex bg-white w-full rounded-md h-full mb-8">
-            <ImageSection images={images}></ImageSection>
+          <dir>
+          <ImageSection images={images}></ImageSection>
+          <FlaskSale></FlaskSale>
+          </dir>
+
             <div className="flex flex-col gap-8">
               <MainContentSection ></MainContentSection>
               <DescriptionSection></DescriptionSection>

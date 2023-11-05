@@ -84,14 +84,14 @@ function Header(props) {
           </div>
         </div>
         <div className="header_searching_module">
-          <div class="wrap">
-            <div class="search">
+          <div className="wrap">
+            <div className="search">
               <input
                 type="text"
-                class="searchTerm text-black"
+                className="searchTerm text-black"
                 placeholder="Nhập Thứ Cần Tìm Kiếm"
               ></input>
-              <button type="submit" class="searchButton">
+              <button type="submit" className="searchButton">
                 <FontAwesomeIcon icon={faSearch} />
               </button>
             </div>
@@ -116,7 +116,6 @@ function Header(props) {
             </div>
             <p>Giỏ Hàng</p>
           </div>
-
           <div className="header_user_module">
             {localStorage.getItem("accessToken") === null ? (
               <Link to="/LoginUser">
@@ -131,9 +130,26 @@ function Header(props) {
               <button className="user_module_login">
                 <div className="boxIcon">
                   <AiOutlineUser />
-                  </div>
-                  <p>Hello, {accountName}</p>
+                </div>
+                <p>Hello, {accountName}</p>
               </button>
+            )}
+          </div>
+          <div className="logOutSection">
+            {localStorage.getItem("accessToken") !== null ? (
+              <button
+                className="logOutButton"
+                onClick={() => {
+                  localStorage.removeItem("accessToken");
+                  localStorage.removeItem("accountName");
+                  localStorage.removeItem("accountRole");
+                  window.location.reload();
+                }}
+              >
+                Đăng Xuất
+              </button>
+            ) : (
+              <div></div>
             )}
           </div>
         </div>
