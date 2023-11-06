@@ -33,7 +33,7 @@ const loginUserService = async ({ accountName, email, password }) => {
         throw { status: 400, message: 'Incorrect password' };
     }
 
-    const accessToken = jwt.sign({ userId: user._id }, process.env.ACCESS_TOKEN_SECRET);
+    const accessToken = jwt.sign({ userId: user._id,userName:user.accountName }, process.env.ACCESS_TOKEN_SECRET);
 
     return { success: true, message: 'User logged in successfully', accessToken };
 };
@@ -57,7 +57,7 @@ const loginAdminService = async ({ accountName, password }) => {
         throw { status: 400, message: 'Incorrect password' };
     }
 
-    const accessToken = jwt.sign({ adminId: admin._id }, process.env.ACCESS_TOKEN_SECRET);
+    const accessToken = jwt.sign({ adminId: admin._id,adminName:admin.accountName }, process.env.ACCESS_TOKEN_SECRET);
 
     return { success: true, message: 'Admin logged in successfully', accessToken };
 };
