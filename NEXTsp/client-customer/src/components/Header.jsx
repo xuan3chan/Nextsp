@@ -2,7 +2,6 @@ import React, { Fragment } from "react";
 import "../assets/css/homepage.css";
 import "font-awesome/css/font-awesome.min.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
 import {
   faBars,
   faCaretRight,

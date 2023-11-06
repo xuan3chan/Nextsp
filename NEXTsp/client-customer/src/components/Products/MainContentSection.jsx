@@ -33,6 +33,9 @@ function MainContentSection(props) {
     }
     return "Not Available "; // You can change this message to your preferred text
   }
+  const handleAddCart = () => {
+    localStorage.setItem("cart", JSON.stringify(product));
+  }
   return (
     <div>
       {product && (
@@ -52,7 +55,7 @@ function MainContentSection(props) {
               <p>Giao hàng tận nơi hoặc nhận tại cửa hàng</p>
             </div>
             <div className="btn-AddToCart bg-black text-white text-center p-2 flex items-center rounded-sm">
-              <p>Thêm vào giỏ hàng</p>
+              <p onClick={handleAddCart}>Thêm vào giỏ hàng</p>
             </div>
           </div>
           <div className="productPolicySection flex flex-col gap-1">
