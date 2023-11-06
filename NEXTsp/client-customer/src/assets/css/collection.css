@@ -362,3 +362,22 @@
   background: #f1f1f1;
   width:100%
 }
+.Flask-Sale-Section{
+  border: #fee2e2 1px solid;
+  border-radius: 20px;
+  width: 400px;
+  height: 300px;
+}
+.FlaskSale-Title{
+  font-size: larger;
+  font-weight: 700;
+  color:#d70018;
+  border: #fee2e2 1px solid;
+  border-radius: 20px 20px 0 0;
+  background-color: #fee2e2;
+  width: 100%;
+  height: 46px;
+}
+.FlaskSale-desc{
+
+}
