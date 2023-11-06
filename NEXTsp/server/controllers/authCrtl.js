@@ -48,9 +48,20 @@ const loginAdmin = async (req, res) => {
         handleErrorResponse(res, error);
     }
 };
+// get user 
+
+const getUserController = async (req, res) => {
+    try {
+        const user = await authService.getUserService(req);
+        res.json(user);
+    } catch (error) {
+        handleErrorResponse(res, error);
+    }
+}  
 
 module.exports = {
     registerUser,
     loginUser,
     loginAdmin,
+    getUserController,
 };
