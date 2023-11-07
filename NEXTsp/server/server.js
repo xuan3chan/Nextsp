@@ -14,6 +14,7 @@ const categoryRoutes = require('./Routes/categoryRo');
 const brandRoutes = require('./Routes/brandRo');
 const productRoutes = require('./Routes/productRo');
 const catalogRoutes = require('./Routes/catalogRo');
+const cartRoutes = require('./Routes/cartRo');
 
 // Connect to MongoDB
 const connectDB = async () => {
@@ -37,6 +38,7 @@ app.use('/api/categories', categoryRoutes,);
 app.use('/api/brands', brandRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/catalog', catalogRoutes);
+app.use('/api/cart', cartRoutes);
 
 
 app.post('/', (req, res) => {
