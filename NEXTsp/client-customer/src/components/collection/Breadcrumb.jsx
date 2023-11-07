@@ -17,8 +17,6 @@ function Breadcrumb(props) {
           {
             params.nameCategory === undefined ? "Sản Phẩm" : (params.nameCategory === "" ? " " : params.nameCategory)
           }
-          
-          
           </a>
         </ol>
       </nav>
