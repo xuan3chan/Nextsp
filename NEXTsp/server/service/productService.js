@@ -123,7 +123,14 @@ class ProductService {
     }
   //get all products
   static async getAllProductsService() {
-    const products = await Products.find().populate('brand', 'nameBrand _id');
+    const products = await Products.find().populate({
+      path: 'brand',
+      select: 'nameBrand _id category',
+      populate: {
+        path: 'category',
+        select: 'nameCategory _id' // replace 'nameCategory' with the actual field name for the category name
+      }
+    });
 
     if (!products.length) {
       return { success: false, message: 'No products found' };
@@ -136,7 +143,11 @@ class ProductService {
       price: product.price,
       oldprice: product.oldprice,
       images: product.images,
-      brand: product.brand ? { name: product.brand.nameBrand, id: product.brand._id } : null,
+      brand: product.brand ? { 
+        name: product.brand.nameBrand, 
+        id: product.brand._id,
+        category: product.brand.category ? product.brand.category : null
+      } : null,
       status: product.status,
     }));
 
