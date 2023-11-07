@@ -5,45 +5,44 @@ import FilterButtonSection from "./FilterButtonSection";
 import "../../assets/css/main.css";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 function ProductList(props) {
-  const [products, setProducts] = React.useState([]);
+  
   const param = useParams();
+  const [products, setProducts] = React.useState([]);
+  const ApiProducts = "http://localhost:3101/api/products/getall";
+
   React.useEffect(() => {
     const fetchData = async () => {
-      const result = await axios.get(
-        "http://localhost:3101/api/products/getall"
-      );
+      const result = await axios.get(ApiProducts);
       setProducts(result.data.products);
     };
-
+    console.log(JSON.stringify(products.brand));
     fetchData();
   }, []);
-
   function formatPrice(price) {
     if (price) {
       return `${price.toLocaleString()}đ`;
     }
-    return "Not Available "; // You can change this message to your preferred text
+    return "";
   }
   const handleAddCart = () => {
     localStorage.setItem("cart", JSON.stringify(products));
-  }
+  };
   return (
     <div className="productList max-h-full w-full bg-white rounded-md pb-4">
       <h1 className="CategoryTitle">{param.nameCategory}</h1>
       <FilterButtonSection />
       <div className=" flex flex-wrap  gap-1 content-center justify-center pt-12">
-        {products
-          .map((product) => (
-            <div
-              key={product.id}
-              className="productItem flex flex-col  border-black-500/100 p-4 gap-1 "
-            >
-            <Link 
-              to={`/products/${product.id}`}>
+        {products.map((product) => (
+          <div
+            key={product.id}
+            className="productItem flex flex-col  border-black-500/100 p-4 gap-1 "
+          >
+            <Link to={`/products/${product.id}`}>
               <div className="product_image w-72 h-52 object-contain">
                 <img
-                  src={product.images}
+                  src={product.images[0]}
                   alt=""
                   className="w-full h-44 object-contain "
                 />
@@ -89,17 +88,20 @@ function ProductList(props) {
                 />
                 <p className="text-xs	">(5 đánh giá)</p>
               </div>
-              </Link>
-              <div className="over-button flex gap-4 items-center justify-center mt-6">
-                <div className="btn p-1  flex justify-center btn-sell ">
-                  Mua Ngay
-                </div>
-                <div onClick={handleAddCart} className="btn p-1 flex justify-center btn-addCart">
-                  Thêm Vào Giỏ
-                </div>
+            </Link>
+            <div className="over-button flex gap-4 items-center justify-center mt-6">
+              <div className="btn p-1  flex justify-center btn-sell ">
+                Mua Ngay
+              </div>
+              <div
+                onClick={handleAddCart}
+                className="btn p-1 flex justify-center btn-addCart"
+              >
+                Thêm Vào Giỏ
               </div>
             </div>
-          ))}
+          </div>
+        ))}
       </div>
     </div>
   );
