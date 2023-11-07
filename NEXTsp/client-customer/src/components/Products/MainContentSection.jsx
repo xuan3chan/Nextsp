@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import {useParams} from "react-router-dom";
+import { useParams } from "react-router-dom";
 function MainContentSection(props) {
   const [product, setProduct] = useState(null);
   const param = useParams();
@@ -35,7 +35,7 @@ function MainContentSection(props) {
   }
   const handleAddCart = () => {
     localStorage.setItem("cart", JSON.stringify(product));
-  }
+  };
   return (
     <div>
       {product && (
@@ -46,12 +46,16 @@ function MainContentSection(props) {
           <div className="productTitle h-22">{product.nameProduct}</div>
           <div className="priceSection flex gap-2 h-8">
             <div className="productPrice">{formatPrice(product.price)}</div>
-            <div className="productOldPrice">{formatPrice(product.oldprice)}</div>
+            <div className="productOldPrice">
+              {formatPrice(product.oldprice)}
+            </div>
             <div className="productSale">-17%</div>
           </div>
           <div className="btnSection flex gap-2">
             <div className="btn-BuyNow bg-black text-white text-center p-2 flex flex-col items-center rounded-sm">
-              <a className =" cursor-pointer" onClick={handleBuyBtn}>Mua Ngay</a>
+              <a className=" cursor-pointer" onClick={handleBuyBtn}>
+                Mua Ngay
+              </a>
               <p>Giao hàng tận nơi hoặc nhận tại cửa hàng</p>
             </div>
             <div className="btn-AddToCart bg-black text-white text-center p-2 flex items-center rounded-sm">

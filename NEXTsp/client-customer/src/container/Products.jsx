@@ -20,15 +20,14 @@ function Products(props) {
       <Header></Header>
       <div className="">
         <div className="container flex flex-col w-3/5 mx-auto h-max ">
-          <Breadcrumb titleCollection ="Sản Phẩm"></Breadcrumb>
+          <Breadcrumb titleCollection="Sản Phẩm"></Breadcrumb>
           <div className="flex bg-white w-full rounded-md h-full mb-8">
-          <dir>
-          <ImageSection images={images}></ImageSection>
-          <FlaskSale></FlaskSale>
-          </dir>
-
+            <dir>
+              <ImageSection images={images}></ImageSection>
+              <FlaskSale></FlaskSale>
+            </dir>
             <div className="flex flex-col gap-8">
-              <MainContentSection ></MainContentSection>
+              <MainContentSection></MainContentSection>
               <DescriptionSection></DescriptionSection>
             </div>
           </div>
