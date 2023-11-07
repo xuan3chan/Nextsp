@@ -16,29 +16,38 @@ import { AiOutlineUser } from "react-icons/ai";
 import { PiShoppingCartSimpleBold } from "react-icons/pi";
 
 function Header(props) {
-
   const [Categories, setCategories] = useState([]);
   const [accountName, setAccountName] = useState("");
-
+  const apiBrand = "http://localhost:3101/api/catalog/getlistcateandbrand";
   const apiUrl = "http://localhost:3101/api/auth/user";
-  const token = localStorage.getItem('accessToken'); 
+  const token = localStorage.getItem("accessToken");
 
-  axios.get(apiUrl, {
-    headers: {
-      'Authorization': `Bearer ${token}`
-    }
-  })
-  .then(response => {
-    setAccountName(response.data.user.fullName);
-  })
-  .catch(error => {
-    console.error(error);
-  });
-  
+  useEffect(() => {
+    axios
+      .get(apiUrl, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        setAccountName(response.data.user.fullName);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+    axios
+    .get(apiBrand)
+    .then((res) => {
+      setCategories(res.data.categories);
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+    }, []);
   return (
     <Fragment>
       <div className="header z-20 fixed flex justify-center ">
-        <div className="header_logo"></div>
+        <div className="header_logo text-white"> </div>
         <div className="navbar">
           <a href="../Homepage">Trang Chủ</a>
           <a href="/Blog">Bài Viết</a>

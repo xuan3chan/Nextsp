@@ -24,11 +24,8 @@ const Login = () => {
           console.log(response.data)
           setTimeout(() => {
             navigate("/homepage");
-            window.location.reload();
           }, 200);
-        } else {
-          setError("Đăng nhập thất bại");
-        }
+        } 
       })
       .then(response => {
         console.log('response', response);

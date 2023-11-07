@@ -1,5 +1,7 @@
+import axios from "axios";
 import React from "react";
 import { useState } from "react";
+import { useEffect } from "react";
 function ProductAdded(props) {
   const [count, setCount] = useState(0);
   const increment = () => {
@@ -11,10 +13,16 @@ function ProductAdded(props) {
       setCount(count - 1);
     }
   };
-  const imageLink =
-    "https://product.hstatic.net/200000722513/product/image-removebg-preview__49_.png_b1bb06c9d6bc4aefb692eb347a9f784e_grande.jpg";
-  
-  
+
+  useEffect(() => {
+    axios.get("http://localhost:3101/api/products/getall")
+    .then((res) => {
+      console.log(res.data.products);
+    });
+  }, []);
+  const productAdded = JSON.parse(localStorage.getItem("cart"));
+  const imageLink = localStorage.getItem(productAdded.images[0]);
+  console.log(imageLink);
     return (
     <div>
       <div className="flex w-full h-40 items-center content-center gap-4 border-b-2">

@@ -44,9 +44,9 @@ function MainContentSection(props) {
           className="flex flex-col gap-6 mt-8 mr-8 ml-8 border-b-2 h-96"
         >
           <div className="productTitle h-22">{product.nameProduct}</div>
-          <div className="priceSection flex gap-2 h-8">
+          <div className="priceSection flex content-center items-center gap-2 h-8">
             <div className="productPrice">{formatPrice(product.price)}</div>
-            <div className="productOldPrice">
+            <div className="productOldPrice m-0">
               {formatPrice(product.oldprice)}
             </div>
             <div className="productSale">-17%</div>
