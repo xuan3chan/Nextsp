@@ -2,7 +2,6 @@ import React from "react";
 import { useState } from "react";
 function ProductAdded(props) {
   const [count, setCount] = useState(0);
-
   const increment = () => {
     setCount(count + 1);
   };
@@ -14,7 +13,9 @@ function ProductAdded(props) {
   };
   const imageLink =
     "https://product.hstatic.net/200000722513/product/image-removebg-preview__49_.png_b1bb06c9d6bc4aefb692eb347a9f784e_grande.jpg";
-  return (
+  
+  
+    return (
     <div>
       <div className="flex w-full h-40 items-center content-center gap-4 border-b-2">
         <div className="flex flex-col w-24 h-30 ">

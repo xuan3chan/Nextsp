@@ -16,25 +16,33 @@ import { AiOutlineUser } from "react-icons/ai";
 import { PiShoppingCartSimpleBold } from "react-icons/pi";
 
 function Header(props) {
-
   const [Categories, setCategories] = useState([]);
   const [accountName, setAccountName] = useState("");
-
-  const apiUrl = "http://localhost:3101/api/auth/user";
-  const token = localStorage.getItem('accessToken'); 
-
-  axios.get(apiUrl, {
-    headers: {
-      'Authorization': `Bearer ${token}`
-    }
-  })
-  .then(response => {
-    setAccountName(response.data.user.fullName);
-  })
-  .catch(error => {
-    console.error(error);
+  const axiosInstance = axios.create({
+    baseURL: "http://localhost:3101/api/",
   });
-  
+
+  useEffect(() => {
+    const apiUrl1 = "catalog/getlistcateandbrand";
+    const apiUrl2 = "auth/user";
+    const token = localStorage.getItem("accessToken");
+
+    const request1 = axiosInstance.get(apiUrl1);
+    const request2 = axiosInstance.get(apiUrl2, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    Promise.all([request1, request2])
+      .then(([response1, response2]) => {
+        setCategories(response1.data.categories);
+        setAccountName(response2.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+        // Handle individual request errors here if needed
+      });
+  }, []);
   return (
     <Fragment>
       <div className="header z-20 fixed flex justify-center ">
