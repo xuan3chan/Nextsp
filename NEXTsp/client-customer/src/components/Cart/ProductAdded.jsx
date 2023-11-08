@@ -15,28 +15,30 @@ function ProductAdded(props) {
   };
 
   useEffect(() => {
-    axios.get("http://localhost:3101/api/products/getall")
-    .then((res) => {
+    axios.get("http://localhost:3101/api/products/getall").then((res) => {
       console.log(res.data.products);
     });
   }, []);
-  const productAdded = JSON.parse(localStorage.getItem("cart"));
-  const imageLink = localStorage.getItem(productAdded.images[0]);
-  console.log(imageLink);
-    return (
+
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  const imgLink = [cart[0].images[0]];
+  const productNameAdded = [cart[0].nameProduct];
+  const productPriceAdded = [cart[0].price];
+  const productOldPriceAdded = [cart[0].oldprice];
+  return (
     <div>
       <div className="flex w-full h-40 items-center content-center gap-4 border-b-2">
         <div className="flex flex-col w-24 h-30 ">
-          <img src={imageLink} alt="" className="productImage" />
+          <img src={imgLink} alt="" className="productImage" />
           <button className="deleteBtn">Xóa</button>
         </div>
         <div className="productInfo flex gap-20">
-          <h2 className="productTitle">Màn hình cong ASUS TUF GAMING VG34VQL3A 34" 2K 180Hz HDR chuyên game</h2>
+          <h2 className="productTitle">{productNameAdded}</h2>
           <div className="flex flex-col">
-          <div className="flex flex-col items-end">
-          <p className="productPrice">30.000.000</p>
-          <p className="productOldPrice">30.000.000</p>
-          </div>
+            <div className="flex flex-col items-end">
+              <p className="productPrice">{productPriceAdded}</p>
+              <p className="productOldPrice">{productOldPriceAdded}</p>
+            </div>
             <p className="productQuantity flex">
               <button className="btnCart" onClick={decrement}>
                 -

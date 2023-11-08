@@ -36,14 +36,29 @@ function Header(props) {
         console.error(error);
       });
     axios
-    .get(apiBrand)
-    .then((res) => {
-      setCategories(res.data.categories);
-    })
-    .catch((error) => {
-      console.error("Error:", error);
-    });
-    }, []);
+      .get(apiBrand)
+      .then((res) => {
+        setCategories(res.data.categories);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  }, []);
+
+  const getCart = () => {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    console.log(cart[0]);
+  };
+
+  const [cart, setCart] = useState([]);
+  const [counterCart, setCounterCart] = useState(null);
+
+  useEffect(() => {
+    const cartData = JSON.parse(localStorage.getItem("cart")) || [];
+    setCart(cartData);
+    setCounterCart(cartData.length);
+  }, []);
+
   return (
     <Fragment>
       <div className="header z-20 fixed flex justify-center ">
@@ -126,7 +141,9 @@ function Header(props) {
             <div className="boxIcon">
               <PiShoppingCartSimpleBold></PiShoppingCartSimpleBold>
             </div>
-            <p>Giỏ Hàng</p>
+            <div className="number-counter">{counterCart}</div>
+            <Link 
+            to={"/CartPage"}>Giỏ Hàng </Link>
           </div>
           <div className="header_user_module">
             {localStorage.getItem("accessToken") === null ? (

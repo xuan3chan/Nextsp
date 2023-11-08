@@ -13,7 +13,7 @@ function CartPage(props) {
           <ProcessBar></ProcessBar>
           <ProductAdded></ProductAdded>
           <TotalSection></TotalSection>
-          </div>
+        </div>
       </div>
     </div>
   );
