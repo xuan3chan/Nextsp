@@ -2,12 +2,16 @@ import React from "react";
 import "../../assets/css/main.css";
 
 function ButtonAddToCart(props) {
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
-  const addToCart = () => {
-    cart.push(props.product);
-    localStorage.setItem("cart", JSON.stringify(cart));
-    window.location.reload();
-  };
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+const addToCart = () => {
+  if (!Array.isArray(cart)) {
+    cart = [];
+  }
+  cart.push(props.product);
+  localStorage.setItem("cart", JSON.stringify(cart));
+  window.location.reload();
+};
 
   return (
     <div className="w-1/2">
