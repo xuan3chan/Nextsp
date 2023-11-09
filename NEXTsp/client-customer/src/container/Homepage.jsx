@@ -8,11 +8,11 @@ import {
   SloganListSection,
   ProductList,
   Footer,
-  BannerTop,
 } from "../components";
 import "../assets/css/homepage.css";
 import "../assets/css/main.css";
 import ProductListAll from "../components/homepage/ProductListAll";
+
 function Homepage(props) {
   const CollectionBrand = ["Apple", "Apple2", "Apple3"];
   const title = ["Apple", "Apple2", "Apple3"];
@@ -45,8 +45,6 @@ function Homepage(props) {
                   CollectionBrand={CollectionBrand[1]}
                 ></ProductList>
                 <ProductList title="PC - Máy Bàn"></ProductList>
-                <ProductList title="Gear Gaming"></ProductList>
-                <ProductList title="Linh Kiện Máy Tính"></ProductList>
               </div>
             </div>
             <BannerSales />
