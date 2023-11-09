@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { FaTruckMoving } from "react-icons/fa";
 import { BiSolidRightArrow } from "react-icons/bi";
 import { Link } from "react-router-dom";
+import ButtonBuyNow from "./ButtonBuyNow";
 
 function ProductListAll(props) {
 
@@ -102,12 +103,8 @@ function ProductListAll(props) {
                     <p className="text-xs	">(5 đánh giá)</p>
                   </div>
                   <div className="over-button flex gap-4 items-center justify-center mt-3">
-                    <div className="btn p-1  flex justify-center btn-sell ">
-                      Mua Ngay
-                    </div>
-                    <div className="btn p-1 flex justify-center btn-addCart">
-                      Thêm Vào Giỏ
-                    </div>
+                    <ButtonBuyNow></ButtonBuyNow>
+
                   </div>
                 </Link>
               )

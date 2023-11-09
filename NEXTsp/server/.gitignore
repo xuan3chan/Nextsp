@@ -3,6 +3,7 @@
 # Build files
 /build
 /dist
+/.env
 
 # Environment files
 .env.local

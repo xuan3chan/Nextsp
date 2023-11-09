@@ -3,10 +3,10 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Landing } from "./components";
 import { LoginForm, RegisterFrom } from "./components";
 import Homepage from "./container/Homepage";
-import Collection from "../src/container/Collections/Collection";
+import Collection from "./container/Collection";
 import { LoadingProvider } from "./components/LoadingContext";
 import Products from "./container/Products";
-import CartPage from "../src/container/CartPage"
+import CartPage from "./container/CartPage"
 
 const App = () => {
 

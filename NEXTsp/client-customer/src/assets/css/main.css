@@ -211,6 +211,7 @@
   opacity: 100%;
 }
 .navItem {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -304,4 +305,18 @@ dropDownItem2 {
   opacity: 70%;
   border-radius: 10px;
   font-size: 12px;
+}
+.number-counter{
+  position: absolute;
+  left:16px;
+  top:-8px;
+  display: flex;
+  background-color:coral;
+  color: white;
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  font-size: 10px;
+  justify-content: center;
+  align-items: center;
 }

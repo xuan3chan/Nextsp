@@ -21,3 +21,4 @@ lấy hết cate có brand:" http://localhost:3101/api/catalog/getlistcateandbra
 loginuser :http://localhost:3101/api/auth/login
 registeruer: http://localhost:3101/api/auth/register
 loginadmin:http://localhost:3101/api/auth/login/admin
+getuser: http://localhost:3101/api/auth/getuser { phải có bearer Token }

@@ -60,3 +60,4 @@
 #     "brand": "65394f137fb869aad55653af"
 # }
 GET http://localhost:3101/api/products/getall
+# Get http://localhost:3101/api/brands/getall

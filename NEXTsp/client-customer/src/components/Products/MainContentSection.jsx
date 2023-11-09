@@ -1,38 +1,50 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import {useParams} from "react-router-dom";
+import { useParams } from "react-router-dom";
+import "../../assets/css/Products.css";
+import ButtonAddToCart from "../button/buttonAddToCart";
+import ButtonBuyNow from "../button/buttonBuyNow";
+
 function MainContentSection(props) {
   const [product, setProduct] = useState(null);
   const param = useParams();
-
-  console.log(param);
-
   const ApiProducts = `http://localhost:3101/api/products/getdetails/${param.id}/`;
+
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(ApiProducts);
+      return response.data.product;
+    } catch (error) {
+      throw error;
+    }
+  };
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchDataAndSetProduct = async () => {
       try {
-        const result = await axios.get(ApiProducts);
-        if (result.data && typeof result.data.product === "object") {
-          setProduct(result.data.product);
-        } else {
-          console.error("Invalid API response data structure:", result.data);
-        }
+        const productData = await fetchData();
+        setProduct(productData);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
 
-    fetchData();
-  }, [ApiProducts]);
-  const handleBuyBtn = () => {
-    alert("Không Bán");
-  };
+    fetchDataAndSetProduct();
+  }, []);
+
+  //Format Price Function
   function formatPrice(price) {
     if (price) {
       return `${price.toLocaleString()}đ`;
     }
     return "Not Available "; // You can change this message to your preferred text
   }
+
+  //Function Add to LocalStorage
+  // const [productAdded, setProductAdded] = useState([]); // [
+  // const handleAddCart = () => {
+  //   setProductAdded(localStorage.setItem("cart", JSON.stringify(product)));
+  // };
+
   return (
     <div>
       {product && (
@@ -41,19 +53,18 @@ function MainContentSection(props) {
           className="flex flex-col gap-6 mt-8 mr-8 ml-8 border-b-2 h-96"
         >
           <div className="productTitle h-22">{product.nameProduct}</div>
-          <div className="priceSection flex gap-2 h-8">
-            <div className="productPrice">{formatPrice(product.price)}</div>
-            <div className="productOldPrice">{formatPrice(product.oldprice)}</div>
+          <div className="priceSection flex content-center items-center gap-2 h-8">
+            <div className="productPrice productPriceDetail">
+              {formatPrice(product.price)}
+            </div>
+            <div className="productOldPrice productOldPriceDetail m-0">
+              {formatPrice(product.oldprice)}
+            </div>
             <div className="productSale">-17%</div>
           </div>
-          <div className="btnSection flex gap-2">
-            <div className="btn-BuyNow bg-black text-white text-center p-2 flex flex-col items-center rounded-sm">
-              <a className =" cursor-pointer" onClick={handleBuyBtn}>Mua Ngay</a>
-              <p>Giao hàng tận nơi hoặc nhận tại cửa hàng</p>
-            </div>
-            <div className="btn-AddToCart bg-black text-white text-center p-2 flex items-center rounded-sm">
-              <p>Thêm vào giỏ hàng</p>
-            </div>
+          <div className="btnSection flex gap-2 w-80">
+            <ButtonBuyNow product={product} />
+            <ButtonAddToCart product={product} />
           </div>
           <div className="productPolicySection flex flex-col gap-1">
             <span>✔ Bảo hành chính hãng 24 tháng.</span>

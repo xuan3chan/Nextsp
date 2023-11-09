@@ -1,17 +1,17 @@
 import React from "react";
-import { Breadcrumb, Header } from "../../components";
-import "../../assets/css/collection.css";
-import "../../assets/css/main.css";
-import Paginnation from "../../components/collection/Paginnation";
-import ProductListAll from "../../components/collection/ProductListAll";
-import ProductList from "../../components/collection/ProductList";
+import "../assets/css/main.css"
+import "../assets/css/collection.css";
+import { useParams } from "react-router-dom";
+import { Breadcrumb, Header } from "../components";
 import RiseLoader from "react-spinners/RiseLoader";
 import { useState, useEffect, override } from "react";
-import { useParams } from "react-router-dom"; 
-function Collection(props) {
+import Paginnation from "../components/collection/Paginnation";
+import ProductList from "../components/collection/ProductList";
+import ProductListAll from "../components/collection/ProductListAll";
 
+function Collection(props) {
   const [isLoading, setIsLoading] = useState(true);
-  const params = useParams()
+  const params = useParams();
   useEffect(() => {
     // Simulate a data loading delay
     setTimeout(() => {
@@ -22,7 +22,7 @@ function Collection(props) {
     <div className="flex text-center justify-center items-center contents-center w-full h-100vh">
       {isLoading ? (
         <div className="loading">
-        <RiseLoader color="#212529" />
+          <RiseLoader color="#212529" />
         </div>
       ) : (
         <div className="color-bg bg-slate-200 w-full">
@@ -30,10 +30,11 @@ function Collection(props) {
             <Header></Header>
             <Breadcrumb></Breadcrumb>
             <div className="container_content ">
-            {
-              params.nameCategory !== undefined ? <ProductList></ProductList> :
-              <ProductListAll amountProduct = "999" ></ProductListAll>
-            }
+              {params.nameCategory !== undefined ? (
+                <ProductList></ProductList>
+              ) : (
+                <ProductListAll amountProduct="999"></ProductListAll>
+              )}
             </div>
             <Paginnation></Paginnation>
           </div>

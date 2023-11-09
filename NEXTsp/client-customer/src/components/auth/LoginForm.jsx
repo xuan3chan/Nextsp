@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-const apiUrl = 'http://localhost:3101/api/auth/login/admin';
+const apiUrl = 'http://localhost:3101/api/auth/login';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -24,11 +24,8 @@ const Login = () => {
           console.log(response.data)
           setTimeout(() => {
             navigate("/homepage");
-            window.location.reload();
           }, 200);
-        } else {
-          setError("Đăng nhập thất bại");
-        }
+        } 
       })
       .then(response => {
         console.log('response', response);

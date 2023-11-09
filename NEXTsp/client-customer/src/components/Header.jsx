@@ -2,7 +2,6 @@ import React, { Fragment } from "react";
 import "../assets/css/homepage.css";
 import "font-awesome/css/font-awesome.min.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
 import {
   faBars,
   faCaretRight,
@@ -18,24 +17,52 @@ import { PiShoppingCartSimpleBold } from "react-icons/pi";
 
 function Header(props) {
   const [Categories, setCategories] = useState([]);
+  const [accountName, setAccountName] = useState("");
+  const apiBrand = "http://localhost:3101/api/catalog/getlistcateandbrand";
+  const apiUrl = "http://localhost:3101/api/auth/user";
+  const token = localStorage.getItem("accessToken");
 
   useEffect(() => {
-    const apiUrl1 = "http://localhost:3101/api/catalog/getlistcateandbrand";
-    const request1 = axios.get(apiUrl1);
-
-    Promise.all([request1])
-      .then(([response1]) => {
-        setCategories(response1.data.categories);
+    axios
+      .get(apiUrl, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        setAccountName(response.data.user.fullName);
       })
       .catch((error) => {
-        console.error("Error fetching data:", error);
+        console.error(error);
+      });
+    axios
+      .get(apiBrand)
+      .then((res) => {
+        setCategories(res.data.categories);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
       });
   }, []);
-  const accountName = localStorage.getItem("accountName");
+
+  const getCart = () => {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    console.log(cart[0]);
+  };
+
+  const [cart, setCart] = useState([]);
+  const [counterCart, setCounterCart] = useState(null);
+
+  useEffect(() => {
+    const cartData = JSON.parse(localStorage.getItem("cart")) || [];
+    setCart(cartData);
+    setCounterCart(cartData.length);
+  }, []);
+
   return (
     <Fragment>
       <div className="header z-20 fixed flex justify-center ">
-        <div className="header_logo"></div>
+        <div className="header_logo text-white"> </div>
         <div className="navbar">
           <a href="../Homepage">Trang Chủ</a>
           <a href="/Blog">Bài Viết</a>
@@ -114,7 +141,9 @@ function Header(props) {
             <div className="boxIcon">
               <PiShoppingCartSimpleBold></PiShoppingCartSimpleBold>
             </div>
-            <p>Giỏ Hàng</p>
+            <div className="number-counter">{counterCart}</div>
+            <Link 
+            to={"/CartPage"}>Giỏ Hàng </Link>
           </div>
           <div className="header_user_module">
             {localStorage.getItem("accessToken") === null ? (
@@ -157,5 +186,4 @@ function Header(props) {
     </Fragment>
   );
 }
-
 export default Header;

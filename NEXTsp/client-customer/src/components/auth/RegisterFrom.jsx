@@ -66,7 +66,7 @@ const RegisterForm = () => {
         setPassword("");
         setConfirmPassword("");
         // Redirect to login page or do something else
-        loginPage('/login');
+        loginPage('/loginUser');
       })
       .catch((error) => {
         console.error("Error:", error.response);
