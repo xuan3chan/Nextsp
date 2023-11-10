@@ -22,6 +22,15 @@ const CartSchema = new mongoose.Schema({
         type: Number,
         required: true,
     },
+    address: {
+        type: String,
+        required: true,
+    },
+    phone: {
+        type: String,
+        required: true,
+        trim: true,
+    },
     tracking:
     {
         type: String,
@@ -33,6 +42,13 @@ const CartSchema = new mongoose.Schema({
         enum: ['COD', 'banking'],
         default: 'COD',
     },
+    createdAt: {
+        type: Date,
+        default: Date.now,
+    },
+    updatedAt: {
+        type: Date,
+    },
 });
 
-module.exports = mongoose.model('Cart', CartSchema);
+module.exports = mongoose.model('order', CartSchema);
