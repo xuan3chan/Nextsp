@@ -4,40 +4,40 @@ const handleErrorResponse = require('../middleware/errorHandling');
 
 class OrderController {
     //add new order
-    async addOrder(req, res) {
+    async addOrderController(req, res) {
         try {
             const { userId, product, totalPrice, tracking, payment,address,phone } = req.body;
-            const result = await orderService.addOrder(userId, product, totalPrice, tracking, payment,address,phone);
+            const result = await orderService.addOrderService(userId, product, totalPrice, tracking, payment,address,phone);
             res.status(200).json({message : "add complet", order : result});
         } catch (error) {
             handleErrorResponse(res, error);
         }
     }
     //update order chỉ update trường tracking
-    async updateOrder(req, res) {
+    async updateOrderController(req, res) {
         try {
             const { id } = req.params;
             const { tracking } = req.body;
-            const result = await orderService.updateOrder(id, tracking);
+            const result = await orderService.updateOrderService(id, tracking);
             res.status(200).json(result);
         } catch (error) {
             handleErrorResponse(res, error);
         }
     }
     //delete order
-    async deleteOrder(req, res) {
+    async deleteOrderController(req, res) {
         try {
             const { id } = req.params;
-            const result = await orderService.deleteOrder(id);
+            const result = await orderService.deleteOrderService(id);
             res.status(200).json(result);
         } catch (error) {
             handleErrorResponse(res, error);
         }
     }
     //get all order
-    async getAllOrder(req, res) {
+    async getAllOrderController(req, res) {
         try {
-            const result = await orderService.getAllOrder();
+            const result = await orderService.getAllOrderService();
             res.status(200).json(result);
         } catch (error) {
             handleErrorResponse(res, error);

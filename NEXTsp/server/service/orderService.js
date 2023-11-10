@@ -2,7 +2,7 @@ const Order = require('../models/orderModel');
 
 class OrderService {
   //add new order and validate
-  async addOrder(userId, product, totalPrice, tracking, payment,address,phone) {
+  async addOrderService(userId, product, totalPrice, tracking, payment,address,phone) {
     if (!userId || !product || !totalPrice || !tracking || !payment || !address || !phone) {
       throw new Error('Missing required fields');
     }
@@ -20,7 +20,7 @@ class OrderService {
     return saveOder;;  
 }
 //update order chỉ update trường tracking
-async updateOrder(id, tracking) {
+async updateOrderService(id, tracking) {
   if (!id || !tracking) {
     throw new Error('Missing required fields');
   }
@@ -34,7 +34,7 @@ async updateOrder(id, tracking) {
 
 }
 //delete order
-async deleteOrder(id) {
+async deleteOrderService(id) {
     if (!id) {
         throw new Error('Missing required fields');
     }
@@ -46,7 +46,7 @@ async deleteOrder(id) {
     return result;    
 }
 //get all order populate product and user
-async getAllOrder() {
+async getAllOrderService() {
     const result = await Order.find().populate({ path: 'product.productId', select: 'nameProduct price' }).populate({path:'userId',select:'fullName email accountName'});
     return result;
 

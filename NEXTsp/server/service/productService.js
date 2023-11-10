@@ -181,6 +181,14 @@ class ProductService {
     }
     return { success: true, message: 'Product details', product };
   }
+  // serach product by name
+  static async searchProductService(nameProduct) {
+    const product = await Products.find({ nameProduct: { $regex: nameProduct, $options: 'i' } });
+    if (!product) {
+      throw { status: 404, message: 'Product not found' };
+    }
+    return { success: true, message: 'Product details', product };
+  }
 }
 
 module.exports = ProductService;

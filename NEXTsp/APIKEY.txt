@@ -14,6 +14,7 @@ xóa sản phẩm http://localhost:3101/api/products/delete/id
 sửa sản phẩm http://localhost:3101/api/products/update/id
 chi tiết 1 sản phẩm http://localhost:3101/api/products/getdetails/id
 lay het san pham :http://localhost:3101/api/products/getall
+search sản phẩm : http://localhost:3101/api/products/search/nameProduct
 
 lấy hết cate có brand:" http://localhost:3101/api/catalog/getlistcateandbrand"
 
@@ -22,3 +23,9 @@ loginuser :http://localhost:3101/api/auth/login
 registeruer: http://localhost:3101/api/auth/register
 loginadmin:http://localhost:3101/api/auth/login/admin
 getuser: http://localhost:3101/api/auth/getuser { phải có bearer Token }
+
+thêm order : http://localhost:3101/api/orders/add
+Xóa order: http://localhost:3101/api/orders/delete/id
+sửa order: http://localhost:3101/api/orders/update/id   
+lay het order : http://localhost:3101/api/orders/getall
+

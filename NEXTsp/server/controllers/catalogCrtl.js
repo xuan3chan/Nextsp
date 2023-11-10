@@ -2,7 +2,7 @@ const catalogService = require('../service/catalogService');
 const handleErrorResponse = require('../middleware/errorHandling');
 
 class CatalogController {
-    static async getAllCategoriesAndBrands(req, res, next) {
+    static async getAllCategoriesAndBrandsController(req, res, next) {
         try {
             const { success, categories } = await catalogService.getAllCategoriesAndBrandsService();
             if (success) {

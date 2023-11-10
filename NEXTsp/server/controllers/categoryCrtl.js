@@ -3,7 +3,7 @@ const CategoryService = require('../service/categoryService');
 const handleErrorResponse = require('../middleware/errorHandling');
 
 class CategoryController {
-    static async addCategory(req, res) {
+    static async addCategoryController(req, res) {
         try {
             const result = await CategoryService.addCategoryService(req.body);
             res.json(result);
@@ -12,7 +12,7 @@ class CategoryController {
         }
     }
 
-    static async updateCategory(req, res) {
+    static async updateCategoryController(req, res) {
         try {
             const { id } = req.params;
             const result = await CategoryService.updateCategoryService({ id, ...req.body });
@@ -22,7 +22,7 @@ class CategoryController {
         }
     }
 
-    static async deleteCategory(req, res) {
+    static async deleteCategoryController(req, res) {
         try {
             const result = await CategoryService.deleteCategoryService(req.params.id);
             res.json(result);
@@ -31,7 +31,7 @@ class CategoryController {
         }
     }
 
-    static async getAllCategories(req, res) {
+    static async getAllCategoriesController(req, res) {
         try {
             const result = await CategoryService.getAllCategoriesService();
             res.json(result);

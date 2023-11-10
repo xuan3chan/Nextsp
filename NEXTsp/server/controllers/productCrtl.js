@@ -3,7 +3,7 @@ const ProductService = require('../service/productService');
 const handleErrorResponse = require('../middleware/errorHandling');
 
 class ProductController {
-    static async addProduct(req, res) {
+    static async addProductController(req, res) {
         try {
             const result = await ProductService.addProductService(req,req.body);
             res.json(result);
@@ -12,7 +12,7 @@ class ProductController {
         }
     }
 
-    static async updateProduct(req, res) {
+    static async updateProductController(req, res) {
         try {
             const { id } = req.params;
             const result = await ProductService.updateProductService(req,{ id, ...req.body });
@@ -22,7 +22,7 @@ class ProductController {
         }
     }
 
-    static async deleteProduct(req, res) {
+    static async deleteProductController(req, res) {
         try {
             const result = await ProductService.deleteProductService(req.params.id);
             res.json(result);
@@ -31,7 +31,7 @@ class ProductController {
         }
     }
 
-    static async getDetailsProduct(req, res) {
+    static async getDetailsProductController(req, res) {
         try {
             const result = await ProductService.getDetailsProductService(req.params.id);
             res.json(result);
@@ -40,18 +40,19 @@ class ProductController {
         }
     }
 
-    // static async deleteManyProducts(req, res) {
-    //     try {
-    //         const result = await ProductService.deleteManyProductsService(req.body.ids);
-    //         res.json(result);
-    //     } catch (error) {
-    //         handleErrorResponse(res, error);
-    //     }
-    // }
 
-    static async getAllProducts(req, res) {
+    static async getAllProductsController(req, res) {
         try {
             const result = await ProductService.getAllProductsService();
+            res.json(result);
+        } catch (error) {
+            handleErrorResponse(res, error);
+        }
+    }
+    static async searchProductController(req, res) {
+        try {
+            const nameProduct = req.params.nameProduct;
+            const result = await ProductService.searchProductService(nameProduct);
             res.json(result);
         } catch (error) {
             handleErrorResponse(res, error);
