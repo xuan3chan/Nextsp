@@ -16,7 +16,8 @@ class OrderController {
     //update order chỉ update trường tracking
     async updateOrder(req, res) {
         try {
-            const { id, tracking } = req.body;
+            const { id } = req.params;
+            const { tracking } = req.body;
             const result = await orderService.updateOrder(id, tracking);
             res.status(200).json(result);
         } catch (error) {
@@ -26,7 +27,7 @@ class OrderController {
     //delete order
     async deleteOrder(req, res) {
         try {
-            const { id } = req.body;
+            const { id } = req.params;
             const result = await orderService.deleteOrder(id);
             res.status(200).json(result);
         } catch (error) {

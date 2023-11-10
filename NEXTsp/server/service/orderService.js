@@ -45,12 +45,12 @@ async deleteOrder(id) {
     const result = await Order.findByIdAndDelete(id);
     return result;    
 }
-//get all order
+//get all order populate product and user
 async getAllOrder() {
-    const result = await Order.find();
+    const result = await Order.find().populate({ path: 'product.productId', select: 'nameProduct price' }).populate({path:'userId',select:'fullName email accountName'});
     return result;
-}
 
+  }
 }
 module.exports = new OrderService();
 
