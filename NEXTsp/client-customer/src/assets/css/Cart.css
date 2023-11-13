@@ -1,15 +1,19 @@
 .bg-cart {
   background-color: #f6f7fa;
   z-index: 1;
+  max-height: 3000px;
 }
 .CartSection {
+  position: relative;
   width: 660px;
-  height: 800px;
+  max-height: 2000px;
   background-color: #fff;
-  padding: 14px;
+  padding: 10px 20px;
+  display: flex;
+  flex-direction: column;
 }
 .ProcessSection {
-  background-color: #ffeded;
+  background-color: #d4d5da;
 }
 .bg-step {
   border-radius: 10%;
@@ -41,50 +45,62 @@
   border-radius: 50%;
   border: solid black 1px;
 }
-.process-Icon:hover {
-  background-color: red;
-}
-.InfoStep {
-}
-.PaymentStep {
-}
-.FinishStep {
-}
-.CartSection-Title {
-}
 
 /* Product Information */
-.productTitle{
-    font-size: 20px;
-    font-weight: 600;
-    margin-top: 8px;
-    width:300px;
-    height: 70px;
+.productTitle {
+  font-size: 20px;
+  font-weight: 600;
+  margin-top: 8px;
+  width: 300px;
+  height: 70px;
 }
-.productPrice{
-    font-size: 20px;
-    font-weight: 600;
-    margin-top: 8px;
+.productPrice {
+  font-size: 20px;
+  font-weight: 600;
+  margin-top: 8px;
 }
-.productOldPrice{
-    font-size: 16px;
-    font-weight: 600;
-    margin-bottom: 10px;
+.productOldPrice {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 10px;
 }
 /* QualityCounter.css */
-.productQuantity{
-    height: 34px;
+.productQuantity {
+  height: 34px;
 }
-.quality-counter{
-    border-radius: 4px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 60px;
-    border: solid 1px #ddd;
+.quality-counter {
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  border: solid 1px #ddd;
 }
 
-.productQuantity  .btnCart{
-    padding: 0 8px;
-    border: solid 1px #ddd;
+.productQuantity .btnCart {
+  padding: 0 8px;
+  border: solid 1px #ddd;
+}
+
+.totalShip {
+}
+.mainText {
+  font-size: larger;
+}
+.subText {
+  font-size: large;
+  font-weight: 600;
+  color: var(--primary-color);
+}
+.totalOrder {
+}
+.btnContinueShopping {
+  height: 60px;
+  font-size: large;
+}
+.btnOrderNow {
+  height: 60px;
+  font-size: large;
+}
+.btn {
 }
