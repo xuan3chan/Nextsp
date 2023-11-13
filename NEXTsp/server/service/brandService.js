@@ -7,6 +7,10 @@ class BrandService {
         if (!nameBrand || !category || !status) {
             return { success: false, status: 400, message: 'Missing required parameters' };
         }
+        const duplicate = await Brand.findOne({ nameBrand });
+        if (duplicate) {
+            return { success: false, status: 400, message: 'Brand already exists' };
+        }
 
         // Tạo slug từ tên brand
         const brandSlug = slugify(nameBrand, { lower: true });
@@ -20,17 +24,25 @@ class BrandService {
         return { success: true, message: 'Brand created successfully' };
     }
 
-    static async updateBrandService({ id, nameBrand, description, category }) {
-  // if (!nameBrand || !category) {
-        //     return { success: false, status: 400, message: 'Missing required parameters' };
-        // }
+    static async updateBrandService({ id, nameBrand, description, category ,status}) {
+        const duplicate = await Brand.findOne({ nameBrand });
+        if (duplicate) {
+            return { success: false, status: 400, message: 'Brand already exists' };
+        }
 
-        // Tạo slug từ tên brand
-        const brandSlug = slugify(nameBrand, { lower: true });
+        // Create an update object with description and category
+        const update = { description, category,status, };
+
+        // If nameBrand is defined, slugify it and add nameBrand and brandSlug to the update object
+        if (nameBrand) {
+            const brandSlug = slugify(nameBrand, { lower: true });
+            update.nameBrand = nameBrand;
+            update.brandSlug = brandSlug;
+        }
 
         const updatedBrand = await Brand.findByIdAndUpdate(
             id,
-            { nameBrand, description, category, brandSlug },
+            update,
             { new: true, runValidators: true }
         );
 
