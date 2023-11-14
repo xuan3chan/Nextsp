@@ -46,10 +46,6 @@ const CartSchema = new mongoose.Schema({
         enum: ['COD', 'banking'],
         default: 'COD',
     },
-    fullName:{
-        type: String,
-        required: true,
-    },
     createdAt: {
         type: Date,
         default: Date.now,
