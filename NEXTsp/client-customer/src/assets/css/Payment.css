@@ -1,0 +1,37 @@
+.iOrder-content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 6px;
+}
+.iOrder {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.iOrder-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #000000;
+  margin-bottom: 10px;
+  width: 200px;
+}
+.iOrder-content-item-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #000000;
+}
+.iOrder-content-item-content {
+  font-size: 16px;
+  font-weight: 450;
+  color: #000000;
+  max-width: 390px;
+  max-height: 50px;
+}
+.iOrder-price {
+  color: var(--primary-color);
+  font-weight: 500;
+}
+.QRbanking{
+    
+}

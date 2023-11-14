@@ -9,25 +9,19 @@ function ProductAdded(props) {
     "https://cdn3.vectorstock.com/i/1000x1000/35/52/placeholder-rgb-color-icon-vector-32173552.jpg";
 
   useEffect(() => {
-    // Retrieve cart data from localStorage
     const storedCart = localStorage.getItem("cart");
-    // Parse the storedCart string into an array
     const parsedCart = JSON.parse(storedCart) || [];
-    // Add a count property to each item in the cart
     const cartWithCount = parsedCart.map((item) => ({ ...item, count: 1 }));
-    // Set the cart state with the updated array
     setCart(cartWithCount);
   }, []);
 
   const handleCheckLogin = () => {
     const token = localStorage.getItem("accessToken");
-    if (token) {
-      token != null;
-      return (window.location.href = "/Customer");
-    } else {
-      alert("Bạn cần đăng nhập để tiếp tục");
-      return (window.location.href = "/LoginUser");
-    }
+    token == null
+      ? alert("Vui Lòng Đăng Nhập Để Tiếp Tục!")(
+          (window.location.href = "/LoginUser")
+        )
+      : (window.location.href = "/Customer");
   };
 
   function formatPrice(price) {
@@ -80,7 +74,6 @@ function ProductAdded(props) {
 
     // Get the current cart from localStorage
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
     // Remove the item from the cart
     cart = cart.filter((item) => item.id !== itemId);
 
@@ -154,7 +147,7 @@ function ProductAdded(props) {
         <a className=" max-w-xs" href="/Homepage">
           <button className="btn btnContinueShopping">Tiếp Tục Mua Sắm</button>
         </a>
-        <a className=" max-w-xs" href="/Customer">
+        <a className=" max-w-xs">
           <button onClick={handleCheckLogin} className="btn btnOrderNow">
             Đặt Hàng Ngay
           </button>

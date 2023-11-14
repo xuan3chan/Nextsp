@@ -18,6 +18,7 @@ import { PiShoppingCartSimpleBold } from "react-icons/pi";
 function Header(props) {
   const [Categories, setCategories] = useState([]);
   const [accountName, setAccountName] = useState("");
+  const [userId, setUserId] = useState("");
   const apiBrand = "http://localhost:3101/api/catalog/getlistcateandbrand";
   const apiUrl = "http://localhost:3101/api/auth/user";
   const token = localStorage.getItem("accessToken");
@@ -31,6 +32,9 @@ function Header(props) {
       })
       .then((response) => {
         setAccountName(response.data.user.fullName);
+        setUserId(response.data.user._id);
+        localStorage.setItem("userId", response.data.user._id);
+        localStorage.setItem("accountName", response.data.user.fullName);
       })
       .catch((error) => {
         console.error(error);

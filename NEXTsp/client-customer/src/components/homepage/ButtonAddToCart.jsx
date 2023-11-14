@@ -7,7 +7,7 @@ function ButtonAddToCart(props) {
   const updatedCart = [...cart, props.product];
   const addToCart = () => {
     const existingItemIndex = cart.findIndex((item) => item.id === newItem.id);
-
+    
     if (existingItemIndex !== -1) {
       // If it exists, increase the count of that item
       setCart((prevCart) =>

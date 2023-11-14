@@ -21,6 +21,15 @@ function CustomerShipping(props) {
 
   // Hàm xử lý khi người dùng submit form
   const handleSubmit = (e) => {
+    localStorage.setItem(
+      "customerInformation",
+      JSON.stringify({
+        fullName: formData.recipientName,
+        phone: formData.phoneNumber,
+        address: formData.address,
+        email: formData.email,
+      })
+    );
     e.preventDefault();
     window.location.href = "/payment";
   };
