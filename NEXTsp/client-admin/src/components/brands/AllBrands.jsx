@@ -69,14 +69,14 @@ const AllBrands = () => {
   };
   
   //Edit Brand
-  const editBrand = (id, nameBrand, description, category, status) => [
+  const editBrand = (id, nameBrand, description, status, category ) => [
     dispatch({ 
       type: "editBrandModalOpen", 
       id: id,
       nameBrand: nameBrand,
       description: description,
+      status: status,
       category: category,
-      status: status
   })
   ]
 
@@ -116,7 +116,7 @@ const AllBrands = () => {
                               {brand.status}
                             </td>
                             <td className="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
-                            {brand.category ? brand.category.nameCategory : "N/A"}
+                            {brand.category ? brand.category.name : "N/A"}
                             </td> 
                             <td className="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
                               <button
@@ -125,8 +125,8 @@ const AllBrands = () => {
                                     brand.id,
                                     brand.nameBrand,
                                     brand.description,
-                                    brand.category,
-                                    brand.status
+                                    brand.status,
+                                    brand.category.id
                                   )
                                 }
                                 className="text-indigo-600 hover:text-indigo-900"

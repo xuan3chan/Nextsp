@@ -10,9 +10,9 @@ export const getAllProduct = async () => {
   }
 }
 
-export const deleteProduct = async (_id) => {
+export const deleteProduct = async (id) => {
   try {
-    let res = await axios.delete(`${apiURL}/delete/${_id}`);
+    let res = await axios.delete(`${apiURL}/delete/${id}`);
     return res.data.products;
   } catch (error) {
     console.log(error);
@@ -30,6 +30,7 @@ export const createPorductImage = async ({ image }) => {
 
 export const createProduct = async ({ nameProduct, description, image, status, brand, price }) => {
   let formData = new FormData();
+  
   for (const file of image) {
     formData.append("images", file);
   }
@@ -48,26 +49,31 @@ export const createProduct = async ({ nameProduct, description, image, status, b
 }
 
 export const editProduct = async (product) => {
-  console.log(product)
-  /* Most important part for updating multiple image  */
-  let formData = new FormData();
-  if (product.images) {
-    for (const file of product.images) {
-      formData.append("images", file);
-    }
-  }
-  /* Most important part for updating multiple image  */
-  formData.append("nameProduct", product.nameProduct);
-  formData.append("description", product.description);
-  formData.append("status", product.status);
-  formData.append("brand", product.brand);
-  formData.append("price", product.price);
-  formData.append("id", product.id);
   try {
+    let formData = new FormData();
+    if (product.pEditImages) {
+      for (const file of product.pEditImages) {
+        formData.append("pEditImages", file);
+      }
+    }
+    formData.append("id", product.id);
+    formData.append("nameProduct", product.nameProduct);
+    formData.append("description", product.description);
+    formData.append("status", product.status);
+    formData.append("brand", product.brand ? product.brand.id : null);
+    formData.append("price", product.price);
+    formData.append("images", product.images);
+
+    console.log("Product before sending request:", product);
+
     let res = await axios.put(`${apiURL}/update/${product.id}`, formData);
+    console.log("Product ID:", product);
+    console.log("Response from server:", res.data);
     return res.data;
+  } catch (error) {
+    console.log("Error during product update:", error);
+    return { error: 'An error occurred while updating the product.' };
   }
-  catch (error) {
-    console.log(error);
-  }
-}
+};
+
+

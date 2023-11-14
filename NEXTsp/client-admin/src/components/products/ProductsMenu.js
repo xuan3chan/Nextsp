@@ -1,7 +1,8 @@
 import React ,{Fragment, useContext} from 'react'
 import { ProductContext } from './index';
 import AddProductModal from './AddProductModal'
-import EditProductModal from './EditProductModal';
+// import EditProductModal from './EditProductModal';
+import EditProductModal1 from './EditProductModal1';
 
 const ProductsMenu = (props) => {
   const { dispatch } = useContext(ProductContext)
@@ -33,7 +34,7 @@ const ProductsMenu = (props) => {
           </span>
         </div>
         <AddProductModal />
-        <EditProductModal/>
+        <EditProductModal1/>
       </div>
     </Fragment>
   );

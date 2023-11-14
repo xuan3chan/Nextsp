@@ -1,8 +1,14 @@
 import React, { Fragment } from "react";
 import { useNavigate  } from "react-router-dom";
-
+import { jwtDecode } from "jwt-decode";
+import { Link } from "react-router-dom";
 const AdminNavber = (props) => {
   const navigate = useNavigate ();
+
+
+  const accessToken = localStorage.getItem("accessToken");
+  const decodedToken = accessToken ? jwtDecode(accessToken) : null;
+  const accountName = decodedToken ? decodedToken.adminName : null;
 
   const logout = () => {
     localStorage.removeItem("accessToken");
@@ -104,20 +110,23 @@ const AdminNavber = (props) => {
             className="userDropdownBtn hover:bg-gray-200 px-2 py-2 rounded-lg relative group"
             title="user"
           >
-            <svg
-              className="cursor-pointer w-8 h-8 text-gray-600 hover:text-gray-800"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-              />
-            </svg>
+            <div className="header_user_module">
+            {accessToken === null ? (
+              <Link to="/LoginUser">
+                <button className="user_module_login">
+                  <div className="boxIcon">
+                  </div>
+                  <p>Đăng Nhập</p>
+                </button>
+              </Link>
+            ) : (
+              <button className="user_module_login">
+                <div className="boxIcon">
+                </div>
+                <p>Hello, {accountName}</p>
+              </button>
+            )}
+          </div>
             <div className="hidden userDropdown absolute right-0 mt-1 bg-gray-200 rounded group-hover:block">
               <li className="flex flex-col text-gray-700">
                 <span className="flex space-x-1 py-2 px-8 hover:bg-gray-400 cursor-pointer">
