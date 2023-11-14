@@ -43,13 +43,19 @@ const AllProducts = () => {
     }
   }
 
-  const editProduct = (id, product, type) => {
-    if (type) {
-      dispatch({
-        type: "editProductModalOpen",
-        product: { ...product, id: id },
-      });
-    }
+  const editProduct = (id, nameProduct, description, price, images, brand, status) => {
+    dispatch({
+      type: "editProductModalOpen",
+      product: {
+        id,
+        nameProduct,
+        description,
+        price,
+        images,
+        brand,
+        status
+      }
+    })
   }
 
   if (loading) {
@@ -77,11 +83,7 @@ const AllProducts = () => {
       </div>
     );
   }
-  if (!products || error) {
-    return (
-      <div>ERROR...</div>
-    )
-  }
+
 
   return (
     <Fragment>
@@ -104,7 +106,8 @@ const AllProducts = () => {
             </tr>
           </thead>
           <tbody>
-              {products && products.map((product) => (
+              {products && products.length > 0 ? (
+                products.map((product) => (
                 <tr className="border border-spacing-1" key={product.id}>
                   <td className="p-2 text-left">
                     {product.nameProduct.length > 15
@@ -112,7 +115,7 @@ const AllProducts = () => {
                       : product.nameProduct}
                   </td>
                   <td className="p-2 text-left">
-                    {product.description.slice(0, 15)}...
+                    {product.description ? product.description.slice(0, 15) + "..." : "N/A"}
                   </td>
                   <td className="p-2 text-center relative">
                     {product.images.length > 0 ? (
@@ -139,7 +142,7 @@ const AllProducts = () => {
                       </span>
                     )}
                   </td>
-                  <td className="p-2 text-center">{product.brand.name}</td>
+                  <td className="p-2 text-center">{product.brand?.name}</td>
                   <td className="p-2 text-center">{product.price}</td>
                   <td className="p-2 text-center">
                     {moment(product.createdAt).format("lll")}
@@ -149,7 +152,14 @@ const AllProducts = () => {
                   </td>
                   <td className="p-2">
                     <span
-                      onClick={(e) => editProduct(product.id, product, true
+                      onClick={(e) => editProduct(
+                        product.id,
+                        product.nameProduct,
+                        product.description,
+                        product.price,
+                        product.images,
+                        product.brand,
+                        product.status
                       )}
                       className="cursor-pointer bg-green-500 hover:bg-green-600 px-2 py-1 text-white rounded mr-2"
                     >
@@ -163,7 +173,13 @@ const AllProducts = () => {
                     </span>
                   </td>
                 </tr>
-              ))}
+              ))) : (
+                <tr>
+                  <td colSpan="9" className="text-center p-4">
+                    No Product Found
+                  </td>
+                </tr>
+              )}
           </tbody>
         </table>
       </div>

@@ -6,8 +6,8 @@ export const brandState = {
     id: "",
     nameBrand: "",
     description: "",
-    category: "",
     status: "",
+    category: "",
   },
   loading: false
 }
@@ -33,8 +33,8 @@ export const brandReducer = (state, action) => {
           id: action.id,
           nameBrand: action.nameBrand,
           description: action.description,
-          category: action.category,
           status: action.status,
+          category: action.category,
         },
       };
       case "editBrandModalClose":
@@ -45,8 +45,8 @@ export const brandReducer = (state, action) => {
           id: "",
           nameBrand: "",
           description: "",
-          category: "",
           status: "",
+          category: "",
         },
       };
       case "loading":
