@@ -39,7 +39,7 @@ class BrandService {
             update.nameBrand = nameBrand;
             update.brandSlug = brandSlug;
         }
-
+         
         const updatedBrand = await Brand.findByIdAndUpdate(
             id,
             update,

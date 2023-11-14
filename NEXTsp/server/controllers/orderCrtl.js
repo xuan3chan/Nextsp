@@ -6,8 +6,8 @@ class OrderController {
     //add new order
     async addOrderController(req, res) {
         try {
-            const { userId, product, totalPrice, tracking, payment,address,phone } = req.body;
-            const result = await orderService.addOrderService(userId, product, totalPrice, tracking, payment,address,phone);
+            const { userId, product, totalPrice, tracking, payment,address,phone,fullName } = req.body;
+            const result = await orderService.addOrderService(userId, product, totalPrice, tracking, payment,address,phone,fullName);
             res.status(200).json({message : "add complet", order : result});
         } catch (error) {
             handleErrorResponse(res, error);
