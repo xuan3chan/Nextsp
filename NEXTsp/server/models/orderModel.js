@@ -38,9 +38,13 @@ const CartSchema = new mongoose.Schema({
         default: 'pending',
     },
     payment: {
-        type: String,
+        type: String, 
         enum: ['COD', 'banking'],
         default: 'COD',
+    },
+    fullName:{
+        type: String,
+        required: true,
     },
     createdAt: {
         type: Date,
