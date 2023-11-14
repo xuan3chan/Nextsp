@@ -71,6 +71,7 @@
   color: white;
   align-items: center;
 }
+
 .header_logo {
   width: 10%;
 }
@@ -135,42 +136,6 @@
 
 .dropdown-content a:hover {
   background-color: #ddd;
-}
-
-.category_item{ 
-  display: none;
-  position: absolute;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  padding: 12px 16px;
-  z-index: 1;
-}
-
-.brand-menu{ 
-  background-color: #f9f9f9;
-  width: 180px;
-  height:450px;
-}
-
-.dropdown:hover .dropdown-content {
-  width:180px;
-  display: flex;
-}
-.header_menu {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 60%;
-}
-.nav_list {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-}
-.nav_item:active {
-  color: black;
-  background-color: #ffffff;
 }
 .header_searching_module {
   display: flex;

@@ -39,11 +39,6 @@ function MainContentSection(props) {
     return "Not Available "; // You can change this message to your preferred text
   }
 
-  //Function Add to LocalStorage
-  // const [productAdded, setProductAdded] = useState([]); // [
-  // const handleAddCart = () => {
-  //   setProductAdded(localStorage.setItem("cart", JSON.stringify(product)));
-  // };
 
   return (
     <div>

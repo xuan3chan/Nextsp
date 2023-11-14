@@ -8,11 +8,10 @@ function CartPage(props) {
   return (
     <div className="bg-cart">
       <Header></Header>
-      <div className="w-4/5 mr-auto ml-auto pt-24">
-        <div className="CartSection">
+      <div className="pt-24 w-full pb-24">
+        <div className="CartSection ml-auto mr-auto border-spacing-1 p-20">
           <ProcessBar></ProcessBar>
           <ProductAdded></ProductAdded>
-          <TotalSection></TotalSection>
         </div>
       </div>
     </div>
