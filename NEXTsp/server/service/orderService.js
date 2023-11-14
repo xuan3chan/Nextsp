@@ -2,8 +2,8 @@ const Order = require('../models/orderModel');
 
 class OrderService {
   //add new order and validate
-  async addOrderService(userId, product, totalPrice, tracking, payment,address,phone,fullName) {
-    if (!userId || !product || !totalPrice || !tracking || !payment || !address || !phone|| !fullName) {
+  async addOrderService(userId, product, totalPrice, tracking, payment,address,phone) {
+    if (!userId || !product || !totalPrice || !tracking || !payment || !address || !phone) {
       throw new Error('Missing required fields');
     }
     const order = new Order({
@@ -14,7 +14,7 @@ class OrderService {
       payment,
       address,
       phone,
-      fullName
+      fullName,
 
     });
     const saveOder=await order.save();

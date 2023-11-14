@@ -14,44 +14,30 @@ import "../assets/css/main.css";
 import ProductListAll from "../components/homepage/ProductListAll";
 
 function Homepage(props) {
-  const CollectionBrand = ["Apple", "Apple2", "Apple3"];
   const title = ["Apple", "Apple2", "Apple3"];
-
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
-  }, []);
-
+  const [isLoading, setIsLoading] = useState(false);
   return (
-    <div>
+    <div className="">
       {isLoading ? (
-        <div className="loading">
-          <RiseLoader color="#000000" loading={isLoading} size={30} />
+        <div className="loading w-full h-full flex justify-center content-center items-center">
+          <RiseLoader color="#212529" />
         </div>
-      ) : (
-        <div>
-          <Header></Header>
-          <div className="container_content mt-[56px] color-bg">
-            <BannerScroll />
-            <div className="container-product-section inline-block relative">
-              <div className="flex flex-col w-4/5 contents-center mr-auto ml-auto gap-10">
-                <SloganListSection></SloganListSection>
-                <ProductListAll title="Sản Phẩm Nổi Bật"></ProductListAll>
-                <ProductList
-                  title={title[1]}
-                  CollectionBrand={CollectionBrand[1]}
-                ></ProductList>
-                <ProductList title="PC - Máy Bàn"></ProductList>
-              </div>
+      ) : null}
+      <div>
+        <Header />
+        <div className="container_content mt-[56px] color-bg">
+          <BannerScroll />
+          <div className="container-product-section inline-block relative">
+            <div className="flex flex-col w-4/5 contents-center mr-auto ml-auto gap-10">
+              <SloganListSection />
+              <ProductListAll />
+              <ProductList title={title[1]} CollectionBrand="Intel" />
             </div>
-            <BannerSales />
           </div>
-          <Footer />
+          <BannerSales />
         </div>
-      )}
+        <Footer />
+      </div>
     </div>
   );
 }

@@ -6,6 +6,7 @@ import ImageSection from "../components/Products/ImageSection";
 import MainContentSection from "../components/Products/MainContentSection";
 import DescriptionSection from "../components/Products/DescriptionSection";
 import FlaskSale from "../components/Products/FlaskSale";
+import { useState  } from "react";
 
 function Products(props) {
   const images = [
@@ -21,7 +22,7 @@ function Products(props) {
       <div className="">
         <div className="container flex flex-col w-3/4 mx-auto h-max ">
           <Breadcrumb titleCollection="Sản Phẩm"></Breadcrumb>
-          <div className="flex bg-white w-full rounded-md h-full mb-8 pl-72">
+          <div className="flex bg-white w-full rounded-md h-full mb-8 pl-28">
             <div>
               <ImageSection images={images}></ImageSection>
               <FlaskSale></FlaskSale>

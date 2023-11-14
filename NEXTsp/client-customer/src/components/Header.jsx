@@ -67,7 +67,7 @@ function Header(props) {
           <a href="../Homepage">Trang Chủ</a>
           <a href="/Blog">Bài Viết</a>
           <div className="dropdown">
-            <button className="dropbtn">
+            <button href="/Collection" className="dropbtn">
               <FontAwesomeIcon className="mr-1" icon={faBars} />
               Danh Mục
               <i className="fa fa-caret-down"></i>
@@ -142,8 +142,7 @@ function Header(props) {
               <PiShoppingCartSimpleBold></PiShoppingCartSimpleBold>
             </div>
             <div className="number-counter">{counterCart}</div>
-            <Link 
-            to={"/CartPage"}>Giỏ Hàng </Link>
+            <Link to={"/CartPage"}>Giỏ Hàng </Link>
           </div>
           <div className="header_user_module">
             {localStorage.getItem("accessToken") === null ? (

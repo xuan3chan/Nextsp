@@ -39,6 +39,7 @@
   z-index: 1;
   color: #000 !important;
   width: 216px;
+  height: 260px;
 }
 .category-item {
   display: flex;
