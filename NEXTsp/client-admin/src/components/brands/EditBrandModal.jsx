@@ -30,6 +30,7 @@ const EditBrandModal = () => {
     let responseData = await getAllCategory();
     if (responseData) {
       setCategories(responseData);
+      console.log(responseData);
     } else {
       console.log(responseData);
     }
@@ -37,6 +38,7 @@ const EditBrandModal = () => {
 
   useEffect(() => {
     setEditformdata({
+      ...editformData,
       id: data.editBrandModal.id,
       nameBrand: data.editBrandModal.nameBrand,
       description: data.editBrandModal.description,
@@ -55,28 +57,68 @@ const EditBrandModal = () => {
     }
   };
 
-  const submitForm = async () => {
-    dispatch({ type: "loading", payload: true });
-    let edit = await editBrand(
-      editformData.id,
-      editformData.nameBrand,
-      editformData.description,
-      editformData.status,
-      editformData.category
-    );
-    if (edit.error) {
-      console.log(edit.error);
-      dispatch({ type: "loading", payload: false });
-    } else if (edit.success) {
-      console.log(edit.success);
-      dispatch({ type: "editBrandModalClose" });
-      setTimeout(() => {
-        dispatch({ type: "loading", payload: false });
-        fetchData();
-      }, 3000);
-    }
+  const handleChange = (e) => {
+    setEditformdata({
+      ...editformData,
+      error: false,
+      success: false,
+      [e.target.name]: e.target.value,
+    });
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // Check if nameBrand has changed
+    const hasNameBrandChanged = editformData.nameBrand !== data.editBrandModal.nameBrand;
+
+    // Prepare data to send to editBrand
+    const dataToSend = hasNameBrandChanged 
+      ? { ...editformData } 
+      : { 
+          id: editformData.id, 
+          description: editformData.description, 
+          status: editformData.status, 
+          category: editformData.category 
+        };
+
+    let response = await editBrand(dataToSend);
+
+    if (response && response.error) {
+      setEditformdata({
+        ...editformData,
+        error: response.error,
+        success: false,
+      });
+      setTimeout(() => {
+        setEditformdata({
+          ...editformData,
+          error: "Fail to update !",
+          success: false,
+        });
+      }, 100);
+    } else if (response && response.success) {
+      setEditformdata({
+        ...editformData,
+        error: false,
+        success: response.success,
+      });
+      fetchData();
+      setTimeout(() => {
+        setEditformdata({
+          ...editformData,
+          error: false,
+          success: "Update complete !",
+        });
+      }, 100);
+      setTimeout(() => {
+        dispatch({ type: "editBrandModalClose", payload: false });
+        getAllBrand();
+      },1000)
+    } else {
+      console.error("Unknown error");
+    }
+  };
   return (
     <Fragment>
       {/* Black Overlay */}
@@ -89,167 +131,142 @@ const EditBrandModal = () => {
         } fixed top-0 left-0 z-30 w-full h-full bg-black opacity-50`}
       />
       {/* End Black Overlay */}
-      {/* Modal Start */}
+      {/* Modal */}
       <div
         className={`${
           data.editBrandModal.modal ? "" : "hidden"
         } fixed inset-0 flex items-center z-30 justify-center overflow-auto`}
       >
-        <div className="mt-32 md:mt-0 relative bg-white w-11/12 md:w-3/6 shadow-lg flex flex-col items-center space-y-4 px-4 py-4 md:px-8">
-          <div className="flex items-center justify-between w-full pt-4">
-            <span className="text-left font-semibold text-2xl tracking-wider">
-              Edit Brand
-            </span>
-            {/* Close Modal */}
-            <span
-              style={{ background: "#303031" }}
-              onClick={(e) =>
-                dispatch({ type: "editBrandModalClose", payload: false })
-              }
-              className="cursor-pointer text-gray-100 py-2 px-2 rounded-full"
-            >
-              <svg
-                className="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
-            </span>
+        {/* Modal Content */}
+        <div className="relative mx-auto w-11/12 md:w-3/5 lg:w-1/3 my-6">
+          {/*Exit btn */}
+          <button
+            onClick={(e) =>
+              dispatch({ type: "editBrandModalOpen", payload: false })
+            }
+            className="absolute right-0 top-0 m-6 text-3xl font-bold outline-none focus:outline-none"
+          >
+            <span className="text-white">&times;</span>
+          </button>
+          {/* End Exit btn */}
+          {/*body */}
+          <div className="relative flex flex-col w-full bg-white outline-none focus:outline-none">
+            <div className="flex items-start justify-between p-5 border-b border-solid border-gray-300 rounded-t">
+              <h3 className="text-3xl font-semibold">Edit Brand</h3>
+            </div>
+            {/* Edit Form */}
+            <form onSubmit={handleSubmit}>
+              <div className="relative p-6 flex-auto">
+                {editformData.error && alert(editformData.error, "red")}
+                {editformData.success && alert(editformData.success, "green")}
+                <div className="mb-4">
+                  <label
+                    className="block text-gray-700 text-sm font-bold mb-2"
+                    htmlFor="nameBrand"
+                  >
+                    Name Brand
+                  </label>
+                  <input
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    value={editformData.nameBrand}
+                    onChange={handleChange}
+                    name="nameBrand"
+                    type="text"
+                    placeholder="Name Brand"
+                  />
+                </div>
+                <div className="mb-4">
+                  <label
+                    className="block text-gray-700 text-sm font-bold mb-2"
+                    htmlFor="description"
+                  >
+                    Description
+                  </label>
+                  <textarea
+                    className="resize-none border rounded focus:outline-none focus:shadow-outline w-full h-24 px-3 py-2 text-gray-700"
+                    value={editformData.description}
+                    onChange={handleChange}
+                    name="description"
+                    type="text"
+                    placeholder="Description"
+                  />
+                </div>
+                <div className="mb-4">
+                  <label
+                    className="block text-gray-700 text-sm font-bold mb-2"
+                    htmlFor="status"
+                  >
+                    Status
+                  </label>
+                  <select
+                    className="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    value={editformData.status}
+                    onChange={handleChange}
+                    name="status"
+                    type="text"
+                    placeholder="Status"
+                  >
+                    <option value="Active">Active</option>
+                    <option value="Inactive">Inactive</option>
+                  </select>
+                </div>
+                <div className="mb-4">
+                  <label
+                    className="block text-gray-700 text-sm font-bold mb-2"
+                    htmlFor="category"
+                  >
+                    Category
+                  </label>
+                  <select
+                    className="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    value={editformData.category}
+                    onChange={handleChange}
+                    name="category"
+                    placeholder="Category"
+                  >
+                    {categories && categories.length > 0 ? (
+                      categories.map((elem) => (
+                        <option
+                          key={elem._id}
+                          value={elem._id}
+                        >
+                          {elem.nameCategory}
+                        </option>
+                      ))
+                    ) : (
+                      <option value="" disabled>
+                        No Category Found
+                      </option>
+                    )}
+                  </select>
+                </div>
+              </div>
+              {/*Footer */}
+              <div className="flex items-center justify-end p-6 border-t border-solid border-gray-300 rounded-b">
+                <button
+                  onClick={(e) =>
+                    dispatch({ type: "editBrandModalClose", payload: false })
+                  }
+                  className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1"
+                  type="button"
+                  style={{ transition: "all .15s ease" }}
+                >
+                  Close
+                </button>
+                <button
+                  className="bg-green-500 text-white active:bg-green-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1"
+                  type="submit"
+                  style={{ transition: "all .15s ease" }}
+                >
+                  Save Changes
+                </button>
+              </div>
+            </form>
+            {/* End Edit Form */}
           </div>
-          {editformData.error ? alert(editformData.error, "red") : ""}
-          {editformData.success ? alert(editformData.success, "green") : ""}
-          <form className="w-full" onSubmit={(e) => submitForm(e)}>
-            <div className="flex space-x-1 py-4">
-              <div className="w-full flex flex-col space-y-1 space-x-1">
-                <label htmlFor="name">Product Name *</label>
-                <input
-                  value={editformData.nameBrand}
-                  onChange={(e) =>
-                    setEditformdata({
-                      ...editformData,
-                      error: false,
-                      success: false,
-                      nameBrand: e.target.value,
-                    })
-                  }
-                  className="px-4 py-2 border focus:outline-none"
-                  type="text"
-                />
-              </div>
-            </div>
-            <div className="flex flex-col space-y-2">
-              <label htmlFor="description">Product Description *</label>
-              <textarea
-                value={editformData.description}
-                onChange={(e) =>
-                  setEditformdata({
-                    ...editformData,
-                    error: false,
-                    success: false,
-                    description: e.target.value,
-                  })
-                }
-                className="px-4 py-2 border focus:outline-none"
-                name="description"
-                id="description"
-                cols={5}
-                rows={2}
-              />
-            </div>
-            <div className="flex space-x-1 py-4">
-              <div className="w-1/2 flex flex-col space-y-1">
-                <label htmlFor="status">Product Status *</label>
-                <select
-                  value={editformData.status}
-                  onChange={(e) =>
-                    setEditformdata({
-                      ...editformData,
-                      error: false,
-                      success: false,
-                      status: e.target.value,
-                    })
-                  }
-                  name="status"
-                  className="px-4 py-2 border focus:outline-none"
-                  id="status"
-                >
-                  <option name="status" value="Active">
-                    Active
-                  </option>
-                  <option name="status" value="Inactive">
-                    Inactive
-                  </option>
-                </select>
-              </div>
-              <div className="w-1/2 flex flex-col space-y-1">
-                <label htmlFor="status">Product Category *</label>
-                <select
-                  onChange={(e) =>
-                    setEditformdata({
-                      ...editformData,
-                      error: false,
-                      success: false,
-                      category: e.target.value,
-                    })
-                  }
-                  name="status"
-                  className="px-4 py-2 border focus:outline-none"
-                  id="status"
-                >
-                  <option disabled value="">
-                    {categories && categories.length > 0
-                      ? "Select a category"
-                      : "Select a category"}
-                  </option>
-                  {categories && categories.length > 0
-                    ? categories.map((elem) => {
-                        return (
-                          <Fragment key={elem._id}>
-                            {editformData.category._id &&
-                            editformData.category._id === elem._id ? (
-                              <option
-                                name="status"
-                                value={elem._id}
-                                key={elem._id}
-                                selected
-                              >
-                                {elem.nameCategory}
-                              </option>
-                            ) : (
-                              <option
-                                name="status"
-                                value={elem._id}
-                                key={elem._id}
-                              >
-                                {elem.nameCategory}
-                              </option>
-                            )}
-                          </Fragment>
-                        );
-                      })
-                    : "No Category Found"}
-                </select>
-              </div>
-            </div>
-            <div className="flex flex-col space-y-1 w-full pb-4 md:pb-6 mt-4">
-              <button
-                style={{ background: "#303031" }}
-                type="submit"
-                className="rounded-full bg-gray-800 text-gray-100 text-lg font-medium py-2"
-              >
-                Update product
-              </button>
-            </div>
-          </form>
+          {/* End body */}
         </div>
+        {/* End Modal Content */}
       </div>
     </Fragment>
   );

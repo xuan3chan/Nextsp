@@ -71,7 +71,7 @@ const AddBrandDetail = ({ categories }) => {
         setFdata({ ...fData, success: false, error: responseData.error });
         setTimeout(() => {
           return setFdata({ ...fData, error: false, success: false });
-        }, 100);
+        }, 2000);
       }
     } catch (error) {
       console.log(error);
@@ -98,7 +98,7 @@ const AddBrandDetail = ({ categories }) => {
         <div className="mt-32 md:mt-0 relative bg-white w-11/12 md:w-3/6 shadow-lg flex flex-col items-center space-y-4 px-4 py-4 md:px-8">
           <div className="flex items-center justify-between w-full pt-4">
             <span className="text-left font-semibold text-2xl tracking-wider">
-              Add Product
+              Add Brand
             </span>
             {/* Close Modal */}
             <span
@@ -129,7 +129,7 @@ const AddBrandDetail = ({ categories }) => {
           <form className="w-full" onSubmit={(e) => submitForm(e)}>
             <div className="flex space-x-1 py-4">
               <div className="w-full flex flex-col space-y-1 space-x-1">
-                <label htmlFor="name">Product Name *</label>
+                <label htmlFor="name">Brand Name *</label>
                 <input
                   value={fData.nameBrand}
                   onChange={(e) =>
@@ -146,7 +146,7 @@ const AddBrandDetail = ({ categories }) => {
               </div>
             </div>
             <div className="flex flex-col space-y-2">
-              <label htmlFor="description">Product Description *</label>
+              <label htmlFor="description">Brand Description *</label>
               <textarea
                 value={fData.description}
                 onChange={(e) =>
@@ -166,7 +166,7 @@ const AddBrandDetail = ({ categories }) => {
             </div>
             <div className="flex space-x-1 py-4">
               <div className="w-1/2 flex flex-col space-y-1">
-                <label htmlFor="status">Product Status *</label>
+                <label htmlFor="status">Brand Status *</label>
                 <select
                   value={fData.status}
                   onChange={(e) =>
@@ -190,7 +190,7 @@ const AddBrandDetail = ({ categories }) => {
                 </select>
               </div>
               <div className="w-1/2 flex flex-col space-y-1">
-                <label htmlFor="status">Product Category *</label>
+                <label htmlFor="status">Brand Category *</label>
                 <select
                   value={fData.category}
                   onChange={(e) =>
@@ -226,7 +226,7 @@ const AddBrandDetail = ({ categories }) => {
                 type="submit"
                 className="rounded-full bg-gray-800 text-gray-100 text-lg font-medium py-2"
               >
-                Create product
+                Create Brand
               </button>
             </div>
           </form>

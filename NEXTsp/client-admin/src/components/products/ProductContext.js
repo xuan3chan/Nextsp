@@ -53,11 +53,6 @@ export const productReducer = (state, action) => {
           price: "",
         }
       };
-      case "loading":
-      return {
-        ...state,
-        loading: action.payload,
-      };
     default:
       return state
   }
