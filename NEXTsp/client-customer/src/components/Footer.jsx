@@ -3,8 +3,8 @@ import React from "react";
 const Footer = () => {
   return (
     <footer>
-      <div className="bg-footer w-full h-60 bg-white">
-        <div className="footerSection flex gap-14 justify-center pt-10">
+      <div className="bg-footer w-full h-6 border-t-2 mt-10 ">
+        <div className="footerSection flex gap-14 justify-center pt-10 pb-10">
           <div className="footer-col-1 flex flex-col">
             <h1>Về NextSP Store</h1>
             <p>Giới Thiệu</p>

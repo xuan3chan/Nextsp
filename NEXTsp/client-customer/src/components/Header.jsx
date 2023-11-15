@@ -64,14 +64,14 @@ function Header(props) {
   }, []);
 
   return (
-    <Fragment>
-      <div className="header z-20 fixed flex justify-center ">
+    <Fragment className="">
+      <div className="header z-20 fixed flex justify-center">
         <div className="header_logo text-white"> </div>
         <div className="navbar">
           <a href="../Homepage">Trang Chủ</a>
           <a href="/Blog">Bài Viết</a>
-          <div className="dropdown">
-            <button href="/Collection" className="dropbtn">
+          <a href="/Collection" className="dropdown">
+            <button className="dropbtn flex justify-center items-center">
               <FontAwesomeIcon className="mr-1" icon={faBars} />
               Danh Mục
               <i className="fa fa-caret-down"></i>
@@ -112,7 +112,7 @@ function Header(props) {
                   }
                 })}
             </div>
-          </div>
+          </a>
         </div>
         <div className="header_searching_module">
           <div className="wrap">

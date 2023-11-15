@@ -90,7 +90,7 @@ function ProductList(props) {
                   </div>
                   <div>
                     <p className="product_oldPrice font-bold RobotoViet">
-                      {formatPrice(product.old)}
+                      {formatPrice(product.oldprice)}
                     </p>
                     <p className="product_price font-normal RobotoViet">
                       {formatPrice(product.price)}

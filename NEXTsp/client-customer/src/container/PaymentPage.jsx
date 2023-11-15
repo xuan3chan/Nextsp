@@ -29,7 +29,6 @@ function PaymentPage(props) {
     }
     return "";
   }
-
   const userId = localStorage.getItem("userId");
   const totalPrice = localStorage.getItem("totalPrice");
   const fullName = customerInformation.fullName;
@@ -55,13 +54,11 @@ function PaymentPage(props) {
     payment,
     tracking,
   };
-  const dataJson = JSON.stringify(data);
 
   // Assuming you have the API endpoint
   const apiUrl = "http://localhost:3101/api/orders/add";
 
   const handleOrder = () => {
-    console.log(dataJson);
     axios
       .post(apiUrl, data)
       .then((response) => {

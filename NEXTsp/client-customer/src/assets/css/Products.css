@@ -182,3 +182,9 @@
 .productPriceDetail {
   margin: 0 !important;
 }
+
+.FlaskSale-main-text {
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--primary-color);
+}
