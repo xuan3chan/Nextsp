@@ -24,3 +24,5 @@ class BlogService {
     static async updateBlogService({title, description, content, image, status }) {
         
 }
+
+}
