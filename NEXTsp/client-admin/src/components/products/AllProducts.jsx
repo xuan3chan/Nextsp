@@ -96,7 +96,7 @@ const AllProducts = () => {
             <tr>
               <th className="px-4 py-2 border">Product</th>
               <th className="px-4 py-2 border">Description</th>
-              <th className="px-4 py-2 border w-5 h-2">Image</th>
+              <th className="px-4 py-2 border w-5 h-2">Images</th>
               <th className="px-4 py-2 border">Status</th>
               <th className="px-4 py-2 border">Brand</th>
               <th className="px-4 py-2 border">Price</th>
@@ -145,10 +145,10 @@ const AllProducts = () => {
                   <td className="p-2 text-center">{product.brand?.name}</td>
                   <td className="p-2 text-center">{product.price}</td>
                   <td className="p-2 text-center">
-                    {moment(product.createdAt).format("lll")}
+                    {moment(product.createdAt).format("DD/MM/YYYY HH:mm")}
                   </td>
                   <td className="p-2 text-center">
-                    {moment(product.updatedAt).format("lll")}
+                    {moment(product.updatedAt).format("DD/MM/YYYY HH:mm")}
                   </td>
                   <td className="p-2">
                     <span

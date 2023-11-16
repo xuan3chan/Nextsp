@@ -48,21 +48,47 @@ export const createProduct = async ({ nameProduct, description, image, status, b
   }
 }
 
-export const editProduct = async (product) => {
+export const editProduct = async (product, originalProduct) => {
   try {
     let formData = new FormData();
-    if (product.pEditImages) {
-      for (const file of product.pEditImages) {
-        formData.append("pEditImages", file);
+
+    // If there are new images, upload them
+    if (product.newImages) {
+      for (const file of product.newImages) {
+        formData.append("newImages", file);
       }
     }
-    formData.append("id", product.id);
-    formData.append("nameProduct", product.nameProduct);
-    formData.append("description", product.description);
-    formData.append("status", product.status);
-    formData.append("brand", product.brand ? product.brand.id : null);
-    formData.append("price", product.price);
-    formData.append("images", product.images);
+
+    // If there are images to delete, add them to the form data
+    if (product.imagesToDelete) {
+      for (const url of product.imagesToDelete) {
+        formData.append("imagesToDelete", url);
+      }
+    }
+
+    if (product.images && product.images !== originalProduct.images) {
+      for (const file of product.images) {
+        formData.append("images", file);
+      }
+    }
+    if (product.id !== originalProduct.id) {
+      formData.append("id", product.id);
+    }
+    if (product.nameProduct !== originalProduct.nameProduct) {
+      formData.append("nameProduct", product.nameProduct);
+    }
+    if (product.description !== originalProduct.description) {
+      formData.append("description", product.description);
+    }
+    if (product.status !== originalProduct.status) {
+      formData.append("status", product.status);
+    }
+    if (product.brand && product.brand.id !== originalProduct.brand.id) {
+      formData.append("brand", product.brand);
+    }
+    if (product.price !== originalProduct.price) {
+      formData.append("price", product.price);
+    }
 
     console.log("Product before sending request:", product);
 
