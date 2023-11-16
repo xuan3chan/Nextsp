@@ -1,8 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
-import { Login, AdminLayout, Categories, Products } from "./components";
+import { Login, AdminLayout, Categories, Products, Brands, Orders} from "./components";
 import Landing from "./components/layout/Landing";
-import Brands from "./components/brands";
 
 const App = () => {
   const isAuthenticated = !!localStorage.getItem("accessToken");
@@ -28,6 +27,10 @@ const App = () => {
         <Route
           path="/admin/dashboard/products"
           element={isAuthenticated ? <Products/> : <Navigate to="/login" />}
+        />
+        <Route
+          path="/admin/dashboard/orders"
+          element={isAuthenticated ? <Orders/> : <Navigate to="/login" />}
         />
       </Routes>
     </Router>
