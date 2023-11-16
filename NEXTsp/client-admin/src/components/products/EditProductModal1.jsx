@@ -62,7 +62,7 @@ const EditProductModal = (props) => {
     dispatch({ type: "loading", payload: true });
     try {
       let edit = await editProduct(
-        { ...editformData, newImages },
+        { ...editformData, images: [...editformData.images, ...newImages] },
         data.editProductModal
       );
       if (edit && edit.error) {
@@ -75,10 +75,15 @@ const EditProductModal = (props) => {
         setEditformdata({
           ...editformData,
           error: false,
-          success: edit.success,
+          success: "Update Complete !",
         });
-        fetchData();
-        dispatch({ type: "editProductModalClose", payload: true });
+        setTimeout(() => {
+          fetchData();
+          dispatch({ type: "editProductModalClose", payload: true });
+        }, 2000);
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
       } else {
         setEditformdata({
           ...editformData,
