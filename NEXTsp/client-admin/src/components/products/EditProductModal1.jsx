@@ -6,6 +6,7 @@ const EditProductModal = (props) => {
   const { data, dispatch } = useContext(ProductContext);
 
   const [brands, setBrands] = useState(null);
+  const [newImages, setNewImages] = useState([]);
 
   const alert = (msg, type) => (
     <div className={`bg-${type}-200 py-2 px-4 w-full`}>{msg}</div>
@@ -15,8 +16,7 @@ const EditProductModal = (props) => {
     id: "",
     nameProduct: "",
     description: "",
-    images: null,
-    pEditImages: null,
+    images: [],
     status: "",
     brand: "",
     price: "",
@@ -40,13 +40,12 @@ const EditProductModal = (props) => {
       id: data.editProductModal.id,
       nameProduct: data.editProductModal.nameProduct,
       description: data.editProductModal.description,
-      images: data.editProductModal.images,
+      images: data.editProductModal.images || [],
       status: data.editProductModal.status,
       brand: data.editProductModal.brand || { id: "", nameBrand: "" },
       price: data.editProductModal.price,
     });
   }, [data.editProductModal]);
-  
 
   const fetchData = async () => {
     let responseData = await getAllProduct();
@@ -62,7 +61,10 @@ const EditProductModal = (props) => {
     e.preventDefault();
     dispatch({ type: "loading", payload: true });
     try {
-      let edit = await editProduct(editformData);
+      let edit = await editProduct(
+        { ...editformData, images: [...editformData.images, ...newImages] },
+        data.editProductModal
+      );
       if (edit && edit.error) {
         setEditformdata({
           ...editformData,
@@ -73,10 +75,15 @@ const EditProductModal = (props) => {
         setEditformdata({
           ...editformData,
           error: false,
-          success: edit.success,
+          success: "Update Complete !",
         });
-        fetchData();
-        dispatch({ type: "editProductModalClose", payload: true });
+        setTimeout(() => {
+          fetchData();
+          dispatch({ type: "editProductModalClose", payload: true });
+        }, 2000);
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
       } else {
         setEditformdata({
           ...editformData,
@@ -85,7 +92,7 @@ const EditProductModal = (props) => {
         });
       }
     } catch (error) {
-      console.error('An error occurred:', error);
+      console.error("An error occurred:", error);
     } finally {
       dispatch({ type: "loading", payload: false });
     }
@@ -198,30 +205,57 @@ const EditProductModal = (props) => {
             {/* Most Important part for uploading multiple image */}
             <div className="flex flex-col mt-4">
               <label htmlFor="image">Product Images *</label>
-              {editformData.images ? (
-                <div className="flex space-x-1">
-                  {editformData.images.map((image, index) => (
+              {/* Update the way images are displayed to include both current and
+              new images */}
+              <div className="flex space-x-1">
+                {/* Add a delete button next to each image */}
+                {editformData.images.map((image, index) => (
+                  <div key={index} className="relative h-16 w-16">
                     <img
-                      key={index}
-                      className="h-16 w-16 object-cover"
+                      className="object-cover"
                       src={image}
                       alt={`productImage-${index}`}
                     />
-                  ))}
-                </div>
-              ) : (
-                ""
-              )}
+                    <button
+                      type="button"
+                      className="absolute right-0 top-0 bg-red-500 text-white"
+                      onClick={() => {
+                        const newImages = [...editformData.images];
+                        newImages.splice(index, 1);
+                        setEditformdata({ ...editformData, images: newImages });
+                      }}
+                    >
+                      X
+                    </button>
+                  </div>
+                ))}
+
+                {newImages.map((image, index) => (
+                  <div key={index} className="relative h-16 w-16">
+                    <img
+                      className="object-cover"
+                      src={URL.createObjectURL(image)}
+                      alt={`newImage-${index}`}
+                    />
+                    <button
+                      type="button"
+                      className="absolute right-0 top-0 bg-red-500 text-white"
+                      onClick={() => {
+                        const newImagesArray = [...newImages];
+                        newImagesArray.splice(index, 1);
+                        setNewImages(newImagesArray);
+                      }}
+                    >
+                      X
+                    </button>
+                  </div>
+                ))}
+              </div>
               <span className="text-gray-600 text-xs">Must need 2 images</span>
               <input
-                onChange={(e) =>
-                  setEditformdata({
-                    ...editformData,
-                    error: false,
-                    success: false,
-                    pEditImages: [...e.target.files],
-                  })
-                }
+                onChange={(e) => {
+                  setNewImages([...e.target.files]);
+                }}
                 type="file"
                 accept=".jpg, .jpeg, .png"
                 className="px-4 py-2 border focus:outline-none"

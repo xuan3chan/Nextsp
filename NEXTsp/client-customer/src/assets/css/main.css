@@ -28,6 +28,7 @@
 }
 .navbar {
   max-width: 50%;
+  margin-right: 20px;
 }
 .category-item .brand-menu {
   display: none;
@@ -78,8 +79,7 @@
 }
 
 .dropdown {
-  float: left;
-  overflow: hidden;
+  position: relative;
   height: 64px;
 }
 .dropdown a {
@@ -97,11 +97,10 @@
   border: none;
   outline: none;
   color: white;
-  padding: 14px 16px;
+  padding: 4px 8px;
   background-color: inherit;
   font-family: inherit;
-  margin: 0;
-  height: 64px;
+  height: 100%;
 }
 .dropbtn > i {
   margin-left: 4px;
@@ -109,7 +108,6 @@
   vertical-align: right;
   fill: currentColor;
 }
-
 .navbar a:hover,
 .dropdown:hover .dropbtn {
   background-color: #ddd;
@@ -120,9 +118,11 @@
 .dropdown-content2 {
   display: none;
   position: absolute;
+  left: 0;
   background-color: #f9f9f9;
-  min-width: 146px;
+  width: 163px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  max-height: 400px;
   z-index: 1;
 }
 .category_container > .category_item {
@@ -278,24 +278,24 @@ dropDownItem2 {
 
 /* Footer Section */
 
-.footerSection  h1{
+.footerSection h1 {
   font-size: large;
   font-style: bold;
   font-weight: 600;
 }
-.footerSection p { 
+.footerSection p {
   font-size: 16px;
   font-style: normal;
 }
-.footerSection img{ 
+.footerSection img {
   width: 80px;
 }
 
-.phoneNumber{
+.phoneNumber {
   font-weight: 500;
-  color:cornflowerblue
+  color: cornflowerblue;
 }
-.logOutSection{
+.logOutSection {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -307,12 +307,12 @@ dropDownItem2 {
   border-radius: 10px;
   font-size: 12px;
 }
-.number-counter{
+.number-counter {
   position: absolute;
-  left:16px;
-  top:-8px;
+  left: 16px;
+  top: -8px;
   display: flex;
-  background-color:coral;
+  background-color: coral;
   color: white;
   border-radius: 50%;
   width: 16px;

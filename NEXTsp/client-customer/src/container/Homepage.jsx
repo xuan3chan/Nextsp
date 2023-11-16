@@ -8,13 +8,13 @@ import {
   SloganListSection,
   ProductList,
   Footer,
+  BannerTop,
 } from "../components";
 import "../assets/css/homepage.css";
 import "../assets/css/main.css";
 import ProductListAll from "../components/homepage/ProductListAll";
 
 function Homepage(props) {
-  const title = ["Apple", "Apple2", "Apple3"];
   const [isLoading, setIsLoading] = useState(false);
   return (
     <div className="">
@@ -31,10 +31,12 @@ function Homepage(props) {
             <div className="flex flex-col w-4/5 contents-center mr-auto ml-auto gap-10">
               <SloganListSection />
               <ProductListAll />
-              <ProductList title={title[1]} CollectionBrand="Intel" />
+              <ProductList
+                title="Gaming Razer"
+                CollectionBrand="Gaming razer"
+              />
             </div>
           </div>
-          <BannerSales />
         </div>
         <Footer />
       </div>

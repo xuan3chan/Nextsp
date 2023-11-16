@@ -7,8 +7,10 @@ import ButtonBuyNow from "./ButtonBuyNow";
 import ButtonAddToCart from "./ButtonAddToCart";
 import RiseLoader from "react-spinners/RiseLoader";
 import { useState, useEffect } from "react";
+
 function ProductList(props) {
   const [products, setProducts] = React.useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const ApiProducts = "http://localhost:3101/api/products/getall";
   const starUrl =
     "https://static.vecteezy.com/system/resources/previews/013/743/605/original/golden-star-icon-png.png";
@@ -19,19 +21,15 @@ function ProductList(props) {
     }
     return "";
   }
-  React.useEffect(() => {
+  useEffect(() => {
     const fetchData = async () => {
       const result = await axios.get(ApiProducts);
       setProducts(result.data.products);
     };
-    fetchData();
-  }, []);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
     setTimeout(() => {
       setIsLoading(false);
     }, 2000);
+    fetchData();
   }, []);
 
   const imagePlaceHolder = "https://via.placeholder.com/350";
@@ -68,49 +66,52 @@ function ProductList(props) {
       <div className="flex flex-wrap gap-4 content-center justify-center">
         {products
           .filter((product) => product.brand.name === props.CollectionBrand)
-          .map((product) => (
-            <div
-              className="productItem flex flex-col border-black-500/100 p-4 gap-1"
-              key={product.id}
-            >
-              <Link to={`/products/${product.id}`}>
-                <div className="product_image w-72 h-52 object-contain">
-                  <img
-                    src={
-                      product.images[0] == null
-                        ? imagePlaceHolder
-                        : product.images[0]
-                    }
-                    alt=""
-                    className="w-full h-44 object-contain"
-                  />
+          .map(
+            (product, index) =>
+              index < 5 && (
+                <div
+                  className="productItem flex flex-col  border-black-500/100 p-4 gap-1"
+                  key={product.id}
+                >
+                  <Link to={`/products/${product.id}`}>
+                    <div className="product_image w-72 h-52 object-contain">
+                      <img
+                        src={
+                          product.images[0] == null
+                            ? imagePlaceHolder
+                            : product.images[0]
+                        }
+                        alt=""
+                        className="w-full h-44 object-contain"
+                      />
+                    </div>
+                    <div className="product_title">
+                      <h1>{product.nameProduct}</h1>
+                    </div>
+                    <div>
+                      <p className="product_oldPrice font-bold RobotoViet">
+                        {formatPrice(product.oldrice)}
+                      </p>
+                      <p className="product_price font-normal RobotoViet">
+                        {formatPrice(product.price)}
+                      </p>
+                    </div>
+                    <div className="product_rating flex gap-1 items-center">
+                      <img src={starUrl} alt="" className="w-6 h-6" />
+                      <img src={starUrl} alt="" className="w-6 h-6" />
+                      <img src={starUrl} alt="" className="w-6 h-6" />
+                      <img src={starUrl} alt="" className="w-6 h-6" />
+                      <img src={starUrl} alt="" className="w-6 h-6" />
+                      <p className="text-xs">(5 đánh giá)</p>
+                    </div>
+                  </Link>
+                  <div className="over-button flex gap-4 items-center justify-center mt-3">
+                    <ButtonBuyNow product={product} />
+                    <ButtonAddToCart product={product} />
+                  </div>
                 </div>
-                <div className="product_title">
-                  <h1>{product.nameProduct}</h1>
-                </div>
-                <div>
-                  <p className="product_oldPrice font-bold RobotoViet">
-                    {formatPrice(product.old)}
-                  </p>
-                  <p className="product_price font-normal RobotoViet">
-                    {formatPrice(product.price)}
-                  </p>
-                </div>
-                <div className="product_rating flex gap-1 items-center">
-                  <img src={starUrl} alt="" className="w-6 h-6" />
-                  <img src={starUrl} alt="" className="w-6 h-6" />
-                  <img src={starUrl} alt="" className="w-6 h-6" />
-                  <img src={starUrl} alt="" className="w-6 h-6" />
-                  <img src={starUrl} alt="" className="w-6 h-6" />
-                  <p className="text-xs">(5 đánh giá)</p>
-                </div>
-              </Link>
-              <div className="over-button flex gap-4 items-center justify-center mt-3">
-                <ButtonBuyNow product={product} />
-                <ButtonAddToCart product={product} />
-              </div>
-            </div>
-          ))}
+              )
+          )}
       </div>
     </div>
   );

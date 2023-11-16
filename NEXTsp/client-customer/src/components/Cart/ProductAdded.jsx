@@ -82,49 +82,62 @@ function ProductAdded(props) {
   };
 
   return (
-    <div className="pb-8">
-      {uniqueProducts.map((item, index) => (
-        <div key={index}>
-          <div className="flex w-full h-40 items-center content-center gap-4 border-b-2">
-            <div className="flex flex-col w-28 h-28 ">
-              <img
-                className="object-fill w-24 h-24"
-                src={item.images[0] == null ? placeHolderImg : item.images[0]}
-                alt=""
-              />
-              <button onClick={() => removeItem(item.id)} className="deleteBtn">
-                Xóa
-              </button>
-            </div>
-            <div className="productInfo flex gap-20">
-              <h2 className="productTitle">{item.nameProduct}</h2>
-              <div className="flex flex-col">
-                <div className="flex flex-col items-end">
-                  <p className="productPrice">{formatPrice(item.price)}</p>
-                  <p className="productOldPrice">
-                    {formatPrice(item.oldprice)}
-                  </p>
+    <div className="pb-8 ">
+      {cart.length === 0 ? (
+        <div className="flex justify-center items-center h-96">
+          <h1 className="text-xl">Hiện tại bạn chưa chọn sản phẩm nào.</h1>
+        </div>
+      ) : (
+        <div className="pb-8 ">
+          {uniqueProducts.map((item, index) => (
+            <div className="" key={index}>
+              <div className="flex w-full h-40 items-center content-center gap-4 border-b-2">
+                <div className="flex flex-col w-28 h-28 ">
+                  <img
+                    className="object-fill w-24 h-24"
+                    src={
+                      item.images[0] == null ? placeHolderImg : item.images[0]
+                    }
+                    alt=""
+                  />
+                  <button
+                    onClick={() => removeItem(item.id)}
+                    className="deleteBtn"
+                  >
+                    Xóa
+                  </button>
                 </div>
-                <div className="productQuantity flex">
-                  <button
-                    className="btnCart"
-                    onClick={() => decrement(item.id)}
-                  >
-                    -
-                  </button>
-                  <div className="quality-counter">{item.count}</div>
-                  <button
-                    className="btnCart"
-                    onClick={() => increment(item.id)}
-                  >
-                    +
-                  </button>
+                <div className="productInfo flex gap-20">
+                  <h2 className="productTitle">{item.nameProduct}</h2>
+                  <div className="flex flex-col">
+                    <div className="flex flex-col items-end">
+                      <p className="productPrice">{formatPrice(item.price)}</p>
+                      <p className="productOldPrice">
+                        {formatPrice(item.oldprice)}
+                      </p>
+                    </div>
+                    <div className="productQuantity flex">
+                      <button
+                        className="btnCart"
+                        onClick={() => decrement(item.id)}
+                      >
+                        -
+                      </button>
+                      <div className="quality-counter">{item.count}</div>
+                      <button
+                        className="btnCart"
+                        onClick={() => increment(item.id)}
+                      >
+                        +
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          ))}
         </div>
-      ))}
+      )}
       <div>
         <p className="totalQuanlity flex relative mt-8">
           <p className="mainText w-30">Tổng Số Lượng Sản Phẩm:</p>
