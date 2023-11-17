@@ -82,6 +82,9 @@ const AllCategories = () => {
 
   return (
     <Fragment>
+      <div className="flex items-center justify-center">
+        <h1 className="text-2xl font-semibold text-gray-800">All Categories</h1>
+      </div>
       <div className="col-span-1 overflow-auto bg-white shadow-lg p-4">
         <table className="table-auto border w-full my-2">
           <thead>

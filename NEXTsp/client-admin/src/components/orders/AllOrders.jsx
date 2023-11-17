@@ -1,27 +1,62 @@
-import React, {Fragment, useState, useEffect, useContext} from 'react'
-import { getAllOrders } from './FetchApi'
-import { OrderContext } from './index'
+import axios from "axios";
+import React, { Fragment, useState, useEffect, useContext } from "react";
+import moment from "moment";
+import { getAllOrders } from "./FetchApi";
+import { OrderContext } from "./index";
+
+const apiURL = process.env.REACT_APP_ORDERS
 
 const AllOrders = () => {
-  const { data, dispatch } = useContext(OrderContext)
-  const [orders, setOrders] = useState([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(false)
+  const { data, dispatch } = useContext(OrderContext);
+  const [order, setOrder] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
   // Fetch all orders on component mount
+  const fetchData = async () => {
+    try {
+      const responseData = await getAllOrders();
+      setOrder(responseData);
+      setLoading(false);
+    } catch (err) {
+      setError(true);
+      setLoading(false);
+    }
+  };
   useEffect(() => {
-    const fetchData = async () => {
+    fetchData();
+  }, []);
+  
+  const deleteOrder = async (_id) => {
+    // Show a confirmation dialog
+    if (window.confirm("Are you sure you want to delete this order?")) {
       try {
-        const responseData = await getAllOrders()
-        setOrders(responseData)
-        console.log(responseData)
-        setLoading(false)
-      } catch (err) {
-        setError(true)
-        setLoading(false)
+        const res = await axios.delete(`${apiURL}/delete/${_id}`);
+        // Fetch data again after successful deletion
+        // eslint-disable-next-line no-undef
+        fetchData();
+        return res.data;
+      } catch (error) {
+        alert("You can't not delete this order!")
       }
     }
-    fetchData()
-  }, [])
+  }
+  
+  const updateTracking = async (_id, newTracking) => {
+    if (window.confirm("Are you sure you want to update this order?")) {
+      try {
+        const res = await axios.put(`${apiURL}/update/${_id}`, { tracking: newTracking });
+        // Fetch data again after successful deletion
+        // eslint-disable-next-line no-undef
+        fetchData();
+        return res.data;
+      } catch (error) {
+        alert("You can't not update this order!")
+      }
+    }
+  }
+  
+
+
   if (loading) {
     return (
       <div className="flex items-center justify-center p-8">
@@ -45,57 +80,96 @@ const AllOrders = () => {
           ></path>
         </svg>
       </div>
-    )
+    );
   }
   if (error) {
-    return (
-      <div>ERROR...</div>
-    )
+    return <div>ERROR...</div>;
   }
   return (
     <Fragment>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {orders.map((order) => (
-          <div className="bg-white shadow-lg rounded-lg px-4 py-4">
-            <div className="flex justify-between items-center">
-              <div>
-                <span className="font-semibold text-gray-700">Order ID: </span>
-                <span className="text-gray-700">{order._id}</span>
-              </div>
-              <div>
-                <span className="font-semibold text-gray-700">Status: </span>
-                <span className="text-gray-700">{order.status}</span>
-              </div>
-            </div>
-            <div className="flex justify-between items-center">
-              <div>
-                <span className="font-semibold text-gray-700">User ID: </span>
-                <span className="text-gray-700">{order.user_id}</span>
-              </div>
-              <div>
-                <span className="font-semibold text-gray-700">Total: </span>
-                <span className="text-gray-700">{order.total}</span>
-              </div>
-            </div>
-            <div className="flex justify-between items-center">
-              <div>
-                <span className="font-semibold text-gray-700">
-                  Created At:{' '}
-                </span>
-                <span className="text-gray-700">{order.createdAt}</span>
-              </div>
-              <div>
-                <span className="font-semibold text-gray-700">
-                  Updated At:{' '}
-                </span>
-                <span className="text-gray-700">{order.updatedAt}</span>
-              </div>
-            </div>
-          </div>
-        ))}
+      <div className="flex items-center justify-center">
+        <h1 className="text-2xl font-semibold text-gray-800">All Orders</h1>
+      </div>
+      <div className="col-span-1 overflow-auto bg-white shadow-lg p-4">
+        <table className="table-fixed border w-full my-2"></table>
+        <thead>
+          <tr>
+            <th className="px-4 py-2 border">Products</th>
+            <th className="px-4 py-2 border">Customer</th>
+            <th className="px-4 py-2 border">Email</th>
+            <th className="px-4 py-2 border">Address</th>
+            <th className="px-4 py-2 border">Payment</th>
+            <th className="px-4 py-2 border">Total</th>
+            <th className="px-4 py-2 border">Created at</th>
+            <th className="px-4 py-2 border">Tracking</th>
+            <th className="px-4 py-2 border">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {order && order?.length > 0 ? (
+            order.map((item, i) => {
+              return (
+                <tr key={i}>
+                  <td className="px-4 py-2 border">
+                    {item.product?.map((elem, i) => {
+                      // Check if productId exists before accessing nameProduct
+                      if (elem.productId) {
+                        const productName = elem.productId.nameProduct;
+                        return (
+                          <div key={i}>
+                            <p>{productName.slice(0, 5) + "..."}</p>
+                          </div>
+                        );
+                      }
+                      // If productId does not exist, return null
+                      return null;
+                    })}
+                  </td>
+                  <td className="px-4 py-2 border">{item.userId.fullName}</td>
+                  <td className="px-4 py-2 border">{item.userId.email}</td>
+                  <td className="px-4 py-2 border">{item.address}</td>
+                  <td className="px-4 py-2 border">{item.payment}</td>
+                  <td className="px-4 py-2 border">{item.totalPrice}</td>
+                  <td className="px-4 py-2 border">
+                    {moment(item.createdAt).format("DD/MM/YYYY")}
+                  </td>
+                  <td className="px-4 py-2 border">
+                    <select value={item.tracking}
+                      onChange={(e) => updateTracking(item._id, e.target.value)}
+                    >
+                      <option value="pending">pending</option>
+                      <option value="confirmed">confirmed</option>
+                      <option value="shipping">shipping</option>
+                      <option value="delivered">delivered</option>
+                      <option value="done">done</option>
+                      <option value="cancel">cancel</option>
+                    </select>
+                  </td>
+                  <td className="px-4 py-2 border">
+                    <button
+                      onClick={() => deleteOrder(item._id, dispatch)}
+                      className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded"
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              );
+            })
+          ) : (
+            <tr>
+              <td
+                colSpan="12"
+                className="text-xl text-center font-semibold py-8"
+              >
+                No order found
+              </td>
+            </tr>
+          )}
+        </tbody>
       </div>
     </Fragment>
-  )
-}
+  );
+};
 
-export default AllOrders
+export default AllOrders;

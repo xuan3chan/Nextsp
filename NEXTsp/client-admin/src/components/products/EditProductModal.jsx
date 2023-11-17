@@ -1,47 +1,34 @@
 import React, { Fragment, useContext, useState, useEffect } from "react";
 import { ProductContext } from "./index";
-import { getAllProduct, editProduct } from "./FetchApi";
+import { editProduct, getAllProduct } from "./FetchApi";
 import { getAllBrand } from "../brands/FetchAPI";
-
 const EditProductModal = (props) => {
   const { data, dispatch } = useContext(ProductContext);
 
   const [brands, setBrands] = useState(null);
+  const [newImages, setNewImages] = useState([]);
 
-  const message = (msg, type) => (
+  const alert = (msg, type) => (
     <div className={`bg-${type}-200 py-2 px-4 w-full`}>{msg}</div>
   );
 
-  const [fData, setFdata] = useState({
+  const [editformData, setEditformdata] = useState({
     id: "",
     nameProduct: "",
     description: "",
-    images: null,
-    newImages: null,
-    status: "Active",
+    images: [],
+    status: "",
     brand: "",
     price: "",
     error: false,
     success: false,
   });
 
-  const fetchData = async () => {
-    let responseData = await getAllProduct();
-    setTimeout(() => {
-      if (responseData && responseData.Products) {
-        dispatch({
-          type: "fetchProductsAndChangeState",
-          payload: responseData.Products,
-        });
-      }
-    }, 1000);
-  };
-
   useEffect(() => {
-    fetchBrandData();
+    fetchBrands();
   }, []);
 
-  const fetchBrandData = async () => {
+  const fetchBrands = async () => {
     let responseData = await getAllBrand();
     if (responseData) {
       setBrands(responseData);
@@ -49,56 +36,67 @@ const EditProductModal = (props) => {
   };
 
   useEffect(() => {
-    setFdata({
+    setEditformdata({
       id: data.editProductModal.id,
       nameProduct: data.editProductModal.nameProduct,
       description: data.editProductModal.description,
-      images: data.editProductModal.images,
+      images: data.editProductModal.images || [],
       status: data.editProductModal.status,
-      brand: data.editProductModal.brand,
+      brand: data.editProductModal.brand || { id: "", nameBrand: "" },
       price: data.editProductModal.price,
     });
   }, [data.editProductModal]);
 
-  const submitForm = async (e) => {
-    e.preventDefault();
-
-    if (!fData.nameProduct) {
-      setFdata({ ...fData, error: "Please give the name!" });
-      setFdata({ ...fData, error: false });
-    }
-
-
-    try {
-      let responseData = await editProduct(fData);
-      if (responseData.success) {
-        fetchData();
-        setFdata({
-          ...fData,
-          success: "Edit product successfully !",
-          error: false,
-        });
-        setTimeout(() => {
-          return setFdata({
-            ...fData,
-            success: responseData.success,
-          });
-        }, 2000);
-      } else if (responseData.error) {
-        setFdata({ ...setFdata, error: responseData.error });
-        setTimeout(() => {
-          return setFdata({
-            ...fData,
-            error: responseData.error,
-          });
-        }, 2000);
-      }
-    } catch (error) {
-      console.log(error);
+  const fetchData = async () => {
+    let responseData = await getAllProduct();
+    if (responseData && responseData.Products) {
+      dispatch({
+        type: "fetchProductsAndChangeState",
+        payload: responseData.Products,
+      });
     }
   };
 
-  
+  const submitForm = async (e) => {
+    e.preventDefault();
+    dispatch({ type: "loading", payload: true });
+    try {
+      let edit = await editProduct(
+        { ...editformData, images: [...editformData.images, ...newImages] },
+        data.editProductModal
+      );
+      if (edit && edit.error) {
+        setEditformdata({
+          ...editformData,
+          error: edit.error,
+          success: false,
+        });
+      } else if (edit && edit.success) {
+        setEditformdata({
+          ...editformData,
+          error: false,
+          success: "Update Complete !",
+        });
+        setTimeout(() => {
+          fetchData();
+          dispatch({ type: "editProductModalClose", payload: true });
+        }, 2000);
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
+      } else {
+        setEditformdata({
+          ...editformData,
+          error: "something went wrong",
+          success: false,
+        });
+      }
+    } catch (error) {
+      console.error("An error occurred:", error);
+    } finally {
+      dispatch({ type: "loading", payload: false });
+    }
+  };
   return (
     <Fragment>
       {/* Black Overlay */}
@@ -110,201 +108,247 @@ const EditProductModal = (props) => {
           data.editProductModal.modal ? "" : "hidden"
         } fixed top-0 left-0 z-30 w-full h-full bg-black opacity-50`}
       />
-      {/* End black Overlay */}
+      {/* End Black Overlay */}
+
       {/* Modal Start */}
       <div
         className={`${
           data.editProductModal.modal ? "" : "hidden"
-        } fixed inset-0 flex items-center justify-center z-40 overflow-auto`}
+        } fixed inset-0 flex items-center z-30 justify-center overflow-auto`}
       >
         <div className="mt-32 md:mt-0 relative bg-white w-11/12 md:w-3/6 shadow-lg flex flex-col items-center space-y-4 px-4 py-4 md:px-8">
           <div className="flex items-center justify-between w-full pt-4">
             <span className="text-left font-semibold text-2xl tracking-wider">
               Edit Product
             </span>
-            <button
+            {/* Close Modal */}
+            <span
+              style={{ background: "#303031" }}
               onClick={(e) =>
                 dispatch({ type: "editProductModalClose", payload: false })
               }
-              className="text-black close-modal"
+              className="cursor-pointer text-gray-100 py-2 px-2 rounded-full"
             >
-              <span className="text-2xl">&times;</span>
-            </button>
-          </div>
-          <form
-            onSubmit={submitForm}
-            className="w-full flex flex-col space-y-4"
-          >
-            <div className="flex flex-col space-y-1">
-              <label
-                htmlFor="nameProduct"
-                className="text-sm font-semibold text-gray-500"
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
               >
-                Name Product
-              </label>
-              <input
-                type="text"
-                name="nameProduct"
-                id="nameProduct"
-                value={fData.nameProduct}
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </span>
+          </div>
+          {editformData.error ? alert(editformData.error, "red") : ""}
+          {editformData.success ? alert(editformData.success, "green") : ""}
+          <form className="w-full" onSubmit={(e) => submitForm(e)}>
+            <div className="flex space-x-1 py-4">
+              <div className="w-1/2 flex flex-col space-y-1 space-x-1">
+                <label htmlFor="name">Product Name *</label>
+                <input
+                  value={editformData.nameProduct}
+                  onChange={(e) =>
+                    setEditformdata({
+                      ...editformData,
+                      error: false,
+                      success: false,
+                      nameProduct: e.target.value,
+                    })
+                  }
+                  className="px-4 py-2 border focus:outline-none"
+                  type="text"
+                />
+              </div>
+              <div className="w-1/2 flex flex-col space-y-1 space-x-1">
+                <label htmlFor="price">Product Price *</label>
+                <input
+                  value={editformData.price}
+                  onChange={(e) =>
+                    setEditformdata({
+                      ...editformData,
+                      error: false,
+                      success: false,
+                      price: e.target.value,
+                    })
+                  }
+                  type="number"
+                  className="px-4 py-2 border focus:outline-none"
+                  id="price"
+                />
+              </div>
+            </div>
+            <div className="flex flex-col space-y-2">
+              <label htmlFor="description">Product Description *</label>
+              <textarea
+                value={editformData.description}
                 onChange={(e) =>
-                  setFdata({ 
-                    ...fData, 
+                  setEditformdata({
+                    ...editformData,
                     error: false,
                     success: false,
-                    nameProduct: e.target.value 
+                    description: e.target.value,
                   })
                 }
-                className="border border-gray-300 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-200"
-              />
-            </div>
-            <div className="flex flex-col space-y-1">
-              <label
-                htmlFor="description"
-                className="text-sm font-semibold text-gray-500"
-              >
-                Description
-              </label>
-              <textarea
+                className="px-4 py-2 border focus:outline-none"
                 name="description"
                 id="description"
-                value={fData.description}
-                onChange={(e) =>
-                  setFdata({ ...fData, description: e.target.value })
-                }
-                className="border border-gray-300 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-200"
+                cols={5}
+                rows={2}
               />
             </div>
-            <div className="flex flex-col space-y-1">
-              <label
-                htmlFor="status"
-                className="text-sm font-semibold text-gray-500"
-              >
-                Status
-              </label>
-              <select
-                name="status"
-                id="status"
-                value={fData.status}
-                onChange={(e) => setFdata({ ...fData, status: e.target.value })}
-                className="border border-gray-300 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-200"
-              >
-                <option
-                  value="
-                  Active"
-                >
-                  Active
-                </option>
-                <option value="Inactive">Inactive</option>
-              </select>
-            </div>
-            <div className="flex flex-col space-y-1">
-              <label
-                htmlFor="brand"
-                className="text-sm font-semibold text-gray-500"
-              >
-                Brand
-              </label>
-              <select
-                name="brand"
-                id="brand"
-                onChange={(e) => setFdata({ ...fData, brand: e.target.value })}
-                className="border border-gray-300 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-200"
-              >
-                <option disabled value="">
-                  Select a category
-                </option>
-                {brands && brands.length > 0
-                  ? brands.map((elem) => {
-                      return (
-                        <Fragment key={elem.id}>
-                          {fData.brand.id && fData.brand.id === elem.id ? (
-                            <option
-                              name="status"
-                              value={elem.id}
-                              key={elem.id}
-                              selected
-                            >
-                              {elem.nameBrand}
-                            </option>
-                          ) : (
-                            <option name="status" value={elem.id} key={elem.id}>
-                              {elem.nameBrand}
-                            </option>
-                          )}
-                        </Fragment>
-                      );
-                    })
-                  : ""}
-              </select>
-            </div>
-            <div className="flex flex-col space-y-1">
-              <label
-                htmlFor="price"
-                className="text-sm font-semibold text-gray-500"
-              >
-                Price
-              </label>
+            {/* Most Important part for uploading multiple image */}
+            <div className="flex flex-col mt-4">
+              <label htmlFor="image">Product Images *</label>
+              {/* Update the way images are displayed to include both current and
+              new images */}
+              <div className="flex space-x-1">
+                {/* Add a delete button next to each image */}
+                {editformData.images.map((image, index) => (
+                  <div key={index} className="relative h-16 w-16">
+                    <img
+                      className="object-cover"
+                      src={image}
+                      alt={`productImage-${index}`}
+                    />
+                    <button
+                      type="button"
+                      className="absolute right-0 top-0 bg-red-500 text-white"
+                      onClick={() => {
+                        const newImages = [...editformData.images];
+                        newImages.splice(index, 1);
+                        setEditformdata({ ...editformData, images: newImages });
+                      }}
+                    >
+                      X
+                    </button>
+                  </div>
+                ))}
+
+                {newImages.map((image, index) => (
+                  <div key={index} className="relative h-16 w-16">
+                    <img
+                      className="object-cover"
+                      src={URL.createObjectURL(image)}
+                      alt={`newImage-${index}`}
+                    />
+                    <button
+                      type="button"
+                      className="absolute right-0 top-0 bg-red-500 text-white"
+                      onClick={() => {
+                        const newImagesArray = [...newImages];
+                        newImagesArray.splice(index, 1);
+                        setNewImages(newImagesArray);
+                      }}
+                    >
+                      X
+                    </button>
+                  </div>
+                ))}
+              </div>
+              <span className="text-gray-600 text-xs">Must need 2 images</span>
               <input
-                type="number"
-                name="price"
-                id="price"
-                value={fData.price}
-                onChange={(e) => setFdata({ ...fData, price: e.target.value })}
-                className="border border-gray-300 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-200"
-              />
-            </div>
-            <div className="flex flex-col space-y-1">
-              <label
-                htmlFor="images"
-                className="text-sm font-semibold text-gray-500"
-              >
-                Images
-              </label>
-              {fData.images && fData.images.length > 0 ? (
-                <div className="flex space-x-1">
-                  {fData.images.map((image, index) => (
-                    <div key={index}>
-                      <img
-                        src={image}
-                        alt="product"
-                        className="w-20 h-20 object-cover object-center"
-                      />
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                ""
-              )}
-              <input
+                onChange={(e) => {
+                  setNewImages([...e.target.files]);
+                }}
                 type="file"
-                name="images"
+                accept=".jpg, .jpeg, .png"
+                className="px-4 py-2 border focus:outline-none"
                 id="image"
                 multiple
-                onChange={(e) =>
-                  setFdata({ 
-                    ...fData, 
-                    error: false,
-                    success: false,
-                    newImages: [...e.target.files] })
-                }
-                className="border border-gray-300 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-200"
               />
             </div>
-            <div className="flex items-center justify-between w-full space-x-4">
+            {/* Most Important part for uploading multiple image */}
+            <div className="flex space-x-1 py-4">
+              <div className="w-1/2 flex flex-col space-y-1">
+                <label htmlFor="status">Product Status *</label>
+                <select
+                  value={editformData.status}
+                  onChange={(e) =>
+                    setEditformdata({
+                      ...editformData,
+                      error: false,
+                      success: false,
+                      status: e.target.value,
+                    })
+                  }
+                  name="status"
+                  className="px-4 py-2 border focus:outline-none"
+                  id="status"
+                >
+                  <option name="status" value="Active">
+                    Active
+                  </option>
+                  <option name="status" value="Inactive">
+                    Inactive
+                  </option>
+                </select>
+              </div>
+              <div className="w-1/2 flex flex-col space-y-1">
+                <label htmlFor="status">Product Category *</label>
+                <select
+                  onChange={(e) =>
+                    setEditformdata({
+                      ...editformData,
+                      error: false,
+                      success: false,
+                      brand: e.target.value,
+                    })
+                  }
+                  name="status"
+                  className="px-4 py-2 border focus:outline-none"
+                  id="status"
+                >
+                  <option disabled value="">
+                    Select a Brand
+                  </option>
+                  {brands && brands.length > 0
+                    ? brands.map((elem) => {
+                        return (
+                          <Fragment key={elem.id}>
+                            {editformData.brand.id &&
+                            editformData.brand.id === elem.id ? (
+                              <option
+                                name="status"
+                                value={elem.id}
+                                key={elem.id}
+                                selected
+                              >
+                                {elem.nameBrand}
+                              </option>
+                            ) : (
+                              <option
+                                name="status"
+                                value={elem.id}
+                                key={elem.id}
+                              >
+                                {elem.nameBrand}
+                              </option>
+                            )}
+                          </Fragment>
+                        );
+                      })
+                    : ""}
+                </select>
+              </div>
+            </div>
+            <div className="flex flex-col space-y-1 w-full pb-4 md:pb-6 mt-4">
               <button
+                style={{ background: "#303031" }}
                 type="submit"
-                className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 focus:outline-none"
+                className="rounded-full bg-gray-800 text-gray-100 text-lg font-medium py-2"
               >
-                Edit Product
+                Update product
               </button>
             </div>
-            {fData.success && message(fData.success, "green")}
-            {fData.error && message(fData.error, "red")}
           </form>
         </div>
       </div>
-      {/* Modal end */}
     </Fragment>
   );
 };

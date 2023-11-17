@@ -83,8 +83,10 @@ const AllBrands = () => {
 
   return (
     <Fragment>
-      <div className="flex flex-col items-center justify-center">
+      <div className="flex items-center justify-center">
         <h1 className="text-2xl font-semibold text-gray-800">All Brands</h1>
+      </div>
+      <div className="flex flex-col items-center justify-start">
         <div className="w-full mt-4">
           <div className="flex flex-col">
             <div className="overflow-x-auto">
@@ -129,13 +131,13 @@ const AllBrands = () => {
                                     brand.category.id
                                   )
                                 }
-                                className="text-indigo-600 hover:text-indigo-900"
+                                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-1"
                               >
                                 Edit
                               </button>
                               <button
                                 onClick={() => deleteBrand(brand.id)}
-                                className="ml-4 text-red-600 hover:text-red-900"
+                                className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
                               >
                                 Delete
                               </button>

@@ -87,7 +87,7 @@ const AllProducts = () => {
 
   return (
     <Fragment>
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-center">
         <h1 className="text-2xl font-semibold text-gray-800">All Products</h1>
       </div>
       <div className="col-span-1 overflow-auto bg-white shadow-lg p-4">
@@ -161,13 +161,13 @@ const AllProducts = () => {
                         product.brand,
                         product.status
                       )}
-                      className="cursor-pointer bg-green-500 hover:bg-green-600 px-2 py-1 text-white rounded mr-2"
+                      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-1"
                     >
                       Edit
                     </span>
                     <span
                       onClick={(e) => deleteProduct(product.id)}
-                      className="cursor-pointer bg-red-500 hover:bg-red-600 px-2 py-1 text-white rounded"
+                      className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
                     >
                       Delete
                     </span>
