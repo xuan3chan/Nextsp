@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-const apiUrl = 'http://localhost:3101/api/auth/login';
+const apiUrl = "http://localhost:3101/api/auth/login";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -21,18 +21,15 @@ const Login = () => {
         if (response.data.accessToken) {
           localStorage.setItem("accessToken", response.data.accessToken);
           localStorage.setItem("accountName", response.data.accountName);
-          console.log(response.data)
           setTimeout(() => {
             navigate("/homepage");
           }, 200);
-        } 
+        }
       })
-      .then(response => {
-        console.log('response', response);
+      .then((response) => {
         return response.json();
       })
-      .then(data => {
-        console.log('data', data);
+      .then((data) => {
       })
       .catch((error) => {
         setError("Đăng nhập thất bại");

@@ -23,9 +23,7 @@ function MainContentSection(props) {
       try {
         const productData = await fetchData();
         setProduct(productData);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
+      } catch (error) {}
     };
 
     fetchDataAndSetProduct();
@@ -38,8 +36,6 @@ function MainContentSection(props) {
     }
     return "Not Available "; // You can change this message to your preferred text
   }
-
-
   return (
     <div>
       {product && (

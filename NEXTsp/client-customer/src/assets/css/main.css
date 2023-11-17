@@ -186,15 +186,39 @@
   height: 52px;
   max-width: 40%;
 }
+.oldPrice {
+  text-decoration: line-through;
+  color: #9e9e9e;
+}
 .header_searching_module {
   display: flex;
-  width: 13%;
+  width: 100%;
 }
 .header_searching_module > .wrap {
   width: 100%;
 }
-.header_user_module {
+
+.searching-result {
 }
+.searching-result-item-img {
+  width: 40px;
+  height: 40px;
+}
+.searching-result-item-info {
+  color: #000;
+  font-weight: 500;
+}
+.searching-result-item-info-name {
+  font-size: small;
+}
+.searching-result-item-info-name:hover {
+  color: var(--primary-color);
+}
+.searching-result-item-info-price {
+  font-size: small;
+  color: var(--primary-color);
+}
+
 .user_module_login {
   display: flex;
   gap: 4px;
@@ -248,7 +272,6 @@
   padding: 5px;
   border-radius: 5px 0 0 5px;
   outline: none;
-  color: #9dbfaf;
   height: 36px;
 }
 

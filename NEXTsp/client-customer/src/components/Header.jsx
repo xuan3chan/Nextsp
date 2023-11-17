@@ -2,11 +2,7 @@ import React, { Fragment } from "react";
 import "../assets/css/homepage.css";
 import "font-awesome/css/font-awesome.min.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faBars,
-  faCaretRight,
-  faSearch,
-} from "@fortawesome/free-solid-svg-icons";
+import { faBars, faCaretRight } from "@fortawesome/free-solid-svg-icons";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useState, useEffect } from "react";
@@ -14,6 +10,7 @@ import { BiTask } from "react-icons/bi";
 import { BsHeadphones } from "react-icons/bs";
 import { AiOutlineUser } from "react-icons/ai";
 import { PiShoppingCartSimpleBold } from "react-icons/pi";
+import SearchFunction from "./Header/SearchFunction";
 
 function Header(props) {
   const [Categories, setCategories] = useState([]);
@@ -114,20 +111,7 @@ function Header(props) {
             </div>
           </a>
         </div>
-        <div className="header_searching_module">
-          <div className="wrap">
-            <div className="search">
-              <input
-                type="text"
-                className="searchTerm text-black"
-                placeholder="Nhập Thứ Cần Tìm Kiếm"
-              ></input>
-              <button type="submit" className="searchButton">
-                <FontAwesomeIcon icon={faSearch} />
-              </button>
-            </div>
-          </div>
-        </div>
+        <SearchFunction />
         <div className="header_right_section pl-4 pr-4">
           <div className=" navItem tracking-order opacity-60 hover:cursor-pointer hover:opacity-100">
             <div className="boxIcon">
