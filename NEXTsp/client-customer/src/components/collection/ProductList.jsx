@@ -6,6 +6,8 @@ import "../../assets/css/main.css";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
+import ButtonBuyNow from "../button/buttonBuyNow";
+import ButtonAddToCart from "../button/buttonAddToCart";
 
 function ProductList(props) {
   const param = useParams();
@@ -19,12 +21,30 @@ function ProductList(props) {
     console.log(JSON.stringify(products.brand));
     fetchData();
   }, []);
+  const handlePageChange = (newPageIndex) => {
+    setPageIndex(newPageIndex);
+  };
+
   function formatPrice(price) {
     if (price) {
       return `${price.toLocaleString()}đ`;
     }
-    return "";
+    return "Not Available "; // You can change this message to your preferred text
   }
+  const generateStarIcons = (rating) => {
+    const starIcons = [];
+    for (let i = 0; i < 5; i++) {
+      starIcons.push(
+        <img
+          key={i}
+          src="https://static.vecteezy.com/system/resources/previews/013/743/605/original/golden-star-icon-png.png"
+          alt=""
+          className="w-6 h-6"
+        />
+      );
+    }
+    return starIcons;
+  };
 
   const handleAddCart = () => {
     localStorage.setItem("cart", JSON.stringify(products));
@@ -65,44 +85,16 @@ function ProductList(props) {
                       </p>
                     </div>
                     <div className="product_rating flex gap-1 items-center">
-                      <img
-                        src="https://static.vecteezy.com/system/resources/previews/013/743/605/original/golden-star-icon-png.png"
-                        alt=""
-                        className="w-6 h-6"
-                      />
-                      <img
-                        src="https://static.vecteezy.com/system/resources/previews/013/743/605/original/golden-star-icon-png.png"
-                        alt=""
-                        className="w-6 h-6"
-                      />
-                      <img
-                        src="https://static.vecteezy.com/system/resources/previews/013/743/605/original/golden-star-icon-png.png"
-                        alt=""
-                        className="w-6 h-6"
-                      />
-                      <img
-                        src="https://static.vecteezy.com/system/resources/previews/013/743/605/original/golden-star-icon-png.png"
-                        alt=""
-                        className="w-6 h-6"
-                      />
-                      <img
-                        src="https://static.vecteezy.com/system/resources/previews/013/743/605/original/golden-star-icon-png.png"
-                        alt=""
-                        className="w-6 h-6"
-                      />
-                      <p className="text-xs	">(5 đánh giá)</p>
+                      {generateStarIcons(product.rating)}
+                      <p className="text-xs">(5 đánh giá)</p>
                     </div>
                   </Link>
-                  <div className="over-button flex gap-4 items-center justify-center mt-6">
-                    <div className="btn p-1  flex justify-center btn-sell ">
-                      Mua Ngay
-                    </div>
-                    <div
-                      onClick={handleAddCart}
-                      className="btn p-1 flex justify-center btn-addCart"
-                    >
-                      Thêm Vào Giỏ
-                    </div>
+                  <div className="over-button flex gap-4 items-center justify-center mt-3">
+                    <ButtonBuyNow
+                      className="btn p-1  flex justify-center btn-sell "
+                      product={product}
+                    />
+                    <ButtonAddToCart product={product} />
                   </div>
                 </div>
               )
