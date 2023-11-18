@@ -44,6 +44,15 @@ class OrderController {
             handleErrorResponse(res, error);
         }
     }
+    async getOrdersByUser(req, res) {
+        try {
+            const userId = req.params.userId;
+            const orders = await orderService.getOrdersByUserId(userId);
+            res.json(orders);
+        } catch (error) {
+            handleErrorResponse(res, error);
+        }
+    } 
 
 }
 module.exports = new OrderController();

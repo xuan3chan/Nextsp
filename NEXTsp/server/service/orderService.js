@@ -61,6 +61,13 @@ async getAllOrderService() {
     return{ success: true, message: 'all order', order: result };  ;
 
   }
+async getOrdersByUserId(userId) {
+  const orders = await Order.find({ userId: userId })
+                .populate('userId')
+                .populate('product.productId');
+  return orders;
+}
+
 }
 module.exports = new OrderService();
 
