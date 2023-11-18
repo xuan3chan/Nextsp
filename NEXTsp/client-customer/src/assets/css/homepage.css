@@ -121,7 +121,6 @@
 
 .tilte_slogan {
   color: #212529;
-  font-family: Arial, Helvetica, sans-serif;
   font-size: 21px;
   font-weight: 500;
   line-height: 25.2px; /* 120% */
@@ -129,7 +128,6 @@
 }
 .desc_slogan {
   color: #aeaeae;
-  font-family: Arial, Helvetica, sans-serif;
   font-size: 16.8px;
   font-style: normal;
   font-weight: 500;
@@ -140,7 +138,6 @@
 
 .titleList {
   color: #212529;
-  font-family: Arial, Helvetica, sans-serif;
   font-size: 26px;
   font-style: bold;
   font-weight: 550;

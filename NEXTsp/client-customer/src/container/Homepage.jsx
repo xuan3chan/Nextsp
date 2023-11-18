@@ -31,9 +31,14 @@ function Homepage(props) {
             <div className="flex flex-col w-4/5 contents-center mr-auto ml-auto gap-10">
               <SloganListSection />
               <ProductListAll />
+              <ProductList title="Gaming Gear Razer" CollectionBrand="Razer" />
               <ProductList
-                title="Gaming Razer"
-                CollectionBrand="Gaming razer"
+                title="PC Máy Tính Bàn - Intel"
+                CollectionBrand="Intel"
+              />
+              <ProductList
+                title="PC Máy Tính Bàn - AMD"
+                CollectionBrand="AMD"
               />
             </div>
           </div>
