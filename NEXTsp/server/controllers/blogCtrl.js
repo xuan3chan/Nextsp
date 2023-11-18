@@ -29,6 +29,15 @@ class BlogController{
         } catch (error) {
             handleErrorResponse(res, error);
         }
+    }//them sr vo thoi chu khong chac lam, tai thay no cung hop ly
+    static async searchBlogController(req, res) {
+        try {
+            const title = req.params.title;
+            const result = await blogCtrl.searchBlogService(title);
+            res.json(result);
+        } catch (error) {
+            handleErrorResponse(res, error);
+        }
     }
 
     static async getAllBlogsController(req, res) {

@@ -92,4 +92,3 @@ class BlogService {
 }
 
 module.exports = BlogService;
-//new class
