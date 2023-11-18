@@ -1,4 +1,5 @@
 const Order = require('../models/orderModel');
+const Product = require('../models/productModel');
 
 class OrderService {
   //add new order and validate
