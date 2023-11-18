@@ -2,10 +2,18 @@ const Order = require('../models/orderModel');
 
 class OrderService {
   //add new order and validate
-  async addOrderService(userId, product, totalPrice, tracking, payment,address,phone,fullName) {
-    if (!userId || !product || !totalPrice || !tracking || !payment || !address || !phone|| !fullName) {
+  async addOrderService(userId, product, tracking, payment, address, phone, fullName) {
+    if (!userId || !product || !tracking || !payment || !address || !phone || !fullName) {
       throw new Error('Missing required fields');
     }
+
+    // Calculate total price
+    let totalPrice = 0;
+    for (let i = 0; i < product.length; i++) {
+      const prod = await Product.findById(product[i].productId);
+      totalPrice += prod.price * product[i].quantity;
+    }
+
     const order = new Order({
       userId,
       product,
@@ -15,11 +23,11 @@ class OrderService {
       address,
       phone,
       fullName,
-
     });
-    const saveOder=await order.save();
-    return saveOder;;  
-}
+
+    const saveOrder = await order.save();
+    return saveOrder;
+  }
 //update order chỉ update trường tracking
 async updateOrderService(id, tracking) {
   if (!id || !tracking) {
