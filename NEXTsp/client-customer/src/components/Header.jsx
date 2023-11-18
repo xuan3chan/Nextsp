@@ -61,7 +61,7 @@ function Header(props) {
   }, []);
 
   return (
-    <Fragment className="">
+    <div>
       <div className="header z-20 fixed flex justify-center">
         <div className="header_logo text-white"> </div>
         <div className="navbar">
@@ -73,13 +73,13 @@ function Header(props) {
               Danh Mục
               <i className="fa fa-caret-down"></i>
             </button>
-            <div className="dropdown-content flex flex-col">
+            <div className="dropdown-content flex flex-col w-48 ">
               {Categories &&
                 Categories.map((category) => {
                   if (category.status === "Active") {
                     return (
                       <div
-                        className="category-item text-black flex contents-center"
+                        className="category-item text-black flex contents-center w-48"
                         key={category._id}
                       >
                         <a
@@ -170,7 +170,7 @@ function Header(props) {
           </div>
         </div>
       </div>
-    </Fragment>
+    </div>
   );
 }
 export default Header;

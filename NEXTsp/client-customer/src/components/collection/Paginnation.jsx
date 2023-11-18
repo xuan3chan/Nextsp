@@ -1,10 +1,21 @@
+// Paginnation component
 import React from "react";
-import "../../assets/css/collection.css";
-function Paginnation(props) {
 
+function Paginnation({ pageIndex, pageCount, onPageChange }) {
+  const handleChangeActive = (pageNumber) => {
+    onPageChange(pageNumber);
+  };
   return (
-    <div className="flex contents-center justify-center mr-auto ml-auto w-full mt-4">
-
+    <div className="pagination flex gap-2">
+      {[...Array(pageCount)].map((_, index) => (
+        <a
+          key={index}
+          onClick={() => handleChangeActive(index + 1)}
+          className={pageIndex === index + 1 ? "active" : ""}
+        >
+          {index + 1}
+        </a>
+      ))}
     </div>
   );
 }

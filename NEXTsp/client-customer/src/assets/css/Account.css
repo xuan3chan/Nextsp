@@ -1,0 +1,7 @@
+.sub-title {
+  text-align: end;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  color: hsl(0, 0%, 20%);
+  width: 100px;
+}
