@@ -1,14 +1,15 @@
 //oder controller
-const orderService = require('../service/orderService');
+const orderService = require('../services/orderService');
+
 const handleErrorResponse = require('../middleware/errorHandling');
 
 class OrderController {
     //add new order
     async addOrderController(req, res) {
         try {
-            const { userId, product, totalPrice, tracking, payment,address,phone,fullName } = req.body;
-            const result = await orderService.addOrderService(userId, product, totalPrice, tracking, payment,address,phone,fullName);
-            res.status(200).json({message : "add complet", order : result});
+            const { userId, product, tracking, payment, address, phone, fullName } = req.body;
+            const result = await orderService.addOrderService(userId, product, tracking, payment, address, phone, fullName);
+            res.status(200).json({message : "add complete", order : result});
         } catch (error) {
             handleErrorResponse(res, error);
         }

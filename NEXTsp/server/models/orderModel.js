@@ -52,6 +52,7 @@ const CartSchema = new mongoose.Schema({
     },
     updatedAt: {
         type: Date,
+        default: Date.now,
     },
 });
 
