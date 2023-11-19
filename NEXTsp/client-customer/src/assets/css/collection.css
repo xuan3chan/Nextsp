@@ -32,105 +32,6 @@
 }
 
 /* Product List */
-.productItem-collection {
-  max-width: 18%;
-}
-.productItem-collection:hover {
-  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
-}
-.productList {
-  width: 100%;
-}
-
-/* Pagination section */
-
-.pagination {
-  display: inline-block;
-}
-
-.pagination a {
-  color: black;
-  float: left;
-  padding: 8px 16px;
-  text-decoration: none;
-}
-
-.pagination a.active {
-  background-color: var(--primary-color);
-  color: white;
-  border-radius: 5px;
-}
-
-.pagination a:hover:not(.active) {
-  background-color: #ddd;
-  border-radius: 5px;
-}
-
-/* Categories Section */
-
-.CategoryTitle {
-  padding: 12px;
-  text-align: center;
-  justify-content: center;
-  font-size: 30px;
-  font-weight: 600;
-}
-
-/* FilterButtonSection */
-.btnFilter {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 4px 10px;
-  border: solid #ddd 1px;
-  border-radius: 4px;
-  font-size: small;
-  gap: 2px;
-}
-.btnPrice {
-}
-.btnBrand {
-}
-.btnCategory {
-}
-.btnSort {
-}
-.sort-dropdown {
-  position: absolute;
-  background: white;
-  border: 1px solid #ddd;
-}
-
-/* BreadCrumb menu */
-.breadcrumb {
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  padding: 0;
-  margin: 0;
-  width: 100%;
-  margin-top: 80px;
-}
-
-.breadcrumb-item {
-  padding: 0.5rem;
-}
-
-.breadcrumb-item a {
-  color: var(--primary-color);
-  text-decoration: none;
-}
-
-.breadcrumb-item.active {
-  color: #6c757d;
-}
-
-.breadcrumb-item + .breadcrumb-item::before {
-  content: "/\00a0";
-  padding: 0.5rem;
-}
-
-/* Product List */
 .product_title > h1 {
   font-family: "Lato Bold", Arial, Helvetica, sans-serif;
   font-weight: 600;
@@ -150,8 +51,6 @@
 .productItem-collection:hover {
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
 }
-.productList {
-}
 
 /* Pagination section */
 
@@ -198,129 +97,7 @@
   font-size: small;
   gap: 2px;
 }
-.btnPrice {
-}
-.btnBrand {
-}
-.btnCategory {
-}
-.btnSort {
-}
-.sort-dropdown {
-  position: absolute;
-  background: white;
-  border: 1px solid #ddd;
-}
 
-.color-bg {
-  background-color: var(--color-body-bg);
-}
-
-/* BreadCrumb menu */
-.breadcrumb {
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  padding-bottom: 10px;
-  margin: 0;
-  width: 100%;
-  margin-top: 80px;
-}
-
-.breadcrumb-item {
-  padding: 0.5rem;
-}
-
-.breadcrumb-item a {
-  color: var(--primary-color);
-  text-decoration: none;
-}
-
-.breadcrumb-item.active {
-  color: #6c757d;
-}
-
-.breadcrumb-item + .breadcrumb-item::before {
-  content: "/\00a0";
-  padding: 0.5rem;
-}
-
-/* Product List */
-.product_title > h1 {
-  font-family: "Lato Bold", Arial, Helvetica, sans-serif;
-  font-weight: 600;
-  font-size: 14px;
-  width: 200px;
-  height: 50px;
-  max-height: 3.6em; /* Two lines (2 * line-height) */
-  line-height: 1.8em; /* Line height of your text */
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 2; /* Number of lines to display */
-  -webkit-box-orient: vertical;
-  white-space: normal;
-}
-
-.productItem-collection:hover {
-  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
-}
-.productList {
-}
-
-/* Pagination section */
-
-.pagination {
-  display: inline-block;
-}
-
-.pagination a {
-  color: black;
-  float: left;
-  padding: 8px 16px;
-  text-decoration: none;
-}
-
-.pagination a.active {
-  background-color: var(--primary-color);
-  color: white;
-  border-radius: 5px;
-}
-
-.pagination a:hover:not(.active) {
-  background-color: #ddd;
-  border-radius: 5px;
-}
-
-/* Categories Section */
-
-.CategoryTitle {
-  padding: 12px;
-  text-align: center;
-  justify-content: center;
-  font-size: 30px;
-  font-weight: 600;
-}
-
-/* FilterButtonSection */
-.btnFilter {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 4px 10px;
-  border: solid #ddd 1px;
-  border-radius: 4px;
-  font-size: small;
-  gap: 2px;
-}
-.btnPrice {
-}
-.btnBrand {
-}
-.btnCategory {
-}
-.btnSort {
-}
 .sort-dropdown {
   position: absolute;
   background: white;
@@ -340,12 +117,15 @@
   background: #f1f1f1;
   width: 100%;
 }
+
+/* Flask Sale Section */
 .Flask-Sale-Section {
   border: #fee2e2 1px solid;
   border-radius: 20px;
   width: 400px;
   height: 300px;
 }
+
 .FlaskSale-Title {
   font-size: larger;
   font-weight: 700;
@@ -356,5 +136,7 @@
   width: 100%;
   height: 46px;
 }
+
 .FlaskSale-desc {
+  /* Add styles as needed */
 }

@@ -59,7 +59,7 @@ function CustomerShipping(props) {
                 <div className="form-group w-1/2">
                   <label htmlFor="phoneNumber">Số điện thoại:</label>
                   <input
-                    type="tel"
+                    type="number"
                     id="phoneNumber"
                     name="phoneNumber"
                     value={formData.phoneNumber}

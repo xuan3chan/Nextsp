@@ -64,52 +64,57 @@ function Header(props) {
     <div>
       <div className="header z-20 fixed flex justify-center">
         <div className="header_logo text-white"> </div>
-        <div className="navbar">
+        <div className="navbar flex ">
           <a href="../Homepage">Trang Chủ</a>
           <a href="/Blog">Bài Viết</a>
-          <a href="/Collection" className="dropdown">
-            <button className="dropbtn flex justify-center items-center">
-              <FontAwesomeIcon className="mr-1" icon={faBars} />
-              Danh Mục
-              <i className="fa fa-caret-down"></i>
-            </button>
-            <div className="dropdown-content flex flex-col w-48 ">
-              {Categories &&
-                Categories.map((category) => {
-                  if (category.status === "Active") {
-                    return (
-                      <div
-                        className="category-item text-black flex contents-center w-48"
-                        key={category._id}
-                      >
-                        <a
-                          className="category-link"
-                          href={`/Collection/${category.nameCategory}`}
+          <div className="dropdown relative">
+            <div className="dropdown-btn-container flex justify-center items-center">
+              <a
+                href="/Collection"
+                className="dropbtn flex justify-center items-center"
+              >
+                <FontAwesomeIcon className="mr-1" icon={faBars} />
+                Danh Mục
+                <i className="fa fa-caret-down"></i>
+              </a>
+              <div className="dropdown-content flex flex-col w-48 ">
+                {Categories &&
+                  Categories.map((category) => {
+                    if (category.status === "Active") {
+                      return (
+                        <div
+                          className="category-item text-black flex contents-center w-48"
+                          key={category._id}
                         >
-                          {category.nameCategory}
-                          <FontAwesomeIcon
-                            className="category-icon"
-                            icon={faCaretRight}
-                          />
-                        </a>
-                        <div className="brand-menu">
-                          {category.brands &&
-                            category.brands.map((brand) => (
-                              <a
-                                className="brand-link"
-                                href={`/Collection/${brand.nameBrand}`}
-                                key={brand._id}
-                              >
-                                {brand.nameBrand}
-                              </a>
-                            ))}
+                          <a
+                            className="category-link"
+                            href={`/Collection/${category.nameCategory}`}
+                          >
+                            {category.nameCategory}
+                            <FontAwesomeIcon
+                              className="category-icon"
+                              icon={faCaretRight}
+                            />
+                          </a>
+                          <div className="brand-menu">
+                            {category.brands &&
+                              category.brands.map((brand) => (
+                                <a
+                                  className="brand-link"
+                                  href={`/Collection/${category.nameCategory}/${brand.nameBrand}`}
+                                  key={brand._id}
+                                >
+                                  {brand.nameBrand}
+                                </a>
+                              ))}
+                          </div>
                         </div>
-                      </div>
-                    );
-                  }
-                })}
+                      );
+                    }
+                  })}
+              </div>
             </div>
-          </a>
+          </div>
         </div>
         <SearchFunction />
         <div className="header_right_section pl-4 pr-4">

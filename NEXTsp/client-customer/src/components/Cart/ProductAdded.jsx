@@ -4,7 +4,6 @@ import TotalSection from "./TotalSection";
 import { useNavigate } from "react-router-dom";
 function ProductAdded(props) {
   const [cart, setCart] = useState([]);
-
   const placeHolderImg =
     "https://cdn3.vectorstock.com/i/1000x1000/35/52/placeholder-rgb-color-icon-vector-32173552.jpg";
 
@@ -13,6 +12,17 @@ function ProductAdded(props) {
     const parsedCart = JSON.parse(storedCart) || [];
     const cartWithCount = parsedCart.map((item) => ({ ...item, count: 1 }));
     setCart(cartWithCount);
+    const uniqueItemsById = cartWithCount.reduce((accumulator, currentItem) => {
+      if (!accumulator[currentItem.id]) {
+        accumulator[currentItem.id] = { ...currentItem };
+      } else {
+        accumulator[currentItem.id].count += currentItem.count;
+      }
+      return accumulator;
+    }, {});
+    const uniqueCart = Object.values(uniqueItemsById);
+    setCart(uniqueCart);
+    console.log(cartWithCount);
   }, []);
 
   const handleCheckLogin = () => {
@@ -30,24 +40,35 @@ function ProductAdded(props) {
     }
     return "";
   }
-
-  const increment = (itemId) => {
-    setCart((prevCart) =>
-      prevCart.map((item) =>
-        item.id === itemId ? { ...item, count: item.count + 1 } : item
-      )
-    );
+ const updateLocalStorage = (updatedCart) => {
+    // Update local storage with the new cart data
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
   };
 
-  const decrement = (itemId) => {
-    setCart((prevCart) =>
-      prevCart.map((item) =>
-        item.id === itemId && item.count > 0
+  const increment = (productId) => {
+    setCart((prevCart) => {
+      const updatedCart = prevCart.map((item) =>
+        item.id === productId ? { ...item, count: item.count + 1 } : item
+      );
+
+      updateLocalStorage(updatedCart);
+      return updatedCart;
+    });
+  };
+
+  const decrement = (productId) => {
+    setCart((prevCart) => {
+      const updatedCart = prevCart.map((item) =>
+        item.id === productId && item.count > 0
           ? { ...item, count: item.count - 1 }
           : item
-      )
-    );
+      );
+
+      updateLocalStorage(updatedCart);
+      return updatedCart;
+    });
   };
+
   const calculateTotalQuantity = () => {
     const totalQuantity = cart.reduce((total, item) => total + item.count, 0);
     localStorage.setItem("totalQuantity", JSON.stringify(totalQuantity));
@@ -157,9 +178,13 @@ function ProductAdded(props) {
         </p>
       </div>
       <div className="buttonSection flex gap-10 justify-center mt-16">
-        <a className=" max-w-xs" href="/Homepage">
-          <button className="btn btnContinueShopping">Tiếp Tục Mua Sắm</button>
-        </a>
+        <div className="max-w-xs">
+          <a href="/Homepage">
+            <button className="btn btnContinueShopping">
+              Tiếp Tục Mua Sắm
+            </button>
+          </a>
+        </div>
         <a className=" max-w-xs">
           <button onClick={handleCheckLogin} className="btn btnOrderNow">
             Đặt Hàng Ngay
