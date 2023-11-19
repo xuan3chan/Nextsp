@@ -117,7 +117,12 @@
 .SloganListSection {
   height: 120px;
   padding: 8px;
-}
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
+  }
 
 .tilte_slogan {
   color: #212529;

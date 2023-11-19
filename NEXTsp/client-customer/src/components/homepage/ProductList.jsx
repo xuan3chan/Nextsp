@@ -85,7 +85,9 @@ function ProductList(props) {
                         className="w-full h-44 object-contain"
                       />
                     </div>
-                    <div className="product_title">{product.nameProduct}</div>
+                    <div className="product_title">
+                      <h1>{product.nameProduct}</h1>
+                    </div>
                     <div>
                       <p className="product_oldPrice font-bold">
                         {formatPrice(product.oldrice)}

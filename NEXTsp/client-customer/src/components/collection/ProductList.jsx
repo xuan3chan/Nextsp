@@ -8,10 +8,13 @@ import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import ButtonBuyNow from "../button/buttonBuyNow";
 import ButtonAddToCart from "../button/buttonAddToCart";
-
+import Paginnation from "./Paginnation";
 function ProductList(props) {
   const param = useParams();
   const [products, setProducts] = React.useState([]);
+  const [pageIndex, setPageIndex] = React.useState(1); // Initial page index
+  const itemsPerPage = 10;
+
   const ApiProducts = "http://localhost:3101/api/products/getall";
   React.useEffect(() => {
     const fetchData = async () => {
@@ -21,6 +24,8 @@ function ProductList(props) {
     console.log(JSON.stringify(products.brand));
     fetchData();
   }, []);
+
+  // Function to handle page change
   const handlePageChange = (newPageIndex) => {
     setPageIndex(newPageIndex);
   };
@@ -53,9 +58,9 @@ function ProductList(props) {
     <div className="productList max-h-full w-full bg-white rounded-md pb-8">
       <h1 className="CategoryTitle">{param.nameCategory}</h1>
       <FilterButtonSection />
-      <div className=" flex flex-wrap  gap-1 content-center justify-center pt-12 pb-4">
+      <div className=" flex flex-wrap  gap-1 content-center justify-center pt-12 flex-col items-center pb-8">
         {products
-          .filter((product) => product.brand.name === props.CollectionBrand)
+          .filter((product) => product.brand.name === props.CollectionBrand) // Filter products by brand
           .map(
             (product, index) =>
               index < 1 && (
@@ -100,6 +105,11 @@ function ProductList(props) {
               )
           )}
       </div>
+      <Paginnation
+        pageIndex={pageIndex}
+        pageCount={Math.ceil(products.length / itemsPerPage)}
+        onPageChange={handlePageChange}
+      />
     </div>
   );
 }

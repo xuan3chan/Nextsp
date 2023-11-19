@@ -100,7 +100,7 @@ function SearchFunction(props) {
                   <img src={item.images[0]} alt="" />
                 </div>
                 <div className="searching-result-item-info flex flex-col">
-                  <div className="searching-result-item-info-name">
+                  <div className="searching-result-item-info-name text-left">
                     <p>{item.nameProduct}</p>
                   </div>
                   <div className="searching-result-item-info-price flex gap-4">

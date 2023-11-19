@@ -201,9 +201,9 @@
 
 .searching-result {
 }
-.searching-result-item-img {
-  width: 40px;
-  height: 40px;
+.searching-result-item-img img {
+  max-width: 40px;
+  max-height: 40px;
 }
 .searching-result-item-info {
   color: #000;
