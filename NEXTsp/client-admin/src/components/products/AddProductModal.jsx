@@ -16,6 +16,7 @@ const AddProductDetail = ({brands}) => {
     status: "Active",
     brand: "",
     price: "",
+    oldprice: "",
     success: false,
     error: false,
   });
@@ -53,6 +54,7 @@ const AddProductDetail = ({brands}) => {
             status: "Active",
             brand: "",
             price: "",
+            oldprice: "",
             success: "Add product complete !",
             error: false,
           });
@@ -65,6 +67,7 @@ const AddProductDetail = ({brands}) => {
           status: "Active",
           brand: "",
           price: "",
+          oldprice: "",
           success: "Add product complete !",
           error: false,
         });

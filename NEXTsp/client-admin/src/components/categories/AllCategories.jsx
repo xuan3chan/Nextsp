@@ -101,7 +101,17 @@ const AllCategories = () => {
                 <tr key={category._id}>
                   <td className="px-4 py-2 border">{category.nameCategory}</td>
                   <td className="px-4 py-2 border whitespace-normal break-words break-all">{category.description}</td>
-                  <td className="px-4 py-2 text-center border">{category.status}</td>
+                  <td className="px-4 py-2 text-center border">
+                    {category.status === "Active" ? (
+                      <span className="bg-green-200 rounded-full text-center text-sm px-2 font-semibold">
+                        {category.status}
+                      </span>
+                    ) : (
+                      <span className="bg-red-200 rounded-full text-center text-sm px-2 font-semibold">
+                        {category.status}
+                      </span>
+                    )}
+                  </td>
                   <td className="px-4 py-2 border">
                     <button
                       onClick={() => deleteCategory(category._id)}

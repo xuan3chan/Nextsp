@@ -28,7 +28,7 @@ export const createPorductImage = async ({ image }) => {
   /* Most important part for uploading multiple image  */
 };
 
-export const createProduct = async ({ nameProduct, description, image, status, brand, price }) => {
+export const createProduct = async ({ nameProduct, description, image, status, brand, price, oldprice }) => {
   let formData = new FormData();
   
   for (const file of image) {
@@ -39,6 +39,7 @@ export const createProduct = async ({ nameProduct, description, image, status, b
   formData.append("status", status);
   formData.append("brand", brand);
   formData.append("price", price);
+  formData.append("oldprice", oldprice);
 
   try {
     let res = await axios.post(`${apiURL}/add`, formData);
@@ -88,6 +89,9 @@ export const editProduct = async (product, originalProduct) => {
     }
     if (product.price !== originalProduct.price) {
       formData.append("price", product.price);
+    }
+    if (product.oldprice !== originalProduct.oldprice) {
+      formData.append("oldprice", product.oldprice);
     }
 
     console.log("Product before sending request:", product);

@@ -9,6 +9,7 @@ const apiURL = process.env.REACT_APP_ORDERS
 const AllOrders = () => {
   const { data, dispatch } = useContext(OrderContext);
   const [order, setOrder] = useState([]);
+  const [sortOrder, setSortOrder] = useState('asc');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   // Fetch all orders on component mount
@@ -22,6 +23,17 @@ const AllOrders = () => {
       setLoading(false);
     }
   };
+
+  const sortOrders = () => {
+    let sortedOrders = [...order];
+    if (sortOrder === 'asc') {
+      sortedOrders.sort((a, b) => a.totalPrice - b.totalPrice);
+    } else {
+      sortedOrders.sort((a, b) => b.totalPrice - a.totalPrice);
+    }
+    setOrder(sortedOrders);
+  };
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -54,6 +66,11 @@ const AllOrders = () => {
       }
     }
   }
+
+  const toggleSortOrder = () => {
+    setSortOrder(prevSortOrder => prevSortOrder === 'asc' ? 'desc' : 'asc');
+    sortOrders()
+  };
   
 
 
@@ -94,13 +111,15 @@ const AllOrders = () => {
         <table className="table-fixed border w-full my-2"></table>
         <thead>
           <tr>
-            <th className="px-4 py-2 border">Products</th>
+            <th className="px-4 py-2 w-1/3 border">Products</th>
             <th className="px-4 py-2 border">Customer</th>
             <th className="px-4 py-2 border">Email</th>
             <th className="px-4 py-2 border">Address</th>
-            <th className="px-4 py-2 border">Payment</th>
-            <th className="px-4 py-2 border">Total</th>
-            <th className="px-4 py-2 border">Created at</th>
+            <th className="px-4 py-2 border ">Payment</th>
+            <th className={`px-4 py-2 border ${sortOrder === 'desc' ? ' bg-black/10 shadow-inner' : ''}`} onClick={toggleSortOrder}>
+              Total {sortOrder === 'desc' ? '↑' : '↓'}
+            </th>
+            <th className="px-4 py-2 w-[9.666667%] border">Created at</th>
             <th className="px-4 py-2 border">Tracking</th>
             <th className="px-4 py-2 border">Actions</th>
           </tr>
@@ -110,14 +129,14 @@ const AllOrders = () => {
             order.map((item, i) => {
               return (
                 <tr key={i}>
-                  <td className="px-4 py-2 border">
+                  <td className="px-4 py-2 border text-sm">
                     {item.product?.map((elem, i) => {
                       // Check if productId exists before accessing nameProduct
                       if (elem.productId) {
                         const productName = elem.productId.nameProduct;
                         return (
                           <div key={i}>
-                            <p>{productName.slice(0, 5) + "..."}</p>
+                            <p>{productName + "; "}</p>
                           </div>
                         );
                       }
@@ -125,12 +144,12 @@ const AllOrders = () => {
                       return null;
                     })}
                   </td>
-                  <td className="px-4 py-2 border">{item.userId.fullName}</td>
-                  <td className="px-4 py-2 border">{item.userId.email}</td>
-                  <td className="px-4 py-2 border">{item.address}</td>
-                  <td className="px-4 py-2 border">{item.payment}</td>
-                  <td className="px-4 py-2 border">{item.totalPrice}</td>
-                  <td className="px-4 py-2 border">
+                  <td className="px-4 py-2 border text-sm">{item.userId ? item.userId.fullName : 'N/A'}</td>
+                  <td className="px-4 py-2 border text-sm">{item.userId ? item.userId.email.slice(0, 10) + "..." : 'N/A'}</td>
+                  <td className="px-4 py-2 border text-sm">{item.address}</td>
+                  <td className="px-4 py-2 border text-sm">{item.payment}</td>
+                  <td className="px-4 py-2 border text-sm">{item.totalPrice}</td>
+                  <td className="px-4 py-2 border text-sm">
                     {moment(item.createdAt).format("DD/MM/YYYY")}
                   </td>
                   <td className="px-4 py-2 border">

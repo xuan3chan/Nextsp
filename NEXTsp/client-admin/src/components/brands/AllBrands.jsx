@@ -11,17 +11,17 @@ const AllBrands = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   // Fetch all brands when component mounts
+  const fetchData = async () => {
+    try {
+      const responseData = await getAllBrand();
+      setBrands(responseData);
+      setLoading(false);
+    } catch (err) {
+      setError(true);
+      setLoading(false);
+    }
+  };
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const responseData = await getAllBrand();
-        setBrands(responseData);
-        setLoading(false);
-      } catch (err) {
-        setError(true);
-        setLoading(false);
-      }
-    };
     fetchData();
   }, []);
   // Loading state
@@ -115,7 +115,15 @@ const AllBrands = () => {
                               {brand.description}
                             </td>
                             <td className="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
-                              {brand.status}
+                              {brand.status === "Active" ? (
+                                <span className="inline-flex px-2 text-xs font-semibold leading-5 text-black bg-green-200 rounded-full">
+                                  {brand.status}
+                                </span>
+                              ) : (
+                                <span className="inline-flex px-2 text-xs font-semibold leading-5 text-black bg-red-200 rounded-full">
+                                  {brand.status}
+                                </span>
+                              )}
                             </td>
                             <td className="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
                             {brand.category ? brand.category.name : "N/A"}
