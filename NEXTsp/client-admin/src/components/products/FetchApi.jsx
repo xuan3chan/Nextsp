@@ -103,11 +103,8 @@ export const editProduct = async (product, originalProduct) => {
     console.log("Product before sending request:", product);
 
     let res = await axios.put(`${apiURL}/update/${product.id}`, formData);
-    console.log("Product ID:", product);
-    console.log("Response from server:", res.data);
     return res.data;
   } catch (error) {
-    console.log("Error during product update:", error);
     return { error: 'An error occurred while updating the product.' };
   }
 };
