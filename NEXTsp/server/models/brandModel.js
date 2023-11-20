@@ -11,11 +11,11 @@ const brandSchema = new mongoose.Schema(
             type: String,
             trim: true,
         },
-        category: {
+        category: [{
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Category',
             required: true,
-        },
+        }],
         status: {
             type: String,
             enum: ['Active', 'Inactive'],
