@@ -36,7 +36,7 @@ function ProductList(props) {
 
   const imagePlaceHolder = "https://via.placeholder.com/350";
   return (
-    <div className="productList p-4 mr-auto ml-auto bg-white rounded-md">
+    <div className="productList w-full p-4 mr-auto ml-auto bg-white rounded-md">
       {isLoading && (
         <div className="loading">
           <RiseLoader
