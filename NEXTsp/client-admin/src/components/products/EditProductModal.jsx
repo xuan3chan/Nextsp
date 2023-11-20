@@ -2,10 +2,13 @@ import React, { Fragment, useContext, useState, useEffect } from "react";
 import { ProductContext } from "./index";
 import { editProduct, getAllProduct } from "./FetchApi";
 import { getAllBrand } from "../brands/FetchAPI";
+import { getAllCategory } from "../categories/FetchApi";
+
 const EditProductModal = (props) => {
   const { data, dispatch } = useContext(ProductContext);
 
   const [brands, setBrands] = useState(null);
+  const [categories, setCategories] = useState(null);
   const [newImages, setNewImages] = useState([]);
 
   const alert = (msg, type) => (
@@ -19,13 +22,16 @@ const EditProductModal = (props) => {
     images: [],
     status: "",
     brand: "",
+    category: "",
     price: "",
+    oldprice: "",
     error: false,
     success: false,
   });
 
   useEffect(() => {
     fetchBrands();
+    fetchCategory();
   }, []);
 
   const fetchBrands = async () => {
@@ -35,15 +41,24 @@ const EditProductModal = (props) => {
     }
   };
 
+  const fetchCategory = async () => {
+    let responseData = await getAllCategory();
+    if (responseData) {
+      setCategories(responseData);
+    }
+  };
+
   useEffect(() => {
     setEditformdata({
-      id: data.editProductModal.id,
-      nameProduct: data.editProductModal.nameProduct,
-      description: data.editProductModal.description,
-      images: data.editProductModal.images || [],
-      status: data.editProductModal.status,
-      brand: data.editProductModal.brand || { id: "", nameBrand: "" },
-      price: data.editProductModal.price,
+      id: data.editProductModal?.id,
+      nameProduct: data.editProductModal?.nameProduct,
+      description: data.editProductModal?.description,
+      images: data.editProductModal?.images || [],
+      status: data.editProductModal?.status,
+      brand: data.editProductModal?.brand || { id: "", nameBrand: "" },
+      category: data.editProductModal?.category || { _id: "", nameCategory: "" },
+      price: data.editProductModal?.price,
+      oldprice: data.editProductModal?.oldprice,
     });
   }, [data.editProductModal]);
 
@@ -59,12 +74,14 @@ const EditProductModal = (props) => {
 
   const submitForm = async (e) => {
     e.preventDefault();
+
     dispatch({ type: "loading", payload: true });
     try {
       let edit = await editProduct(
         { ...editformData, images: [...editformData.images, ...newImages] },
         data.editProductModal
       );
+      
       if (edit && edit.error) {
         setEditformdata({
           ...editformData,
@@ -116,7 +133,7 @@ const EditProductModal = (props) => {
           data.editProductModal.modal ? "" : "hidden"
         } fixed inset-0 flex items-center z-30 justify-center overflow-auto`}
       >
-        <div className="mt-32 md:mt-0 relative bg-white w-11/12 md:w-3/6 shadow-lg flex flex-col items-center space-y-4 px-4 py-4 md:px-8">
+        <div className="mt-32 md:mt-0 relative bg-white w-11/12 md:w-3/6 shadow-lg flex flex-col items-center space-y-4 px-4 py-2 md:px-8">
           <div className="flex items-center justify-between w-full pt-4">
             <span className="text-left font-semibold text-2xl tracking-wider">
               Edit Product
@@ -148,8 +165,8 @@ const EditProductModal = (props) => {
           {editformData.error ? alert(editformData.error, "red") : ""}
           {editformData.success ? alert(editformData.success, "green") : ""}
           <form className="w-full" onSubmit={(e) => submitForm(e)}>
-            <div className="flex space-x-1 py-4">
-              <div className="w-1/2 flex flex-col space-y-1 space-x-1">
+            <div className="flex space-x-1 py-2">
+              <div className="w-full flex flex-col space-y-1 space-x-1">
                 <label htmlFor="name">Product Name *</label>
                 <input
                   value={editformData.nameProduct}
@@ -163,8 +180,11 @@ const EditProductModal = (props) => {
                   }
                   className="px-4 py-2 border focus:outline-none"
                   type="text"
+                  required
                 />
               </div>
+            </div>
+            <div className="flex space-x-1 py-2">
               <div className="w-1/2 flex flex-col space-y-1 space-x-1">
                 <label htmlFor="price">Product Price *</label>
                 <input
@@ -180,6 +200,24 @@ const EditProductModal = (props) => {
                   type="number"
                   className="px-4 py-2 border focus:outline-none"
                   id="price"
+                  required
+                />
+              </div>
+              <div className="w-1/2 flex flex-col space-y-1 space-x-1">
+                <label htmlFor="price">Product Old Price *</label>
+                <input
+                  value={editformData.oldprice ? editformData.oldprice : ""}
+                  onChange={(e) =>
+                    setEditformdata({
+                      ...editformData,
+                      error: false,
+                      success: false,
+                      oldprice: e.target.value,
+                    })
+                  }
+                  type="number"
+                  className="px-4 py-2 border focus:outline-none"
+                  id="oldprice"
                 />
               </div>
             </div>
@@ -201,140 +239,194 @@ const EditProductModal = (props) => {
                 cols={5}
                 rows={2}
               />
-            </div>
-            {/* Most Important part for uploading multiple image */}
-            <div className="flex flex-col mt-4">
-              <label htmlFor="image">Product Images *</label>
-              {/* Update the way images are displayed to include both current and
-              new images */}
-              <div className="flex space-x-1">
-                {/* Add a delete button next to each image */}
-                {editformData.images.map((image, index) => (
-                  <div key={index} className="relative h-16 w-16">
-                    <img
-                      className="object-cover"
-                      src={image}
-                      alt={`productImage-${index}`}
-                    />
-                    <button
-                      type="button"
-                      className="absolute right-0 top-0 bg-red-500 text-white"
-                      onClick={() => {
-                        const newImages = [...editformData.images];
-                        newImages.splice(index, 1);
-                        setEditformdata({ ...editformData, images: newImages });
-                      }}
-                    >
-                      X
-                    </button>
-                  </div>
-                ))}
+              <div className="flex space-x-1 py-1">
+                {/* Most Important part for uploading multiple image */}
+                <div className="w-1/2 flex flex-col">
+                  <label htmlFor="image">Product Images *</label>
+                  {/* Update the way images are displayed to include both current and
+                    new images */}
+                  <div className="flex space-x-1">
+                    {/* Add a delete button next to each image */}
+                    {editformData.images.map((image, index) => (
+                      <div key={index} className="relative h-16 w-16">
+                        <img
+                          className="object-cover"
+                          src={image}
+                          alt={`productImage-${index}`}
+                        />
+                        <button
+                          type="button"
+                          className="absolute right-0 top-0 bg-red-500 text-white"
+                          onClick={() => {
+                            const newImages = [...editformData.images];
+                            newImages.splice(index, 1);
+                            setEditformdata({
+                              ...editformData,
+                              images: newImages,
+                            });
+                          }}
+                        >
+                          X
+                        </button>
+                      </div>
+                    ))}
 
-                {newImages.map((image, index) => (
-                  <div key={index} className="relative h-16 w-16">
-                    <img
-                      className="object-cover"
-                      src={URL.createObjectURL(image)}
-                      alt={`newImage-${index}`}
-                    />
-                    <button
-                      type="button"
-                      className="absolute right-0 top-0 bg-red-500 text-white"
-                      onClick={() => {
-                        const newImagesArray = [...newImages];
-                        newImagesArray.splice(index, 1);
-                        setNewImages(newImagesArray);
-                      }}
-                    >
-                      X
-                    </button>
+                    {newImages.map((image, index) => (
+                      <div key={index} className="relative h-16 w-16">
+                        <img
+                          className="object-cover"
+                          src={URL.createObjectURL(image)}
+                          alt={`newImage-${index}`}
+                        />
+                        <button
+                          type="button"
+                          className="absolute right-0 top-0 bg-red-500 text-white"
+                          onClick={() => {
+                            const newImagesArray = [...newImages];
+                            newImagesArray.splice(index, 1);
+                            setNewImages(newImagesArray);
+                          }}
+                        >
+                          X
+                        </button>
+                      </div>
+                    ))}
                   </div>
-                ))}
-              </div>
-              <span className="text-gray-600 text-xs">Must need 2 images</span>
-              <input
-                onChange={(e) => {
-                  setNewImages([...e.target.files]);
-                }}
-                type="file"
-                accept=".jpg, .jpeg, .png"
-                className="px-4 py-2 border focus:outline-none"
-                id="image"
-                multiple
-              />
-            </div>
-            {/* Most Important part for uploading multiple image */}
-            <div className="flex space-x-1 py-4">
-              <div className="w-1/2 flex flex-col space-y-1">
-                <label htmlFor="status">Product Status *</label>
-                <select
-                  value={editformData.status}
-                  onChange={(e) =>
-                    setEditformdata({
-                      ...editformData,
-                      error: false,
-                      success: false,
-                      status: e.target.value,
-                    })
-                  }
-                  name="status"
-                  className="px-4 py-2 border focus:outline-none"
-                  id="status"
-                >
-                  <option name="status" value="Active">
-                    Active
-                  </option>
-                  <option name="status" value="Inactive">
-                    Inactive
-                  </option>
-                </select>
-              </div>
-              <div className="w-1/2 flex flex-col space-y-1">
-                <label htmlFor="status">Product Category *</label>
-                <select
-                  onChange={(e) =>
-                    setEditformdata({
-                      ...editformData,
-                      error: false,
-                      success: false,
-                      brand: e.target.value,
-                    })
-                  }
-                  name="status"
-                  className="px-4 py-2 border focus:outline-none"
-                  id="status"
-                >
-                  <option disabled value="">
-                    Select a Brand
-                  </option>
-                  {brands && brands.length > 0
-                    ? brands.map((elem) => {
-                        return (
-                          <Fragment key={elem.id}>
-                            {editformData.brand.id &&
-                            editformData.brand.id === elem.id ? (
-                              <option
-                                name="status"
-                                value={elem.id}
-                                key={elem.id}
-                                selected
-                              >
-                                {elem.nameBrand}
-                              </option>
-                            ) : (
-                              <option
-                                name="status"
-                                value={elem.id}
-                                key={elem.id}
-                              >
-                                {elem.nameBrand}
-                              </option>
-                            )}
-                          </Fragment>
-                        );
+                  <span className="text-gray-600 text-xs">
+                    Must need 2 images
+                  </span>
+                  <input
+                    onChange={(e) => {
+                      setNewImages([...e.target.files]);
+                    }}
+                    type="file"
+                    accept=".jpg, .jpeg, .png"
+                    className="px-4 py-2 border focus:outline-none"
+                    id="image"
+                    multiple
+                  />
+                </div>
+                {/* Most Important part for uploading multiple image */}
+                <div className="w-1/2 flex flex-col justify-end space-y-1">
+                  <label htmlFor="status">Product Status *</label>
+                  <select
+                    value={editformData.status}
+                    onChange={(e) =>
+                      setEditformdata({
+                        ...editformData,
+                        error: false,
+                        success: false,
+                        status: e.target.value,
                       })
-                    : ""}
-                </select>
+                    }
+                    name="status"
+                    className="px-4 py-2 border focus:outline-none"
+                    id="status"
+                  >
+                    <option name="status" value="Active">
+                      Active
+                    </option>
+                    <option name="status" value="Inactive">
+                      Inactive
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div className="flex space-x-1 py-2">
+                <div className="w-1/2 flex flex-col space-y-1">
+                  <label htmlFor="status">Brand *</label>
+                  <select
+                    onChange={(e) =>
+                      setEditformdata({
+                        ...editformData,
+                        error: false,
+                        success: false,
+                        brand: e.target.value,
+                      })
+                    }
+                    name="status"
+                    className="px-4 py-2 border focus:outline-none"
+                    id="status"
+                  >
+                    <option disabled value="">
+                      Select a Brand
+                    </option>
+                    {brands && brands.length > 0
+                      ? brands.map((elem) => {
+                          return (
+                            <Fragment key={elem.id}>
+                              {editformData.brand.id &&
+                              editformData.brand.id === elem.id ? (
+                                <option
+                                  name="status"
+                                  value={elem.id}
+                                  key={elem.id}
+                                  selected
+                                >
+                                  {elem.nameBrand}
+                                </option>
+                              ) : (
+                                <option
+                                  name="status"
+                                  value={elem.id}
+                                  key={elem.id}
+                                >
+                                  {elem.nameBrand}
+                                </option>
+                              )}
+                            </Fragment>
+                          );
+                        })
+                      : ""}
+                  </select>
+                </div>
+                <div className="w-1/2 flex flex-col space-y-1">
+                  <label htmlFor="status">Category *</label>
+                  <select
+                    onChange={(e) =>
+                      setEditformdata({
+                        ...editformData,
+                        error: false,
+                        success: false,
+                        category: e.target.value,
+                      })
+                    }
+                    name="status"
+                    className="px-4 py-2 border focus:outline-none"
+                    id="status"
+                  >
+                    <option disabled value="">
+                      Select a Category
+                    </option>
+                    {categories && categories.length > 0
+                      ? categories.map((cate) => {
+                          return (
+                            <Fragment key={cate.id}>
+                              {editformData.category.id &&
+                              editformData.category.id === cate._id ? (
+                                <option
+                                  name="category"
+                                  value={cate._id}
+                                  key={cate._id}
+                                  selected
+                                >
+                                  {cate.nameCategory}
+                                </option>
+                              ) : (
+                                <option
+                                  name="category"
+                                  value={cate._id}
+                                  key={cate._id}
+                                >
+                                  {cate.nameCategory}
+                                </option>
+                              )}
+                            </Fragment>
+                          );
+                        })
+                      : ""}
+                  </select>
+                </div>
               </div>
             </div>
             <div className="flex flex-col space-y-1 w-full pb-4 md:pb-6 mt-4">

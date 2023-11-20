@@ -7,7 +7,7 @@ function ButtonBuyNow(props) {
 
   return (
     <Link to="/CartPage">
-      <div className="btn-BuyNow bg-black text-white text-center p-2 flex flex-colflex items-center contents-center justify-center rounded-sm">
+      <div className="btn-BuyNo btn text-white text-center p-2 flex flex-colflex items-center contents-center justify-center rounded-sm">
         <a className=" cursor-pointer" onClick={handleBuyBtn}>
           Mua Ngay
         </a>

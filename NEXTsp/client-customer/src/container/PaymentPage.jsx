@@ -4,7 +4,7 @@ import axios from "axios";
 import "../assets/css/Payment.css";
 function PaymentPage(props) {
   const [cart, setCart] = React.useState([]);
-  const [selectedPayment, setSelectedPayment] = useState("COD");
+  const [selectedPayment, setSelectedPayment] = useState(null);
 
   // Update payment method when the customer selects a different option
 
@@ -14,6 +14,7 @@ function PaymentPage(props) {
     const cartWithCount = parsedCart.map((item) => ({ ...item, count: 1 }));
     setCart(cartWithCount);
   }, []);
+
   const handlePaymentChange = (paymentMethod) => {
     setSelectedPayment(paymentMethod);
   };
@@ -29,21 +30,41 @@ function PaymentPage(props) {
     }
     return "";
   }
+  useEffect(() => {
+    const storedCart = localStorage.getItem("cart");
+    const parsedCart = JSON.parse(storedCart) || [];
+    const cartWithCount = parsedCart.map((item) => ({ ...item, count: 1 }));
+    setCart(cartWithCount);
+    const uniqueItemsById = cartWithCount.reduce((accumulator, currentItem) => {
+      if (!accumulator[currentItem.id]) {
+        accumulator[currentItem.id] = { ...currentItem };
+      } else {
+        accumulator[currentItem.id].count += currentItem.count;
+      }
+      return accumulator;
+    }, {});
+
+    const uniqueCart = Object.values(uniqueItemsById);
+    setCart(uniqueCart);
+    console.log(cart);
+  }, []);
+
   const userId = localStorage.getItem("userId");
   const totalPrice = localStorage.getItem("totalPrice");
   const fullName = customerInformation.fullName;
   const phone = customerInformation.phone;
   const address = customerInformation.address;
   const tracking = "pending";
-  const payment = "COD";
   const totalPriceNumber = Number(totalPrice);
   const addInfo = `NextSP Store Payment, userId: ${userId}`;
   const accountName = "Nguyễn Văn Thiện";
   const imageUrlQR = `https://img.vietqr.io/image/tpb-04144454101-compact2.jpg?amount=${totalPriceNumber}&addInfo=${addInfo}&accountName=${accountName}`;
+  const payment = selectedPayment === "COD" ? "COD" : "QR";
   const product = cart.map((item) => ({
     productId: item.id,
     quantity: item.count,
   }));
+
   const data = {
     userId,
     product,

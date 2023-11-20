@@ -31,7 +31,11 @@
   text-align: center;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
-
+.container-product-section {
+  width: 90%;
+  margin-right: 5%;
+  margin-left: 5%;
+}
 .color-bg {
   background-color: var(--color-body-bg);
 }
@@ -122,7 +126,7 @@
   justify-content: center;
   align-items: center;
   justify-items: center;
-  }
+}
 
 .tilte_slogan {
   color: #212529;

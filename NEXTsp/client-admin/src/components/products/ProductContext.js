@@ -9,7 +9,9 @@ export const productState = {
     images: null,
     status: "",
     brand: "",
+    category: "",
     price: "",
+    oldprice: ""
   },
 }
 
@@ -36,7 +38,9 @@ export const productReducer = (state, action) => {
           images: action.product.images,
           status: action.product.status,
           brand: action.product.brand,
+          category: action.product.category,
           price: action.product.price,
+          oldprice: action.product.oldprice,
         }
       };
     case "editProductModalClose":
@@ -50,7 +54,9 @@ export const productReducer = (state, action) => {
           images: null,
           status: "",
           brand: "",
+          category: "",
           price: "",
+          oldprice: ""
         }
       };
     default:

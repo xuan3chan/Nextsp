@@ -44,7 +44,7 @@ function ProductList(props) {
           key={i}
           src="https://static.vecteezy.com/system/resources/previews/013/743/605/original/golden-star-icon-png.png"
           alt=""
-          className="w-6 h-6"
+          className="w-4 h-4"
         />
       );
     }
@@ -54,13 +54,17 @@ function ProductList(props) {
   const handleAddCart = () => {
     localStorage.setItem("cart", JSON.stringify(products));
   };
+
   return (
     <div className="productList max-h-full w-full bg-white rounded-md pb-8">
       <h1 className="CategoryTitle">{param.nameCategory}</h1>
       <FilterButtonSection />
       <div className=" flex flex-wrap  gap-1 content-center justify-center pt-12 flex-col items-center pb-8">
         {products
-          .filter((product) => product.brand.name === props.CollectionBrand) // Filter products by brand
+          .filter(
+            (product) =>
+              product.brand.name === props.CollectionBrand
+          ) // Filter products by brand
           .map(
             (product, index) =>
               index < 1 && (
@@ -95,10 +99,7 @@ function ProductList(props) {
                     </div>
                   </Link>
                   <div className="over-button flex gap-4 items-center justify-center mt-3">
-                    <ButtonBuyNow
-                      className="btn p-1  flex justify-center btn-sell "
-                      product={product}
-                    />
+                    <ButtonBuyNow product={product} />
                     <ButtonAddToCart product={product} />
                   </div>
                 </div>

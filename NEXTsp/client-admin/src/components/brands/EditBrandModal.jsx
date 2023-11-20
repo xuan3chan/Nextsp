@@ -30,7 +30,6 @@ const EditBrandModal = () => {
     let responseData = await getAllCategory();
     if (responseData) {
       setCategories(responseData);
-      console.log(responseData);
     } else {
       console.log(responseData);
     }

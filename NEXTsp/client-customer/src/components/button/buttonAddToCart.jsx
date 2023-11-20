@@ -31,9 +31,9 @@ function ButtonAddToCart(props) {
     <div className="w-1/2">
       <div
         onClick={addToCart}
-        className="btn-AddToCart bg-black text-white text-center p-2 flex items-center contents-center justify-center rounded-sm cursor-pointer"
+        className="btn-AddToCart btn text-white text-center p-2 flex items-center contents-center justify-center rounded-sm cursor-pointer"
       >
-        <p>Thêm vào giỏ hàng</p>
+        <p>Thêm vào giỏ</p>
       </div>
     </div>
   );
