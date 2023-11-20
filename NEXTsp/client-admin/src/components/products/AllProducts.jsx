@@ -1,6 +1,5 @@
 import React, { Fragment, useContext, useEffect, useState } from "react";
 import { getAllProduct } from "./FetchApi";
-import moment from "moment";
 import { ProductContext } from "./index";
 import axios from "axios";
 const apiURL = process.env.REACT_APP_PRODUCTS
