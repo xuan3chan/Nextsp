@@ -65,7 +65,6 @@ function ProductList(props) {
       </div>
       <div className="flex flex-wrap gap-4 content-center justify-center">
         {products
-          .filter((product) => product.brand.name === props.CollectionBrand)
           .map(
             (product, index) =>
               index < 5 && (

@@ -29,11 +29,11 @@ function Account() {
   };
   const userName = localStorage.getItem("accountName");
   return (
-    <div className="wrapper bg-cart">
+    <div className="wrapper rounded-lg h-full border-gray-50 ">
       <Header></Header>
-      <div className=" h-full">
-        <div className="flex gap-4 h-full w-3/4 mr-auto ml-auto">
-          <div className="left-sidebar flex flex-col mt-20 w-1/5 bg-white gap-2">
+      <div className="h-full">
+        <div className="flex gap-4 h-full w-3/4 mr-auto ml-auto overflow-hidden">
+          <div className="left-sidebar rounded-lg h-full flex flex-col mt-20 w-1/5 bg-white gap-2 pb-10 overflow-hidden">
             <div className="Profile-name flex items-center border-b-2 border-black p-4 gap-4">
               <div className="profileAvatar w-16 h-16 text-lg">
                 <img src={ProfileImage} alt="" />
@@ -75,12 +75,13 @@ function Account() {
           </div>
           <div
             id="content"
-            className="bg-white flex flex-col mt-20 h-full w-3/4 gap-2 p-4"
+            className="bg-white rounded-lg flex flex-col mt-20 h-full w-3/4 gap-2 p-4 pb-10 overflow-hidden"
           >
             {renderContent()}
           </div>
         </div>
-      </div>
+        </div>
+        <Footer className ="overflow-hidden"></Footer>
     </div>
   );
 }

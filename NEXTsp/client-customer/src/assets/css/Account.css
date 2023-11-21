@@ -1,8 +1,18 @@
-.left-sidebar {
+#root{
+
+}
+.left-sidebar {   
+  width: 20%;
+  background-color: #fff;
+  border: solid black 1px;
+}
+#content{
+  height: 100%;
+  border: solid black 1px;
 }
 .wrapper{
-  padding-bottom: 400px;
-  height: 100%;
+  background-color: #f6f7fa;
+  max-height: 3000px;
 }
 .InforAccountSection{
 }

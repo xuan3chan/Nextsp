@@ -67,7 +67,7 @@ function Header(props) {
           <img className="" src={LogoPage} alt="" />
         </div>
         <div className="navbar flex ">
-          <a href="../Homepage">Trang Chủ</a>
+          <a href="/Homepage">Trang Chủ</a>
           <a href="/Blog">Bài Viết</a>
           <div className="dropdown relative">
             <div className="dropdown-btn-container flex justify-center items-center">
