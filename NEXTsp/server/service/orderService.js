@@ -1,11 +1,27 @@
-const Order = require('../models/orderModel');
-const Product = require('../models/productModel');
+const Order = require("../models/orderModel");
+const Product = require("../models/productModel");
 
 class OrderService {
   //add new order and validate
-  async addOrderService(userId, product, tracking, payment, address, phone, fullName) {
-    if (!userId || !product || !tracking || !payment || !address || !phone || !fullName) {
-      throw new Error('Missing required fields');
+  async addOrderService(
+    userId,
+    product,
+    tracking,
+    payment,
+    address,
+    phone,
+    fullName
+  ) {
+    if (
+      !userId ||
+      !product ||
+      !tracking ||
+      !payment ||
+      !address ||
+      !phone ||
+      !fullName
+    ) {
+      throw new Error("Missing required fields");
     }
 
     // Calculate total price
@@ -29,45 +45,43 @@ class OrderService {
     const saveOrder = await order.save();
     return saveOrder;
   }
-//update order chỉ update trường tracking
-async updateOrderService(id, tracking) {
-  if (!id || !tracking) {
-    throw new Error('Missing required fields');
-  }
-  const order = await Order.findById(id);
-  if (!order) {
-    throw new Error('Order not found');
-  }
-  order.tracking = tracking;
-  const saveOder=await order.save();
-  return saveOder;
-
-}
-//delete order
-async deleteOrderService(id) {
-    if (!id) {
-        throw new Error('Missing required fields');
+  //update order chỉ update trường tracking
+  async updateOrderService(id, tracking) {
+    if (!id || !tracking) {
+      throw new Error("Missing required fields");
     }
     const order = await Order.findById(id);
     if (!order) {
-        throw new Error('Order not found');
+      throw new Error("Order not found");
+    }
+    order.tracking = tracking;
+    const saveOder = await order.save();
+    return saveOder;
+  }
+  //delete order
+  async deleteOrderService(id) {
+    if (!id) {
+      throw new Error("Missing required fields");
+    }
+    const order = await Order.findById(id);
+    if (!order) {
+      throw new Error("Order not found");
     }
     const result = await Order.findByIdAndDelete(id);
-    return result;    
-}
-//get all order populate product and user
-async getAllOrderService() {
-    const result = await Order.find().populate({ path: 'product.productId', select: 'nameProduct price' }).populate({path:'userId',select:'fullName email accountName'});
-    return{ success: true, message: 'all order', order: result };  ;
-
+    return result;
   }
-async getOrdersByUserId(userId) {
-  const orders = await Order.find({ userId: userId })
-                .populate('userId')
-                .populate('product.productId');
-  return orders;
-}
-
+  //get all order populate product and user
+  async getAllOrderService() {
+    const result = await Order.find()
+      .populate({ path: "product.productId", select: "nameProduct price" })
+      .populate({ path: "userId", select: "fullName email accountName" });
+    return { success: true, message: "all order", order: result };
+  }
+  async getOrdersByUserId(userId) {
+    const orders = await Order.find({ userId: userId })
+      .populate("userId")
+      .populate("product.productId");
+    return orders;
+  }
 }
 module.exports = new OrderService();
-
