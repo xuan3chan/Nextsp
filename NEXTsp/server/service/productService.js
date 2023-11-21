@@ -2,10 +2,10 @@ const Products = require('../models/productModel');
 const cloudinary = require('cloudinary').v2;
 
 class ProductService {
-  static async addProductService(req, { nameProduct, description, price, oldprice, brand, status }) {
+  static async addProductService(req, { nameProduct, description, price, oldprice, brand, status,category }) {
     try {
       // Validation
-      if (!nameProduct || !price || !brand) {
+      if (!nameProduct || !price || !brand || !category) {
         throw { status: 400, message: 'Missing required fields for product creation' };
       }
       // Check for duplicate product name
@@ -31,6 +31,7 @@ class ProductService {
         price,
         oldprice,
         brand,
+        category,
         status,
       });
       //2
@@ -60,7 +61,7 @@ class ProductService {
   }
 
   // Update a product
-  static async updateProductService(req,  {id, nameProduct, description, price, oldprice, brand, status }) {
+  static async updateProductService(req,  {id, nameProduct, description, price, oldprice, brand, status,category }) {
     try {
       // Find the product
       const product = await Products.findById(id);
@@ -76,6 +77,7 @@ class ProductService {
       if (nameProduct) product.nameProduct = nameProduct;
       if (description) product.description = description;
       if (price) product.price = price;
+      if (category) product.category = category;
       if (oldprice) product.oldprice = oldprice;
       if (brand) product.brand = brand;
       if (status) product.status = status;
@@ -126,35 +128,39 @@ class ProductService {
       }}}
   //get all products
   static async getAllProductsService() {
-    const products = await Products.find().populate({
-      path: 'brand',
-      select: 'nameBrand _id category',
-      populate: {
-        path: 'category',
-        select: 'nameCategory _id' // replace 'nameCategory' with the actual field name for the category name
+      const products = await Products.find()
+                                     .populate({
+                                         path: 'brand',
+                                         select: 'nameBrand _id'
+                                     })
+                                     .populate({
+                                         path: 'category',
+                                         select: 'nameCategory _id'
+                                     });
+
+      if (!products.length) {
+        return { success: false, message: 'No products found' };
       }
-    });
 
-    if (!products.length) {
-      return { success: false, message: 'No products found' };
-    }
+      const extractedProducts = products.map(product => ({
+        id: product.id,
+        nameProduct: product.nameProduct,
+        description: product.description,
+        price: product.price,
+        oldprice: product.oldprice,
+        images: product.images,
+        brand: product.brand ? { 
+          name: product.brand.nameBrand, 
+          id: product.brand._id,
+        } : null,
+        category: product.category ? {
+          name: product.category.nameCategory,
+          id: product.category._id,
+        } : null,
+        status: product.status,
+      }));
 
-    const extractedProducts = products.map(product => ({
-      id: product.id,
-      nameProduct: product.nameProduct,
-      description: product.description,
-      price: product.price,
-      oldprice: product.oldprice,
-      images: product.images,
-      brand: product.brand ? { 
-        name: product.brand.nameBrand, 
-        id: product.brand._id,
-        category: product.brand.category ? product.brand.category : null
-      } : null,
-      status: product.status,
-    }));
-
-    return { success: true, message: 'Product details', products: extractedProducts };
+      return { success: true, message: 'Product details', products: extractedProducts };
   }
   //delete product
   static async deleteProductService(id) {

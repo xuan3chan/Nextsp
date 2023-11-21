@@ -28,7 +28,7 @@ export const createPorductImage = async ({ image }) => {
   /* Most important part for uploading multiple image  */
 };
 
-export const createProduct = async ({ nameProduct, description, image, status, brand, price }) => {
+export const createProduct = async ({ nameProduct, description, image, status, brand, category, price, oldprice }) => {
   let formData = new FormData();
   
   for (const file of image) {
@@ -38,7 +38,9 @@ export const createProduct = async ({ nameProduct, description, image, status, b
   formData.append("description", description);
   formData.append("status", status);
   formData.append("brand", brand);
+  formData.append("category", category);
   formData.append("price", price);
+  formData.append("oldprice", oldprice);
 
   try {
     let res = await axios.post(`${apiURL}/add`, formData);
@@ -83,21 +85,26 @@ export const editProduct = async (product, originalProduct) => {
     if (product.status !== originalProduct.status) {
       formData.append("status", product.status);
     }
-    if (product.brand && product.brand.id !== originalProduct.brand.id) {
+    if (product.brand && originalProduct.brand && product.brand.id !== originalProduct.brand.id) {
       formData.append("brand", product.brand);
+    }
+    if (product.category && originalProduct.category && product.category.id !== originalProduct.category.id) {
+      formData.append("category", product.category);
+    } else if (!product.category) {
+      formData.append("category", { _id: "", nameCategory: "" });
     }
     if (product.price !== originalProduct.price) {
       formData.append("price", product.price);
+    }
+    if (product.oldprice !== originalProduct.oldprice) {
+      formData.append("oldprice", product.oldprice);
     }
 
     console.log("Product before sending request:", product);
 
     let res = await axios.put(`${apiURL}/update/${product.id}`, formData);
-    console.log("Product ID:", product);
-    console.log("Response from server:", res.data);
     return res.data;
   } catch (error) {
-    console.log("Error during product update:", error);
     return { error: 'An error occurred while updating the product.' };
   }
 };

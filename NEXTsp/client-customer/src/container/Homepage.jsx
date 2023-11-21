@@ -28,12 +28,13 @@ function Homepage(props) {
         <div className="container_content mt-[56px] color-bg">
           <BannerScroll />
           <div className="container-product-section inline-block relative">
-            <div className="flex flex-col w-4/5 contents-center mr-auto ml-auto gap-10">
+            <div className="flex flex-col contents-center mr-auto ml-auto gap-10">
               <SloganListSection />
               <ProductListAll />
+              <ProductList title="Gaming Gear Razer" CollectionBrand="Razer" />
               <ProductList
-                title="Gaming Razer"
-                CollectionBrand="Gaming razer"
+                title="PC Máy Tính Bàn - Intel"
+                CollectionBrand="Samsung"
               />
             </div>
           </div>

@@ -34,7 +34,7 @@ function ProductList(props) {
 
   const imagePlaceHolder = "https://via.placeholder.com/350";
   return (
-    <div className="productList p-4 mr-auto ml-auto bg-white rounded-md">
+    <div className="productList w-full  p-4 mr-auto ml-auto bg-white rounded-md">
       {isLoading && (
         <div className="loading">
           <RiseLoader
@@ -89,10 +89,10 @@ function ProductList(props) {
                       <h1>{product.nameProduct}</h1>
                     </div>
                     <div>
-                      <p className="product_oldPrice font-bold RobotoViet">
+                      <p className="product_oldPrice font-bold">
                         {formatPrice(product.oldrice)}
                       </p>
-                      <p className="product_price font-normal RobotoViet">
+                      <p className="product_price font-normal ">
                         {formatPrice(product.price)}
                       </p>
                     </div>

@@ -36,7 +36,7 @@ function ProductList(props) {
 
   const imagePlaceHolder = "https://via.placeholder.com/350";
   return (
-    <div className="productList p-4 mr-auto ml-auto bg-white rounded-md">
+    <div className="productList w-full p-4 mr-auto ml-auto bg-white rounded-md">
       {isLoading && (
         <div className="loading">
           <RiseLoader
@@ -74,7 +74,7 @@ function ProductList(props) {
                 key={product.id}
               >
                 <Link to={`/products/${product.id}`}>
-                  <div className="product_image w-72 h-52 object-contain">
+                  <div className="product_image w-56 h-52 object-contain">
                     <img
                       src={
                         product.images[0] == null
@@ -89,25 +89,25 @@ function ProductList(props) {
                     <h1>{product.nameProduct}</h1>
                   </div>
                   <div>
-                    <p className="product_oldPrice font-bold RobotoViet">
+                    <p className="product_oldPrice font-bold ">
                       {formatPrice(product.oldprice)}
                     </p>
-                    <p className="product_price font-normal RobotoViet">
+                    <p className="product_price font-normal ">
                       {formatPrice(product.price)}
                     </p>
                   </div>
                   <div className="product_rating flex gap-1 items-center">
-                    <img src={starUrl} alt="" className="w-6 h-6" />
-                    <img src={starUrl} alt="" className="w-6 h-6" />
-                    <img src={starUrl} alt="" className="w-6 h-6" />
-                    <img src={starUrl} alt="" className="w-6 h-6" />
-                    <img src={starUrl} alt="" className="w-6 h-6" />
+                    <img src={starUrl} alt="" className="w-4 h-4" />
+                    <img src={starUrl} alt="" className="w-4 h-4" />
+                    <img src={starUrl} alt="" className="w-4 h-4" />
+                    <img src={starUrl} alt="" className="w-4 h-4" />
+                    <img src={starUrl} alt="" className="w-4 h-4" />
                     <p className="text-xs">(5 đánh giá)</p>
                   </div>
                 </Link>
                 <div className="over-button flex gap-4 items-center justify-center mt-3">
-                  <ButtonBuyNow product={product} />
-                  <ButtonAddToCart product={product} />
+                <ButtonBuyNow product={product} />
+                <ButtonAddToCart product={product} />
                 </div>
               </div>
             )

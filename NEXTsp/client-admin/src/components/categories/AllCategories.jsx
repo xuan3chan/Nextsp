@@ -59,6 +59,16 @@ const AllCategories = () => {
 
   const deleteCategory = (_id) => {
     if (window.confirm("Are you sure?")) {
+      // Find the category
+      const category = categories.find(category => category._id === _id);
+
+      // Check if the category has brands
+      if (category.brands.length > 0) {
+        alert('This category has brands associated with it and cannot be deleted.');
+        return;
+      }
+
+      // Continue with deletion
       axios.delete(`${apiURL}/delete/${_id}`)
         .then(res => {
           const del = categories.filter(category => _id !== category._id)
@@ -68,7 +78,7 @@ const AllCategories = () => {
           console.log(err)
         })
     }
-  }
+  };
   
   const editCategory = (_id, nameCategory, description, status) => {
     dispatch({
@@ -101,7 +111,17 @@ const AllCategories = () => {
                 <tr key={category._id}>
                   <td className="px-4 py-2 border">{category.nameCategory}</td>
                   <td className="px-4 py-2 border whitespace-normal break-words break-all">{category.description}</td>
-                  <td className="px-4 py-2 text-center border">{category.status}</td>
+                  <td className="px-4 py-2 text-center border">
+                    {category.status === "Active" ? (
+                      <span className="bg-green-200 rounded-full text-center text-sm px-2 font-semibold">
+                        {category.status}
+                      </span>
+                    ) : (
+                      <span className="bg-red-200 rounded-full text-center text-sm px-2 font-semibold">
+                        {category.status}
+                      </span>
+                    )}
+                  </td>
                   <td className="px-4 py-2 border">
                     <button
                       onClick={() => deleteCategory(category._id)}

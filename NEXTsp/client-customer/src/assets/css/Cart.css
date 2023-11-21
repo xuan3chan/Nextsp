@@ -1,7 +1,6 @@
 .bg-cart {
   background-color: #f6f7fa;
   z-index: 1;
-  max-height: 3000px;
 }
 .CartSection {
   position: relative;

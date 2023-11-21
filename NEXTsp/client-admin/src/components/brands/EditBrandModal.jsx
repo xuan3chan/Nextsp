@@ -30,7 +30,6 @@ const EditBrandModal = () => {
     let responseData = await getAllCategory();
     if (responseData) {
       setCategories(responseData);
-      console.log(responseData);
     } else {
       console.log(responseData);
     }
@@ -113,7 +112,7 @@ const EditBrandModal = () => {
       }, 100);
       setTimeout(() => {
         dispatch({ type: "editBrandModalClose", payload: false });
-        getAllBrand();
+        window.location.reload()
       },1000)
     } else {
       console.error("Unknown error");

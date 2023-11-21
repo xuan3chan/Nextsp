@@ -5,6 +5,7 @@ import "../assets/css/CustomerInformation.css";
 import { useState } from "react";
 import TotalSection from "../components/Cart/TotalSection";
 import axios from "axios";
+
 function CustomerShipping(props) {
   const [formData, setFormData] = useState({
     recipientName: "",
@@ -58,7 +59,7 @@ function CustomerShipping(props) {
                 <div className="form-group w-1/2">
                   <label htmlFor="phoneNumber">Số điện thoại:</label>
                   <input
-                    type="tel"
+                    type="number"
                     id="phoneNumber"
                     name="phoneNumber"
                     value={formData.phoneNumber}
@@ -67,18 +68,6 @@ function CustomerShipping(props) {
                     placeholder="Bắt buộc nhập"
                   />
                 </div>
-              </div>
-              <div className="form-group">
-                <label htmlFor="email">Email:</label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                  placeholder="Bắt buộc nhập"
-                />
               </div>
               <div className="w-full h-10 flex items-center gap-1">
                 <input type="radio" name="shipping" id="shipping" />

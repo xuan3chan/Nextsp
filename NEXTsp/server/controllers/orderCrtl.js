@@ -1,14 +1,15 @@
 //oder controller
 const orderService = require('../service/orderService');
+
 const handleErrorResponse = require('../middleware/errorHandling');
 
 class OrderController {
     //add new order
     async addOrderController(req, res) {
         try {
-            const { userId, product, totalPrice, tracking, payment,address,phone,fullName } = req.body;
-            const result = await orderService.addOrderService(userId, product, totalPrice, tracking, payment,address,phone,fullName);
-            res.status(200).json({message : "add complet", order : result});
+            const { userId, product, tracking, payment, address, phone, fullName } = req.body;
+            const result = await orderService.addOrderService(userId, product, tracking, payment, address, phone, fullName);
+            res.status(200).json({message : "add complete", order : result});
         } catch (error) {
             handleErrorResponse(res, error);
         }
@@ -43,6 +44,15 @@ class OrderController {
             handleErrorResponse(res, error);
         }
     }
+    async getOrdersByUser(req, res) {
+        try {
+            const userId = req.params.userId;
+            const orders = await orderService.getOrdersByUserId(userId);
+            res.json(orders);
+        } catch (error) {
+            handleErrorResponse(res, error);
+        }
+    } 
 
 }
 module.exports = new OrderController();
