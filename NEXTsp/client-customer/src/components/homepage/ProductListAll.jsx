@@ -36,7 +36,7 @@ function ProductList(props) {
 
   const imagePlaceHolder = "https://via.placeholder.com/350";
   return (
-    <div className="productList p-4 mr-auto ml-auto bg-white rounded-md">
+    <div className="productList w-full p-4 mr-auto ml-auto bg-white rounded-md">
       {isLoading && (
         <div className="loading">
           <RiseLoader
@@ -106,8 +106,8 @@ function ProductList(props) {
                   </div>
                 </Link>
                 <div className="over-button flex gap-4 items-center justify-center mt-3">
-                  <ButtonBuyNow product={product} />
-                  <ButtonAddToCart product={product} />
+                <ButtonBuyNow product={product} />
+                <ButtonAddToCart product={product} />
                 </div>
               </div>
             )

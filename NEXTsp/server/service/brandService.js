@@ -77,18 +77,10 @@ class BrandService {
 
         return { success: true, message: 'Excellent progress!' };
     }
-
+    // get all brand
     static async getAllBrandsService() {
-        const brands = await Brand.find().populate('category','nameCategory _id');
-        const extractedBrands = brands.map((brand) => ({
-            id: brand.id,
-            nameBrand: brand.nameBrand,
-            description: brand.description,
-            category: brand.category ? {name: brand.category.nameCategory,id: brand.category._id} : null,
-            status: brand.status,
-        }));
-
-        return { success: true, brands: extractedBrands };
+        const brands = await Brand.find().populate('category', 'nameCategory _id');
+        return { success: true, message: 'Excellent progress!', brands };
     }
 }
 

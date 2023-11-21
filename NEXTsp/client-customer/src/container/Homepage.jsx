@@ -34,11 +34,7 @@ function Homepage(props) {
               <ProductList title="Gaming Gear Razer" CollectionBrand="Razer" />
               <ProductList
                 title="PC Máy Tính Bàn - Intel"
-                CollectionBrand="Intel"
-              />
-              <ProductList
-                title="PC Máy Tính Bàn - AMD"
-                CollectionBrand="AMD"
+                CollectionBrand="Samsung"
               />
             </div>
           </div>
