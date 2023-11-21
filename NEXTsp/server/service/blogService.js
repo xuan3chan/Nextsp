@@ -1,94 +1,192 @@
 const Blog = require('../models/blogModel');
 const cloudinary = require('cloudinary').v2;
-const slugify = require('slugify'); //import thu vien slugify
+const slugify = require('slugify');// thu vien nay khong xai, tai khong biet xai cho nao cho hop ly
 
 class BlogService {
     static async addBlogService({ title, description, content, image, status }) {
         try {
-            // Kiểm tra validation
             if (!title || !description || !content || !image || !status) {
-                return { success: false, status: 400, message: 'Missing required parameters' };
+                throw { status: 400, message: 'Missing required parameters' };
+            }
+            // Check for duplicate blog
+            const duplicateBlog = await Blog.findOne({ title });
+            if (duplicateBlog) {
+                throw { status: 400, message: 'Blog already exists' };
             }
 
-            // Kiểm tra xem có bài đăng nào đã tồn tại với tiêu đề này chưa
-            const duplicate = await Blog.findOne({ title });
-            if (duplicate) {
-                return { success: false, status: 400, message: 'Blog already exists' };
+            //Su ly hinh anh
+            //1
+            if (req.files) {
+                const originalnames = req.files.map(file => file.originalname);
+                const uniqueOriginalnames = new Set(originalnames);
+                if (uniqueOriginalnames.size < originalnames.length) {
+                    throw { status: 400, message: 'Duplicate file names are not allowed' };
+                }
             }
+            //Create a new blog instance
+            const newBlog = new Blog({
+                title,
+                description,
+                content,
+                image,
+                status,
+            });
+            //2
+            if (req.files && req.files.length > 0) {
+                const imagePaths = req.files.map(el => el.path);
+                newBlog.images.push(...imagePaths);
+            }
+            console.log(req.files);
+            //save the new blog
+            const savedBlog = await newBlog.save();
 
-            // Tạo slug từ tiêu đề blog
-            const blogSlug = slugify(title, { lower: true });
+            //   const blogSlug = slugify(title, { lower: true });
 
-            // Tạo mới một đối tượng Blog với thông tin được cung cấp
-            const newBlog = new Blog({ title, description, content, image, status, blogSlug });
+            //Khuc nay tu nhien khong viet xai sao cho hop ly
+            //   const newBlog = new Blog({ title, description, content, image, status, blogSlug });
+            //   await newBlog.save();
 
-            // Lưu đối tượng Blog vào cơ sở dữ liệu
-            await newBlog.save();
 
-            return { success: true, message: 'Blog created successfully' };
+            //tiep tu la ham su ly hinh anh: destroy
+            return { success: true, message: 'Blog created successfully', blog: savedBlog };
         } catch (error) {
-            return { success: false, status: 500, message: 'Internal Server Error', error };
+            // If an error occurs, delete the files from Cloudinary
+            if (req.files && req.files.length > 0) {
+                for (const file of req.files) {
+                    const publicId = file.filename; // replace with the correct public ID
+                    cloudinary.uploader.upload.destroy(publicId, function (error, result) {
+                        console.log(result, error);
+                    });
+                }
+            }
+            // Re-throw the error
+            throw error;
         }
     }
-
-    static async updateBlogService({ blogId, title, description, content, image, status }) {
+    //update a blog
+    static async updateBlogService(req, { blogId, title, description, content, image, status }) {
         try {
-            // Kiểm tra validation
-            if (!blogId) {
-                return { success: false, status: 400, message: 'Missing blogId parameter' };
+            //Find the blog
+            const blog = await Blog.findById(blogId);
+            if (!blog) {
+                throw { status: 404, message: 'Blog not found' };
             }
-
-            // Kiểm tra xem bài đăng cần cập nhật có tồn tại không
-            const existingBlog = await Blog.findById(blogId);
-            if (!existingBlog) {
-                return { success: false, status: 404, message: 'Blog not found' };
+            const duplicateBlog = await Blog.findOne({ title });
+            if (duplicateBlog) {
+                throw { status: 400, message: 'A blog with this title already exists' };
             }
+            //Update the blog fields
+            if (title) blog.title = title;
+            if (description) blog.description = description;
+            if (content) blog.content = content;
+            if (image) blog.image = image;
+            if (status) blog.status = status;
 
-            // Kiểm tra xem có bài đăng khác có tiêu đề giống nhau không
-            if (title && title !== existingBlog.title) {
-                const duplicateTitle = await Blog.findOne({ title });
-                if (duplicateTitle) {
-                    return { success: false, status: 400, message: 'Another blog with the same title already exists' };
+            //check for duplicate originalnames in req.files
+            if (req.files) {
+                const originalnames = req.files.map(file => file.originalname);
+                const uniqueOriginalnames = new Set(originalnames);
+                if (uniqueOriginalnames.size < originalnames.length) {
+                    throw { status: 400, message: 'Duplicate file names are not allowed' };
+                }
+                //update the blog images
+                const imagePaths = req.files.map(el => el.path);
+                blog.images.push(...imagePaths); //add the new images to the existing images
+
+                //if there are more than 1 images, delete the oldest ones
+
+                //wrong khuc nay
+                if (product.images.length > 1) {
+                    // Get the images to delete
+                    const imagesToDelete = product.images.splice(1); // Get the images to delete
+                    const deletePromises = imagesToDelete.map(imagePath => {
+                        const splitUrl = imagePath.split('/');
+                        const filename = splitUrl[splitUrl.length - 1].split('.')[0]; // Get the filename from the URL
+                        const publicId = `NEXTsp/${filename}`; // Construct the publicId
+                        return cloudinary.uploader.upload.destroy(publicId);
+                    });
+
+                    try {
+                        await Promise.all(deletePromises);
+                        console.log('All images deleted successfully');
+                    } catch (error) {
+                        console.log('Error in deleting images: ', error);
+                    }
                 }
             }
 
-            // Cập nhật thông tin của bài đăng
-            existingBlog.title = title || existing
-            existingBlog.description = description || existingBlog.description;
-            existingBlog.content = content || existingBlog.content;
-            existingBlog.image = image || existingBlog.image;
-            existingBlog.status = status || existingBlog.status;
-
-            // Lưu thay đổi vào cơ sở dữ liệu
-            await existingBlog.save();
-
-            return { success: true, message: 'Blog updated successfully' };
+            //save the updated blog
+            const updatedBlog = await blog.save();
+            return { success: true, message: 'Blog updated successfully', blog: updatedBlog };
         } catch (error) {
-            return { success: false, status: 500, message: 'Internal Server Error', error };
+            // If an error occurs, delete the files from Cloudinary
+            if (req.files && req.files.length > 0) {
+                for (const file of req.files) {
+                    const publicId = file.filename; // replace with the correct public ID
+                    cloudinary.uploader.upload.destroy(publicId, function (error, result) {
+                        console.log(result, error);
+                    });
+                }
+            }
         }
     }
-
-    static async deleteBlogByIdService(blogId) {
-        try {
-            // Kiểm tra validation
-            if (!blogId) {
-                return { success: false, status: 400, message: 'Missing blogId parameter' };
-            }
-
-            // Kiểm tra xem bài đăng cần xóa có tồn tại hay không
-            const existingBlog = await Blog.findById(blogId);
-            if (!existingBlog) {
-                return { success: false, status: 404, message: 'Blog not found' };
-            }
-
-            // Xóa bài đăng từ cơ sở dữ liệu
-            await existingBlog.remove();
-
-            return { success: true, message: 'Blog deleted successfully' };
-        } catch (error) {
-            return { success: false, status: 500, message: 'Internal Server Error', error };
-        }
+    //delete a blog
+    static async deleteBlogService(blogId) {
+    const blog = await Blog.findByIdAndDelete(blogId);
+    if (!blog) {
+        throw { status: 404, message: 'Blog not found' };
     }
+    //delete all images from Cloudinary
+    for (const image of blog.images) {
+        const splitUrl = image.split('/');
+        const filename = splitUrl[splitUrl.length - 1].split('.')[0]; // Get the filename from the URL
+        const publicId = `NEXTsp/${filename}`; // Construct the publicId
+        cloudinary.uploader.upload.destroy(publicId, function (error, result) {
+            console.log(result, error);
+        });
+    }
+    return { success: true, message: 'Blog deleted successfully' };
 }
+    //getdetail blog by id
+    static async getDetailsBlogService(blogId) {
+    const blog = await Blog.findById(blogId);
+    if (!blog) {
+        throw { status: 404, message: 'Blog not found' };
+    }
+    return { success: true, message: 'Blog found', blog };
+}
+    //search blog by title
+    static async searchBlogService(title) {
+    const blog = await Blog.find({ title: { $regex: title, $options: 'i' } });
+    if (!blog) {
+        throw { status: 404, message: 'Blog not found' };
+    }
+    return { success: true, message: 'Blog found', blog };
+}
+    //get all blog
+    static async getAllBlogsService() {
+    const blogs = await Blog.find().populate({
+        path: 'category',
+        select: 'nameCategory _id',
+    });
+    if (!blogs.length) {
+        return { success: false, message: 'No blogs found' };
+    }
+    const extractedBlogs = blogs.map(blog => ({
+        id: blog.id,
+        title: blog.title,
+        description: blog.description,
+        content: blog.content,
+        image: blog.image,
+        status: blog.status,
+        category: blog.category ? {
+            name: blog.category.nameCategory,
+            id: blog.category._id,
+        } : null,
+    }));
+    return { success: true, message: 'Blog details', blogs: extractedBlogs };
+}
+}
+
 
 module.exports = BlogService;

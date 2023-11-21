@@ -15,6 +15,7 @@ class ProductService {
       }
 
       // Check for duplicate originalnames in req.files
+      //1
       if (req.files) {
         const originalnames = req.files.map(file => file.originalname);
         const uniqueOriginalnames = new Set(originalnames);
@@ -32,6 +33,7 @@ class ProductService {
         brand,
         status,
       });
+      //2
       if (req.files && req.files.length > 0) {
         const imagePaths = req.files.map(el => el.path);
         newProduct.images.push(...imagePaths);
