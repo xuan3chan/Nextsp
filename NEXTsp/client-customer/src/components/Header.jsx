@@ -11,7 +11,7 @@ import { BsHeadphones } from "react-icons/bs";
 import { AiOutlineUser } from "react-icons/ai";
 import { PiShoppingCartSimpleBold } from "react-icons/pi";
 import SearchFunction from "./Header/SearchFunction";
-
+import LogoPage from "../assets/img/Logo.png";
 function Header(props) {
   const [Categories, setCategories] = useState([]);
   const [accountName, setAccountName] = useState("");
@@ -62,8 +62,10 @@ function Header(props) {
 
   return (
     <div>
-      <div className="header z-20 fixed flex justify-center">
-        <div className="header_logo text-white"> </div>
+      <div className="header z-20 flex justify-center">
+        <div className="header_logo">
+          <img className="" src={LogoPage} alt="" />
+        </div>
         <div className="navbar flex ">
           <a href="../Homepage">Trang Chủ</a>
           <a href="/Blog">Bài Viết</a>

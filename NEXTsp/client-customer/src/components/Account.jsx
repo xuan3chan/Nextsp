@@ -9,7 +9,7 @@ import { FaUserAlt } from "react-icons/fa";
 import { FaClipboardCheck } from "react-icons/fa6";
 import { FaSignOutAlt } from "react-icons/fa";
 import { IoLocation } from "react-icons/io5";
-
+import Footer from "./Footer";
 function Account() {
   const [activeTab, setActiveTab] = useState("profile");
 
@@ -29,56 +29,59 @@ function Account() {
   };
   const userName = localStorage.getItem("accountName");
   return (
-    <div className="bg-cart">
+    <div className="h-full">
       <Header></Header>
-      <div className="flex gap-4">
-        <div className="left-sidebar flex flex-col mt-20 h-full w-1/5 bg-white gap-2 p-4">
-          <div className="Profile-name flex items-center border-b-2 border-black pb-1 gap-4">
-            <div className="profileAvatar w-16 h-16 text-lg">
-              <img src={ProfileImage} alt="" />
+      <div className="bg-cart h-3/4 ">
+        <div className="flex gap-4 h-4/5 w-3/4 mr-auto ml-auto">
+          <div className="left-sidebar flex flex-col mt-20 h-full w-1/5 bg-white gap-2">
+            <div className="Profile-name flex items-center border-b-2 border-black p-4 gap-4">
+              <div className="profileAvatar w-16 h-16 text-lg">
+                <img src={ProfileImage} alt="" />
+              </div>
+              <div className="profileName ">
+                <p>Xin Chào {userName}</p>
+              </div>
             </div>
-            <div className="profileName">
-              <p>{userName}</p>
+            <div className="menu-section flex flex-col items-start p-2 gap-4 ml-4 mt-4">
+              <button
+                className="menu-item flex items-center gap-2 text-lg"
+                onClick={() => setActiveTab("profile")}
+              >
+                <FaUserAlt />
+                Thông tin tài khoản
+              </button>
+              <button
+                className="menu-item flex items-center gap-2 text-lg"
+                onClick={() => setActiveTab("tracking")}
+              >
+                <FaClipboardCheck />
+                Kiểm tra trạng thái
+              </button>
+              <button
+                className="menu-item flex items-center gap-2 text-lg"
+                onClick={() => setActiveTab("address")}
+              >
+                <IoLocation />
+                Địa Chỉ
+              </button>
+              <button
+                className="menu-item flex items-center gap-2 text-lg"
+                onClick={() => setActiveTab("logout")}
+              >
+                <FaSignOutAlt />
+                Đăng Xuất
+              </button>
             </div>
           </div>
-          <div className="menu-section flex flex-col items-start gap-2">
-            <button
-              className="flex items-center gap-1 text-lg"
-              onClick={() => setActiveTab("profile")}
-            >
-              <FaUserAlt />
-              Thông tin tài khoản
-            </button>
-            <button
-              className="flex items-center gap-1 text-lg"
-              onClick={() => setActiveTab("tracking")}
-            >
-              <FaClipboardCheck />
-              Kiểm tra trạng thái
-            </button>
-            <button
-              className="flex items-center gap-1 text-lg"
-              onClick={() => setActiveTab("address")}
-            >
-              <IoLocation />
-              Địa Chỉ
-            </button>
-            <button
-              className="flex items-center gap-1 text-lg"
-              onClick={() => setActiveTab("logout")}
-            >
-              <FaSignOutAlt />
-              Đăng Xuất
-            </button>
+          <div
+            id="content"
+            className="bg-white flex flex-col mt-20 h-full w-3/4 gap-2 p-4"
+          >
+            {renderContent()}
           </div>
-        </div>
-        <div
-          id="content"
-          className="bg-white flex flex-col mt-20 h-full gap-2 p-4"
-        >
-          {renderContent()}
         </div>
       </div>
+      <Footer />
     </div>
   );
 }
