@@ -130,7 +130,7 @@ function Header(props) {
             <div className="boxIcon">
               <BiTask></BiTask>
             </div>
-            <p className="">Trạng Thái Đơn Hàng</p>
+            <a href ="/Account" className="">Trạng Thái Đơn Hàng</a>
           </div>
           <div className="navItem opacity-60 hover:cursor-pointer hover:opacity-100 text-sm">
             <div className="boxIcon">
