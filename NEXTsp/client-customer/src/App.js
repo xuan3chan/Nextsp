@@ -10,7 +10,7 @@ import CustomerShipping from "./container/CustomerShipping";
 import PaymentPage from "./container/PaymentPage";
 import Account from "./components/Account";
 import SearchFunction from "./components/Header/SearchFunction";
-
+import OrderTracker from "./components/AccountPage/OrderTracker";
 const App = () => {
   return (
     <Router>
@@ -34,6 +34,7 @@ const App = () => {
             path="SearchFunction"
             element={<SearchFunction></SearchFunction>}
           ></Route>
+          <Route path ="OrderTracker" element={<OrderTracker></OrderTracker>}></Route>
         </Routes>
       </LoadingProvider>
     </Router>

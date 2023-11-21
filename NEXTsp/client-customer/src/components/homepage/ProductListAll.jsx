@@ -106,8 +106,8 @@ function ProductList(props) {
                   </div>
                 </Link>
                 <div className="over-button flex gap-4 items-center justify-center mt-3">
-                  <ButtonBuyNow product={product} />
-                  <ButtonAddToCart product={product} />
+                <ButtonBuyNow product={product} />
+                <ButtonAddToCart product={product} />
                 </div>
               </div>
             )

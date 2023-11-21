@@ -4,7 +4,7 @@ const Footer = () => {
   return (
     <footer>
       <div className="">
-        <div className="footerSection flex h-6 gap-14 justify-center pt-10 pb-10 w-full border-t-2">
+        <div className="footerSection flex gap-14 justify-center pt-14 pb-10 w-full border-t-2">
           <div className="footer-col-1 flex flex-col">
             <h1>Về NextSP Store</h1>
             <p>Giới Thiệu</p>

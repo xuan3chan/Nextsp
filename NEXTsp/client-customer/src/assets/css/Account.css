@@ -1,5 +1,21 @@
 .left-sidebar {
+}
+.wrapper{
+  padding-bottom: 400px;
   height: 100%;
+}
+.InforAccountSection{
+}
+.title{
+  font-weight: 500;
+  font-size: 22px;
+}
+.menu-section{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  height:100%;
+  margin-top:10px;
 }
 .sub-title {
   text-align: end;
@@ -43,4 +59,18 @@
   font-size: 16px;
   text-decoration: underline;
   color: #005ec9;
+}
+.content__body__subTitle{
+  font-size: 20px;
+  font-weight: 500;
+}
+.content__body__title{
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+  border-bottom: solid black 2px;
+}
+.content_body{
+  height:100%;
+  width: 100%;
 }

@@ -74,8 +74,8 @@ function InforAccount(props) {
           </div>
           <div className="userBirth flex gap-2 items-center">
             <div className="sub-title">Ngày sinh</div>
-            <span className="sub-title-content w-1/3">
-              <input type="date" />
+            <span className="sub-title-content w-2/3">
+              <input className ="p-2 " type="date" />
             </span>
           </div>
         </div>
