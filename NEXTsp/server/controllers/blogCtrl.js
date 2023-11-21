@@ -1,4 +1,4 @@
-const blogCtrl = require('../controllers/blogCtrl');
+const BlogService = require('../service/blogService');
 const handleErrorResponse = require('../middleware/errorHandling');
 
 //class
