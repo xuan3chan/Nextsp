@@ -5,7 +5,7 @@ const handleErrorResponse = require('../middleware/errorHandling');
 class BlogController{
     static async addBlogController(req, res) {
         try {
-            const result = await blogCtrl.addBlogService(req.body);
+            const result = await BlogService.addBlogService(req, req.body);
             res.json(result);
         } catch (error) {
             handleErrorResponse(res, error);
@@ -15,7 +15,7 @@ class BlogController{
     static async updateBlogController(req, res) {
         try {
             const { id } = req.params;
-            const result = await blogCtrl.updateBlogService({ id, ...req.body });
+            const result = await BlogService.updateBlogService({ id, ...req.body });
             res.json(result);
         } catch (error) {
             handleErrorResponse(res, error);
@@ -24,7 +24,7 @@ class BlogController{
 
     static async deleteBlogController(req, res) {
         try {
-            const result = await blogCtrl.deleteBlogService(req.params.id);
+            const result = await BlogService.deleteBlogService(req.params.id);
             res.json(result);
         } catch (error) {
             handleErrorResponse(res, error);
@@ -33,7 +33,7 @@ class BlogController{
     static async searchBlogController(req, res) {
         try {
             const title = req.params.title;
-            const result = await blogCtrl.searchBlogService(title);
+            const result = await BlogService.searchBlogService(title);
             res.json(result);
         } catch (error) {
             handleErrorResponse(res, error);
@@ -42,7 +42,15 @@ class BlogController{
 
     static async getAllBlogsController(req, res) {
         try {
-            const result = await blogCtrl.getAllBlogsService();
+            const result = await BlogService.getAllBlogsService();
+            res.json(result);
+        } catch (error) {
+            handleErrorResponse(res, error);
+        }
+    }
+    static async getDetailsBlogController(req, res) {
+        try {
+            const result = await BlogService.getDetailsBlogService(req.params.id);
             res.json(result);
         } catch (error) {
             handleErrorResponse(res, error);
