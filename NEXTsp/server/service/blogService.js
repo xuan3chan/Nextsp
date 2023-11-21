@@ -1,6 +1,9 @@
 const Blog = require("../models/blogModel");
 const cloudinary = require("cloudinary").v2;
 const slugify = require("slugify"); //import thu vien slugify
+const Blog = require('../models/blogModel');
+const cloudinary = require('cloudinary').v2;
+const slugify = require('slugify');// thu vien nay khong xai, tai khong biet xai cho nao cho hop ly
 
 class BlogService {
   static async addBlogService({ title, description, content, image, status }) {

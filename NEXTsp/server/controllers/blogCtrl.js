@@ -2,15 +2,15 @@ const blogCtrl = require("../controllers/blogCtrl");
 const handleErrorResponse = require("../middleware/errorHandling");
 
 //class
-class BlogController {
-  static async addBlogController(req, res) {
-    try {
-      const result = await blogCtrl.addBlogService(req.body);
-      res.json(result);
-    } catch (error) {
-      handleErrorResponse(res, error);
+class BlogController{
+    static async addBlogController(req, res) {
+        try {
+            const result = await BlogService.addBlogService(req, req.body);
+            res.json(result);
+        } catch (error) {
+            handleErrorResponse(res, error);
+        }
     }
-  }
 
   static async updateBlogController(req, res) {
     try {
