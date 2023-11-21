@@ -10,7 +10,6 @@ import CustomerShipping from "./container/CustomerShipping";
 import PaymentPage from "./container/PaymentPage";
 import Account from "./components/Account";
 import SearchFunction from "./components/Header/SearchFunction";
-
 const App = () => {
   return (
     <Router>
