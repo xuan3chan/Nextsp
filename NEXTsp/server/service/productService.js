@@ -1,5 +1,6 @@
 const Products = require("../models/productModel");
 const cloudinary = require("cloudinary").v2;
+const removeAccents = require('remove-accents');
 
 class ProductService {
   static async addProductService(
@@ -230,18 +231,22 @@ class ProductService {
     return { success: true, message: "Product details", product };
   }
   // serach product by name
+ 
+
   static async searchProductService(nameProduct) {
-    const words = nameProduct.split(' ');
-    const product = await Products.find({ 
-      nameProduct: { 
-        $regex: words.join('|'), 
-        $options: 'i' 
-      } 
-    });
-    if (!product) {
+    const normalizedInput = removeAccents(nameProduct);
+    const regex = new RegExp([...normalizedInput].join('.*'), 'i');
+
+    const products = await Products.find();
+    const matchedProducts = products.filter(product => 
+      regex.test(removeAccents(product.nameProduct))
+    );
+
+    if (!matchedProducts.length) {
       throw { status: 404, message: "Product not found" };
     }
-    return { success: true, message: "Product details", product };
+
+    return { success: true, message: "Product details", product: matchedProducts };
   }
 }
 
