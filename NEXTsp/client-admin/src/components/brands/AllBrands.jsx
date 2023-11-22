@@ -55,31 +55,33 @@ const AllBrands = () => {
     return <div>ERROR...</div>;
   }
   // Delete brand
-  const deleteBrand = (id) => {
+  const deleteBrand = (_id) => {
     if (window.confirm("Are you sure?")) {
-      axios.delete(`${apiURL}/delete/${id}`)
-        .then(res => {
-          const del = brands.filter(brand => id !== brand.id)
-          setBrands(del)
+      axios
+        .delete(`${apiURL}/delete/${_id}`)
+        .then((res) => {
+          const del = brands.filter((brand) => _id !== brand._id);
+          setBrands(del);
         })
-        .catch(err => {
-          console.log(err)
-        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
   };
-  
+
   //Edit Brand
-  const editBrand = (id, nameBrand, description, status, category ) => [
-    dispatch({ 
-      type: "editBrandModalOpen", 
-      id: id,
+  const editBrand = (_id, nameBrand, description, status, category) => {
+    console.log(_id)
+    console.log(category); // This will log the category array
+    dispatch({
+      type: "editBrandModalOpen",
+      _id: _id,
       nameBrand: nameBrand,
       description: description,
       status: status,
       category: category,
-  })
-  ]
-
+    });
+  };
 
   return (
     <Fragment>
@@ -126,17 +128,21 @@ const AllBrands = () => {
                               )}
                             </td>
                             <td className="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
-                            {brand.category ? brand.category.name : "N/A"}
-                            </td> 
+                              {brand.category && brand.category.length > 0
+                                ? brand.category
+                                    .map((elem) => elem.nameCategory)
+                                    .join("; ")
+                                : "N/A"}
+                            </td>
                             <td className="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
                               <button
                                 onClick={() =>
                                   editBrand(
-                                    brand.id,
+                                    brand._id,
                                     brand.nameBrand,
                                     brand.description,
                                     brand.status,
-                                    brand.category.id
+                                    brand.category
                                   )
                                 }
                                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-1"
@@ -144,15 +150,15 @@ const AllBrands = () => {
                                 Edit
                               </button>
                               <button
-                                onClick={() => deleteBrand(brand.id)}
+                                onClick={() => deleteBrand(brand._id)}
                                 className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
                               >
                                 Delete
                               </button>
                             </td>
                           </tr>
-                      ))
-                    ) : (
+                        ))
+                      ) : (
                         <tr>
                           <td
                             colSpan="7"

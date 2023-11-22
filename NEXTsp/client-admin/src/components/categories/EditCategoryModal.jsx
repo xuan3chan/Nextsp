@@ -31,19 +31,34 @@ const EditCategoryModal = () => {
     }
   };
 
-  const submitForm = async () => {
+  const submitForm = async (e) => {
+    e.preventDefault(); // Prevent form from being submitted
+
+    if (!nameCategory || !status) {
+      alert('Please fill in all required fields');
+      return;
+    }
+
     dispatch({ type: "loading", payload: true });
     let edit = await editCategory(_id, nameCategory, description, status);
+
+    if (!edit) {
+      console.error('editCategory returned undefined');
+      dispatch({ type: "loading", payload: false });
+      return;
+    }
+
     if (edit.error) {
       console.log(edit.error);
       dispatch({ type: "loading", payload: false });
     } else if (edit.success) {
       console.log(edit.success);
-      dispatch({ type: "editCategoryModalClose" });
       setTimeout(() => {
+        dispatch({ type: "editCategoryModalClose", payload: true});
         fetchData();
         dispatch({ type: "loading", payload: false });
-      }, 3000);
+      }, 1000);
+      window.location.reload(); // Reload the page
     }
   };
 
@@ -104,7 +119,6 @@ const EditCategoryModal = () => {
                   className="border-2 border-gray-300 p-2 w-full"
                   type="text"
                   placeholder="Description"
-                  required
                 />
               </div>
               <div className="mb-4">

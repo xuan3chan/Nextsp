@@ -1,11 +1,11 @@
 import React, { Fragment, useContext, useState, useEffect } from "react";
+import Select from "react-select";
 import { BrandContext } from "./index";
 import { editBrand, getAllBrand } from "./FetchAPI";
 import { getAllCategory } from "../categories/FetchApi";
 
 const EditBrandModal = () => {
   const { data, dispatch } = useContext(BrandContext);
-
   const [categories, setCategories] = useState(null);
 
   const alert = (msg, type) => (
@@ -13,11 +13,11 @@ const EditBrandModal = () => {
   );
 
   const [editformData, setEditformdata] = useState({
-    id: "",
+    _id: "",
     nameBrand: "",
     description: "",
     status: "",
-    category: "",
+    category: [],
     error: false,
     success: false,
   });
@@ -38,7 +38,7 @@ const EditBrandModal = () => {
   useEffect(() => {
     setEditformdata({
       ...editformData,
-      id: data.editBrandModal.id,
+      _id: data.editBrandModal._id,
       nameBrand: data.editBrandModal.nameBrand,
       description: data.editBrandModal.description,
       status: data.editBrandModal.status,
@@ -56,29 +56,58 @@ const EditBrandModal = () => {
     }
   };
 
+  const getUnselectedCategories = () => {
+    if (!categories) return [];
+    const selectedCategoryIds = Array.isArray(editformData.category) ? editformData.category.map(c => c._id) : [];
+    return categories.filter((c, index, self) => 
+      index === self.findIndex((t) => (
+        t._id === c._id && t.nameCategory === c.nameCategory
+      )) && !selectedCategoryIds.includes(c._id)
+    );
+  };
+
   const handleChange = (e) => {
-    setEditformdata({
-      ...editformData,
-      error: false,
-      success: false,
-      [e.target.name]: e.target.value,
-    });
+    if (e.target.name === "category") {
+      const selectedCategoryIds = Array.isArray(editformData.category) ? editformData.category.map(c => c._id) : [];
+      const newCategories = e.target.value
+        .filter(_id => !selectedCategoryIds.includes(_id))
+        .map(_id => categories.find(c => c._id === _id));
+      const removedCategories = selectedCategoryIds.filter(_id => !e.target.value.includes(_id));
+      setEditformdata(prevState => ({
+        ...prevState,
+        error: false,
+        success: false,
+        category: Array.isArray(prevState.category) 
+          ? [...prevState.category.filter(c => !removedCategories.includes(c._id)), ...newCategories]
+          : [...newCategories],
+      }));
+      console.log('Category added: ', newCategories);
+      console.log('Category removed: ', removedCategories);
+    } else {
+      setEditformdata({
+        ...editformData,
+        error: false,
+        success: false,
+        [e.target.name]: e.target.value,
+      });
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Check if nameBrand has changed
-    const hasNameBrandChanged = editformData.nameBrand !== data.editBrandModal.nameBrand;
+    const hasNameBrandChanged =
+      editformData.nameBrand !== data.editBrandModal.nameBrand;
 
     // Prepare data to send to editBrand
-    const dataToSend = hasNameBrandChanged 
-      ? { ...editformData } 
-      : { 
-          id: editformData.id, 
-          description: editformData.description, 
-          status: editformData.status, 
-          category: editformData.category 
+    const dataToSend = hasNameBrandChanged
+      ? { ...editformData }
+      : {
+          _id: editformData._id,
+          description: editformData.description,
+          status: editformData.status,
+          category: editformData.category,
         };
 
     let response = await editBrand(dataToSend);
@@ -112,8 +141,8 @@ const EditBrandModal = () => {
       }, 100);
       setTimeout(() => {
         dispatch({ type: "editBrandModalClose", payload: false });
-        window.location.reload()
-      },1000)
+        window.location.reload();
+      }, 1000);
     } else {
       console.error("Unknown error");
     }
@@ -216,28 +245,35 @@ const EditBrandModal = () => {
                   >
                     Category
                   </label>
-                  <select
-                    className="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    value={editformData.category}
-                    onChange={handleChange}
+                  <Select
+                    isMulti
                     name="category"
-                    placeholder="Category"
-                  >
-                    {categories && categories.length > 0 ? (
-                      categories.map((elem) => (
-                        <option
-                          key={elem._id}
-                          value={elem._id}
-                        >
-                          {elem.nameCategory}
-                        </option>
-                      ))
-                    ) : (
-                      <option value="" disabled>
-                        No Category Found
-                      </option>
-                    )}
-                  </select>
+                    options={
+                      getUnselectedCategories().map((category, index) => ({
+                        value: category._id,
+                        label: category.nameCategory,
+                        key: `${category.nameCategory}-${category._id}-${index}`,
+                      }))
+                    }
+                    value={
+                      Array.isArray(editformData.category) && editformData.category.length > 0
+                        ? editformData.category.map((elem) => elem ? {
+                            value: elem._id,
+                            label: elem.nameCategory,
+                          } : {})
+                        : []
+                    }
+                    className="basic-multi-select"
+                    classNamePrefix="select"
+                    onChange={(selectedOptions) =>
+                      handleChange({
+                        target: {
+                          name: "category",
+                          value: selectedOptions ? selectedOptions.map((option) => option.value) : [],
+                        },
+                      })
+                    }
+                  />
                 </div>
               </div>
               {/*Footer */}

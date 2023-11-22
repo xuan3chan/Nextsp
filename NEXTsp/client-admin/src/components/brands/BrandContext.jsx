@@ -3,7 +3,7 @@ export const brandState = {
   addBrandModal: false,
   editBrandModal: {
     modal: false,
-    id: "",
+    _id: "",
     nameBrand: "",
     description: "",
     status: "",
@@ -30,7 +30,7 @@ export const brandReducer = (state, action) => {
         ...state,
         editBrandModal: {
           modal: true,
-          id: action.id,
+          _id: action._id,
           nameBrand: action.nameBrand,
           description: action.description,
           status: action.status,
@@ -42,7 +42,7 @@ export const brandReducer = (state, action) => {
         ...state,
         editBrandModal: {
           modal: false,
-          id: "",
+          _id: "",
           nameBrand: "",
           description: "",
           status: "",

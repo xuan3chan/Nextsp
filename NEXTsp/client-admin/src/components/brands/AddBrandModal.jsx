@@ -1,4 +1,5 @@
 import React, { Fragment, useContext, useState, useEffect } from "react";
+import Select from "react-select";
 import { BrandContext } from "./index";
 import { createBrand, getAllBrand } from "./FetchAPI";
 import { getAllCategory } from "../categories/FetchApi";
@@ -14,7 +15,7 @@ const AddBrandDetail = ({ categories }) => {
     nameBrand: "",
     description: "",
     status: "Active",
-    category: "",
+    category: [],
     success: false,
     error: false,
   });
@@ -35,8 +36,8 @@ const AddBrandDetail = ({ categories }) => {
     e.preventDefault();
     e.target.reset();
 
-    if (!fData.nameBrand) {
-      setFdata({ ...fData, error: "Please give the name!" });
+    if (!fData.nameBrand || !fData.category || fData.category.length === 0) {
+      setFdata({ ...fData, error: "Please give the name and select at least one category!" });
       setTimeout(() => {
         setFdata({ ...fData, error: false });
       }, 100);
@@ -191,33 +192,25 @@ const AddBrandDetail = ({ categories }) => {
               </div>
               <div className="w-1/2 flex flex-col space-y-1">
                 <label htmlFor="status">Brand Category *</label>
-                <select
-                  value={fData.category}
-                  onChange={(e) =>
+                <Select
+                  isMulti
+                  name="category"
+                  options={categories.map((category, index) => ({
+                    value: category._id,
+                    label: category.nameCategory,
+                    key: `${category.nameCategory}-${category._id}-${index}`,
+                  }))}
+                  className="basic-multi-select"
+                  classNamePrefix="select"
+                  onChange={(selectedOptions) =>
                     setFdata({
                       ...fData,
                       error: false,
                       success: false,
-                      category: e.target.value,
+                      category: selectedOptions ? selectedOptions.map((option) => option.value) : [],
                     })
                   }
-                  name="status"
-                  className="px-4 py-2 border focus:outline-none"
-                  id="status"
-                >
-                  <option disabled value="">
-                    Select a category
-                  </option>
-                  {categories.length > 0
-                    ? categories.map(function (elem) {
-                        return (
-                          <option name="status" value={elem._id} key={elem._id}>
-                            {elem.nameCategory}
-                          </option>
-                        );
-                      })
-                    : ""}
-                </select>
+                />
               </div>
             </div>
             <div className="flex flex-col space-y-1 w-full pb-4 md:pb-6 mt-4">
@@ -236,16 +229,17 @@ const AddBrandDetail = ({ categories }) => {
   );
 };
 
+
 const AddBrandModal = (props) => {
   useEffect(() => {
     fetchCategoryData();
   }, []);
 
-  const [allCat, setAllCat] = useState({});
+  const [allCat, setAllCat] = useState([]); // Initialize allCat as an empty array
 
   const fetchCategoryData = async () => {
     let responseData = await getAllCategory();
-    if (responseData) {
+    if (responseData && Array.isArray(responseData)) { // Check if responseData is an array
       setAllCat(responseData);
     }
   };
@@ -256,5 +250,6 @@ const AddBrandModal = (props) => {
     </Fragment>
   );
 };
+
 
 export default AddBrandModal;

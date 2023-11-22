@@ -124,12 +124,6 @@ const AllCategories = () => {
                   </td>
                   <td className="px-4 py-2 border">
                     <button
-                      onClick={() => deleteCategory(category._id)}
-                      className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-                    >
-                      Delete
-                    </button>
-                    <button
                       onClick={() =>
                         editCategory(
                           category._id,
@@ -138,11 +132,16 @@ const AllCategories = () => {
                           category.status
                         )
                       }
-                      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-1"
                     >
-                      Update
+                      Edit
                     </button>
-                    
+                    <button
+                      onClick={() => deleteCategory(category._id)}
+                      className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                    >
+                      Delete
+                    </button>
                   </td>
                 </tr>
               ))

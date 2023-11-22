@@ -32,10 +32,12 @@ export const createBrand = async ({nameBrand, description, category, status}) =>
 
 export const editBrand = async (brandData) => {
   try {
-    const response = await axios.put(`${apiURL}/update/${brandData.id}`, brandData);
+    const response = await axios.put(`${apiURL}/update/${brandData._id}`, brandData);
+    console.log(brandData._id)
 
     return response.data;
   } catch (error) {
+    console.log(brandData._id)
     console.error(error);
   }
 };
