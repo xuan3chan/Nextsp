@@ -83,5 +83,18 @@ class OrderService {
       .populate("product.productId");
     return orders;
   }
+  //search order by id
+  async searchOrderService(id) {
+    if (!id) {
+      throw new Error("Missing required fields");
+    }
+    const order = await Order.findById(id)
+      .populate({ path: "product.productId", select: "nameProduct price" })
+      .populate({ path: "userId", select: "fullName email accountName" });
+    if (!order) {
+      throw new Error("Order not found");
+    }
+    return order;
+  }
 }
 module.exports = new OrderService();

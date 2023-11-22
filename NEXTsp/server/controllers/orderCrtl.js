@@ -62,5 +62,15 @@ class OrderController {
       handleErrorResponse(res, error);
     }
   }
+  //search order by id
+  async searchOrderController(req, res) {
+    try {
+      const { id } = req.params;
+      const result = await orderService.searchOrderService(id);
+      res.status(200).json(result);
+    } catch (error) {
+      handleErrorResponse(res, error);
+    }
+  }
 }
 module.exports = new OrderController();
