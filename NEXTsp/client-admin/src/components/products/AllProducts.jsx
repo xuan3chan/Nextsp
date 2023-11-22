@@ -15,8 +15,15 @@ const AllProducts = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      fetchData();
+    }, 10000); // Fetch data every 10 seconds
+  
+    return () => clearInterval(interval); // This represents the unmount function, in which you need to clear your interval to prevent memory leaks.
+  }, []);
+
   const fetchData = async () => {
-    setLoading(true);
     try {
       const responseData = await getAllProduct();
       setProducts(responseData);

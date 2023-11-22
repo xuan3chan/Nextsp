@@ -199,7 +199,7 @@ const AddProductDetail = ({ brands, categories }) => {
                   {brands && brands.length > 0
                     ? brands.map((brand) => {
                         return (
-                          <option name="status" value={brand.id} key={brand.id}>
+                          <option name="status" value={brand._id} key={brand._id}>
                             {brand.nameBrand}
                           </option>
                         );

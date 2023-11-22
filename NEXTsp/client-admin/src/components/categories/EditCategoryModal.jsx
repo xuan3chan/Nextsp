@@ -32,35 +32,16 @@ const EditCategoryModal = () => {
   };
 
   const submitForm = async (e) => {
-    e.preventDefault(); // Prevent form from being submitted
-
-    if (!nameCategory || !status) {
-      alert('Please fill in all required fields');
-      return;
+    e.preventDefault();
+    let responseData = await editCategory(_id, nameCategory, description, status);
+    if (responseData && responseData.error) {
+      console.log(responseData.error);
+    } else {
+      dispatch({ type: "editCategoryModalClose" });
+      fetchData();
+      window.location.reload();
     }
-
-    dispatch({ type: "loading", payload: true });
-    let edit = await editCategory(_id, nameCategory, description, status);
-
-    if (!edit) {
-      console.error('editCategory returned undefined');
-      dispatch({ type: "loading", payload: false });
-      return;
-    }
-
-    if (edit.error) {
-      console.log(edit.error);
-      dispatch({ type: "loading", payload: false });
-    } else if (edit.success) {
-      console.log(edit.success);
-      setTimeout(() => {
-        dispatch({ type: "editCategoryModalClose", payload: true});
-        fetchData();
-        dispatch({ type: "loading", payload: false });
-      }, 1000);
-      window.location.reload(); // Reload the page
-    }
-  };
+  }
 
   return (
     <Fragment>

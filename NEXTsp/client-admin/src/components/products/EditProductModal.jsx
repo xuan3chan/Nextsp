@@ -55,7 +55,7 @@ const EditProductModal = (props) => {
       description: data.editProductModal?.description,
       images: data.editProductModal?.images || [],
       status: data.editProductModal?.status,
-      brand: data.editProductModal?.brand || { id: "", nameBrand: "" },
+      brand: data.editProductModal?.brand || { _id: "", nameBrand: "" },
       category: data.editProductModal?.category || { _id: "", nameCategory: "" },
       price: data.editProductModal?.price,
       oldprice: data.editProductModal?.oldprice,
@@ -99,7 +99,6 @@ const EditProductModal = (props) => {
           dispatch({ type: "editProductModalClose", payload: true });
         }, 2000);
         setTimeout(() => {
-          window.location.reload();
         }, 1000);
       } else {
         setEditformdata({
@@ -114,6 +113,7 @@ const EditProductModal = (props) => {
       dispatch({ type: "loading", payload: false });
     }
   };
+  
   return (
     <Fragment>
       {/* Black Overlay */}
@@ -354,13 +354,13 @@ const EditProductModal = (props) => {
                     {brands && brands.length > 0
                       ? brands.map((elem) => {
                           return (
-                            <Fragment key={elem.id}>
+                            <Fragment key={elem._id}>
                               {editformData.brand.id &&
-                              editformData.brand.id === elem.id ? (
+                              editformData.brand.id === elem._id ? (
                                 <option
                                   name="status"
-                                  value={elem.id}
-                                  key={elem.id}
+                                  value={elem._id}
+                                  key={elem._id}
                                   selected
                                 >
                                   {elem.nameBrand}
@@ -368,8 +368,8 @@ const EditProductModal = (props) => {
                               ) : (
                                 <option
                                   name="status"
-                                  value={elem.id}
-                                  key={elem.id}
+                                  value={elem._id}
+                                  key={elem._id}
                                 >
                                   {elem.nameBrand}
                                 </option>
