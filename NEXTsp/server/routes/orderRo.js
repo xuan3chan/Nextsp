@@ -9,5 +9,6 @@ router.put('/update/:id', orderController.updateOrderController);
 router.delete('/delete/:id', orderController.deleteOrderController);
 router.get('/getall', orderController.getAllOrderController);
 router.get('/getbyuser/:userId',verifyToken, orderController.getOrdersByUser);
+router.get('/searchorder/:id', orderController.searchOrderController);
 
 module.exports = router;
