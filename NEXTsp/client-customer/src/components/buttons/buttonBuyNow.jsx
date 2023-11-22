@@ -1,11 +1,12 @@
 import React from "react";
-
-function ButtonAddToCart(props) {
+import { Link } from "react-router-dom";
+function ButtonBuyNow(props) {
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
   const newItem = props.product;
   const [cartItems, setCart] = React.useState(cart);
   const updatedCart = [...cart, props.product];
-  const addToCart = () => {
+
+  const buyNowBtn = () => {
     const existingItemIndex = cart.findIndex((item) => item.id === newItem.id);
 
     if (existingItemIndex !== -1) {
@@ -23,19 +24,17 @@ function ButtonAddToCart(props) {
     }
     setCart(updatedCart);
     localStorage.setItem("cart", JSON.stringify(updatedCart));
-    window.location.reload();
+    window.location.href = "/CartPage";
   };
-
   return (
-    <div>
-      <div
-        onClick={addToCart}
-        className="btn p-1 flex justify-center btn-addCart"
-      >
-        Thêm Vào Giỏ
+    <Link to="/CartPage">
+      <div className="btn-BuyNow btn text-white text-center p-2 flex flex-colflex items-center contents-center justify-center rounded-sm">
+        <a className=" cursor-pointer" onClick={buyNowBtn}>
+          Mua Ngay
+        </a>
       </div>
-    </div>
+    </Link>
   );
 }
 
-export default ButtonAddToCart;
+export default ButtonBuyNow;

@@ -4,8 +4,8 @@ import axios from "axios";
 import "../assets/css/Payment.css";
 function PaymentPage(props) {
   const [cart, setCart] = React.useState([]);
-  const [selectedPayment, setSelectedPayment] = useState(null);
 
+  const [selectedPayment, setSelectedPayment] = useState("COD");
   // Update payment method when the customer selects a different option
 
   useEffect(() => {
@@ -17,6 +17,8 @@ function PaymentPage(props) {
 
   const handlePaymentChange = (paymentMethod) => {
     setSelectedPayment(paymentMethod);
+    console.log(paymentMethod);
+    console.log(typeof paymentMethod);
   };
   const codImageLink =
     "https://file.hstatic.net/200000636033/file/pay_2d752907ae604f08ad89868b2a5554da.png";
@@ -46,7 +48,6 @@ function PaymentPage(props) {
 
     const uniqueCart = Object.values(uniqueItemsById);
     setCart(uniqueCart);
-    console.log(cart);
   }, []);
 
   const userId = localStorage.getItem("userId");
@@ -59,7 +60,7 @@ function PaymentPage(props) {
   const addInfo = `NextSP Store Payment, userId: ${userId}`;
   const accountName = "Nguyễn Văn Thiện";
   const imageUrlQR = `https://img.vietqr.io/image/tpb-04144454101-compact2.jpg?amount=${totalPriceNumber}&addInfo=${addInfo}&accountName=${accountName}`;
-  const payment = selectedPayment === "COD" ? "COD" : "QR";
+  const payment = selectedPayment;
   const product = cart.map((item) => ({
     productId: item.id,
     quantity: item.count,
@@ -173,7 +174,7 @@ function PaymentPage(props) {
                     checked={selectedPayment === "COD"}
                     onChange={() => handlePaymentChange("COD")}
                   />
-                  <img className=" w-6 h-6" src={codImageLink} alt="" />
+                  <img className="w-6 h-6" src={codImageLink} alt="" />
                   <label htmlFor="COD"> Thanh toán khi giao hàng (COD)</label>
                 </div>
 
@@ -186,14 +187,16 @@ function PaymentPage(props) {
                       checked={selectedPayment === "QR"}
                       onChange={() => handlePaymentChange("QR")}
                     />
-                    <img className=" w-6 h-6" src={qrImageLink} alt="" />
+                    <img className="w-6 h-6" src={qrImageLink} alt="" />
                     <label htmlFor="QR"> Thanh toán chuyển khoản (QR)</label>
                   </div>
-                  <img
-                    className="QRbanking w-72 h-86 "
-                    src={imageUrlQR}
-                    alt=""
-                  />
+                  {selectedPayment === "QR" && (
+                    <img
+                      className="QRbanking w-72 h-86"
+                      src={imageUrlQR}
+                      alt=""
+                    />
+                  )}
                 </div>
               </div>
               <div className="totalPrice">

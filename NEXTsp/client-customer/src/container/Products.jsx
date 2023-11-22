@@ -7,6 +7,7 @@ import MainContentSection from "../components/Products/MainContentSection";
 import DescriptionSection from "../components/Products/DescriptionSection";
 import FlaskSale from "../components/Products/FlaskSale";
 import { useState } from "react";
+import FeedBackSection from "../components/Products/FeedBackSection";
 
 function Products(props) {
   const images = [
@@ -30,6 +31,7 @@ function Products(props) {
             <div className="flex flex-col gap-8">
               <MainContentSection></MainContentSection>
               <DescriptionSection></DescriptionSection>
+              <FeedBackSection></FeedBackSection>
             </div>
           </div>
         </div>

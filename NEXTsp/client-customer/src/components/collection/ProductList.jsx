@@ -6,26 +6,57 @@ import "../../assets/css/main.css";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
-import ButtonBuyNow from "../button/buttonBuyNow";
-import ButtonAddToCart from "../button/buttonAddToCart";
-import Paginnation from "./Paginnation";
+import ButtonBuyNow from "../buttons/buttonBuyNow";
+import ButtonAddToCart from "../buttons/buttonAddToCart";
+import Pagination from "./Pagination";
+import { useState } from "react";
+import { BiSolidDownArrow } from "react-icons/bi";
+import { CiFilter } from "react-icons/ci";
+import { BsSortDown } from "react-icons/bs";
+
 function ProductList(props) {
-  const param = useParams();
+  const { category, nameCategory } = useParams();
   const [products, setProducts] = React.useState([]);
-  const [pageIndex, setPageIndex] = React.useState(1); // Initial page index
+  const [pageIndex, setPageIndex] = React.useState(1);
   const itemsPerPage = 10;
-
+  const [filteredProducts, setFilteredProducts] = React.useState([]);
+  const [isOpen, setIsOpen] = useState(false);
   const ApiProducts = "http://localhost:3101/api/products/getall";
-  React.useEffect(() => {
-    const fetchData = async () => {
-      const result = await axios.get(ApiProducts);
-      setProducts(result.data.products);
-    };
-    console.log(JSON.stringify(products.brand));
-    fetchData();
-  }, []);
+  useEffect(() => {
+    axios
+      .get(ApiProducts)
+      .then((res) => {
+        setProducts(res.data.products);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  }, [ApiProducts]);
 
-  // Function to handle page change
+  useEffect(() => {
+    // Ensure that products is not undefined before filtering
+    if (products) {
+      const productByCategory = products.filter(
+        (product) => product.category.name === category
+      );
+      const productByBrand = products.filter(
+        (product) =>
+          product.brand.name === nameCategory &&
+          product.category.name === category
+      );
+
+      // Use nameCategory to determine which set of filtered products to set
+      if (nameCategory === null) {
+        setFilteredProducts(productByCategory);
+      } else {
+        setFilteredProducts(productByBrand);
+      }
+    } else {
+      // Handle the case where products is undefined
+      setFilteredProducts([]);
+    }
+  }, [category, nameCategory, products]);
+
   const handlePageChange = (newPageIndex) => {
     setPageIndex(newPageIndex);
   };
@@ -34,8 +65,9 @@ function ProductList(props) {
     if (price) {
       return `${price.toLocaleString()}đ`;
     }
-    return "Not Available "; // You can change this message to your preferred text
+    return "Not Available";
   }
+
   const generateStarIcons = (rating) => {
     const starIcons = [];
     for (let i = 0; i < 5; i++) {
@@ -51,64 +83,101 @@ function ProductList(props) {
     return starIcons;
   };
 
-  const handleAddCart = () => {
-    localStorage.setItem("cart", JSON.stringify(products));
+  const handleAddCart = (product) => {
+    // Assuming you have a cart array in localStorage
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    cart.push(product);
+    localStorage.setItem("cart", JSON.stringify(cart));
+  };
+  useEffect(() => {
+    setProducts(props.products);
+    console.log(products);
+  }, [props.products]);
+
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
   };
 
+  const sortIncreasing = () => {
+    const sortedProducts = [...filteredProducts].sort((a, b) =>
+      a.price > b.price ? 1 : -1
+    );
+    setFilteredProducts(sortedProducts);
+  };
+
+  const sortDecreasing = () => {
+    const sortProducts = [...filteredProducts].sort((a, b) =>
+      a.price < b.price ? 1 : -1
+    );
+    setFilteredProducts(sortProducts);
+  };
   return (
     <div className="productList max-h-full w-full bg-white rounded-md pb-8">
-      <h1 className="CategoryTitle">{param.nameCategory}</h1>
-      <FilterButtonSection />
-      <div className=" flex flex-wrap  gap-1 content-center justify-center pt-12 flex-col items-center pb-8">
-        {products
-          .filter(
-            (product) =>
-              product.brand.name === props.CollectionBrand
-          ) // Filter products by brand
-          .map(
-            (product, index) =>
-              index < 1 && (
-                <div
-                  key={product.id}
-                  className="productItem flex flex-col  border-black-500/100 p-4 gap-1 "
-                >
-                  <Link to={`/products/${product.id}`}>
-                    <div className="product_image w-72 h-52 object-contain">
-                      <img
-                        src={product.images[0]}
-                        alt=""
-                        className="w-full h-44 object-contain "
-                      />
-                    </div>
-                    <div className="product_title">
-                      <h1 className=" max-[]: h-16 truncate ">
-                        {product.nameProduct}{" "}
-                      </h1>
-                    </div>
-                    <div>
-                      <p className="product_oldPrice">
-                        {formatPrice(product.oldprice)}
-                      </p>
-                      <p className="product_price font-sans">
-                        {formatPrice(product.price)}
-                      </p>
-                    </div>
-                    <div className="product_rating flex gap-1 items-center">
-                      {generateStarIcons(product.rating)}
-                      <p className="text-xs">(5 đánh giá)</p>
-                    </div>
-                  </Link>
-                  <div className="over-button flex gap-4 items-center justify-center mt-3">
-                    <ButtonBuyNow product={product} />
-                    <ButtonAddToCart product={product} />
+      <h1 className="CategoryTitle">
+        {nameCategory == null ? category : nameCategory}
+      </h1>
+      <div className="flex gap-6 ml-20 mt-6">
+        <div>
+          <button className="btnFilter btnSort" onClick={toggleDropdown}>
+            <BsSortDown></BsSortDown>Sắp Xếp Theo
+          </button>
+
+          {isOpen && (
+            <div className="sort-dropdown flex flex-col">
+              <button onClick={sortIncreasing}>Giá: Thấp đến Cao</button>
+              <button onClick={sortDecreasing}>Giá: Cao đên Thấp</button>
+            </div>
+          )}
+        </div>
+      </div>
+      <div className=" flex flex-wrap gap-1 w-4/5 justify-center pt-12 items-center pb-8 mr-auto ml-auto">
+        {filteredProducts
+          .slice((pageIndex - 1) * itemsPerPage, pageIndex * itemsPerPage)
+          .map((product) => (
+            <div
+              key={product.id}
+              className="productItem flex flex-col border-black-500/100 p-4 gap-1 items-center justify-center"
+            >
+              <Link to={`/products/${product.id}`}>
+                <div className="product_image w-60 h-52 object-cover">
+                  <img
+                    src={product.images[0]}
+                    alt=""
+                    className="w-60 h-44 object-contain "
+                  />
+                </div>
+                <div className="textSection flex flex-col">
+                  <div className="product_title text-left">
+                    <h1 className=" max-[]: h-16 truncate ">
+                      {product.nameProduct}{" "}
+                    </h1>
+                  </div>
+                  <div>
+                    <p className="product_oldPrice text-left">
+                      {formatPrice(product.oldprice)}
+                    </p>
+                    <p className="product_price text-left">
+                      {formatPrice(product.price)}
+                    </p>
                   </div>
                 </div>
-              )
-          )}
+                <div className="product_rating flex gap-1 items-center">
+                  {generateStarIcons(product.rating)}
+                  <p className="text-xs">(5 đánh giá)</p>
+                </div>
+              </Link>
+              <div className="over-button flex gap-4 items-center justify-center mt-3">
+                <ButtonBuyNow product={product} />
+                <ButtonAddToCart product={product} />
+              </div>
+            </div>
+          ))}
       </div>
-      <Paginnation
+      <Pagination
         pageIndex={pageIndex}
-        pageCount={Math.ceil(products.length / itemsPerPage)}
+        pageCount={Math.ceil(
+          (Array.isArray(products) ? products.length : 0) / itemsPerPage
+        )}
         onPageChange={handlePageChange}
       />
     </div>

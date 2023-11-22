@@ -11,7 +11,6 @@ function SearchFunction(props) {
   const imagePlaceHolder = "https://placehold.co/400";
   const [productName, setProductName] = useState("");
   const [searchResult, setSearchResult] = useState(null);
-  const [visibleProducts, setVisibleProducts] = useState(5);
   const [loading, setLoading] = useState(false);
   const [isSearchResultVisible, setIsSearchResultVisible] = useState(false);
 
@@ -57,13 +56,13 @@ function SearchFunction(props) {
       onSubmit(formValues);
     }, 300);
   };
+
   function formatPrice(price) {
     if (price) {
       return `${price.toLocaleString()}đ`;
     }
     return "";
   }
-
   return (
     <div className="w-1/5 relative">
       <div className="header_searching_module">
@@ -84,33 +83,34 @@ function SearchFunction(props) {
             </button>
           </div>
         </div>
-        <div
-          className={`searching-result absolute top-10 rounded-sm bg-white w-full flex flex-col gap-42 p-2 ${
+        <ul
+          className={`searching-result absolute top-10 rounded-sm bg-white w-full flex flex-col gap-42 p-2 overflow-auto ${
             isSearchResultVisible ? "block" : "hidden"
           }`}
         >
           {searchResult &&
-            searchResult.slice(0, visibleProducts).map((item) => (
-              <Link
-                to={`/products/${item._id}`}
-                key={item.id}
-                className="searching-result-item flex gap-4 items-center border-b-2 p-2 "
-              >
-                <div className="searching-result-item-img object-fill">
-                  <img src={item.images[0]} alt="" />
-                </div>
-                <div className="searching-result-item-info flex flex-col">
-                  <div className="searching-result-item-info-name text-left">
-                    <p>{item.nameProduct}</p>
+            searchResult.map((item) => (
+              <Link to={`/products/${item._id}`}>
+                <li
+                  key={item.id}
+                  className="searching-result-item flex gap-4 items-center border-b-2 p-2 "
+                >
+                  <div className="searching-result-item-img object-fill">
+                    <img src={item.images[0]} alt="" />
                   </div>
-                  <div className="searching-result-item-info-price flex gap-4">
-                    <p className=" w-16">{formatPrice(item.price)}</p>
-                    <p className="oldPrice">{formatPrice(item.oldprice)}</p>
+                  <div className="searching-result-item-info flex flex-col">
+                    <div className="searching-result-item-info-name text-left">
+                      <p>{item.nameProduct}</p>
+                    </div>
+                    <div className="searching-result-item-info-price flex gap-4">
+                      <p className=" w-16">{formatPrice(item.price)}</p>
+                      <p className="oldPrice">{formatPrice(item.oldprice)}</p>
+                    </div>
                   </div>
-                </div>
+                </li>
               </Link>
             ))}
-        </div>
+        </ul>
       </div>
     </div>
   );

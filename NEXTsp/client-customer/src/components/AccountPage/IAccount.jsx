@@ -3,7 +3,7 @@ import "../../assets/css/Account.css";
 import { Input } from "@material-tailwind/react";
 import axios from "axios";
 import { useState, useEffect } from "react";
-function InforAccount(props) {
+function IAccount(props) {
   const [accountName, setAccountName] = useState("");
   const [phone, setPhone] = useState("");
   const [Email, setEmail] = useState("");
@@ -40,7 +40,7 @@ function InforAccount(props) {
               className="sub-title-content p-2 border-black font-normal"
               name="userFullName"
               type="text"
-              value={accountName}
+              defaultValue={accountName}
             />
           </div>
           <div className="I-Item userSex flex gap-2 items-center">
@@ -58,7 +58,6 @@ function InforAccount(props) {
               className="sub-title-content p-2 border-black font-normal"
               name="phone"
               type="text"
-              value={""}
             />
             <button className="btnChange">Thay Đổi</button>
           </div>
@@ -68,14 +67,14 @@ function InforAccount(props) {
               className="sub-title-content p-2 border-black font-normal"
               name="email"
               type="text"
-              value={Email}
+              defaultValue={Email}
             />
             <button className="btnChange">Thay Đổi</button>
           </div>
           <div className="userBirth flex gap-2 items-center">
             <div className="sub-title">Ngày sinh</div>
             <span className="sub-title-content w-2/3">
-              <input className ="p-2 " type="date" />
+              <input className="p-2 " type="date" />
             </span>
           </div>
         </div>
@@ -84,4 +83,4 @@ function InforAccount(props) {
   );
 }
 
-export default InforAccount;
+export default IAccount;

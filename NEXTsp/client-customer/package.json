@@ -31,7 +31,6 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "dev": "postcss css/tailwind.css -o public/build/tailwind.css -w"
-    
   },
   "browserslist": {
     "production": [
@@ -46,6 +45,7 @@
     ]
   },
   "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@fortawesome/fontawesome-free": "^6.4.2",
     "autoprefixer": "^10.4.16",
     "json-server": "^0.17.4",

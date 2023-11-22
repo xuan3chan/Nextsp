@@ -8,8 +8,7 @@ import Products from "./container/Products";
 import CartPage from "./container/CartPage";
 import CustomerShipping from "./container/CustomerShipping";
 import PaymentPage from "./container/PaymentPage";
-import Account from "./components/Account";
-import SearchFunction from "./components/Header/SearchFunction";
+import Account from "./container/Account";
 const App = () => {
   return (
     <Router>
@@ -23,16 +22,13 @@ const App = () => {
             path="/collection/:category/:nameCategory"
             element={<Collection />}
           />
+          <Route path="/collection/:category" element={<Collection />} />
           <Route path="/LoginUser" element={<LoginForm />} />
           <Route path="/Products/:id" element={<Products />} />
           <Route path="/CartPage" element={<CartPage />} />
           <Route path="/Customer" element={<CustomerShipping />} />
           <Route path="/payment" element={<PaymentPage></PaymentPage>}></Route>
           <Route path="/Account" element={<Account></Account>}></Route>
-          <Route
-            path="SearchFunction"
-            element={<SearchFunction></SearchFunction>}
-          ></Route>
         </Routes>
       </LoadingProvider>
     </Router>

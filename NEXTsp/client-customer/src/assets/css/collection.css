@@ -87,16 +87,7 @@
 }
 
 /* FilterButtonSection */
-.btnFilter {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 4px 10px;
-  border: solid #ddd 1px;
-  border-radius: 4px;
-  font-size: small;
-  gap: 2px;
-}
+
 
 .sort-dropdown {
   position: absolute;
