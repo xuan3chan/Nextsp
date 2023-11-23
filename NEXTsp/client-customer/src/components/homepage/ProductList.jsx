@@ -3,8 +3,8 @@ import axios from "axios"; // Add this line
 import { Link } from "react-router-dom";
 import { FaTruckMoving } from "react-icons/fa";
 import { BiSolidRightArrow } from "react-icons/bi";
-import ButtonBuyNow from "./ButtonBuyNow";
-import ButtonAddToCart from "./ButtonAddToCart";
+import ButtonBuyNow from "../buttons/buttonBuyNow";
+import ButtonAddToCart from "../buttons/buttonAddToCart";
 import RiseLoader from "react-spinners/RiseLoader";
 import { useState, useEffect } from "react";
 
@@ -32,6 +32,20 @@ function ProductList(props) {
     fetchData();
   }, []);
 
+  const generateStarIcons = (rating) => {
+    const starIcons = [];
+    for (let i = 0; i < 5; i++) {
+      starIcons.push(
+        <img
+          key={i}
+          src="https://static.vecteezy.com/system/resources/previews/013/743/605/original/golden-star-icon-png.png"
+          alt=""
+          className="w-4 h-4"
+        />
+      );
+    }
+    return starIcons;
+  };
   const imagePlaceHolder = "https://via.placeholder.com/350";
   return (
     <div className="productList w-full  p-4 mr-auto ml-auto bg-white rounded-md">
@@ -64,53 +78,46 @@ function ProductList(props) {
         </div>
       </div>
       <div className="flex flex-wrap gap-4 content-center justify-center">
-        {products
-          .map(
-            (product, index) =>
-              index < 5 && (
-                <div
-                  className="productItem flex flex-col  border-black-500/100 p-4 gap-1"
-                  key={product.id}
-                >
-                  <Link to={`/products/${product.id}`}>
-                    <div className="product_image w-72 h-52 object-contain">
-                      <img
-                        src={
-                          product.images[0] == null
-                            ? imagePlaceHolder
-                            : product.images[0]
-                        }
-                        alt=""
-                        className="w-full h-44 object-contain"
-                      />
-                    </div>
-                    <div className="product_title">
-                      <h1>{product.nameProduct}</h1>
+        {products.map(
+          (product, index) =>
+            index < 5 && (
+              <div
+                key={product.id}
+                className="productItem flex flex-col border-black-500/100 p-4 gap-1 items-center justify-center"
+              >
+                <Link to={`/products/${product.id}`}>
+                  <div className="product_image w-60 h-52 object-cover">
+                    <img
+                      src={product.images[0]}
+                      alt=""
+                      className="w-full h-44 object-contain "
+                    />
+                  </div>
+                  <div className="textSection flex flex-col">
+                    <div className="product_title text-left">
+                      <h1 className="h-16">{product.nameProduct} </h1>
                     </div>
                     <div>
-                      <p className="product_oldPrice font-bold">
-                        {formatPrice(product.oldrice)}
+                      <p className="product_oldPrice text-left">
+                        {formatPrice(product.oldprice)}
                       </p>
-                      <p className="product_price font-normal ">
+                      <p className="product_price text-left">
                         {formatPrice(product.price)}
                       </p>
                     </div>
-                    <div className="product_rating flex gap-1 items-center">
-                      <img src={starUrl} alt="" className="w-6 h-6" />
-                      <img src={starUrl} alt="" className="w-6 h-6" />
-                      <img src={starUrl} alt="" className="w-6 h-6" />
-                      <img src={starUrl} alt="" className="w-6 h-6" />
-                      <img src={starUrl} alt="" className="w-6 h-6" />
-                      <p className="text-xs">(5 đánh giá)</p>
-                    </div>
-                  </Link>
-                  <div className="over-button flex gap-4 items-center justify-center mt-3">
-                    <ButtonBuyNow product={product} />
-                    <ButtonAddToCart product={product} />
                   </div>
+                  <div className="product_rating flex gap-1 items-center">
+                    {generateStarIcons(product.rating)}
+                    <p className="text-xs">(5 đánh giá)</p>
+                  </div>
+                </Link>
+                <div className="over-button flex gap-4 items-center justify-center mt-3">
+                  <ButtonBuyNow product={product} />
+                  <ButtonAddToCart product={product} />
                 </div>
-              )
-          )}
+              </div>
+            )
+        )}
       </div>
     </div>
   );

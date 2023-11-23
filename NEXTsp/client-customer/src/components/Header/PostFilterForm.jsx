@@ -23,7 +23,6 @@ function PostFilterForm(props) {
     if (setProductName) {
       setProductName(e.target.value); // Gọi hàm setProductName khi giá trị searchTerm thay đổi
     }
-
     if (!onSubmit) return;
     if (typingTimeoutRef.current) {
       clearTimeout(typingTimeoutRef.current);
@@ -34,9 +33,9 @@ function PostFilterForm(props) {
         searchTerm: e.target.value,
       };
       onSubmit(formValues);
+      console.log(formValues);
     }, 300);
   }
-
   return (
     <div className="w-full">
       <input

@@ -5,14 +5,12 @@ import { useParams } from "react-router-dom";
 import { Breadcrumb, Header } from "../components";
 import RiseLoader from "react-spinners/RiseLoader";
 import { useState, useEffect, override } from "react";
-import Paginnation from "../components/collection/Paginnation";
 import ProductList from "../components/collection/ProductList";
 import ProductListAll from "../components/collection/ProductListAll";
-
+import Footer from "../components/Footer";
 function Collection(props) {
   const [isLoading, setIsLoading] = useState(true);
-  const params = useParams();
-
+  const { category, nameCategory } = useParams();
   useEffect(() => {
     // Simulate a data loading delay
     setTimeout(() => {
@@ -26,17 +24,20 @@ function Collection(props) {
           <RiseLoader color="#212529" />
         </div>
       ) : null}
-      <div className="color-bg bg-slate-200 w-full">
-        <div className="w-5/6 mr-auto ml-auto flex flex-col">
+      <div className="color-bg bg-slate-200 w-4/5">
+        <div className="mr-auto ml-auto flex flex-col">
           <Header></Header>
           <Breadcrumb></Breadcrumb>
           <div className="container_content ">
-            {params.nameCategory !== undefined ? (
-              <ProductList CollectionBrand={params.nameCategory}></ProductList>
+            {nameCategory || category ? (
+              <ProductList
+                CollectionBrand={nameCategory || category}
+              ></ProductList>
             ) : (
               <ProductListAll amountProduct="999"></ProductListAll>
             )}
           </div>
+          <Footer></Footer>
         </div>
       </div>
     </div>

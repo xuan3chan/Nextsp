@@ -1,31 +1,29 @@
-#root{
-
-}
-.left-sidebar {   
+.left-sidebar {
   width: 20%;
   background-color: #fff;
-  border: solid black 1px;
+  border: solid #a9a9a9 1px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
+    rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
 }
-#content{
+#content {
   height: 100%;
-  border: solid black 1px;
+  border: solid #a9a9a9 1px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
+    rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
 }
-.wrapper{
-  background-color: #f6f7fa;
+.wrapper {
   max-height: 3000px;
 }
-.InforAccountSection{
-}
-.title{
+.title {
   font-weight: 500;
   font-size: 22px;
 }
-.menu-section{
-  display:flex;
-  flex-direction:column;
-  gap:10px;
-  height:100%;
-  margin-top:10px;
+.menu-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  height: 100%;
+  margin-top: 10px;
 }
 .sub-title {
   text-align: end;
@@ -58,8 +56,7 @@
 }
 .menu-item:hover {
   color: var(--primary-color);
-  font-weight: 500;
-  font-size: 19px;
+  cursor: pointer;
 }
 .btnChange {
   border-radius: 6px;
@@ -70,17 +67,79 @@
   text-decoration: underline;
   color: #005ec9;
 }
-.content__body__subTitle{
+.content__body__subTitle {
   font-size: 20px;
   font-weight: 500;
 }
-.content__body__title{
-  display:flex;
-  flex-direction:column;
-  gap:2px;
+.content__body__title {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
   border-bottom: solid black 2px;
 }
-.content_body{
-  height:100%;
+.content_body {
+  height: 100%;
   width: 100%;
+}
+.product-Price {
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--primary-color);
+}
+.product-OldPrice {
+  font-size: 16px;
+  font-weight: 500;
+  color: #a9a9a9;
+  text-decoration: line-through;
+}
+.numberQuantity {
+  font-size: 14px;
+  padding: 1px 4px;
+  border-radius: 3px;
+}
+.subTitle_mainTitle {
+  color: var(--secondary-color);
+}
+.maintTitle_idOrd {
+  color: var(--primary-color);
+}
+
+.search-container {
+  position: relative;
+  width: 50%;
+}
+
+#searchInput {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+  width: 100%;
+}
+
+#searchButton {
+  position: absolute;
+  padding: 10px;
+  font-size: 16px;
+  background-color: var(--secondary-color);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  outline: none;
+  right: 0;
+}
+
+#searchButton:hover {
+  background-color: #4b4848;
+}
+
+/* Add this to your existing CSS file */
+.menu-item.active-tab {
+  color: var(--primary-color); /* Add your desired text color */
+  border-radius: 5px; /* Add rounded corners if needed */
+}
+.btn-BuyNow {
+  background-color: var(--primary-color);
 }

@@ -46,21 +46,6 @@
 }
 
 /* End Banner Top */
-.btn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 8px 6px;
-  border: 1px solid #212529;
-  background: #212529;
-  color: white;
-  font-size: 14px;
-  cursor: pointer;
-  max-width: 160px;
-  border-radius: 5%;
-  font-family: var(--primary-font);
-  font-weight: 600;
-}
 
 /* Container Content */
 .container_content {
@@ -269,3 +254,19 @@
   height: 450px;
   top: 100px;
 }
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background-color: #fafafa;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background-color: #212529;
+}
+/* end */

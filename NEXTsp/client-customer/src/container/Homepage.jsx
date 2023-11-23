@@ -13,7 +13,6 @@ import {
 import "../assets/css/homepage.css";
 import "../assets/css/main.css";
 import ProductListAll from "../components/homepage/ProductListAll";
-
 function Homepage(props) {
   const [isLoading, setIsLoading] = useState(false);
   return (

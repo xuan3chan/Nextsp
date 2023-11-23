@@ -1,7 +1,7 @@
 // Paginnation component
 import React from "react";
 
-function Paginnation({ pageIndex, pageCount, onPageChange }) {
+function Pagination({ pageIndex, pageCount, onPageChange }) {
   const handleChangeActive = (pageNumber) => {
     onPageChange(pageNumber);
   };
@@ -20,4 +20,4 @@ function Paginnation({ pageIndex, pageCount, onPageChange }) {
   );
 }
 
-export default Paginnation;
+export default Pagination;

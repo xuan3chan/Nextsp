@@ -5,7 +5,14 @@ import FilterButtonSection from "./FilterButtonSection";
 import "../../assets/css/main.css";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
-import Paginnation from "./Paginnation";
+import Pagination from "./Pagination";
+import ButtonAddToCart from "../buttons/buttonAddToCart";
+import ButtonBuyNow from "../buttons/buttonBuyNow";
+import "../../assets/css/main.css";
+import { useEffect, useState } from "react";
+import { BiSolidDownArrow } from "react-icons/bi";
+import { CiFilter } from "react-icons/ci";
+import { BsSortDown } from "react-icons/bs";
 
 function ProductListAll(props) {
   const [products, setProducts] = React.useState([]);
@@ -13,6 +20,30 @@ function ProductListAll(props) {
   const itemsPerPage = 10;
 
   const param = useParams();
+  const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    setProducts(props.products);
+    console.log(products);
+  }, [props.products]);
+
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const sortIncreasing = () => {
+    const sortedProducts = [...products].sort((a, b) =>
+      a.price > b.price ? 1 : -1
+    );
+    setProducts(sortedProducts);
+  };
+
+  const sortDecreasing = () => {
+    const sortProducts = [...products].sort((a, b) =>
+      a.price < b.price ? 1 : -1
+    );
+    setProducts(sortProducts);
+  };
   React.useEffect(() => {
     const fetchData = async () => {
       const result = await axios.get(
@@ -52,52 +83,67 @@ function ProductListAll(props) {
   return (
     <div className="productList max-h-full w-full bg-white rounded-md pb-8">
       <h1 className="CategoryTitle">Tất Cả Sản Phẩm</h1>
-      <FilterButtonSection />
-      <div className="flex flex-wrap gap-1 content-center justify-center pt-12 pb-4">
-        {products
-          .slice((pageIndex - 1) * itemsPerPage, pageIndex * itemsPerPage)
-          .map((product, index) => (
-            <Link
-              to={`/products/${product.id}`}
-              key={index}
-              className="productItem flex flex-col border-black-500/100 p-4 gap-1"
-            >
-              <div className="product_image w-72 h-52 object-contain">
-                <img
-                  src={product.images[0]}
-                  alt=""
-                  className="w-full h-44 object-contain"
-                />
-              </div>
-              <div className="product_title">
-                <h1 className="">{product.nameProduct} </h1>
-              </div>
-              <div>
-                <p className="product_oldPrice font-bold RobotoViet">
-                  {formatPrice(product.oldprice)}
-                </p>
-                <p className="product_price font-normal RobotoViet">
-                  {formatPrice(product.price)}
-                </p>
-              </div>
-              <div className="product_rating flex gap-1 items-center">
-                {generateStarIcons(product.rating)}
-                <p className="text-xs">(5 đánh giá)</p>
-              </div>
-              <div className="over-button flex gap-4 items-center justify-center mt-3">
-                <div className="btn p-1 flex justify-center btn-sell">
-                  Mua Ngay
-                </div>
-                <div className="btn p-1 flex justify-center btn-addCart">
-                  Thêm Vào Giỏ
-                </div>
-              </div>
-            </Link>
-          ))}
+      <div className="w-36">
+        <button className="btnFilter btnSort w-36" onClick={toggleDropdown}>
+          <BsSortDown></BsSortDown>Sắp Xếp Theo
+        </button>
+
+        {isOpen && (
+          <div className="sort-dropdown flex flex-col">
+            <button onClick={sortIncreasing}>Giá: Thấp đến Cao</button>
+            <button onClick={sortDecreasing}>Giá: Cao đên Thấp</button>
+          </div>
+        )}
       </div>
-      <Paginnation
+      <div className="flex flex-wrap gap-1 content-center justify-center pt-12 pb-4">
+        {products &&
+          products
+            .slice((pageIndex - 1) * itemsPerPage, pageIndex * itemsPerPage)
+            .map((product) => (
+              <div
+                key={product.id}
+                className="productItem flex flex-col border-black-500/100 p-4 gap-1 items-center justify-center"
+              >
+                <Link to={`/products/${product.id}`}>
+                  <div className="product_image w-60 h-52 object-cover">
+                    <img
+                      src={product.images[0]}
+                      alt=""
+                      className="w-full h-44 object-contain "
+                    />
+                  </div>
+                  <div className="textSection flex flex-col">
+                    <div className="product_title text-left">
+                      <h1 className=" max-[]: h-16 truncate ">
+                        {product.nameProduct}{" "}
+                      </h1>
+                    </div>
+                    <div>
+                      <p className="product_oldPrice text-left">
+                        {formatPrice(product.oldprice)}
+                      </p>
+                      <p className="product_price text-left">
+                        {formatPrice(product.price)}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="product_rating flex gap-1 items-center">
+                    {generateStarIcons(product.rating)}
+                    <p className="text-xs">(5 đánh giá)</p>
+                  </div>
+                </Link>
+                <div className="over-button flex gap-4 items-center justify-center mt-3">
+                  <ButtonBuyNow product={product} />
+                  <ButtonAddToCart product={product} />
+                </div>
+              </div>
+            ))}
+      </div>
+      <Pagination
         pageIndex={pageIndex}
-        pageCount={Math.ceil(products.length / itemsPerPage)}
+        pageCount={Math.ceil(
+          (Array.isArray(products) ? products.length : 0) / itemsPerPage
+        )}
         onPageChange={handlePageChange}
       />
     </div>

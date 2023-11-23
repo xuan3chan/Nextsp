@@ -12,7 +12,7 @@
   flex-direction: column;
 }
 .ProcessSection {
-  background-color: #d4d5da;
+  background-color: #a6a6a7;
 }
 .bg-step {
   border-radius: 10%;
@@ -81,8 +81,6 @@
   border: solid 1px #ddd;
 }
 
-.totalShip {
-}
 .mainText {
   font-size: larger;
 }
@@ -91,8 +89,7 @@
   font-weight: 600;
   color: var(--primary-color);
 }
-.totalOrder {
-}
+
 .btnContinueShopping {
   height: 60px;
   font-size: large;
@@ -101,5 +98,9 @@
   height: 60px;
   font-size: large;
 }
-.btn {
+.btnOrderNow {
+  background-color: var(--primary-color);
+}
+.searching-result {
+  height: 300px;
 }

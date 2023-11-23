@@ -4,7 +4,7 @@ function ProcessBar() {
   return (
     <div>
       <div className="ProcessSection flex gap-4 justify-center ">
-        <p className=" h-16 text-3xl font-bold	text-justifyflex justify-center	items-center pt-3">SHOPPING CART</p>
+        <p className=" h-16 text-3xl font-bold text-white flex justify-center	items-center">SHOPPING CART</p>
       </div>
     </div> 
   );

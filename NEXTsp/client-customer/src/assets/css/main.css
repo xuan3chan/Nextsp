@@ -8,6 +8,23 @@
 :root {
   --color-body-bg: ##f6f7fa;
 }
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 6px;
+  background: #212529;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 5%;
+  font-family: var(--primary-font);
+  font-weight: 600;
+  width: 100px;
+}
+.btn-BuyNow {
+  background-color: var(--primary-color);
+}
 
 /* Header*/
 
@@ -351,4 +368,29 @@ dropDownItem2 {
   font-size: 10px;
   justify-content: center;
   align-items: center;
+}
+.SloganItem {
+  border: solid black 1px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px,
+    rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+}
+
+.sort-dropdown button {
+  width: 200px;
+  padding: 2px 1px;
+  border: none;
+}
+.sort-dropdown button:hover {
+  background-color: #ddd;
+}
+.btnFilter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4px 10px;
+  border: solid #ddd 1px;
+  border-radius: 4px;
+  font-size: small;
+  gap: 2px;
+  width: 200px;
 }

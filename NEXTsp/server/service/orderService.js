@@ -89,7 +89,7 @@ class OrderService {
       throw new Error("Missing required fields");
     }
     const order = await Order.findById(id)
-      .populate({ path: "product.productId", select: "nameProduct price" })
+      .populate({ path: "product.productId", select: "nameProduct price images" })
       .populate({ path: "userId", select: "fullName email accountName" });
     if (!order) {
       throw new Error("Order not found");

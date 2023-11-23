@@ -2,8 +2,8 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import "../../assets/css/Products.css";
-import ButtonAddToCart from "../button/buttonAddToCart";
-import ButtonBuyNow from "../button/buttonBuyNow";
+import ButtonAddToCart from "../buttons/buttonAddToCart";
+import ButtonBuyNow from "../buttons/buttonBuyNow";
 
 function MainContentSection(props) {
   const [product, setProduct] = useState(null);
