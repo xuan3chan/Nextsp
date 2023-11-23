@@ -1,4 +1,4 @@
-const catalogService = require("../service/catalogService");
+const catalogService = require("../services/catalogService");
 const handleErrorResponse = require("../middleware/errorHandling");
 
 class CatalogController {

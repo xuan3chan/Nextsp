@@ -1,5 +1,5 @@
 // controllers/categoryCtrl.js
-const CategoryService = require("../service/categoryService");
+const CategoryService = require("../services/categoryService");
 const handleErrorResponse = require("../middleware/errorHandling");
 
 class CategoryController {

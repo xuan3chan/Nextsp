@@ -1,5 +1,5 @@
 // controllers/productCtrl.js
-const ProductService = require("../service/productService");
+const ProductService = require("../services/productService");
 const handleErrorResponse = require("../middleware/errorHandling");
 
 class ProductController {

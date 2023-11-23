@@ -1,5 +1,5 @@
 //oder controller
-const orderService = require("../service/orderService");
+const orderService = require("../services/orderService");
 
 const handleErrorResponse = require("../middleware/errorHandling");
 

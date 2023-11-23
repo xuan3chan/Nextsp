@@ -1,5 +1,5 @@
 // controllers/brandCtrl.js
-const BrandService = require("../service/brandService");
+const BrandService = require("../services/brandService");
 const handleErrorResponse = require("../middleware/errorHandling");
 
 class BrandController {

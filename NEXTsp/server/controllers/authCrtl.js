@@ -1,5 +1,5 @@
 // controllers/authCtrl.js
-const authService = require("../service/authService");
+const authService = require("../services/authService");
 const handleErrorResponse = require("../middleware/errorHandling");
 
 const registerUser = async (req, res) => {
