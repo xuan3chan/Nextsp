@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
-import { Login, AdminLayout, Categories, Products, Brands, Orders} from "./components";
+import { Login, Categories, Products, Brands, Orders, Dashboard} from "./components";
 import Landing from "./components/layout/Landing";
 
 const App = () => {
@@ -12,10 +12,10 @@ const App = () => {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<Landing />} />
-        <Route
+        {/* <Route
           path="/admin/dashboard"
           element={isAuthenticated ? <AdminLayout /> : <Navigate to="/login" />}
-        />
+        /> */}
         <Route
           path="/admin/dashboard/categories"
           element={isAuthenticated ? <Categories /> : <Navigate to="/login" />}
@@ -31,6 +31,10 @@ const App = () => {
         <Route
           path="/admin/dashboard/orders"
           element={isAuthenticated ? <Orders/> : <Navigate to="/login" />}
+        />
+        <Route
+          path="/admin/dashboard"
+          element={isAuthenticated ? <Dashboard/> : <Navigate to="/login" />}
         />
       </Routes>
     </Router>
