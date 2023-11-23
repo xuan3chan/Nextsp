@@ -2,10 +2,10 @@ const Rating = require('../models/ratingModel');
 const Product = require('../models/productModel');
 
 class RatingService {
-    static async addRatingService(userId, { productId, rating, review }) {
+    static async addRatingService(userId, productId, ratingStart, review) {
         try {
             // Validation
-            if (!productId || !rating || !review) {
+            if (!productId || !ratingStart || !review) {
                 throw {
                     status: 400,
                     message: 'Missing required fields for rating creation'
@@ -23,7 +23,7 @@ class RatingService {
             const newRating = new Rating({
                 userId,
                 productId,
-                rating,
+                ratingStart,
                 review
             });
             // Save the new rating
@@ -31,7 +31,7 @@ class RatingService {
 
             // Update the product's rating
             const product = await Product.findById(productId);
-            product.averageRating = (product.averageRating * product.numReviews + rating) / (product.numReviews + 1);
+            product.averageRating = (product.averageRating * product.numReviews + ratingStart) / (product.numReviews + 1);
             product.numReviews += 1;
             await product.save();
 
