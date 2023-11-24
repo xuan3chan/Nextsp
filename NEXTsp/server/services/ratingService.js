@@ -47,6 +47,22 @@ class RatingService {
             };
         }
     }
+    // get rating by product id
+    static async getRatingByProductIdService(productId) {
+        try {
+            const ratings = await Rating.find({ productId }).populate('userId', 'fullName');
+            return {
+                success: true,
+                message: 'Rating fetched successfully',
+                data: ratings
+            };
+        } catch (err) {
+            return {
+                success: false,
+                message: err.message
+            };
+        }
+    }
 }
 
 module.exports = RatingService;

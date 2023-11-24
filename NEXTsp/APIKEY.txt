@@ -16,6 +16,10 @@ chi tiết 1 sản phẩm http://localhost:3101/api/products/getdetails/id
 lay het san pham :http://localhost:3101/api/products/getall
 search sản phẩm : http://localhost:3101/api/products/search/nameProduct
 
+rating sản phẩm :http://localhost:3101/api/ratings/add
+lấy rating qua id product http://localhost:3101/api/ratings/getrating/Productid
+
+
 lấy hết cate có brand:" http://localhost:3101/api/catalog/getlistcateandbrand"
 
 

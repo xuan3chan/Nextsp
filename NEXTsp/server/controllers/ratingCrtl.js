@@ -14,6 +14,16 @@ class RatingController {
         }
     }
     
+    static async getRatingByProductIdController(req, res) {
+        try {
+            const { productId } = req.params;
+            const result = await RatingService.getRatingByProductIdService(productId);
+            res.status(200).json(result);
+        } catch (err) {
+            handleError(err, res);
+        }
+    }
+    
 }
 
 module.exports = RatingController;
