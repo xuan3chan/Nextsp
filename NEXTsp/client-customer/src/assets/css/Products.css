@@ -189,4 +189,44 @@
   color: var(--primary-color);
 }
 
+.ReviewForm {
+  margin-top: 20px;
+  margin-left: 20px;
+}
+.TitleForm {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--second-color);
+  margin-bottom: 6px;
+}
+.getReviewSection {
+  margin-top: 20px;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid #ececec;
+  width: 100%;
+}
+.getReview_title {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--second-color);
+  margin-bottom: 20px;
+}
 
+.reviewItem {
+  margin-bottom: 20px;
+  border-bottom: solid 1px #333;
+  padding-bottom: 20px;
+}
+.userSection p {
+  margin-bottom: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--second-color);
+}
+.userSection span {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--second-color);
+}
