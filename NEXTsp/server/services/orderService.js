@@ -122,74 +122,7 @@ class OrderService {
     return { success: true, message: "Statistics order in 12 month",months:result };
   }
 
-  //4 tuần 
-  async  statisticsOrderInMonthService(year, month) {
-    // Convert year and month to numbers and adjust month for JavaScript's 0-based month index
-    year = Number(year);
-    month = Number(month) - 1;
 
-    const result = await Order.aggregate([
-      {
-        $match: {
-          createdAt: {
-            $gte: new Date(year, month),
-            $lt: new Date(year, month + 1)
-          }
-        }
-      },
-      {
-        $group: {
-          month: { $dayOfMonth: "$createdAt" },
-          total: { $sum: 1 },
-        },
-      },
-    ]);
 
-    if (result.length === 0) {
-      return { success: false, message: "No order in this month" };
-    }
-
-    // Calculate the week of month for each result
-    const weeksInMonth = result.map(item => {
-      const weekOfMonth = Math.ceil(item._id / 7);
-      return { weekOfMonth, total: item.total };
-    });
-
-    return { success: true, message: "Statistics order in week of month", weeks: weeksInMonth };
-  }
-  // statistics order 7 day of week
-  async statisticsOrderInWeekService(year, month, daystart) {
-    // Convert year, month, and day to numbers and adjust month for JavaScript's 0-based month index
-    year = Number(year);
-    month = Number(month) - 1;
-    daystart = Number(daystart);
-
-    const startDate = new Date(year, month, daystart);
-    const endDate = new Date(startDate);
-    endDate.setDate(startDate.getDate() + 7);
-
-    const result = await Order.aggregate([
-      {
-        $match: {
-          createdAt: {
-            $gte: startDate,
-            $lt: endDate
-          }
-        }
-      },
-      {
-        $group: {
-          _id: { $dateToString: { format: "%Y-%m-%d", date: "$createdAt" } },
-          total: { $sum: 1 },
-        },
-      },
-    ]);
-
-    if (result.length === 0) {
-      return { success: false, message: "No order in this week" };
-    }
-
-    return { success: true, message: "Statistics order in 7 day", days: result };
-  }
 }
 module.exports = new OrderService();

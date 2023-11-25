@@ -34,7 +34,6 @@ sửa order: http://localhost:3101/api/orders/update/id
 lay het order : http://localhost:3101/api/orders/getall
 lay het order theo userId : http://localhost:3101/api/orders/getbyuser/userId { phải có bearer Token }
 search order theo id :http://localhost:3101/api/orders/searchorder/id
-thống kê 12 tháng trong năm : http://localhost:3101/api/statisticinyear/:year
-thống kê 4 tuần trong tháng :http://localhost:3101/api/statisticinweek/:year/:month
-thống kế 7 ngày trong tuần http://localhost:3101/api/statisticinweek/:year/:month/:daystart 
+thống kê 12 tháng trong năm : http://localhost:3101/api/orders/statisticinyear/:year
+
 

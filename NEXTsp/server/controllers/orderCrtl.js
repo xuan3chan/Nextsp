@@ -83,31 +83,7 @@ class OrderController {
     }
   }
   
-  async statisticsOrderInMonthController(req, res) {
-    try {
-      const { year, month} = req.params;
-      const result = await orderService.statisticsOrderInMonthService(
-        year,
-        month
-      );
-      res.status(200).json(result);
-    } catch (error) {
-      handleErrorResponse(res, error);
-    }
-  }
-  async statisticsOrderInWeekController(req, res) {
-    try {
-      const { year, month, daystart } = req.params;
-      const result = await orderService.statisticsOrderInWeekService(
-        year,
-        month,
-        daystart
-      );
-      res.status(200).json(result);
-    } catch (error) {
-      handleErrorResponse(res, error);
-    }
-  }
+
 
 
 }
