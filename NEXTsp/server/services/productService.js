@@ -182,6 +182,8 @@ class ProductService {
       price: product.price,
       oldprice: product.oldprice,
       images: product.images,
+      numReviews: product.numReviews,
+      averageRating: product.averageRating,
       brand: product.brand
         ? {
             name: product.brand.nameBrand,
