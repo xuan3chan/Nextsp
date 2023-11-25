@@ -1,5 +1,5 @@
 // services/authService.js
-const User = require("../models/User");
+const User = require("../models/userModel");
 const Admin = require("../models/adminModel");
 const argon2d = require("argon2");
 const jwt = require("jsonwebtoken");
