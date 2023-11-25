@@ -72,5 +72,43 @@ class OrderController {
       handleErrorResponse(res, error);
     }
   }
+
+  async statisticsOrderInYearController(req, res) {
+    try {
+      const year = req.params.year; // get the year from the request body
+      const result = await orderService.statisticsOrderInYearService(year);
+      res.status(200).json(result);
+    } catch (error) {
+      handleErrorResponse(res, error);
+    }
+  }
+  
+  async statisticsOrderInMonthController(req, res) {
+    try {
+      const { year, month} = req.params;
+      const result = await orderService.statisticsOrderInMonthService(
+        year,
+        month
+      );
+      res.status(200).json(result);
+    } catch (error) {
+      handleErrorResponse(res, error);
+    }
+  }
+  async statisticsOrderInWeekController(req, res) {
+    try {
+      const { year, month, daystart } = req.params;
+      const result = await orderService.statisticsOrderInWeekService(
+        year,
+        month,
+        daystart
+      );
+      res.status(200).json(result);
+    } catch (error) {
+      handleErrorResponse(res, error);
+    }
+  }
+
+
 }
 module.exports = new OrderController();

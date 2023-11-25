@@ -10,5 +10,8 @@ router.delete('/delete/:id', orderController.deleteOrderController);
 router.get('/getall', orderController.getAllOrderController);
 router.get('/getbyuser/:userId',verifyToken, orderController.getOrdersByUser);
 router.get('/searchorder/:id', orderController.searchOrderController);
+router.get('/statisticinyear/:year', orderController.statisticsOrderInYearController);
+router.get('/statisticinmonth/:year/:month', orderController.statisticsOrderInMonthController);
+router.get('/statisticinweek/:year/:month/:daystart', orderController.statisticsOrderInWeekController);
 
 module.exports = router;
