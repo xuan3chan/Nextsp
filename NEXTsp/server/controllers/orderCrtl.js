@@ -82,6 +82,20 @@ class OrderController {
       handleErrorResponse(res, error);
     }
   }
+
+  async statisticsOrderInMonthController(req, res) {
+    try {
+      const year = req.params.year; // get the year from the request body
+      const month = req.params.month; // get the month from the request body
+      const result = await orderService.statisticsOrderInMonthService(
+        year,
+        month
+      );
+      res.status(200).json(result);
+    } catch (error) {
+      handleErrorResponse(res, error);
+    }
+  }
   
 
 

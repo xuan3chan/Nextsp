@@ -250,6 +250,7 @@ class ProductService {
 
     return { success: true, message: "Product details", product: matchedProducts };
   }
+  
 }
 
 module.exports = ProductService;

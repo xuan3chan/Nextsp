@@ -121,8 +121,39 @@ class OrderService {
 
     return { success: true, message: "Statistics order in 12 month",months:result };
   }
+//statistics order 31 day in 1 month 
+  async statisticsOrderInMonthService(year, month) {
+    // Convert year and month to numbers and adjust month for JavaScript's 0-based month index
+    year = Number(year);
+    month = Number(month) - 1;
 
+    const startDate = new Date(year, month);
+    const endDate = new Date(year, month + 1);
 
+    const result = await Order.aggregate([
+      {
+        $match: {
+          createdAt: {
+            $gte: startDate,
+            $lt: endDate
+          }
+        }
+      },
+      {
+        $group: {
+          _id: { $dateToString: { format: "%Y-%m-%d", date: "$createdAt" } },
+          total: { $sum: 1 },
+        },
+      },
+    ]);
 
+    if (result.length === 0) {
+      return { success: false, message: "No order in this month" };
+    }
+
+    return { success: true, message: "Statistics order in this month", days: result };
+  }
 }
+
+ 
 module.exports = new OrderService();
