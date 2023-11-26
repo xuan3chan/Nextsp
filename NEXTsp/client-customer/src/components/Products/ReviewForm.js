@@ -10,7 +10,7 @@ const ReviewForm = ({ onSubmit }) => {
   const [rating, setRating] = useState(0);
   const { id } = useParams();
 
-  const ApiAddFeedBack = "http://localhost:3101/api/ratings/add";
+  const ApiAddFeedBack = process.env.REACT_APP_ADD_RATING_API;
   const [userId, setUserID] = useState("");
   const AccessToken = localStorage.getItem("AccessToken");
   const [error, setError] = useState(null); // Added error state

@@ -16,8 +16,8 @@ function Header(props) {
   const [Categories, setCategories] = useState([]);
   const [accountName, setAccountName] = useState("");
   const [userId, setUserId] = useState("");
-  const apiBrand = "http://localhost:3101/api/catalog/getlistcateandbrand";
-  const apiUrl = "http://localhost:3101/api/auth/user";
+  const apiBrand = process.env.REACT_APP_GET_LIST_CATE_AND_BRAND_API;
+  const apiUrl = process.env.REACT_APP_GET_USER_API;
   const token = localStorage.getItem("accessToken");
 
   useEffect(() => {
@@ -62,14 +62,14 @@ function Header(props) {
 
   return (
     <div>
-      <div className="header z-20 flex justify-center">
+      <div className="header z-20 flex justify-center relative">
         <div className="header_logo">
           <img className="" src={LogoPage} alt="" />
         </div>
         <div className="navbar flex ">
           <a href="/Homepage">Trang Chủ</a>
           <a href="/Blog">Bài Viết</a>
-          <div className="dropdown relative">
+          <div className="dropdown">
             <div className="dropdown-btn-container flex justify-center items-center">
               <a
                 href="/Collection"
@@ -118,9 +118,56 @@ function Header(props) {
             </div>
           </div>
         </div>
+        <div className="navBar-mobile absolute left-1">
+          <div className="dropdown relative">
+            <div className="dropdown-btn-container flex justify-center items-center">
+              <a className="dropbtn flex justify-center items-center">
+                <FontAwesomeIcon className="mr-1" icon={faBars} />
+                <i className="fa fa-caret-down"></i>
+              </a>
+              <div className="dropdown-content flex flex-col w-48 ">
+                {Categories &&
+                  Categories.map((category) => {
+                    if (category.status === "Active") {
+                      return (
+                        <div
+                          className="category-item text-black flex contents-center w-full"
+                          key={category._id}
+                        >
+                          <a
+                            className="category-link w-full"
+                            href={`/Collection/${category.nameCategory}`}
+                          >
+                            {category.nameCategory}
+                            <FontAwesomeIcon
+                              className="category-icon"
+                              icon={faCaretRight}
+                            />
+                          </a>
+                          <div className="brand-menu flex flex-col w-full">
+                            {category.brands &&
+                              category.brands.map((brand) => (
+                                <a
+                                  className="brand-link w-full"
+                                  href={`/Collection/${category.nameCategory}/${brand.nameBrand}`}
+                                  key={brand._id}
+                                >
+                                  {brand.nameBrand}
+                                </a>
+                              ))}
+                          </div>
+                        </div>
+                      );
+                    }
+                  })}
+              </div>
+            </div>
+          </div>
+        </div>
+
         <SearchFunction />
         <div className="header_right_section pl-4 pr-4">
-          <div className=" navItem tracking-order opacity-60 hover:cursor-pointer hover:opacity-100">
+          <div className=" navItem hotLine tracking-order opacity-60 hover:cursor-pointer hover:opacity-100">
             <div className="boxIcon">
               <BsHeadphones></BsHeadphones>
             </div>
@@ -134,7 +181,7 @@ function Header(props) {
               Trạng Thái Đơn Hàng
             </a>
           </div>
-          <div className="navItem opacity-60 hover:cursor-pointer hover:opacity-100 text-sm">
+          <div className="navItem cart opacity-60 hover:cursor-pointer hover:opacity-100 text-sm">
             <div className="boxIcon">
               <PiShoppingCartSimpleBold></PiShoppingCartSimpleBold>
             </div>

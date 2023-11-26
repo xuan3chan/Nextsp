@@ -27,12 +27,11 @@ function Products(props) {
           <div className="flex bg-white w-full rounded-md h-full mb-8 pl-28 pb-10">
             <div>
               <ImageSection></ImageSection>
-              <FlaskSale></FlaskSale>
+              <ReviewForm onSubmit={handleReviewSubmit} />
             </div>
             <div className="flex flex-col gap-8">
               <MainContentSection></MainContentSection>
               <DescriptionSection></DescriptionSection>
-              <ReviewForm onSubmit={handleReviewSubmit} />
             </div>
           </div>
           <GetReview className="w-96 h-full" />

@@ -17,8 +17,6 @@ function PaymentPage(props) {
 
   const handlePaymentChange = (paymentMethod) => {
     setSelectedPayment(paymentMethod);
-    console.log(paymentMethod);
-    console.log(typeof paymentMethod);
   };
   const codImageLink =
     "https://file.hstatic.net/200000636033/file/pay_2d752907ae604f08ad89868b2a5554da.png";
@@ -58,7 +56,7 @@ function PaymentPage(props) {
   const tracking = "pending";
   const totalPriceNumber = Number(totalPrice);
   const addInfo = `NextSP Store Payment, userId: ${userId}`;
-  const accountName = "Nguyễn Văn Thiện";
+  const accountName = localStorage.getItem("accountName");
   const imageUrlQR = `https://img.vietqr.io/image/tpb-04144454101-compact2.jpg?amount=${totalPriceNumber}&addInfo=${addInfo}&accountName=${accountName}`;
   const payment = selectedPayment;
   const product = cart.map((item) => ({
@@ -77,8 +75,7 @@ function PaymentPage(props) {
     tracking,
   };
 
-  // Assuming you have the API endpoint
-  const apiUrl = "http://localhost:3101/api/orders/add";
+  const apiUrl = process.env.REACT_APP_ADD_ORDER_API;
 
   const handleOrder = () => {
     axios
@@ -86,12 +83,10 @@ function PaymentPage(props) {
       .then((response) => {
         // Handle success
         console.log("Order placed successfully:", response.data);
-        // Perform any additional actions after a successful order
       })
       .catch((error) => {
         // Handle error
         console.error("Error placing order:", error);
-        // Perform actions for error handling
       });
     localStorage.removeItem("cart");
     localStorage.removeItem("totalPrice");
@@ -99,6 +94,7 @@ function PaymentPage(props) {
     window.location.href = "/homepage";
     alert("Đặt hàng thành công");
   };
+
   return (
     <div className="bg-cart">
       <Header></Header>
@@ -184,13 +180,13 @@ function PaymentPage(props) {
                       type="radio"
                       name="paymentMethod"
                       id="QR"
-                      checked={selectedPayment === "QR"}
-                      onChange={() => handlePaymentChange("QR")}
+                      checked={selectedPayment === "Banking"}
+                      onChange={() => handlePaymentChange("Banking")}
                     />
                     <img className="w-6 h-6" src={qrImageLink} alt="" />
                     <label htmlFor="QR"> Thanh toán chuyển khoản (QR)</label>
                   </div>
-                  {selectedPayment === "QR" && (
+                  {selectedPayment === "Banking" && (
                     <img
                       className="QRbanking w-72 h-86"
                       src={imageUrlQR}

@@ -10,9 +10,11 @@ import {
   Footer,
   BannerTop,
 } from "../components";
+import "../assets/css/Responsive.css";
 import "../assets/css/homepage.css";
 import "../assets/css/main.css";
 import ProductListAll from "../components/homepage/ProductListAll";
+import SlidesShowMobile from "../components/homepage/SlidesShowMobile";
 function Homepage(props) {
   const [isLoading, setIsLoading] = useState(false);
   return (
@@ -26,6 +28,7 @@ function Homepage(props) {
         <Header />
         <div className="container_content mt-[56px] color-bg">
           <BannerScroll />
+          <SlidesShowMobile />
           <div className="container-product-section inline-block relative">
             <div className="flex flex-col contents-center mr-auto ml-auto gap-10">
               <SloganListSection />

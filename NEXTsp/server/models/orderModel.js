@@ -42,7 +42,7 @@ const orderSchema = new mongoose.Schema({
   },
   payment: {
     type: String,
-    enum: ["COD", "banking"],
+    enum: ["COD", "Banking"],
     default: "COD",
   },
 }, { timestamps: true });

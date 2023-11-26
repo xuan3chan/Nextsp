@@ -223,8 +223,6 @@
   width: 100%;
 }
 
-.searching-result {
-}
 .searching-result-item-img img {
   max-width: 40px;
   max-height: 40px;
@@ -242,6 +240,9 @@
 .searching-result-item-info-price {
   font-size: small;
   color: var(--primary-color);
+}
+.slideshow-container{
+  display: none;
 }
 
 .user_module_login {
@@ -393,4 +394,20 @@ dropDownItem2 {
   font-size: small;
   gap: 2px;
   width: 200px;
+}
+
+.navBar-mobile {
+  display: none;
+}
+.slideshow-container {
+  height: 240px;
+  margin: auto;
+}
+.slide-item {
+  margin-left: auto;
+  margin-right: auto;
+  width: 90%;
+}
+.slideImg {
+  display: block;
 }
