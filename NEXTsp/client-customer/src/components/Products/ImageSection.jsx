@@ -42,15 +42,15 @@ const ImageSection = (props) => {
     return <div>Loading...</div>;
   }
   return (
-    <div className=" flex flex-col gap-3 w-[450px] h-[600px] py-16 px-4 relative pl-9">
+    <div className="ImageSection flex flex-col gap-3 w-[450px] h-[600px] py-16 ">
       <div
         style={{ backgroundImage: `url(${product.images[CurrentIndex]})` }}
-        className=" mainImage w-full h-full rouded-2xl bg-center bg-cover duration-500 object-fill "
+        className=" mainImage w-full h-full rounded-xl bg-center bg-cover duration-500 object-fill relative"
       >
-        <div className="absolute top-2/4 translate-x-0 translate-y-[50%] left-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer">
+        <div className="absolute top-1/3 translate-x-0 translate-y-[50%] -left-10 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer">
           <BsChevronLeft onClick={prevClick}></BsChevronLeft>
         </div>
-        <div className="absolute top-2/4  -translate-x-0 translate-y-[50%] right-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer">
+        <div className="absolute top-1/3  -translate-x-0 translate-y-[50%] -right-10 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer">
           <BsChevronRight onClick={nextClick}></BsChevronRight>
         </div>
       </div>

@@ -25,7 +25,7 @@ const GetReview = () => {
     return ratingStar;
   };
   return (
-    <div className="getReviewSection ">
+    <div className="getReviewSection">
       <div className="textSection mb-8">
         <h1 className="getReview_title">Danh sách đánh giá</h1>
         <h2>( Hiện có {countRating} lượt đánh giá )</h2>

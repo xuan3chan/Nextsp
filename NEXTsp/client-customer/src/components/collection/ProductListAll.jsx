@@ -65,7 +65,7 @@ function ProductListAll(props) {
   }
 
   return (
-    <div className="productList max-h-full w-full bg-white rounded-md pb-8">
+    <div className="productList max-h-full w-full bg-white rounded-md pb-8 flex flex-col items-center justify-center">
       <h1 className="CategoryTitle">Tất Cả Sản Phẩm</h1>
       <div className="w-36">
         <button className="btnFilter btnSort w-36" onClick={toggleDropdown}>

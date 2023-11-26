@@ -9,13 +9,16 @@
 .bg-product {
   background-color: #ececec;
 }
-
-/* Hide the images by default */
+.containerDetail {
+  width: 1540px;
+}
+.containerDetail_content {
+  width: 80%;
+  margin: 0 auto;
+}
 .mySlides {
   display: none;
 }
-
-/* Add a pointer when hovering over the thumbnail images */
 .cursor {
   cursor: pointer;
 }
@@ -128,11 +131,10 @@
 
 /* Description section */
 .containerDescSection {
-  width: 600px;
   border: #ececec 1px solid;
   margin-left: 24px;
   border-radius: 10px;
-  max-width: 70%;
+  max-width: 440px;
 }
 .descTitle {
   line-height: 64px;
@@ -192,7 +194,7 @@
 
 .ReviewForm {
   margin-top: 20px;
-  margin-left: 20px;
+  margin-left: 40px;
 }
 .TitleForm {
   font-size: 20px;
@@ -205,8 +207,8 @@
   background-color: #ffffff;
   padding: 20px;
   border-radius: 10px;
-  border: 1px solid #ececec;
   width: 100%;
+  margin-left: 20px;
 }
 .getReview_title {
   font-size: 20px;
@@ -229,4 +231,7 @@
   font-size: 14px;
   font-weight: 400;
   color: var(--second-color);
+}
+.getReviewSection {
+  width: 80%;
 }

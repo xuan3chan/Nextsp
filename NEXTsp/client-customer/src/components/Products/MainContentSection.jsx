@@ -41,7 +41,7 @@ function MainContentSection(props) {
       {product && (
         <div
           key={product._id}
-          className="flex flex-col gap-6 mt-8 mr-8 ml-8 border-b-2 h-96"
+          className="DetailProduct flex flex-col gap-6 mt-8 mr-8 ml-8 border-b-2 pb-4"
         >
           <div className="productTitle h-22">{product.nameProduct}</div>
           <div className="productRating flex gap-2">
