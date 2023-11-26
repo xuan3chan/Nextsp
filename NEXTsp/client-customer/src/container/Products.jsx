@@ -9,6 +9,11 @@ import ReviewForm from "../components/Products/ReviewForm";
 import GetReview from "../components/Products/GetReview";
 import "../assets/css/Products.css";
 function Products(props) {
+  const handleReviewSubmit = (reviewData) => {
+    // Xử lý đánh giá, ví dụ: gửi đến máy chủ hoặc lưu vào trạng thái ứng dụng
+    alert("Đánh giá đã được gửi: " + JSON.stringify(reviewData));
+    console.log("Đánh giá đã được gửi:");
+  };
   return (
     <div className="OverProduct bg-product flex flex-col items-center">
       <Header className="h-16"></Header>
@@ -25,7 +30,7 @@ function Products(props) {
             </div>
           </div>
           <div className="bg-white w-4/5 mt-10 rounded-md">
-            <ReviewForm />
+            <ReviewForm onSubmit={handleReviewSubmit} />
             <GetReview className="h-full" />
           </div>
         </div>
