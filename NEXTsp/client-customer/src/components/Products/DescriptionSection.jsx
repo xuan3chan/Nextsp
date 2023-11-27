@@ -34,7 +34,9 @@ function DescriptionSection(props) {
           <div>
             <div className="descTitle">Mô Tả Sản Phẩm</div>
             <div className="productDesc">
-              <h2>Thông Tin Chi Tiết Sản Phẩm {product.nameProduct}</h2>
+              <span className="font-bold text-lg">
+                Thông Tin Chi Tiết Sản Phẩm {product.nameProduct}
+              </span>
               <p>{product.description}</p>
             </div>
           </div>

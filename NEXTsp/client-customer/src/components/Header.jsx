@@ -63,12 +63,11 @@ function Header(props) {
   return (
     <div>
       <div className="header z-20 flex justify-center relative">
-        <div className="header_logo">
+        <Link to="/homepage" className="header_logo">
           <img className="" src={LogoPage} alt="" />
-        </div>
+        </Link>
         <div className="navbar flex ">
           <a href="/Homepage">Trang Chủ</a>
-          <a href="/Blog">Bài Viết</a>
           <div className="dropdown">
             <div className="dropdown-btn-container flex justify-center items-center">
               <a
@@ -125,26 +124,29 @@ function Header(props) {
                 <FontAwesomeIcon className="mr-1" icon={faBars} />
                 <i className="fa fa-caret-down"></i>
               </a>
-              <div className="dropdown-content flex flex-col w-48 ">
+              <div className="dropdown-content dropdown-content-mb flex flex-col w-56 left-6 absolute ">
+                <div className="dropdown-title text-black p-3">
+                  Danh Mục Sản Phẩm
+                </div>
                 {Categories &&
                   Categories.map((category) => {
                     if (category.status === "Active") {
                       return (
                         <div
-                          className="category-item text-black flex contents-center w-full"
+                          className="category-item category-item-mb text-black flex contents-center w-full"
                           key={category._id}
                         >
                           <a
                             className="category-link w-full"
                             href={`/Collection/${category.nameCategory}`}
                           >
-                            {category.nameCategory}
-                            <FontAwesomeIcon
-                              className="category-icon"
-                              icon={faCaretRight}
-                            />
+                            <span>{category.nameCategory}</span>
                           </a>
-                          <div className="brand-menu flex flex-col w-full">
+                          <FontAwesomeIcon
+                            className="category-icon"
+                            icon={faCaretRight}
+                          />
+                          <div className="brand-menu-mb  flex flex-col w-full">
                             {category.brands &&
                               category.brands.map((brand) => (
                                 <a
@@ -164,7 +166,6 @@ function Header(props) {
             </div>
           </div>
         </div>
-
         <SearchFunction />
         <div className="header_right_section pl-4 pr-4">
           <div className=" navItem hotLine tracking-order opacity-60 hover:cursor-pointer hover:opacity-100">

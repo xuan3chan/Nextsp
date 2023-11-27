@@ -54,10 +54,6 @@
 
 /* Pagination section */
 
-.pagination {
-  display: inline-block;
-}
-
 .pagination a {
   color: black;
   float: left;
@@ -87,7 +83,6 @@
 }
 
 /* FilterButtonSection */
-
 
 .sort-dropdown {
   position: absolute;
