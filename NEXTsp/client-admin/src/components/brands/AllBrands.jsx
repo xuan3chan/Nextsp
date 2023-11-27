@@ -112,7 +112,7 @@ const AllBrands = () => {
   return (
     <Fragment>
       <div className="flex items-center justify-center">
-        <h1 className="text-2xl font-semibold text-gray-800">All Brands</h1>
+        <h1 className={`text-2xl font-semibold ${darkModeText}`}>All Brands</h1>
       </div>
       <div className="flex flex-col items-center justify-start">
         <div className="w-full mt-4">

@@ -1,4 +1,5 @@
 import React, { Fragment, useContext, useEffect, useState } from "react";
+import { ThemeContext } from "../theme/ThemeContext";
 import { getAllProduct } from "./FetchApi";
 import { ProductContext } from "./index";
 import axios from "axios";
@@ -10,7 +11,13 @@ const AllProducts = () => {
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
+  const { darkMode } = useContext(ThemeContext)
   const productsPerPage = 10;
+
+  const darkModeText = darkMode ? 'text-white' : 'text-gray-800'
+  const statusDAM = darkMode ? 'text-black bg-[#37AA9C]' : 'text-black bg-green-200'
+  const statusDA1 = darkMode ? 'text-black bg-[#BB2525]' : 'text-black bg-red-200'
+  const tablebg = darkMode ? 'bg-slate-700 text-white' : 'bg-white text-gray-800'
 
   useEffect(() => {
     fetchData();
@@ -104,9 +111,9 @@ const AllProducts = () => {
   return (
     <Fragment>
       <div className="flex items-center justify-center">
-        <h1 className="text-2xl font-semibold text-gray-800">All Products</h1>
+        <h1 className={`text-2xl font-semibold ${darkModeText}`}>All Products</h1>
       </div>
-      <div className="col-span-1 overflow-auto bg-white shadow-lg p-4">
+      <div className={`col-span-1 overflow-auto ${tablebg} shadow-lg p-4`}>
         <table className="table-auto border w-full my-2">
           <thead>
             <tr>
@@ -154,11 +161,11 @@ const AllProducts = () => {
                   </td>
                   <td className="p-2 text-center border">
                     {product.status === "Active" ? (
-                      <span className="bg-green-200 rounded-full text-center text-xs px-2 font-semibold">
+                      <span className={`${statusDAM} rounded-full text-center text-xs px-2 font-semibold`}>
                         {product.status}
                       </span>
                     ) : (
-                      <span className="bg-red-200 rounded-full text-center text-xs px-2 font-semibold">
+                      <span className={`${statusDA1} rounded-full text-center text-xs px-2 font-semibold`}>
                         {product.status}
                       </span>
                     )}

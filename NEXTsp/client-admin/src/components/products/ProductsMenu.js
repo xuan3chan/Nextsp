@@ -2,20 +2,23 @@ import React ,{Fragment, useContext} from 'react'
 import { ProductContext } from './index';
 import AddProductModal from './AddProductModal'
 import EditProductModal from './EditProductModal';
+import { ThemeContext } from '../theme/ThemeContext';
 
 const ProductsMenu = (props) => {
   const { dispatch } = useContext(ProductContext)
+  const { darkMode, setDarkMode } = useContext(ThemeContext)
+  const btnDM = darkMode ? 'bg-[#2D9596] text-gray-100' : 'bg-[#303031] text-gray-100'
+
   return (
     <Fragment>
       <div className="col-span-1 flex justify-between items-center">
         <div className="flex items-center">
           {/* It's open the add product modal */}
           <span
-            style={{ background: "#303031" }}
             onClick={(e) =>
               dispatch({ type: "addProductModal", payload: true })
             }
-            className="rounded-full cursor-pointer p-2 bg-gray-800 flex items-center text-gray-100 text-sm font-semibold uppercase"
+            className={`rounded-full cursor-pointer p-2 ${btnDM} flex items-center text-sm font-semibold uppercase`}
           >
             <svg
               className="w-6 h-6 text-gray-100 mr-2"

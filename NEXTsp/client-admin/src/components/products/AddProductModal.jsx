@@ -1,4 +1,5 @@
 import React, { Fragment, useContext, useState, useEffect } from "react";
+import { ThemeContext } from "../theme/ThemeContext";
 import { ProductContext } from "./index";
 import { getAllProduct, createProduct } from "./FetchApi";
 import { getAllBrand } from "../brands/FetchAPI";
@@ -6,6 +7,12 @@ import { getAllCategory } from "../categories/FetchApi";
 
 const AddProductDetail = ({ brands, categories }) => {
   const { data, dispatch } = useContext(ProductContext);
+  const { darkMode } = useContext(ThemeContext)
+
+  const darkfield = darkMode ? 'focus:border-[#2D9596] focus:border-2 bg-gray-700' : 'focus:border-black focus:border-2 bg-white border'
+  const darkbtn = darkMode ? 'bg-[#2D9596] text-white' : 'bg-[#303031] text-gray-100'
+  const darkModal = darkMode ? 'bg-gray-800 text-white' : 'bg-white text-black'
+
 
   const message = (msg, type) => (
     <div className={`bg-${type}-200 py-2 px-4 w-full`}>{msg}</div>
@@ -110,18 +117,17 @@ const AddProductDetail = ({ brands, categories }) => {
           data.addProductModal ? "" : "hidden"
         } fixed inset-0 flex items-center z-30 justify-center overflow-auto`}
       >
-        <div className="mt-32 md:mt-0 relative bg-white w-11/12 md:w-3/6 shadow-lg flex flex-col items-center space-y-4 px-4 py-4 md:px-8">
+        <div className={`mt-32 md:mt-0 relative ${darkModal} w-11/12 md:w-3/6 shadow-lg flex flex-col items-center space-y-4 px-4 py-4 md:px-8`}>
           <div className="flex items-center justify-between w-full pt-4">
             <span className="text-left font-semibold text-2xl tracking-wider">
               Add Product
             </span>
             {/* Close Modal */}
             <span
-              style={{ background: "#303031" }}
               onClick={(e) =>
                 dispatch({ type: "addProductModal", payload: false })
               }
-              className="cursor-pointer text-gray-100 py-2 px-2 rounded-full"
+              className={`cursor-pointer ${darkbtn} py-2 px-2 rounded-full`}
             >
               <svg
                 className="w-6 h-6"
@@ -152,7 +158,7 @@ const AddProductDetail = ({ brands, categories }) => {
                   type="text"
                   id="name"
                   placeholder="Product Name"
-                  className="px-4 py-2 border focus:outline-none"
+                  className={`px-4 py-2 border focus:outline-none ${darkfield}`}
                   required
                 />
               </div>
@@ -167,7 +173,7 @@ const AddProductDetail = ({ brands, categories }) => {
                   type="number"
                   id="price"
                   placeholder="Price"
-                  className="px-4 py-2 border focus:outline-none"
+                  className={`px-4 py-2 border focus:outline-none ${darkfield}`}
                   required
                 />
               </div>
@@ -180,7 +186,7 @@ const AddProductDetail = ({ brands, categories }) => {
                   type="number"
                   id="price"
                   placeholder="Old Price"
-                  className="px-4 py-2 border focus:outline-none"
+                  className={`px-4 py-2 border focus:outline-none ${darkfield}`}
                 />
               </div>
             </div>
@@ -192,7 +198,7 @@ const AddProductDetail = ({ brands, categories }) => {
                     setFdata({ ...fData, brand: e.target.value })
                   }
                   id="brand"
-                  className="px-4 py-2 border focus:outline-none"
+                  className={`px-4 py-2 border focus:outline-none ${darkfield}`}
                   required
                 >
                   <option value="">Select Brand</option>
@@ -214,7 +220,7 @@ const AddProductDetail = ({ brands, categories }) => {
                     setFdata({ ...fData, category: e.target.value })
                   }
                   id="category"
-                  className="px-4 py-2 border focus:outline-none"
+                  className={`px-4 py-2 border focus:outline-none ${darkfield}`}
                   required
                 >
                   <option value="">Select Category</option>
@@ -243,7 +249,7 @@ const AddProductDetail = ({ brands, categories }) => {
                   }
                   id="description"
                   placeholder="Description"
-                  className="px-4 py-2 border focus:outline-none"
+                  className={`px-4 py-2 border focus:outline-none ${darkfield}`}
                   required
                 />
               </div>
@@ -265,7 +271,7 @@ const AddProductDetail = ({ brands, categories }) => {
                   type="file"
                   id="image"
                   placeholder="Image"
-                  className="px-4 py-2 border focus:outline-none"
+                  className={`px-4 py-2 border focus:outline-none ${darkfield}`}
                   multiple
                   required
                 />
@@ -277,7 +283,7 @@ const AddProductDetail = ({ brands, categories }) => {
                     setFdata({ ...fData, status: e.target.value })
                   }
                   id="status"
-                  className="px-4 py-2 border focus:outline-none"
+                  className={`px-4 py-2 border focus:outline-none ${darkfield}`}
                   required
                 >
                   <option value="">Select Status</option>
@@ -289,7 +295,7 @@ const AddProductDetail = ({ brands, categories }) => {
             <div className="flex justify-center items-center w-full mt-6">
               <button
                 type="submit"
-                className="px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded"
+                className={`px-4 py-2 ${darkbtn} rounded w-full`}
               >
                 Add Product
               </button>

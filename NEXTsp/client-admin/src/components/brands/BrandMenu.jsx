@@ -1,11 +1,15 @@
 import React, {Fragment, useContext} from 'react'
 import { BrandContext } from "./index";
+import { ThemeContext } from '../theme/ThemeContext';
 import AddBrandModal from './AddBrandModal';
-import EditBrandModal from './EditBrandModal';
-
+import EditBrandModal from './EditBrandModal'
+;
 const BrandMenu = () => {
   
   const { dispatch } = useContext(BrandContext);
+  const { darkMode, setDarkMode } = useContext(ThemeContext)
+  const btnDM = darkMode ? 'bg-[#2D9596] text-gray-100' : 'bg-[#303031] text-gray-100'
+
 
   return (
     <Fragment>
@@ -13,11 +17,10 @@ const BrandMenu = () => {
         <div className="flex flex-col space-y-4 md:flex-row md:justify-between md:items-center w-full">
           {/* It's open the add brand modal */}
           <div
-            style={{ background: "#303031" }}
             onClick={(e) =>
               dispatch({ type: "addBrandModal", payload: true })
             }
-            className="cursor-pointer rounded-full p-2 flex items-center justify-center text-gray-100 text-sm font-semibold uppercase"
+            className={`cursor-pointer rounded-full p-2 flex items-center justify-center ${btnDM} text-sm font-semibold uppercase`}
           >
             <svg
               className="w-6 h-6 text-gray-100 mr-2"
