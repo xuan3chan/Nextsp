@@ -7,7 +7,7 @@ function IAccount(props) {
   const [accountName, setAccountName] = useState("");
   const [phone, setPhone] = useState("");
   const [Email, setEmail] = useState("");
-  const apiUrl = "http://localhost:3101/api/auth/user";
+  const apiUrl = "https://nextsp-server.id.vn/api/auth/user";
   const token = localStorage.getItem("accessToken");
 
   useEffect(() => {

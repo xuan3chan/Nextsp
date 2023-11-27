@@ -1,9 +1,10 @@
 .left-sidebar {
-  width: 20%;
+  max-width: 30%;
   background-color: #fff;
   border: solid #a9a9a9 1px;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
     rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+  min-height: 400px;
 }
 #content {
   height: 100%;
@@ -68,9 +69,22 @@
   color: #005ec9;
 }
 .content__body__subTitle {
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 500;
 }
+.product-Title {
+  font-size: 16px;
+  font-weight: 550;
+}
+.product-OldPrice {
+  font-size: 14px;
+  font-weight: 500;
+}
+.product-Price {
+  font-size: 15px;
+  font-weight: 500;
+}
+
 .content__body__title {
   display: flex;
   flex-direction: column;

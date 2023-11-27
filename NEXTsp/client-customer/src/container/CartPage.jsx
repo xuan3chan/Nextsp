@@ -6,7 +6,7 @@ import ProductAdded from "../components/Cart/ProductAdded";
 import TotalSection from "../components/Cart/TotalSection";
 function CartPage(props) {
   return (
-    <div className="bg-cart">
+    <div className="bg-cart CartOver">
       <Header></Header>
       <div className="pt-24 w-full pb-24">
         <div className="CartSection ml-auto mr-auto border-spacing-1 p-20">

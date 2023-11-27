@@ -6,7 +6,7 @@ const LogoutTracking = () => {
   const [Order, setOrderDetail] = useState([]);
   const [orderId, setOrderId] = useState("");
   const [visibleProduct, setVisibleProduct] = useState(2);
-  const apiUrl = `http://localhost:3101/api/orders/searchorder/${orderId}`;
+  const apiUrl = `https://nextsp-server.id.vn/api/orders/searchorder/${orderId}`;
 
   useEffect(() => {
     if (orderId) {

@@ -8,7 +8,7 @@ import StarRating from "./StarRating";
 function MainContentSection(props) {
   const [product, setProduct] = useState(null);
   const param = useParams();
-  const ApiProducts = `http://localhost:3101/api/products/getdetails/${param.id}/`;
+  const ApiProducts = `https://nextsp-server.id.vn/api/products/getdetails/${param.id}/`;
 
   const fetchData = async () => {
     try {

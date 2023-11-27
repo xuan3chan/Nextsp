@@ -17,7 +17,7 @@ function SearchFunction(props) {
   const handleFiltersChange = (newFilters) => {};
 
   useEffect(() => {
-    const apiLink = `http://localhost:3101/api/products/search/${productName}`;
+    const apiLink = `https://nextsp-server.id.vn/api/products/search/${productName}`;
 
     if (productName) {
       axios
