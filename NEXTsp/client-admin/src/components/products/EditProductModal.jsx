@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useState, useEffect } from "react";
+import React, { Fragment, useContext, useState, useEffect, useCallback } from "react";
 import { ProductContext } from "./index";
 import { editProduct, getAllProduct } from "./FetchApi";
 import { getAllBrand } from "../brands/FetchAPI";
@@ -34,19 +34,20 @@ const EditProductModal = (props) => {
     fetchCategory();
   }, []);
 
-  const fetchBrands = async () => {
+  const fetchBrands = useCallback(async () => {
     let responseData = await getAllBrand();
     if (responseData) {
       setBrands(responseData);
     }
-  };
-
-  const fetchCategory = async () => {
+  }, []);
+  
+  const fetchCategory = useCallback(async () => {
     let responseData = await getAllCategory();
     if (responseData) {
       setCategories(responseData);
     }
-  };
+  }, []);
+  
 
   useEffect(() => {
     setEditformdata({
@@ -62,26 +63,19 @@ const EditProductModal = (props) => {
     });
   }, [data.editProductModal]);
 
-  const fetchData = async () => {
-    let responseData = await getAllProduct();
-    if (responseData && responseData.Products) {
-      dispatch({
-        type: "fetchProductsAndChangeState",
-        payload: responseData.Products,
-      });
-    }
-  };
-
-  const submitForm = async (e) => {
+  const submitForm = useCallback(async (e) => {
     e.preventDefault();
 
     dispatch({ type: "loading", payload: true });
+
+    const updatedProduct = {
+      ...editformData,
+      images: [...editformData.images, ...newImages],
+    };
+
     try {
-      let edit = await editProduct(
-        { ...editformData, images: [...editformData.images, ...newImages] },
-        data.editProductModal
-      );
-      
+      const edit = await editProduct(updatedProduct, data.editProductModal);
+
       if (edit && edit.error) {
         setEditformdata({
           ...editformData,
@@ -89,17 +83,17 @@ const EditProductModal = (props) => {
           success: false,
         });
       } else if (edit && edit.success) {
-        setEditformdata({
-          ...editformData,
-          error: false,
-          success: "Update Complete !",
-        });
         setTimeout(() => {
-          fetchData();
-          dispatch({ type: "editProductModalClose", payload: true });
-        }, 2000);
-        setTimeout(() => {
-        }, 1000);
+          setEditformdata({
+            ...editformData,
+            error: false,
+            success: "Update Complete !",
+          });
+          setTimeout(() => {
+            dispatch({ type: "editProductModalClose", payload: true });
+          }, 1000);
+        },2000)
+        
       } else {
         setEditformdata({
           ...editformData,
@@ -112,7 +106,7 @@ const EditProductModal = (props) => {
     } finally {
       dispatch({ type: "loading", payload: false });
     }
-  };
+  }, [editformData, newImages, data.editProductModal]);
   
   return (
     <Fragment>

@@ -9,21 +9,22 @@ const AllProducts = () => {
   const [ products, setProducts ] = useState([])
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const productsPerPage = 10;
 
   useEffect(() => {
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      fetchData();
-    }, 10000); // Fetch data every 10 seconds
-  
-    return () => clearInterval(interval); // This represents the unmount function, in which you need to clear your interval to prevent memory leaks.
-  }, []);
+  const indexOfLastProduct = currentPage * productsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);
+
+  const paginate = pageNumber => setCurrentPage(pageNumber);
 
   const fetchData = async () => {
+    setLoading(true);
     try {
       const responseData = await getAllProduct();
       setProducts(responseData);
@@ -38,16 +39,16 @@ const AllProducts = () => {
     if (window.confirm("Are you sure?")) {
       axios.delete(`${apiURL}/delete/${id}`)
       .then(res => {
-        const del = products.filter(product => id !== product.id)
-        setProducts(del)
-        fetchData();
-        setLoading(false)
+        // Filter out the deleted product from the local state
+        const updatedProducts = products.filter(product => product.id !== id);
+        setProducts(updatedProducts);
+        setLoading(false);
       })
       .catch(err => {
-        console.log(err)
-      })
+        console.log(err);
+      });
     }
-  }
+  };
 
   const editProduct = (id, nameProduct, description, price, oldprice, images, brand, category, status) => {
     dispatch({
@@ -121,8 +122,8 @@ const AllProducts = () => {
             </tr>
           </thead>
           <tbody>
-              {products && products.length > 0 ? (
-                products.map((product) => (
+            {currentProducts && currentProducts.length > 0 ? (
+              currentProducts.map((product) => (
                 <tr className="border border-spacing-1" key={product.id}>
                   <td className="p-2 text-left border">
                     {product.nameProduct.length > 15
@@ -162,7 +163,7 @@ const AllProducts = () => {
                       </span>
                     )}
                   </td>
-                  <td className="p-2 ">
+                  <td className="p-2 text-center">
                     <span
                       onClick={(e) => editProduct(
                         product.id,
@@ -175,13 +176,13 @@ const AllProducts = () => {
                         product.category,
                         product.status
                       )}
-                      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-1"
+                      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-1 hover:cursor-pointer"
                     >
                       Edit
                     </span>
                     <span
                       onClick={(e) => deleteProduct(product.id)}
-                      className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                      className="bg-red-500 hover:bg-red-700 hover:cursor-pointer text-white font-bold py-2 px-4 rounded"
                     >
                       Delete
                     </span>
@@ -196,6 +197,18 @@ const AllProducts = () => {
               )}
           </tbody>
         </table>
+        {/* Pagination */}
+        <div className="pagination flex justify-end space-x-2">
+          {[...Array(Math.ceil(products.length / productsPerPage)).keys()].map(number => (
+            <button 
+              key={number + 1} 
+              onClick={() => paginate(number + 1)}
+              className={`px-4 py-2 border rounded ${currentPage === number + 1 ? 'bg-blue-500 text-white' : 'text-blue-500'}`}
+            >
+              {number + 1}
+            </button>
+          ))}
+        </div>
       </div>
     </Fragment>
   );

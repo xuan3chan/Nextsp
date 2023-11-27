@@ -12,6 +12,8 @@ const AllOrders = () => {
   const [sortOrder, setSortOrder] = useState('asc');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const ordersPerPage = 10;
   // Fetch all orders on component mount
   const fetchData = async () => {
     try {
@@ -23,6 +25,13 @@ const AllOrders = () => {
       setLoading(false);
     }
   };
+  useEffect(() => {
+    const interval = setInterval(() => {
+      fetchData();
+    }, 10000); // Fetch data every 10 seconds
+  
+    return () => clearInterval(interval); // This represents the unmount function, in which you need to clear your interval to prevent memory leaks.
+  }, []);
 
   const sortOrders = () => {
     let sortedOrders = [...order];
@@ -37,6 +46,12 @@ const AllOrders = () => {
   useEffect(() => {
     fetchData();
   }, []);
+
+  const indexOfLastOrder = currentPage * ordersPerPage;
+  const indexOfFirstOrder = indexOfLastOrder - ordersPerPage;
+  const currentOrders = order.slice(indexOfFirstOrder, indexOfLastOrder);
+
+  const paginate = pageNumber => setCurrentPage(pageNumber);
   
   const deleteOrder = async (_id) => {
     // Show a confirmation dialog
@@ -66,6 +81,11 @@ const AllOrders = () => {
       }
     }
   }
+
+  useEffect(() => {
+    sortOrders();
+  }, [sortOrder]);
+  
 
   const toggleSortOrder = () => {
     setSortOrder(prevSortOrder => prevSortOrder === 'asc' ? 'desc' : 'asc');
@@ -108,84 +128,97 @@ const AllOrders = () => {
         <h1 className="text-2xl font-semibold text-gray-800">All Orders</h1>
       </div>
       <div className="col-span-1 overflow-auto bg-white shadow-lg p-4">
-        <table className="table-fixed border w-full my-2"></table>
-        <thead>
-          <tr>
-            <th className="px-4 py-2 w-1/3 border">Products</th>
-            <th className="px-4 py-2 border">Customer</th>
-            <th className="px-4 py-2 border">Email</th>
-            <th className="px-4 py-2 border">Address</th>
-            <th className="px-4 py-2 border ">Payment</th>
-            <th className={`px-4 py-2 border ${sortOrder === 'desc' ? ' bg-black/10 shadow-inner' : ''}`} onClick={toggleSortOrder}>
-              Total {sortOrder === 'desc' ? '↑' : '↓'}
-            </th>
-            <th className="px-4 py-2 w-[9.666667%] border">Created at</th>
-            <th className="px-4 py-2 border">Tracking</th>
-            <th className="px-4 py-2 border">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {order && order?.length > 0 ? (
-            order.map((item, i) => {
-              return (
-                <tr key={i}>
-                  <td className="px-4 py-2 border text-sm">
-                    {item.product?.map((elem, i) => {
-                      // Check if productId exists before accessing nameProduct
-                      if (elem.productId) {
-                        const productName = elem.productId.nameProduct;
-                        return (
-                          <div key={i}>
-                            <p>{productName + "; "}</p>
-                          </div>
-                        );
-                      }
-                      // If productId does not exist, return null
-                      return null;
-                    })}
-                  </td>
-                  <td className="px-4 py-2 border text-sm">{item.userId ? item.userId.fullName : 'N/A'}</td>
-                  <td className="px-4 py-2 border text-sm">{item.userId ? item.userId.email.slice(0, 10) + "..." : 'N/A'}</td>
-                  <td className="px-4 py-2 border text-sm">{item.address}</td>
-                  <td className="px-4 py-2 border text-sm">{item.payment}</td>
-                  <td className="px-4 py-2 border text-sm">{item.totalPrice}</td>
-                  <td className="px-4 py-2 border text-sm">
-                    {moment(item.createdAt).format("DD/MM/YYYY")}
-                  </td>
-                  <td className="px-4 py-2 border">
-                    <select value={item.tracking}
-                      onChange={(e) => updateTracking(item._id, e.target.value)}
-                    >
-                      <option value="pending">pending</option>
-                      <option value="confirmed">confirmed</option>
-                      <option value="shipping">shipping</option>
-                      <option value="delivered">delivered</option>
-                      <option value="done">done</option>
-                      <option value="cancel">cancel</option>
-                    </select>
-                  </td>
-                  <td className="px-4 py-2 border">
-                    <button
-                      onClick={() => deleteOrder(item._id, dispatch)}
-                      className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded"
-                    >
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              );
-            })
-          ) : (
+        <table className="table-auto border w-full my-2">
+          <thead>
             <tr>
-              <td
-                colSpan="12"
-                className="text-xl text-center font-semibold py-8"
-              >
-                No order found
-              </td>
+              <th className="px-4 py-2 w-1/3 border">Products</th>
+              <th className="px-4 py-2 border">Customer</th>
+              <th className="px-4 py-2 border">Email</th>
+              <th className="px-4 py-2 border">Address</th>
+              <th className="px-4 py-2 border ">Payment</th>
+              <th className={`px-4 py-2 border ${sortOrder === 'desc' ? ' bg-black/10 shadow-inner' : ''}`} onClick={toggleSortOrder}>
+                Total {sortOrder === 'desc' ? '↑' : '↓'}
+              </th>
+              <th className="px-4 py-2 w-[9.666667%] border">Created at</th>
+              <th className="px-4 py-2 border">Tracking</th>
+              <th className="px-4 py-2 border">Actions</th>
             </tr>
-          )}
-        </tbody>
+          </thead>
+          <tbody>
+            {currentOrders && currentOrders.length > 0 ? (
+              currentOrders.map((item, i) => {
+                return (
+                  <tr key={i}>
+                    <td className="px-4 py-2 border text-sm">
+                      {item.product?.map((elem, i) => {
+                        // Check if productId exists before accessing nameProduct
+                        if (elem.productId) {
+                          const productName = elem.productId.nameProduct;
+                          return (
+                            <div key={i}>
+                              <p>{productName + "; "}</p>
+                            </div>
+                          );
+                        }
+                        // If productId does not exist, return null
+                        return null;
+                      })}
+                    </td>
+                    <td className="px-4 py-2 border text-sm">{item.userId ? item.userId.fullName : 'N/A'}</td>
+                    <td className="px-4 py-2 border text-sm">{item.userId ? item.userId.email.slice(0, 10) + "..." : 'N/A'}</td>
+                    <td className="px-4 py-2 border text-sm">{item.address}</td>
+                    <td className="px-4 py-2 border text-sm text-center">{item.payment}</td>
+                    <td className="px-4 py-2 border text-sm">{item.totalPrice}</td>
+                    <td className="px-4 py-2 border text-sm text-center">
+                      {moment(item.createdAt).format("DD/MM/YYYY")}
+                    </td>
+                    <td className="px-4 py-2 border">
+                      <select value={item.tracking}
+                        onChange={(e) => updateTracking(item._id, e.target.value)}
+                      >
+                        <option value="pending">pending</option>
+                        <option value="confirmed">confirmed</option>
+                        <option value="shipping">shipping</option>
+                        <option value="delivered">delivered</option>
+                        <option value="done">done</option>
+                        <option value="cancel">cancel</option>
+                      </select>
+                    </td>
+                    <td className="px-4 py-2 border">
+                      <button
+                        onClick={() => deleteOrder(item._id, dispatch)}
+                        className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded"
+                      >
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })
+            ) : (
+              <tr>
+                <td
+                  colSpan="12"
+                  className="text-xl text-center font-semibold py-8"
+                >
+                  No order found
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+        {/* Pagination */}
+        <div className="pagination flex justify-end space-x-2">
+          {[...Array(Math.ceil(order.length / ordersPerPage)).keys()].map(number => (
+            <button 
+              key={number + 1} 
+              onClick={() => paginate(number + 1)}
+              className={`px-4 py-2 border rounded ${currentPage === number + 1 ? 'bg-blue-500 text-white' : 'text-blue-500'}`}
+            >
+              {number + 1}
+            </button>
+          ))}
+        </div>
       </div>
     </Fragment>
   );

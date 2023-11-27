@@ -24,7 +24,9 @@ const EditBrandModal = () => {
 
   useEffect(() => {
     fetchCategoryData();
-  }, []);
+  }, [
+    data.editBrandModal.modal
+  ]);
 
   const fetchCategoryData = async () => {
     let responseData = await getAllCategory();

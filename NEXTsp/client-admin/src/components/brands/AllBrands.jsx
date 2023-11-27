@@ -1,4 +1,5 @@
 import React, { useState, useEffect, Fragment, useContext } from "react";
+import { ThemeContext } from "../theme/ThemeContext";
 import { getAllBrand } from "./FetchAPI";
 import { BrandContext } from "./index";
 import axios from "axios";
@@ -10,6 +11,15 @@ const AllBrands = () => {
   const [brands, setBrands] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const { darkMode, setDarkMode } = useContext(ThemeContext)
+
+  const darkModeText = darkMode ? 'text-white' : 'text-gray-800'
+  const statusDAM = darkMode ? 'text-black bg-[#37AA9C]' : 'text-black bg-green-200'
+  const statusDA1 = darkMode ? 'text-black bg-[#BB2525]' : 'text-black bg-red-200'
+  const tablebg = darkMode ? 'bg-slate-700' : 'bg-white'
+
+  const brandsPerPage = 10;
   // Fetch all brands when component mounts
   const fetchData = async () => {
     try {
@@ -24,6 +34,22 @@ const AllBrands = () => {
   useEffect(() => {
     fetchData();
   }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      fetchData();
+    }, 10000); // Fetch data every 10 seconds
+  
+    return () => clearInterval(interval); // This represents the unmount function, in which you need to clear your interval to prevent memory leaks.
+  }, []);
+
+
+  const indexOfLastBrand = currentPage * brandsPerPage;
+  const indexOfFirstBrand = indexOfLastBrand - brandsPerPage;
+  const currentBrands = brands.slice(indexOfFirstBrand, indexOfLastBrand);
+
+  const paginate = pageNumber => setCurrentPage(pageNumber);
+
   // Loading state
   if (loading) {
     return (
@@ -93,48 +119,48 @@ const AllBrands = () => {
           <div className="flex flex-col">
             <div className="overflow-x-auto">
               <div className="py-2 align-middle inline-block min-w-full">
-                <div className="overflow-hidden border-b border-gray-200 shadow sm:rounded-lg">
-                  <table className="min-w-full divide-y divide-gray-200">
-                    <thead className="bg-gray-50">
-                      <tr className="text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                        <th className="px-6 py-3">Name</th>
-                        <th className="px-6 py-3">Description</th>
-                        <th className="px-6 py-3">Status</th>
-                        <th className="px-6 py-3">Category</th>
-                        <th className="px-6 py-3 text-right">Action</th>
+                <div className={`overflow-hidden shadow-lg p-5 ${tablebg}`}>
+                  <table className={`min-w-full divide-y divide-gray-200 border ${darkModeText}`}>
+                    <thead>
+                      <tr className={`text-xs tracking-wider text-left uppercase ${darkModeText} text-center`}>
+                        <th className="px-6 py-3 border">Name</th>
+                        <th className="px-6 py-3 border">Description</th>
+                        <th className="px-6 py-3 border">Status</th>
+                        <th className="px-6 py-3 border">Category</th>
+                        <th className="px-6 py-3 border">Action</th>
                       </tr>
                     </thead>
-                    <tbody className="bg-white divide-y divide-gray-200">
-                      {brands && brands.length > 0 ? (
-                        brands.map((brand) => (
-                          <tr key={brand._id}>
-                            <td className="px-6 py-4 whitespace-nowrap">
-                              <div className="text-sm text-gray-900">
+                    <tbody className=" divide-y divide-gray-200">
+                      {currentBrands && currentBrands.length > 0 ? (
+                        currentBrands.map((brand) => (
+                          <tr key={brand._id} className={`${darkModeText}`}>
+                            <td className="px-6 py-4 border whitespace-nowrap">
+                              <div className="text-sm">
                                 {brand.nameBrand}
                               </div>
                             </td>
-                            <td className="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
+                            <td className="px-6 py-4 border text-sm whitespace-nowrap">
                               {brand.description}
                             </td>
-                            <td className="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
+                            <td className="px-6 py-4 border text-sm whitespace-nowrap text-center">
                               {brand.status === "Active" ? (
-                                <span className="inline-flex px-2 text-xs font-semibold leading-5 text-black bg-green-200 rounded-full">
+                                <span className={`inline-flex px-2 text-xs font-semibold leading-5 ${statusDAM} rounded-full`}>
                                   {brand.status}
                                 </span>
                               ) : (
-                                <span className="inline-flex px-2 text-xs font-semibold leading-5 text-black bg-red-200 rounded-full">
+                                <span className={`inline-flex px-2 text-xs font-semibold leading-5 ${statusDA1} rounded-full`}>
                                   {brand.status}
                                 </span>
                               )}
                             </td>
-                            <td className="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
+                            <td className="px-6 py-4 border text-sm whitespace-nowrap">
                               {brand.category && brand.category.length > 0
                                 ? brand.category
                                     .map((elem) => elem.nameCategory)
                                     .join("; ")
                                 : "N/A"}
                             </td>
-                            <td className="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
+                            <td className="px-6 py-4 border text-sm font-medium whitespace-nowrap text-center">
                               <button
                                 onClick={() =>
                                   editBrand(
@@ -170,6 +196,18 @@ const AllBrands = () => {
                       )}
                     </tbody>
                   </table>
+                  {/* Pagination */}
+                  <div className="pagination flex justify-end space-x-2 mt-3">
+                    {[...Array(Math.ceil(brands.length / brandsPerPage)).keys()].map(number => (
+                      <button 
+                        key={number + 1} 
+                        onClick={() => paginate(number + 1)}
+                        className={`px-4 py-2 border rounded ${currentPage === number + 1 ? 'bg-blue-500 text-white' : 'text-blue-500'}`}
+                      >
+                        {number + 1}
+                      </button>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
