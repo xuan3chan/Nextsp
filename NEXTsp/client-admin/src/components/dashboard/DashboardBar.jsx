@@ -1,79 +1,48 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { Bar } from 'react-chartjs-2';
-import { Chart, BarController, BarElement, CategoryScale, LinearScale } from 'chart.js';
+import { Chart, BarController, BarElement, CategoryScale, LinearScale, Title, Tooltip, Legend } from 'chart.js';
 
-Chart.register(BarController, BarElement, CategoryScale, LinearScale);
+Chart.register(BarController, BarElement, CategoryScale, LinearScale, Title, Tooltip, Legend);
 
 const DashboardBar = () => {
-  const monthlyOrderCountJSON = `{
-    "weeklyDailyOrderCount": [
-      {
-          "startDate": "2023-11-01",
-          "endDate": "2023-11-07",
-          "orderCountByDay": {
-              "2023-11-01": 10,
-              "2023-11-02": 15,
-              "2023-11-03": 20,
-              "2023-11-04": 12,
-              "2023-11-05": 8,
-              "2023-11-06": 18,
-              "2023-11-07": 22
+  const [monthlyOrderCount, setMonthlyOrderCount] = useState([]);
+  const [selectedYear, setSelectedYear] = useState(2023);
+  const [serverMessage, setServerMessage] = useState('');
+  useEffect(() => {
+    const fetchData = () => {
+      axios.get(`http://localhost:3101/api/orders/statisticinyear/${selectedYear}`)
+        .then(response => {
+          if (response.data.success) {
+            setMonthlyOrderCount(response.data.months);
+            setServerMessage('');
+          } else {
+            setServerMessage(response.data.message);
           }
-      },
-      {
-          "startDate": "2023-10-01",
-          "endDate": "2023-10-07",
-          "orderCountByDay": {
-              "2023-10-01": 5,
-              "2023-10-02": 10,
-              "2023-10-03": 8,
-              "2023-10-04": 14,
-              "2023-10-05": 6,
-              "2023-10-06": 9,
-              "2023-10-07": 11
-          }
-      },
-      {
-          "startDate": "2023-09-01",
-          "endDate": "2023-09-07",
-          "orderCountByDay": {
-              "2023-09-01": 7,
-              "2023-09-02": 11,
-              "2023-09-03": 9,
-              "2023-09-04": 13,
-              "2023-09-05": 5,
-              "2023-09-06": 12,
-              "2023-09-07": 16
-          }
-      },
-      {
-          "startDate": "2023-08-01",
-          "endDate": "2023-08-07",
-          "orderCountByDay": {
-              "2023-08-01": 4,
-              "2023-08-02": 9,
-              "2023-08-03": 6,
-              "2023-08-04": 11,
-              "2023-08-05": 3,
-              "2023-08-06": 7,
-              "2023-08-07": 10
-          }
-      }
-  ]
-  }`;
+        })
+        .catch(error => {
+          console.error('Error fetching data: ', error);
+        });
+    };
+  
+    fetchData();
+    const intervalId = setInterval(fetchData, 10000); // fetch data every 10 seconds
+  
+    return () => {
+      clearInterval(intervalId); // clear interval on component unmount
+    };
+  }, [selectedYear]);
 
-  const monthlyOrderCountObject = JSON.parse(monthlyOrderCountJSON);
+  const sortedMonthlyOrderCount = [...monthlyOrderCount].sort((a, b) => a._id - b._id);
 
-  const [selectedWeek, setSelectedWeek] = useState(monthlyOrderCountObject.weeklyDailyOrderCount[0]);
-
-  const labels = Object.keys(selectedWeek.orderCountByDay);
-  const data = Object.values(selectedWeek.orderCountByDay);
+  const labels = sortedMonthlyOrderCount.map(month => `Tháng ${month._id}`);
+  const data = sortedMonthlyOrderCount.map(month => month.total);
 
   const chartData = {
     labels: labels,
     datasets: [
       {
-        label: '# of Orders',
+        label: 'My First Dataset',
         data: data,
         backgroundColor: 'rgba(75,192,192,0.4)',
         borderColor: 'rgba(75,192,192,1)',
@@ -83,21 +52,29 @@ const DashboardBar = () => {
   };
 
   const options = {
+    responsive: true,
     scales: {
       y: {
         beginAtZero: true
       }
     },
     plugins: {
+      legend: {
+        position: 'top',
+      },
+      title: {
+        display: true,
+        text: 'Thống kê order theo năm',
+      },
       tooltip: {
         enabled: true,
         callbacks: {
+          title: function(context) {
+            return context[0].dataset.label;
+          },
           label: function(context) {
-            var label = context.dataset.label || '';
-
-            if (label) {
-              label += ': ';
-            }
+            var label = `Tháng ${context.dataIndex + 1}: `;
+  
             if (context.parsed.y !== null) {
               label += new Number(context.parsed.y).toLocaleString();
             }
@@ -114,7 +91,7 @@ const DashboardBar = () => {
     hover: {
       mode: 'nearest',
       intersect: true,
-      animationDuration: 400,
+      animationDuration: 1000,
       onHover: (event, chartElement) => {
         event.target.style.cursor = chartElement[0] ? 'pointer' : 'default';
       }
@@ -124,23 +101,26 @@ const DashboardBar = () => {
     }
   };
 
-  const handleWeekChange = (event) => {
-    const weekIndex = event.target.value;
-    setSelectedWeek(monthlyOrderCountObject.weeklyDailyOrderCount[weekIndex]);
+  const handleYearChange = (event) => {
+    setSelectedYear(event.target.value);
   };
 
   return (
-    <div>
-      <select onChange={handleWeekChange}>
-        {monthlyOrderCountObject.weeklyDailyOrderCount.map((week, index) => (
-          <option key={index} value={index}>
-            {week.startDate} - {week.endDate}
+    <div className='w-[1000px]'>
+      <select onChange={handleYearChange}>
+        {Array.from({length: 10}, (_, i) => 2023 - i).map(year => (
+          <option key={year} value={year}>
+            {year}
           </option>
         ))}
       </select>
-      <Bar data={chartData} options={options} />
+      {serverMessage ? (
+        <p>{serverMessage}</p>
+      ) : (
+        <Bar data={chartData} options={options} />
+      )}
     </div>
   );
-};
-
+}
+  
 export default DashboardBar;
