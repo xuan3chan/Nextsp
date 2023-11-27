@@ -113,9 +113,9 @@ function ProductAdded(props) {
           {uniqueProducts.map((item, index) => (
             <div className="" key={index}>
               <div className="flex w-full h-40 items-center content-center gap-4 border-b-2">
-                <div className="flex flex-col w-28 h-28 ">
+                <div className="ImageSection-cart flex flex-col w-1/5 h-28 ">
                   <img
-                    className="object-fill w-24 h-24"
+                    className="object-fill w-full h-full"
                     src={
                       item.images[0] == null ? placeHolderImg : item.images[0]
                     }
@@ -128,7 +128,7 @@ function ProductAdded(props) {
                     Xóa
                   </button>
                 </div>
-                <div className="productInfo flex gap-20">
+                <div className="productInfo w-4/5 flex gap-20">
                   <h2 className="productTitle">{item.nameProduct}</h2>
                   <div className="flex flex-col">
                     <div className="flex flex-col items-end">
@@ -159,7 +159,7 @@ function ProductAdded(props) {
           ))}
         </div>
       )}
-      <div>
+      <div className="SummarySection">
         <p className="totalQuanlity flex relative mt-8">
           <p className="mainText w-30">Tổng Số Lượng Sản Phẩm:</p>
           <p className="subText absolute right-4 ">

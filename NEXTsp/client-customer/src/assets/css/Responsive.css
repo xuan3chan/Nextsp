@@ -153,11 +153,29 @@ body {
     text-align: start;
     margin-bottom: 0px;
   }
+  .dropbtn p {
+    width: 100%;
+  }
   .moreBtn {
     margin-top: 0;
   }
+  .CartSection {
+    max-width: 560px;
+  }
+  .ImageSection-cart {
+    width: 100px;
+    height: 100px;
+  }
 }
-
+@media (max-width: 470px) and (min-width: 597px) {
+  .dropbtn {
+    width: 100%;
+  }
+  .navbar {
+    margin-right: 0 !important;
+    width: 120px;
+  }
+}
 /* Mobile styles (up to 480px) */
 @media (max-width: 480px) {
   body {
@@ -232,6 +250,7 @@ body {
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    max-width: 200px;
   }
   .BannerScroll-background {
     display: none;
@@ -246,7 +265,9 @@ body {
     border: 1px solid #ddd; /* Add border for better visibility */
     border-radius: 5px;
   }
-
+  .dropbtn > span {
+    display: none !important;
+  }
   .dropdown-content {
     display: none;
     position: absolute;
@@ -273,7 +294,7 @@ body {
     color: black;
     padding: 10px;
     transition: background-color 0.3s;
-
+    min-height: 200px;
     &:hover {
       background-color: #ddd; /* Change background color on hover */
     }
@@ -502,5 +523,94 @@ body {
   .SectionLeft,
   .SectionRight {
     width: 100%;
+  }
+  .CartSection {
+    max-width: 480px;
+  }
+  .ImageSection-cart {
+    width: 100px;
+    height: 100px;
+  }
+  .productInfo {
+    .productTitle {
+      font-size: 14px;
+    }
+    .productPrice {
+      font-size: 12px;
+    }
+    .productOldPrice {
+      font-size: 10px;
+    }
+    .productQuantity {
+      font-size: 12px;
+      padding: 0px;
+      width: 80%;
+      height: 90%;
+    }
+    .mainText {
+      font-size: 12px !important;
+    }
+    .subText {
+      font-size: 12px !important;
+    }
+  }
+  .CartOver {
+    width: 480px;
+  }
+  .CustomerInformationSection {
+    width: 480px !important;
+  }
+  .customerInformation {
+    width: 95% !important;
+    .subText {
+      font-size: 14px !important;
+    }
+    .mainText {
+      font-size: 14px !important;
+    }
+  }
+  .AccountSection {
+    flex-direction: column;
+    width: 480px;
+  }
+  .left-sidebar {
+    width: 90%;
+    max-width: 90% !important;
+    margin-right: auto;
+    margin-left: auto;
+    height: 250px !important;
+    min-height: 200px !important;
+    padding-bottom: 0;
+    margin-bottom: 0px;
+  }
+  .menu-section {
+    height: 120px !important;
+  }
+  .AccountSection #content {
+    margin-left: auto;
+    margin-right: auto;
+    width: 90%;
+    margin-top: 10px;
+  }
+  .subTitle_mainTitle {
+    width: 140px;
+    font-weight: 600;
+  }
+  .AccountSection p {
+    font-size: 13px !important;
+    text-align: left;
+  }
+  .productSection {
+    margin-top: 20px;
+    .product-Title {
+      font-size: 14px;
+      font-weight: 550;
+    }
+    .product-OldPrice {
+      font-size: 12px;
+    }
+    .product-Price {
+      font-size: 12px;
+    }
   }
 }

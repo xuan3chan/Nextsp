@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const apiUrl = "http://localhost:3101/api/auth/login";
+const apiUrl = "https://nextsp-server.id.vn/api/auth/login";
 
 const Login = () => {
   const navigate = useNavigate();

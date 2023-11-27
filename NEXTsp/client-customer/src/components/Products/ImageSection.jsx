@@ -7,7 +7,7 @@ import axios from "axios";
 const ImageSection = (props) => {
   const [product, setProduct] = useState(null);
   const param = useParams();
-  const ApiProducts = `http://localhost:3101/api/products/getdetails/${param.id}/`;
+  const ApiProducts = `https://nextsp-server.id.vn/api/products/getdetails/${param.id}/`;
   useEffect(() => {
     const fetchData = async () => {
       try {

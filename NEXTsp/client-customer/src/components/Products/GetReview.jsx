@@ -7,7 +7,7 @@ import "../../assets/css/Products.css";
 const GetReview = () => {
   const [reviews, setReviews] = useState([]);
   const productId = useParams().id;
-  const ApiGetFB = `http://localhost:3101/api/ratings/getrating/${productId}`; // Đặt URL API của bạn ở đây
+  const ApiGetFB = `https://nextsp-server.id.vn/api/ratings/getrating/${productId}`; // Đặt URL API của bạn ở đây
   const [countRating, setCountRating] = useState(0);
 
   useEffect(() => {

@@ -12,6 +12,9 @@ import { AiOutlineUser } from "react-icons/ai";
 import { PiShoppingCartSimpleBold } from "react-icons/pi";
 import SearchFunction from "./Header/SearchFunction";
 import LogoPage from "../assets/img/Logo.png";
+import { FaClipboardCheck } from "react-icons/fa";
+import { FaUser } from "react-icons/fa";
+
 function Header(props) {
   const [Categories, setCategories] = useState([]);
   const [accountName, setAccountName] = useState("");
@@ -19,7 +22,17 @@ function Header(props) {
   const apiBrand = process.env.REACT_APP_GET_LIST_CATE_AND_BRAND_API;
   const apiUrl = process.env.REACT_APP_GET_USER_API;
   const token = localStorage.getItem("accessToken");
+  const [activeNavItem, setActiveNavItem] = useState(null);
 
+  const handleNavItemClick = (navItem) => {
+    setActiveNavItem(activeNavItem === navItem ? null : navItem);
+  };
+
+  const handleCategoryItemClick = (event, category) => {
+    // Prevent the default behavior of the link (closing the dropdown)
+    event.preventDefault();
+    // Handle additional logic if needed
+  };
   useEffect(() => {
     axios
       .get(apiUrl, {
@@ -59,6 +72,23 @@ function Header(props) {
     setCart(cartData);
     setCounterCart(cartData.length);
   }, []);
+  useEffect(() => {
+    const boxBElements = document.getElementsByClassName("brand-menu");
+
+    if (boxBElements.length > 0) {
+      const categoryContentElement =
+        document.querySelector(".dropdown-content");
+
+      if (categoryContentElement) {
+        const minHeightA = categoryContentElement.offsetHeight;
+
+        // Loop through each element in the collection and set min-height
+        Array.from(boxBElements).forEach((element) => {
+          element.style.minHeight = minHeightA + "px";
+        });
+      }
+    }
+  }, []);
 
   return (
     <div>
@@ -75,29 +105,29 @@ function Header(props) {
                 className="dropbtn flex justify-center items-center"
               >
                 <FontAwesomeIcon className="mr-1" icon={faBars} />
-                Danh Mục
+                <p>Danh Mục</p>
                 <i className="fa fa-caret-down"></i>
               </a>
-              <div className="dropdown-content flex flex-col w-48 ">
+              <div id="boxA" className="dropdown-content  flex flex-col w-48 ">
                 {Categories &&
                   Categories.map((category) => {
                     if (category.status === "Active") {
                       return (
                         <div
-                          className="category-item text-black flex contents-center w-48"
+                          className="category-item text-black flex contents-center"
                           key={category._id}
                         >
                           <a
                             className="category-link"
                             href={`/Collection/${category.nameCategory}`}
                           >
-                            {category.nameCategory}
+                            <span>{category.nameCategory}</span>
                             <FontAwesomeIcon
                               className="category-icon"
                               icon={faCaretRight}
                             />
                           </a>
-                          <div className="brand-menu">
+                          <div id="boxB" className="brand-menu">
                             {category.brands &&
                               category.brands.map((brand) => (
                                 <a
@@ -124,7 +154,11 @@ function Header(props) {
                 <FontAwesomeIcon className="mr-1" icon={faBars} />
                 <i className="fa fa-caret-down"></i>
               </a>
-              <div className="dropdown-content dropdown-content-mb flex flex-col w-56 left-6 absolute ">
+              <div
+                className={`${
+                  activeNavItem === "item1" ? "active" : ""
+                } dropdown-content dropdown-content-mb flex flex-col w-56 left-6 absolute`}
+              >
                 <div className="dropdown-title text-black p-3">
                   Danh Mục Sản Phẩm
                 </div>
@@ -139,6 +173,9 @@ function Header(props) {
                           <a
                             className="category-link w-full"
                             href={`/Collection/${category.nameCategory}`}
+                            onClick={(e) =>
+                              handleCategoryItemClick(e, category)
+                            }
                           >
                             <span>{category.nameCategory}</span>
                           </a>
@@ -200,12 +237,33 @@ function Header(props) {
                 </button>
               </Link>
             ) : (
-              <button className="user_module_login">
-                <div className="boxIcon">
-                  <AiOutlineUser />
+              <Link to="/Account">
+                <button className="user_module_login relative">
+                  <div className="boxIcon">
+                    <AiOutlineUser />
+                  </div>
+                  <p>Hello, {accountName}</p>
+                </button>
+                <div className="LoginOption absolute top-18 bg-white text-black h-28 rounded-lg p-4 ">
+                  <ul className="flex flex-col gap-2 ">
+                    <li className=" border-b-gray-300 p-2">
+                      <Link className="flex items-center gap-1" to={`/Account`}>
+                        <FaUser />
+                        Thông tin tài khoản
+                      </Link>
+                    </li>
+                    <li className=" border-b-gray-400 p-2">
+                      <Link
+                        className="  flex items-center gap-1"
+                        to={`/Account`}
+                      >
+                        <FaClipboardCheck />
+                        Lịch sử đơn hàng
+                      </Link>
+                    </li>
+                  </ul>
                 </div>
-                <p>Hello, {accountName}</p>
-              </button>
+              </Link>
             )}
           </div>
           <div className="logOutSection">
