@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import "../../assets/css/Products.css";
 import ButtonAddToCart from "../buttons/buttonAddToCart";
 import ButtonBuyNow from "../buttons/buttonBuyNow";
-
+import StarRating from "./StarRating";
 function MainContentSection(props) {
   const [product, setProduct] = useState(null);
   const param = useParams();
@@ -41,9 +41,12 @@ function MainContentSection(props) {
       {product && (
         <div
           key={product._id}
-          className="flex flex-col gap-6 mt-8 mr-8 ml-8 border-b-2 h-96"
+          className="DetailProduct flex flex-col gap-6 mt-8 mr-8 ml-8 border-b-2 pb-4"
         >
           <div className="productTitle h-22">{product.nameProduct}</div>
+          <div className="productRating flex gap-2">
+            <StarRating rating={product.averageRating} />
+          </div>
           <div className="priceSection flex content-center items-center gap-2 h-8">
             <div className="productPrice productPriceDetail">
               {formatPrice(product.price)}

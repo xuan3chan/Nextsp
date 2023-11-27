@@ -3,23 +3,20 @@ import "../../assets/css/collection.css";
 import axios from "axios";
 import FilterButtonSection from "./FilterButtonSection";
 import "../../assets/css/main.css";
-import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Pagination from "./Pagination";
 import ButtonAddToCart from "../buttons/buttonAddToCart";
 import ButtonBuyNow from "../buttons/buttonBuyNow";
 import "../../assets/css/main.css";
 import { useEffect, useState } from "react";
-import { BiSolidDownArrow } from "react-icons/bi";
-import { CiFilter } from "react-icons/ci";
 import { BsSortDown } from "react-icons/bs";
+import StarRating from "../Products/StarRating";
 
 function ProductListAll(props) {
   const [products, setProducts] = React.useState([]);
   const [pageIndex, setPageIndex] = React.useState(1); // Initial page index
   const itemsPerPage = 10;
 
-  const param = useParams();
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
@@ -66,22 +63,9 @@ function ProductListAll(props) {
     }
     return "Not Available "; // You can change this message to your preferred text
   }
-  const generateStarIcons = (rating) => {
-    const starIcons = [];
-    for (let i = 0; i < 5; i++) {
-      starIcons.push(
-        <img
-          key={i}
-          src="https://static.vecteezy.com/system/resources/previews/013/743/605/original/golden-star-icon-png.png"
-          alt=""
-          className="w-6 h-6"
-        />
-      );
-    }
-    return starIcons;
-  };
+
   return (
-    <div className="productList max-h-full w-full bg-white rounded-md pb-8">
+    <div className="productList max-h-full w-full bg-white rounded-md pb-8 flex flex-col items-center justify-center">
       <h1 className="CategoryTitle">Tất Cả Sản Phẩm</h1>
       <div className="w-36">
         <button className="btnFilter btnSort w-36" onClick={toggleDropdown}>
@@ -128,8 +112,8 @@ function ProductListAll(props) {
                     </div>
                   </div>
                   <div className="product_rating flex gap-1 items-center">
-                    {generateStarIcons(product.rating)}
-                    <p className="text-xs">(5 đánh giá)</p>
+                    <StarRating rating={product.averageRating} />
+                    <p className="text-xs">({product.numReviews} đánh giá)</p>
                   </div>
                 </Link>
                 <div className="over-button flex gap-4 items-center justify-center mt-3">

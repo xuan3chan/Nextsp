@@ -5,37 +5,34 @@ import { Breadcrumb } from "../components";
 import ImageSection from "../components/Products/ImageSection";
 import MainContentSection from "../components/Products/MainContentSection";
 import DescriptionSection from "../components/Products/DescriptionSection";
-import FlaskSale from "../components/Products/FlaskSale";
 import ReviewForm from "../components/Products/ReviewForm";
 import GetReview from "../components/Products/GetReview";
-import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import axios from "axios";
-
+import "../assets/css/Products.css";
 function Products(props) {
   const handleReviewSubmit = (reviewData) => {
     // Xử lý đánh giá, ví dụ: gửi đến máy chủ hoặc lưu vào trạng thái ứng dụng
-    console.log("Đánh giá đã được gửi:", reviewData);
+    alert("Đánh giá đã được gửi: " + JSON.stringify(reviewData));
+    console.log("Đánh giá đã được gửi:");
   };
-
   return (
-    <div className="bg-product w-full ">
-      <Header></Header>
+    <div className="OverProduct bg-product flex flex-col items-center">
+      <Header className="h-16"></Header>
       <div className="">
-        <div className="container flex flex-col w-3/4 mx-auto h-full  ">
+        <div className="containerDetail relative flex flex-col items-center mx-auto h-full  ">
           <Breadcrumb titleCollection="Sản Phẩm"></Breadcrumb>
-          <div className="flex bg-white w-full rounded-md h-full mb-8 pl-28 pb-10">
-            <div>
+          <div className="containerDetail_content flex bg-white w-full rounded-md h-full mb-8 pb-10">
+            <div className="SectionLeft w-1/2 flex flex-col items-center">
               <ImageSection></ImageSection>
-              <FlaskSale></FlaskSale>
             </div>
-            <div className="flex flex-col gap-8">
+            <div className="SectionRight w-1/2 flex items-start flex-col gap-8">
               <MainContentSection></MainContentSection>
               <DescriptionSection></DescriptionSection>
-              <ReviewForm onSubmit={handleReviewSubmit} />
             </div>
           </div>
-          <GetReview className="w-96 h-full" />
+          <div className="bg-white w-4/5 mt-10 rounded-md">
+            <ReviewForm onSubmit={handleReviewSubmit} />
+            <GetReview className="h-full" />
+          </div>
         </div>
       </div>
       <Footer></Footer>

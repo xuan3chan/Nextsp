@@ -8,10 +8,12 @@ const GetReview = () => {
   const [reviews, setReviews] = useState([]);
   const productId = useParams().id;
   const ApiGetFB = `http://localhost:3101/api/ratings/getrating/${productId}`; // Đặt URL API của bạn ở đây
+  const [countRating, setCountRating] = useState(0);
 
   useEffect(() => {
     axios.get(ApiGetFB).then((response) => {
       setReviews(response.data.data);
+      setCountRating(response.data.data.length);
     });
   }, []);
 
@@ -24,7 +26,10 @@ const GetReview = () => {
   };
   return (
     <div className="getReviewSection">
-      <h1 className="getReview_title">Danh sách đánh giá</h1>
+      <div className="textSection mb-8">
+        <h1 className="getReview_title">Danh sách đánh giá</h1>
+        <h2>( Hiện có {countRating} lượt đánh giá )</h2>
+      </div>
       {reviews && reviews.length > 0 ? (
         <ul>
           {reviews.map((review) => (

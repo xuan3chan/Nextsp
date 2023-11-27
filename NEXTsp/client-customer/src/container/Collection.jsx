@@ -24,7 +24,7 @@ function Collection(props) {
           <RiseLoader color="#212529" />
         </div>
       ) : null}
-      <div className="color-bg bg-slate-200 w-4/5">
+      <div className="CollectionSection color-bg bg-slate-200 w-4/5">
         <div className="mr-auto ml-auto flex flex-col">
           <Header></Header>
           <Breadcrumb></Breadcrumb>

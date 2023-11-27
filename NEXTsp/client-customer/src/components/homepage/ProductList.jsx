@@ -7,13 +7,11 @@ import ButtonBuyNow from "../buttons/buttonBuyNow";
 import ButtonAddToCart from "../buttons/buttonAddToCart";
 import RiseLoader from "react-spinners/RiseLoader";
 import { useState, useEffect } from "react";
-
+import StarRating from "../Products/StarRating";
 function ProductList(props) {
   const [products, setProducts] = React.useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const ApiProducts = "http://localhost:3101/api/products/getall";
-  const starUrl =
-    "https://static.vecteezy.com/system/resources/previews/013/743/605/original/golden-star-icon-png.png";
+  const ApiProducts = process.env.REACT_APP_GET_ALL_PRODUCTS_API;
 
   function formatPrice(price) {
     if (price) {
@@ -32,23 +30,9 @@ function ProductList(props) {
     fetchData();
   }, []);
 
-  const generateStarIcons = (rating) => {
-    const starIcons = [];
-    for (let i = 0; i < 5; i++) {
-      starIcons.push(
-        <img
-          key={i}
-          src="https://static.vecteezy.com/system/resources/previews/013/743/605/original/golden-star-icon-png.png"
-          alt=""
-          className="w-4 h-4"
-        />
-      );
-    }
-    return starIcons;
-  };
   const imagePlaceHolder = "https://via.placeholder.com/350";
   return (
-    <div className="productList w-full  p-4 mr-auto ml-auto bg-white rounded-md">
+    <div className="productList  w-full  p-4 mr-auto ml-auto bg-white rounded-md">
       {isLoading && (
         <div className="loading">
           <RiseLoader
@@ -67,7 +51,7 @@ function ProductList(props) {
           </div>
           <p className="subtitleList">Giao hàng miễn phí</p>
         </div>
-        <div className="flex justify-center gap-4 mt-4 mb- absolute right-0">
+        <div className="moreBtn flex justify-center gap-4 mt-4 mb- absolute right-0">
           <Link
             to={`/Collection`}
             className="btn-seeMore flex justify-center items-center gap-2"
@@ -77,7 +61,7 @@ function ProductList(props) {
           </Link>
         </div>
       </div>
-      <div className="flex flex-wrap gap-4 content-center justify-center">
+      <div className="ProductList2 flex flex-wrap gap-4 content-center justify-center">
         {products.map(
           (product, index) =>
             index < 5 && (
@@ -107,8 +91,8 @@ function ProductList(props) {
                     </div>
                   </div>
                   <div className="product_rating flex gap-1 items-center">
-                    {generateStarIcons(product.rating)}
-                    <p className="text-xs">(5 đánh giá)</p>
+                    <StarRating rating={product.averageRating} />
+                    <p className="text-xs">({product.numReviews} đánh giá)</p>
                   </div>
                 </Link>
                 <div className="over-button flex gap-4 items-center justify-center mt-3">

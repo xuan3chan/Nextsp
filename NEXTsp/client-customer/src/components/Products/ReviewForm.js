@@ -10,7 +10,7 @@ const ReviewForm = ({ onSubmit }) => {
   const [rating, setRating] = useState(0);
   const { id } = useParams();
 
-  const ApiAddFeedBack = "http://localhost:3101/api/ratings/add";
+  const ApiAddFeedBack = process.env.REACT_APP_ADD_RATING_API;
   const [userId, setUserID] = useState("");
   const AccessToken = localStorage.getItem("AccessToken");
   const [error, setError] = useState(null); // Added error state
@@ -47,11 +47,11 @@ const ReviewForm = ({ onSubmit }) => {
   };
 
   return (
-    <div className="w-96 ReviewForm">
+    <div className="w-full ReviewForm">
       <div className="TitleForm">
-        <h1>Nêu Đánh Giá Của Bạn : </h1>
+        <h1>Nêu Đánh Giá Của Bạn Về Sản Phẩm: </h1>
       </div>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+      <form onSubmit={handleSubmit} className="w-2/5 flex flex-col gap-4">
         <Rating onRatingChange={handleRatingChange} />
         <textarea
           placeholder="Nhập đánh giá của bạn..."

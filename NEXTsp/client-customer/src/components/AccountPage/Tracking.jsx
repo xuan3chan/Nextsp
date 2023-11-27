@@ -18,7 +18,6 @@ function Tracking(props) {
       })
       .then((response) => {
         setOrderDetail(response.data);
-        setProduct(response.data.product);
         console.log(response.data);
       })
       .catch((error) => {
@@ -92,31 +91,41 @@ function Tracking(props) {
                             key={index}
                             className="productSection h-24 flex flex-row w-full mt-4 "
                           >
-                            <div className="imageSection relative w-20 h-full">
-                              <img
-                                src={orderItem.productId.images[0]} // Adjust this line based on your actual structure
-                                className="w-24 h-20 object-cover"
-                                alt=""
-                              />
-                              <div className="numberQuantity absolute bottom-4 right-0 bg-slate-200 ">
-                                x{orderItem.quantity}
-                              </div>
-                            </div>
+                            {orderItem.productId &&
+                              orderItem.productId.images && (
+                                <div className="imageSection relative w-20 h-full">
+                                  <img
+                                    src={orderItem.productId.images[0]}
+                                    className="w-24 h-20 object-cover"
+                                    alt=""
+                                  />
+                                  <div className="numberQuantity absolute bottom-4 right-0 bg-slate-200 ">
+                                    x{orderItem.quantity}
+                                  </div>
+                                </div>
+                              )}
                             <div className="textSection ml-4 h-full flex flex-col justify-center items-center">
-                              <span className="product-Title text-left w-full justify-center">
-                                {orderItem.productId.nameProduct}
-                              </span>
-                              <span className="product-OldPrice text-left w-full flex flex-col ">
-                                {formatPrice(orderItem.productId.oldprice)}
-                              </span>
-                              <div className="priceSection text-left flex flex-col w-full h-10">
-                                <span className="product-Price w-28">
-                                  {formatPrice(orderItem.productId.price)}
+                              {orderItem.productId && (
+                                <span className="product-Title text-left w-full justify-center">
+                                  {orderItem.productId.nameProduct}
                                 </span>
-                              </div>
+                              )}
+                              {orderItem.productId && (
+                                <span className="product-OldPrice text-left w-full flex flex-col ">
+                                  {formatPrice(orderItem.productId.oldprice)}
+                                </span>
+                              )}
+                              {orderItem.productId && (
+                                <div className="priceSection text-left flex flex-col w-full h-10">
+                                  <span className="product-Price w-28">
+                                    {formatPrice(orderItem.productId.price)}
+                                  </span>
+                                </div>
+                              )}
                             </div>
                           </div>
                         ))}
+
                       {Order.product.length > visibleProduct && (
                         <button onClick={showMoreProduct}>Xem thêm</button>
                       )}

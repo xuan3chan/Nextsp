@@ -29,9 +29,9 @@ function ButtonBuyNow(props) {
   return (
     <Link to="/CartPage">
       <div className="btn-BuyNow btn text-white text-center p-2 flex flex-colflex items-center contents-center justify-center rounded-sm">
-        <a className=" cursor-pointer" onClick={buyNowBtn}>
+        <div className=" cursor-pointer" onClick={buyNowBtn}>
           Mua Ngay
-        </a>
+        </div>
       </div>
     </Link>
   );

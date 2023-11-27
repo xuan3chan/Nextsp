@@ -64,7 +64,7 @@ function SearchFunction(props) {
     return "";
   }
   return (
-    <div className="w-1/5 relative">
+    <div className="searchingSection relative">
       <div className="header_searching_module">
         <div className="wrap">
           <div className="search">

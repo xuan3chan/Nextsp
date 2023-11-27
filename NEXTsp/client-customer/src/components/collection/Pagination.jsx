@@ -6,7 +6,7 @@ function Pagination({ pageIndex, pageCount, onPageChange }) {
     onPageChange(pageNumber);
   };
   return (
-    <div className="pagination flex gap-2">
+    <div className="pagination flex items-center content-center justify-center w-full gap-2">
       {[...Array(pageCount)].map((_, index) => (
         <a
           key={index}

@@ -13,6 +13,7 @@ import { useState } from "react";
 import { BiSolidDownArrow } from "react-icons/bi";
 import { CiFilter } from "react-icons/ci";
 import { BsSortDown } from "react-icons/bs";
+import StarRating from "../Products/StarRating";
 
 function ProductList(props) {
   const { category, nameCategory } = useParams();
@@ -45,12 +46,9 @@ function ProductList(props) {
           product.category.name === category
       );
 
-      // Use nameCategory to determine which set of filtered products to set
-      if (nameCategory === null) {
-        setFilteredProducts(productByCategory);
-      } else {
-        setFilteredProducts(productByBrand);
-      }
+      nameCategory == null
+        ? setFilteredProducts(productByCategory)
+        : setFilteredProducts(productByBrand);
     } else {
       // Handle the case where products is undefined
       setFilteredProducts([]);
@@ -68,27 +66,6 @@ function ProductList(props) {
     return "Not Available";
   }
 
-  const generateStarIcons = (rating) => {
-    const starIcons = [];
-    for (let i = 0; i < 5; i++) {
-      starIcons.push(
-        <img
-          key={i}
-          src="https://static.vecteezy.com/system/resources/previews/013/743/605/original/golden-star-icon-png.png"
-          alt=""
-          className="w-4 h-4"
-        />
-      );
-    }
-    return starIcons;
-  };
-
-  const handleAddCart = (product) => {
-    // Assuming you have a cart array in localStorage
-    const cart = JSON.parse(localStorage.getItem("cart")) || [];
-    cart.push(product);
-    localStorage.setItem("cart", JSON.stringify(cart));
-  };
   useEffect(() => {
     setProducts(props.products);
     console.log(products);
@@ -162,8 +139,8 @@ function ProductList(props) {
                   </div>
                 </div>
                 <div className="product_rating flex gap-1 items-center">
-                  {generateStarIcons(product.rating)}
-                  <p className="text-xs">(5 đánh giá)</p>
+                  <StarRating rating={product.averageRating} />
+                  <p className="text-xs">({product.numReviews} đánh giá)</p>
                 </div>
               </Link>
               <div className="over-button flex gap-4 items-center justify-center mt-3">
