@@ -1,9 +1,15 @@
 import React, { Fragment, useState, useContext } from "react";
 import { CategoryContext } from "./index";
+import { ThemeContext } from "../theme/ThemeContext";
 import { createCategory, getAllCategory } from "./FetchApi";
 
 const AddCategoryModal = () => {
   const { data, dispatch } = useContext(CategoryContext);
+  const { darkMode , setDM } = useContext(ThemeContext)
+
+  const darkfield = darkMode ? 'focus:border-[#2D9596] focus:border-2 bg-gray-700' : 'focus:border-black focus:border-2 bg-white border'
+  const darkbtn = darkMode ? 'bg-[#2D9596] text-white' : 'bg-[#303031] text-gray-100'
+  const darkModal = darkMode ? 'bg-gray-800 text-white' : 'bg-white text-black'
 
   const alert = (msg, type) => (
     <div className={`bg-${type}-200 py-2 px-4 w-full`}>{msg}</div>
@@ -91,18 +97,17 @@ const AddCategoryModal = () => {
           data.addCategoryModal ? "" : "hidden"
         } fixed inset-0 m-4  flex items-center z-30 justify-center`}
       >
-        <div className="relative bg-white w-12/12 md:w-3/6 shadow-lg flex flex-col items-center space-y-4  overflow-y-auto px-4 py-4 md:px-8">
+        <div className={`relative ${darkModal}  w-12/12 md:w-3/6 shadow-lg flex flex-col items-center space-y-4  overflow-y-auto px-4 py-4 md:px-8`}>
           <div className="flex items-center justify-between w-full pt-4">
             <span className="text-left font-semibold text-2xl tracking-wider">
               Add Category
             </span>
             {/* Close Modal */}
             <span
-              style={{ background: "#303031" }}
               onClick={(e) =>
                 dispatch({ type: "addCategoryModal", payload: false })
               }
-              className="cursor-pointer text-gray-100 py-2 px-2 rounded-full"
+              className={`cursor-pointer ${darkbtn} py-2 px-2 rounded-full`}
             >
               <svg
                 className="w-6 h-6"
@@ -119,7 +124,7 @@ const AddCategoryModal = () => {
                 />
               </svg>
             </span>
-            </div>
+          </div>
           {fData.error ? alert(fData.error, "red") : ""}
           {fData.success ? alert(fData.success, "green") : ""}
           <form className="w-full" onSubmit={(e) => submitForm(e)}>
@@ -135,7 +140,7 @@ const AddCategoryModal = () => {
                   })
                 }
                 value={fData.nameCategory}
-                className="px-4 py-2 border focus:outline-none"
+                className={`px-4 py-2 focus:outline-none ${darkfield}`}
                 type="text"
               />
             </div>
@@ -151,7 +156,7 @@ const AddCategoryModal = () => {
                   })
                 }
                 value={fData.description}
-                className="px-4 py-2 border focus:outline-none"
+                className={`px-4 py-2 focus:outline-none ${darkfield}`}
                 name="description"
                 id="description"
                 cols={5}
@@ -170,7 +175,7 @@ const AddCategoryModal = () => {
                     status: e.target.value,
                   })
                 }
-                className="px-4 py-2 border focus:outline-none"
+                className={`px-4 py-2 focus:outline-none ${darkfield}`}
                 id="status"
               >
                 <option name="status" value="Active">
@@ -183,9 +188,8 @@ const AddCategoryModal = () => {
             </div>
             <div className="flex flex-col space-y-1 w-full pb-4 md:pb-6 mt-4">
               <button
-                style={{ background: "#303031" }}
                 type="submit"
-                className="bg-gray-800 text-gray-100 rounded-full text-lg font-medium py-2"
+                className={`${darkbtn} rounded-full text-lg font-medium py-2`}
               >
                 Create category
               </button>

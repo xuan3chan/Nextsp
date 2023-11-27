@@ -87,6 +87,40 @@ const DashboardBar = () => {
       y: {
         beginAtZero: true
       }
+    },
+    plugins: {
+      tooltip: {
+        enabled: true,
+        callbacks: {
+          label: function(context) {
+            var label = context.dataset.label || '';
+
+            if (label) {
+              label += ': ';
+            }
+            if (context.parsed.y !== null) {
+              label += new Number(context.parsed.y).toLocaleString();
+            }
+            return label;
+          }
+        }
+      },
+    },
+    interaction: {
+      mode: 'nearest',
+      axis: 'x',
+      intersect: false
+    },
+    hover: {
+      mode: 'nearest',
+      intersect: true,
+      animationDuration: 400,
+      onHover: (event, chartElement) => {
+        event.target.style.cursor = chartElement[0] ? 'pointer' : 'default';
+      }
+    },
+    animation: {
+      duration: 1000
     }
   };
 

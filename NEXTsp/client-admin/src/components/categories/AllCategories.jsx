@@ -1,6 +1,7 @@
 import React, { useState, useEffect, Fragment, useContext } from 'react';
 import { getAllCategory } from './FetchApi';
 import { CategoryContext } from './index';
+import { ThemeContext } from '../theme/ThemeContext';
 import axios from 'axios';
 
 const apiURL = process.env.REACT_APP_CATEGORIES
@@ -10,6 +11,14 @@ const AllCategories = () => {
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [categoriesPerPage, setCategoriesPerPage] = useState(10);
+  const { darkMode, setDarkMode } = useContext(ThemeContext)
+
+  const darkModeText = darkMode ? 'text-white' : 'text-gray-800'
+  const statusDAM = darkMode ? 'text-black bg-[#37AA9C]' : 'text-black bg-green-200'
+  const statusDA1 = darkMode ? 'text-black bg-[#BB2525]' : 'text-black bg-red-200'
+  const tablebg = darkMode ? 'bg-slate-700' : 'bg-white'
 
   useEffect(() => {
     const fetchData = async () => {
@@ -24,6 +33,15 @@ const AllCategories = () => {
     };
     fetchData();
   }, []);
+
+  const indexOfLastCategory = currentPage * categoriesPerPage;
+  const indexOfFirstCategory = indexOfLastCategory - categoriesPerPage;
+  const currentCategories = categories.slice(indexOfFirstCategory, indexOfLastCategory);
+  const totalPages = Math.ceil(categories.length / categoriesPerPage);
+  const startPage = Math.max(1, currentPage - 2);
+  const endPage = Math.min(totalPages, currentPage + 2);
+
+  const paginate = pageNumber => setCurrentPage(pageNumber);
 
   if (loading) {
     return (
@@ -92,13 +110,14 @@ const AllCategories = () => {
 
   return (
     <Fragment>
-      <div className="flex items-center justify-center">
-        <h1 className="text-2xl font-semibold text-gray-800">All Categories</h1>
+      <div className="flex items-center justify-center ">
+        <h1 className={`text-2xl font-semibold ${darkModeText}`}>All Categories</h1> 
+        {/* text-gray-800 */}
       </div>
-      <div className="col-span-1 overflow-auto bg-white shadow-lg p-4">
+      <div className={`col-span-1 overflow-auto ${tablebg} shadow-2xl p-4`}>
         <table className="table-auto border w-full my-2">
           <thead>
-            <tr>
+            <tr className={`${darkModeText}`}>
               <th className="px-4 py-2 border">Category</th>
               <th className="px-4 py-2 w-2/4 border">Description</th>
               <th className="px-4 py-2 w-1/6 border">Status</th>
@@ -106,18 +125,18 @@ const AllCategories = () => {
             </tr>
           </thead>
           <tbody>
-            {categories && categories.length > 0 ? (
-              categories.map((category, index) => (
-                <tr key={category._id}>
+        {currentCategories && currentCategories.length > 0 ? (
+          currentCategories.map((category, index) => (
+                <tr key={category._id} className={`${darkModeText}`}>
                   <td className="px-4 py-2 border">{category.nameCategory}</td>
                   <td className="px-4 py-2 border whitespace-normal break-words break-all">{category.description}</td>
                   <td className="px-4 py-2 text-center border">
                     {category.status === "Active" ? (
-                      <span className="bg-green-200 rounded-full text-center text-sm px-2 font-semibold">
+                      <span className={`${statusDAM} rounded-full text-center text-sm px-2 font-semibold`}>
                         {category.status}
                       </span>
                     ) : (
-                      <span className="bg-red-200 rounded-full text-center text-sm px-2 font-semibold">
+                      <span className={`${statusDA1} rounded-full text-center text-sm px-2 font-semibold`}>
                         {category.status}
                       </span>
                     )}
@@ -157,6 +176,18 @@ const AllCategories = () => {
             )}
           </tbody>
         </table>
+        {/* Pagination */}
+        <div className="pagination flex justify-end space-x-2">
+          {Array.from({length: endPage - startPage + 1}, (_, i) => startPage + i).map(number => (
+            <button 
+              key={number} 
+              onClick={() => paginate(number)}
+              className={`px-4 py-2 border rounded ${currentPage === number ? 'bg-blue-500 text-white' : 'text-blue-500'}`}
+            >
+              {number}
+            </button>
+          ))}
+        </div>
       </div>
     </Fragment>
   );

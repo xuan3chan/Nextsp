@@ -1,9 +1,14 @@
 import React, { Fragment, useContext, useState, useEffect } from "react";
+import { ThemeContext } from "../theme/ThemeContext";
 import { CategoryContext } from "./index";
 import { editCategory, getAllCategory } from "./FetchApi";
 
 const EditCategoryModal = () => {
   const { data, dispatch } = useContext(CategoryContext);
+  const { darkMode , setDM } = useContext(ThemeContext)
+  const darkModal = darkMode ? 'bg-gray-800 text-white' : 'bg-white text-black'
+  const darkbtn = darkMode ? 'bg-[#2D9596] text-white' : 'bg-[#303031] text-gray-100'
+  const darkfield = darkMode ? 'focus:border-[#2D9596] focus:border-2 bg-gray-700' : 'focus:border-black focus:border-2 bg-white border'
 
   const [_id, set_id] = useState("");
   const [nameCategory, setNameCategory] = useState("");
@@ -57,24 +62,34 @@ const EditCategoryModal = () => {
         className={`${data.editCategoryModal.modal ? "" : "hidden"} fixed inset-0 m-4 flex items-center justify-center z-40`}
       >
         {/* Modal Inner */}
-        <div className="relative bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg text-gray-900 z-50 overflow-y-auto">
+        <div className={`relative w-11/12 md:max-w-md mx-auto rounded shadow-lg ${darkModal} z-50 overflow-y-auto`}>
           {/* Modal Header */}
-          <div className="flex justify-between items-center p-4 border-b">
-            <p className="text-2xl font-bold">Edit Category</p>
-            <button onClick={handleClose} className="text-black close-modal">
+          <div className="flex items-center justify-between w-full pt-4 px-4">
+            <span className="text-left font-semibold text-2xl tracking-wider">
+              Add Category
+            </span>
+            {/* Close Modal */}
+            <span
+              onClick={(e) =>
+                dispatch({ type: "editCategoryModalClose" })
+              }
+              className={`cursor-pointer ${darkbtn} py-2 px-2 rounded-full`}
+            >
               <svg
-                className="fill-current text-black"
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg"
-                width={18}
-                height={18}
-                viewBox="0 0 18 18"
               >
                 <path
-                  className="heroicon-ui"
-                  d="M6.83 6L12 11.17 17.17 6 18 6.83 12.83 12 18 17.17 17.17 18 12 12.83 6.83 18 6 17.17 11.17 12 6.83 6 6 6.83z"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
                 />
               </svg>
-            </button>
+            </span>
           </div>
           {/* End Modal Header */}
 
@@ -82,32 +97,32 @@ const EditCategoryModal = () => {
           <div className="p-4">
             <form>
               <div className="mb-4">
-                <label className="text-xl text-gray-600">Name Category</label>
+                <label className="text-xl ">Name Category</label>
                 <input
                   value={nameCategory}
                   onChange={(e) => setNameCategory(e.target.value)}
-                  className="border-2 border-gray-300 p-2 w-full"
+                  className={`${darkfield} focus:outline-none  p-2 w-full`}
                   type="text"
                   placeholder="Name Category"
                   required
                 />
               </div>
               <div className="mb-4">
-                <label className="text-xl text-gray-600">Description</label>
+                <label className="text-xl ">Description</label>
                 <textarea
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
-                  className="border-2 border-gray-300 p-2 w-full"
+                  className={`${darkfield} focus:outline-none  p-2 w-full`}
                   type="text"
                   placeholder="Description"
                 />
               </div>
               <div className="mb-4">
-                <label className="text-xl text-gray-600">Status</label>
+                <label className="text-xl ">Status</label>
                 <select
                   value={status}
                   onChange={(e) => setStatus(e.target.value)}
-                  className="border-2 border-gray-300 p-2 w-full"
+                  className={`${darkfield} focus:outline-none  p-2 w-full`}
                   required
                 >
                   <option value="Active">Active</option>
@@ -117,7 +132,7 @@ const EditCategoryModal = () => {
               <div className="mb-4">
                 <button
                   type="submit"
-                  className="bg-blue-500 text-white px-4 py-3 rounded font-medium w-full"
+                  className={`${darkbtn} px-4 py-3 rounded font-medium w-full`}
                   onClick={submitForm}
                 >
                   Update
