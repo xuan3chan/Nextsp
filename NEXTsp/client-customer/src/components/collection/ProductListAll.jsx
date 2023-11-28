@@ -44,7 +44,7 @@ function ProductListAll(props) {
   React.useEffect(() => {
     const fetchData = async () => {
       const result = await axios.get(
-        "http://localhost:3101/api/products/getall"
+        "https://nextsp-server.id.vn/api/products/getall"
       );
       setProducts(result.data.products);
     };
@@ -79,7 +79,7 @@ function ProductListAll(props) {
           </div>
         )}
       </div>
-      <div className="flex flex-wrap gap-1 content-center justify-center pt-12 pb-4">
+      <div className="flex flex-wrap gap-3 content-center justify-center pt-12 pb-4 ">
         {products &&
           products
             .slice((pageIndex - 1) * itemsPerPage, pageIndex * itemsPerPage)

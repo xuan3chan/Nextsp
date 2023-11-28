@@ -72,24 +72,6 @@ function Header(props) {
     setCart(cartData);
     setCounterCart(cartData.length);
   }, []);
-  useEffect(() => {
-    const boxBElements = document.getElementsByClassName("brand-menu");
-
-    if (boxBElements.length > 0) {
-      const categoryContentElement =
-        document.querySelector(".dropdown-content");
-
-      if (categoryContentElement) {
-        const minHeightA = categoryContentElement.offsetHeight;
-
-        // Loop through each element in the collection and set min-height
-        Array.from(boxBElements).forEach((element) => {
-          element.style.minHeight = minHeightA + "px";
-        });
-      }
-    }
-  }, []);
-
   return (
     <div>
       <div className="header z-20 flex justify-center relative">
@@ -100,14 +82,17 @@ function Header(props) {
           <a href="/Homepage">Trang Chủ</a>
           <div className="dropdown">
             <div className="dropdown-btn-container flex justify-center items-center">
-              <a
-                href="/Collection"
-                className="dropbtn flex justify-center items-center"
-              >
+              <div className="dropbtn flex justify-center items-center">
                 <FontAwesomeIcon className="mr-1" icon={faBars} />
-                <p>Danh Mục</p>
+                <span
+                  onClick={() => {
+                    window.location.href = "/Collection";
+                  }}
+                >
+                  Danh Mục
+                </span>
                 <i className="fa fa-caret-down"></i>
-              </a>
+              </div>
               <div id="boxA" className="dropdown-content  flex flex-col w-48 ">
                 {Categories &&
                   Categories.map((category) => {

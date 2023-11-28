@@ -198,7 +198,7 @@ body {
     display: none;
   }
   .header_searching_module {
-    width: 200px;
+    width: 170px;
   }
   .navbar {
     width: 100px;
@@ -233,9 +233,11 @@ body {
   .header_right_section {
     position: absolute;
     right: 20px;
+    width: 130px;
   }
   .header_user_module {
     display: block;
+
   }
   .searchingSection {
     position: absolute;
@@ -612,5 +614,41 @@ body {
     .product-Price {
       font-size: 12px;
     }
+    
   }
+  .LogOutTracking{
+    flex-direction: column;
+    width: 100%;
+  }
+  #content {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .search-container{
+    width: 380px!important;
+
+  }
+  .user_module_login {
+    width: 100px;
+    height: 60px;
+  }
+
+  .search-container input[type=text] {
+    width: 90%;
+  }
+  .subTitle_mainTitle{
+    width: 120px;
+    float: left;
+    font-size: 13px;
+  }
+  .subTitle_mainTitle span{
+    width: 230px;
+    float: left;
+    font-size: 13px;
+  }
+  .content__body__subTitle{
+    font-size: 14px;
+  }
+
 }

@@ -23,7 +23,7 @@ function ProductList(props) {
   const [filteredProducts, setFilteredProducts] = React.useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const ApiProducts = "https://nextsp-server.id.vn/api/products/getall";
-  
+
   useEffect(() => {
     axios
       .get(ApiProducts)

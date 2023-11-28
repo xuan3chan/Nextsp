@@ -34,7 +34,7 @@ function Account() {
       <Header></Header>
       <div className=" max-[3000px]:">
         {token == null ? (
-          <div className="flex gap-4 h-full w-3/4 mr-auto ml-auto overflow-hidden">
+          <div className="LogOutTracking flex gap-4 h-full w-3/4 mr-auto ml-auto overflow-hidden">
             <div className="left-sidebar rounded-lg h-full flex flex-col mt-20 bg-white gap-2 pb-10 overflow-hidden">
               <div className="Profile-name flex items-center border-b-2 border-black p-4 gap-4">
                 <div className="profileAvatar w-16 h-16 text-lg">

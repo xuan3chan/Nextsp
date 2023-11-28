@@ -5,7 +5,7 @@ import "../assets/css/CustomerInformation.css";
 import { useState } from "react";
 import TotalSection from "../components/Cart/TotalSection";
 import axios from "axios";
-
+import Footer from "../components/Footer";
 function CustomerShipping(props) {
   const [formData, setFormData] = useState({
     recipientName: "",
@@ -39,7 +39,7 @@ function CustomerShipping(props) {
     <div className="bg-cart h-full">
       <Header></Header>
       <div className="pt-24 w-full">
-        <div className="CustomerInformationSection ml-auto mr-auto border-spacing-1">
+        <div className="CustomerInformationSection ml-auto mr-auto border-spacing-1 mb-20 mt-10">
           <div className="customerInformation pb-8">
             <h1 className="title text-center w-full">Thông Tin Khách Hàng</h1>
             <form className="shipping-form" onSubmit={handleSubmit}>
@@ -92,6 +92,7 @@ function CustomerShipping(props) {
             </form>
           </div>
         </div>
+        <Footer></Footer>
       </div>
     </div>
   );

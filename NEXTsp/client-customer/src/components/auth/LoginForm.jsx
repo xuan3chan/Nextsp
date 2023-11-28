@@ -10,35 +10,9 @@ const Login = () => {
   const navigate = useNavigate();
   const [accountName, setAccountName] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [error, setError] = useState("null");
   const [errors, setErrors] = useState({});
 
-  const validateForm = () => {
-    const formErrors = {};
-
-    if (!fullName.trim()) {
-      formErrors.fullName = "Tên không được để trống";
-    }
-
-    if (!email.trim()) {
-      formErrors.email = "Email không được để trống";
-    }
-
-    if (!accountName.trim()) {
-      formErrors.accountName = "Tên tài khoản không được để trống";
-    }
-
-    if (!password.trim()) {
-      formErrors.password = "Mật khẩu không được để trống";
-    }
-
-    if (password !== confirmPassword) {
-      formErrors.confirmPassword = "Mật khẩu xác nhận không khớp";
-    }
-
-    setErrors(formErrors);
-    return Object.keys(formErrors).length === 0;
-  };
   const handleLogin = () => {
     const data = {
       accountName: accountName,
@@ -63,7 +37,11 @@ const Login = () => {
       })
       .then((data) => {})
       .catch((error) => {
-        setError("Đăng nhập thất bại");
+        if (error.response) {
+          setError("Đăng nhập thất bại");
+        } else {
+          setError("null");
+        }
       });
   };
 
@@ -119,6 +97,11 @@ const Login = () => {
             />
             {errors.password && (
               <div className="text-red-500 float-right">{errors.password}</div>
+            )}
+            {error == "null" ? (
+              ""
+            ) : (
+              <div className="text-red-500 float-right">{error}</div>
             )}
             <div className="RegisterAnswer flex gap-1">
               <span>Bạn chưa có tài khoản?</span>

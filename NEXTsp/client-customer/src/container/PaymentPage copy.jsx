@@ -5,13 +5,15 @@ import "../assets/css/Payment.css";
 function PaymentPage(props) {
   const [cart, setCart] = React.useState([]);
 
+  const [selectedPayment, setSelectedPayment] = useState("COD");
+  // Update payment method when the customer selects a different option
+
   useEffect(() => {
     const storedCart = localStorage.getItem("cart");
     const parsedCart = JSON.parse(storedCart) || [];
-    setCart(parsedCart);
+    const cartWithCount = parsedCart.map((item) => ({ ...item, count: 1 }));
+    setCart(cartWithCount);
   }, []);
-  const [selectedPayment, setSelectedPayment] = useState("COD");
-  // Update payment method when the customer selects a different option
 
   const handlePaymentChange = (paymentMethod) => {
     setSelectedPayment(paymentMethod);
@@ -28,7 +30,24 @@ function PaymentPage(props) {
     }
     return "";
   }
-  console.log(cart);
+  useEffect(() => {
+    const storedCart = localStorage.getItem("cart");
+    const parsedCart = JSON.parse(storedCart) || [];
+    const cartWithCount = parsedCart.map((item) => ({ ...item, count: 1 }));
+    setCart(cartWithCount);
+    const uniqueItemsById = cartWithCount.reduce((accumulator, currentItem) => {
+      if (!accumulator[currentItem.id]) {
+        accumulator[currentItem.id] = { ...currentItem };
+      } else {
+        accumulator[currentItem.id].count += currentItem.count;
+      }
+      return accumulator;
+    }, {});
+
+    const uniqueCart = Object.values(uniqueItemsById);
+    setCart(uniqueCart);
+  }, []);
+
   const userId = localStorage.getItem("userId");
   const totalPrice = localStorage.getItem("totalPrice");
   const fullName = customerInformation.fullName;
