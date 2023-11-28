@@ -296,7 +296,6 @@ body {
     color: black;
     padding: 10px;
     transition: background-color 0.3s;
-    min-height: 200px;
     &:hover {
       background-color: #ddd; /* Change background color on hover */
     }

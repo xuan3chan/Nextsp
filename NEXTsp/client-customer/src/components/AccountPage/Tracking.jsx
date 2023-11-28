@@ -56,6 +56,9 @@ function Tracking(props) {
               <div className="content">
                 <p> Kiểm Tra Đơn Hàng Đã Đặt</p>
                 <ul className="content__body flex flex-col gap-4">
+                  {orderDetails.length === 0 && (
+                    <div className="text-center">Bạn chưa đặt hàng</div>
+                  )}
                   {orderDetails
                     .slice(
                       (pageIndex - 1) * itemsPerPage,

@@ -38,7 +38,7 @@ function PaymentPage(props) {
   const totalPriceNumber = Number(totalPrice);
   const addInfo = `NextSP Store Payment, userId: ${userId}`;
   const accountName = localStorage.getItem("accountName");
-  const imageUrlQR = `https://img.vietqr.io/image/tpb-04144454101-compact2.jpg?amount=${totalPriceNumber}&addInfo=${addInfo}&accountName=${accountName}`;
+  const imageUrlQR = `https://img.vietqr.io/image/tpb-04144454101-compact2.jpg?amount=${totalPriceNumber}&addInfo=${addInfo}&accountName=${"Nguyễn Văn Thiện"}`;
   const payment = selectedPayment;
   const product = cart.map((item) => ({
     productId: item.id,
