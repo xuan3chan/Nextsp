@@ -1,11 +1,30 @@
 import React, { Fragment, useContext, useState, useEffect } from "react";
 import Select from "react-select";
 import { BrandContext } from "./index";
+import { ThemeContext } from "../theme/ThemeContext";
 import { createBrand, getAllBrand } from "./FetchAPI";
 import { getAllCategory } from "../categories/FetchApi";
 
-const AddBrandDetail = ({ categories }) => {
+const AddBrandDetail = ({ categories, isDarkMode }) => {
   const { data, dispatch } = useContext(BrandContext);
+  const { darkMode , setDM } = useContext(ThemeContext)
+
+  const selectStyles = (isDarkMode) => ({
+    option: (provided, state) => ({
+      ...provided,
+      backgroundColor: isDarkMode
+        ? state.isFocused
+          ? '#1A202C' // bg-gray-600 when focused in dark mode
+          : '#2D3748' // bg-gray-700 in dark mode
+        : state.isFocused
+        ? '#F7FAFC' // bg-gray-100 when focused in light mode
+        : 'white', // white in light mode
+      color: isDarkMode ? 'white' : 'black',
+    }),
+  });
+  const darkfield = darkMode ? 'focus:border-[#2D9596] focus:border-2 bg-gray-700' : 'focus:border-black focus:border-2 bg-white border'
+  const darkbtn = darkMode ? 'bg-[#2D9596] text-white' : 'bg-[#303031] text-gray-100'
+  const darkModal = darkMode ? 'bg-gray-800 text-white' : 'bg-white text-black'
 
   const alert = (msg, type) => (
     <div className={`bg-${type}-200 py-2 px-4 w-full`}>{msg}</div>
@@ -96,18 +115,17 @@ const AddBrandDetail = ({ categories }) => {
           data.addBrandModal ? "" : "hidden"
         } fixed inset-0 flex items-center z-30 justify-center overflow-auto`}
       >
-        <div className="mt-32 md:mt-0 relative bg-white w-11/12 md:w-3/6 shadow-lg flex flex-col items-center space-y-4 px-4 py-4 md:px-8">
+        <div className={`mt-32 md:mt-0 relative ${darkModal} w-11/12 md:w-3/6 shadow-lg flex flex-col items-center space-y-4 px-4 py-4 md:px-8`}>
           <div className="flex items-center justify-between w-full pt-4">
             <span className="text-left font-semibold text-2xl tracking-wider">
               Add Brand
             </span>
             {/* Close Modal */}
             <span
-              style={{ background: "#303031" }}
               onClick={(e) =>
                 dispatch({ type: "addBrandModal", payload: false })
               }
-              className="cursor-pointer text-gray-100 py-2 px-2 rounded-full"
+              className={`cursor-pointer ${darkbtn} py-2 px-2 rounded-full`}
             >
               <svg
                 className="w-6 h-6"
@@ -141,7 +159,7 @@ const AddBrandDetail = ({ categories }) => {
                       nameBrand: e.target.value,
                     })
                   }
-                  className="px-4 py-2 border focus:outline-none"
+                  className={`px-4 py-2 focus:outline-none ${darkfield}`}
                   type="text"
                 />
               </div>
@@ -158,7 +176,7 @@ const AddBrandDetail = ({ categories }) => {
                     description: e.target.value,
                   })
                 }
-                className="px-4 py-2 border focus:outline-none"
+                className={`px-4 py-2 focus:outline-none ${darkfield}`}
                 name="description"
                 id="description"
                 cols={5}
@@ -179,7 +197,7 @@ const AddBrandDetail = ({ categories }) => {
                     })
                   }
                   name="status"
-                  className="px-4 py-2 border focus:outline-none"
+                  className={`px-4 py-2 focus:outline-none ${darkfield}`}
                   id="status"
                 >
                   <option name="status" value="Active">
@@ -192,7 +210,7 @@ const AddBrandDetail = ({ categories }) => {
               </div>
               <div className="w-1/2 flex flex-col space-y-1">
                 <label htmlFor="status">Brand Category *</label>
-                <Select
+                  <Select
                   isMulti
                   name="category"
                   options={categories.map((category, index) => ({
@@ -200,8 +218,9 @@ const AddBrandDetail = ({ categories }) => {
                     label: category.nameCategory,
                     key: `${category.nameCategory}-${category._id}-${index}`,
                   }))}
-                  className="basic-multi-select"
+                  className={`select ${darkfield}`}
                   classNamePrefix="select"
+                  styles={selectStyles(isDarkMode)}
                   onChange={(selectedOptions) =>
                     setFdata({
                       ...fData,
@@ -215,9 +234,8 @@ const AddBrandDetail = ({ categories }) => {
             </div>
             <div className="flex flex-col space-y-1 w-full pb-4 md:pb-6 mt-4">
               <button
-                style={{ background: "#303031" }}
                 type="submit"
-                className="rounded-full bg-gray-800 text-gray-100 text-lg font-medium py-2"
+                className={`rounded-full ${darkbtn} text-lg font-medium py-2`}
               >
                 Create Brand
               </button>
@@ -231,6 +249,8 @@ const AddBrandDetail = ({ categories }) => {
 
 
 const AddBrandModal = (props) => {
+  const { darkMode } = useContext(ThemeContext);
+
   useEffect(() => {
     fetchCategoryData();
   }, []);
@@ -246,7 +266,7 @@ const AddBrandModal = (props) => {
 
   return (
     <Fragment>
-      <AddBrandDetail categories={allCat} />
+      <AddBrandDetail categories={allCat} isDarkMode={darkMode} />
     </Fragment>
   );
 };

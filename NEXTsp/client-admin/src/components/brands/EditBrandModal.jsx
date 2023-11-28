@@ -1,4 +1,5 @@
 import React, { Fragment, useContext, useState, useEffect } from "react";
+import { ThemeContext } from "../theme/ThemeContext";
 import Select from "react-select";
 import { BrandContext } from "./index";
 import { editBrand, getAllBrand } from "./FetchAPI";
@@ -7,6 +8,24 @@ import { getAllCategory } from "../categories/FetchApi";
 const EditBrandModal = () => {
   const { data, dispatch } = useContext(BrandContext);
   const [categories, setCategories] = useState(null);
+  const { darkMode } = useContext(ThemeContext);
+  const darkModal = darkMode ? 'bg-gray-800 text-white' : 'bg-white text-black'
+  const darkbtn = darkMode ? 'bg-[#2D9596] text-white' : 'bg-[#303031] text-gray-100'
+  const darkfield = darkMode ? 'focus:border-[#2D9596] focus:border-2 bg-gray-700' : 'focus:border-black focus:border-2 bg-white border'
+
+  const selectStyles = (darkMode) => ({
+    option: (provided, state) => ({
+      ...provided,
+      backgroundColor: darkMode
+        ? state.isFocused
+          ? '#1A202C' // bg-gray-600 when focused in dark mode
+          : '#2D3748' // bg-gray-700 in dark mode
+        : state.isFocused
+        ? '#F7FAFC' // bg-gray-100 when focused in light mode
+        : 'white', // white in light mode
+      color: darkMode ? 'white' : 'black',
+    }),
+  });
 
   const alert = (msg, type) => (
     <div className={`bg-${type}-200 py-2 px-4 w-full`}>{msg}</div>
@@ -181,23 +200,44 @@ const EditBrandModal = () => {
           {/* End Exit btn */}
           {/*body */}
           <div className="relative flex flex-col w-full bg-white outline-none focus:outline-none">
-            <div className="flex items-start justify-between p-5 border-b border-solid border-gray-300 rounded-t">
+            <div className={`flex items-start justify-between p-5  ${darkModal}`}>
               <h3 className="text-3xl font-semibold">Edit Brand</h3>
+              <span
+              onClick={(e) =>
+                dispatch({ type: "editBrandModalClose", payload: false })
+              }
+              className={`cursor-pointer ${darkbtn} py-2 px-2 rounded-full`}
+            >
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </span>
             </div>
             {/* Edit Form */}
             <form onSubmit={handleSubmit}>
-              <div className="relative p-6 flex-auto">
+              <div className={`relative p-6 flex-auto ${darkModal}`}>
                 {editformData.error && alert(editformData.error, "red")}
                 {editformData.success && alert(editformData.success, "green")}
                 <div className="mb-4">
                   <label
-                    className="block text-gray-700 text-sm font-bold mb-2"
+                    className="block text-sm font-bold mb-2"
                     htmlFor="nameBrand"
                   >
                     Name Brand
                   </label>
                   <input
-                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    className={`shadow appearance-none rounded w-full py-2 px-3 ${darkfield} leading-tight focus:outline-none focus:shadow-outline`}
                     value={editformData.nameBrand}
                     onChange={handleChange}
                     name="nameBrand"
@@ -207,13 +247,13 @@ const EditBrandModal = () => {
                 </div>
                 <div className="mb-4">
                   <label
-                    className="block text-gray-700 text-sm font-bold mb-2"
+                    className="block text-sm font-bold mb-2"
                     htmlFor="description"
                   >
                     Description
                   </label>
                   <textarea
-                    className="resize-none border rounded focus:outline-none focus:shadow-outline w-full h-24 px-3 py-2 text-gray-700"
+                    className={`resize-none border rounded focus:outline-none focus:shadow-outline w-full h-24 px-3 py-2 ${darkfield}`}
                     value={editformData.description}
                     onChange={handleChange}
                     name="description"
@@ -223,13 +263,13 @@ const EditBrandModal = () => {
                 </div>
                 <div className="mb-4">
                   <label
-                    className="block text-gray-700 text-sm font-bold mb-2"
+                    className="block text-sm font-bold mb-2"
                     htmlFor="status"
                   >
                     Status
                   </label>
                   <select
-                    className="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    className={`border rounded w-full py-2 px-3 ${darkfield} leading-tight focus:outline-none focus:shadow-outline`}
                     value={editformData.status}
                     onChange={handleChange}
                     name="status"
@@ -242,7 +282,7 @@ const EditBrandModal = () => {
                 </div>
                 <div className="mb-4">
                   <label
-                    className="block text-gray-700 text-sm font-bold mb-2"
+                    className="block text-sm font-bold mb-2"
                     htmlFor="category"
                   >
                     Category
@@ -267,6 +307,7 @@ const EditBrandModal = () => {
                     }
                     className="basic-multi-select"
                     classNamePrefix="select"
+                    styles={selectStyles(darkMode)}
                     onChange={(selectedOptions) =>
                       handleChange({
                         target: {
@@ -279,19 +320,9 @@ const EditBrandModal = () => {
                 </div>
               </div>
               {/*Footer */}
-              <div className="flex items-center justify-end p-6 border-t border-solid border-gray-300 rounded-b">
+              <div className={`flex items-center justify-center p-6 border-solid ${darkModal}`}>
                 <button
-                  onClick={(e) =>
-                    dispatch({ type: "editBrandModalClose", payload: false })
-                  }
-                  className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1"
-                  type="button"
-                  style={{ transition: "all .15s ease" }}
-                >
-                  Close
-                </button>
-                <button
-                  className="bg-green-500 text-white active:bg-green-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1"
+                  className={`${darkbtn} font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full`}
                   type="submit"
                   style={{ transition: "all .15s ease" }}
                 >

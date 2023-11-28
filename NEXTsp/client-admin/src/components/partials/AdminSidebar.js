@@ -8,7 +8,7 @@ const AdminSidebar = (props) => {
   const navigate = useNavigate();
 
 
-  const { darkMode, setDarkMode } = useContext(ThemeContext);
+  const { darkMode } = useContext(ThemeContext);
 
   const darkmodeHR =  darkMode ? 'border-gray-600 border-b' : 'border-gray-200 border-b';
   const darkmodehoverdiv = darkMode ? 'bg-gray-600' : 'bg-gray-200';
@@ -32,7 +32,7 @@ const AdminSidebar = (props) => {
         >
           <span>
             <svg
-              className="w-8 h-8 text-gray-600 hover:text-gray-800"
+              className="w-8 h-8"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -46,7 +46,7 @@ const AdminSidebar = (props) => {
               />
             </svg>
           </span>
-          <span className="hover:text-gray-800">Dashboard</span>
+          <span>Dashboard</span>
         </div>
         <hr className={darkmodeHR} />
         <div
@@ -59,7 +59,7 @@ const AdminSidebar = (props) => {
         >
           <span>
             <svg
-              className="w-8 h-8 text-gray-600 hover:text-gray-800"
+              className="w-8 h-8"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -73,7 +73,7 @@ const AdminSidebar = (props) => {
               />
             </svg>
           </span>
-          <span className="hover:text-gray-800">Categories</span>
+          <span>Categories</span>
         </div>
         <hr className={darkmodeHR} />
         <div
@@ -86,7 +86,7 @@ const AdminSidebar = (props) => {
         >
           <span>
             <svg
-              className="w-8 h-8 text-gray-600 hover:text-gray-800"
+              className="w-8 h-8"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -100,7 +100,7 @@ const AdminSidebar = (props) => {
               />
             </svg>
           </span>
-          <span className="hover:text-gray-800">Brands</span>
+          <span>Brands</span>
         </div>
         <hr className={darkmodeHR} />
         <div
@@ -113,7 +113,7 @@ const AdminSidebar = (props) => {
         >
           <span>
             <svg
-              className="w-8 h-8 text-gray-600 hover:text-gray-800"
+              className="w-8 h-8"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -127,7 +127,7 @@ const AdminSidebar = (props) => {
               />
             </svg>
           </span>
-          <span className="hover:text-gray-800">Product</span>
+          <span>Product</span>
         </div>
         <hr className={darkmodeHR} />
         <div
@@ -140,7 +140,7 @@ const AdminSidebar = (props) => {
         >
           <span>
             <svg
-              className="w-8 h-8 text-gray-600 hover:text-gray-800"
+              className="w-8 h-8"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -154,7 +154,7 @@ const AdminSidebar = (props) => {
               />
             </svg>
           </span>
-          <span className="hover:text-gray-800">Order</span>
+          <span>Order</span>
         </div>
         <hr className={darkmodeHR}/>
       </div>

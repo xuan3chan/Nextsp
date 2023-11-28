@@ -1,5 +1,6 @@
 import React, { Fragment, useContext, useState, useEffect, useCallback } from "react";
 import { ProductContext } from "./index";
+import { ThemeContext } from "../theme/ThemeContext";
 import { editProduct, getAllProduct } from "./FetchApi";
 import { getAllBrand } from "../brands/FetchAPI";
 import { getAllCategory } from "../categories/FetchApi";
@@ -10,6 +11,10 @@ const EditProductModal = (props) => {
   const [brands, setBrands] = useState(null);
   const [categories, setCategories] = useState(null);
   const [newImages, setNewImages] = useState([]);
+  const { darkMode } = useContext(ThemeContext);
+  const darkModal = darkMode ? 'bg-gray-800 text-white' : 'bg-white text-black'
+  const darkbtn = darkMode ? 'bg-[#2D9596] text-white' : 'bg-[#303031] text-gray-100'
+  const darkfield = darkMode ? 'focus:border-[#2D9596] focus:border-2 bg-gray-700' : 'focus:border-black focus:border-2 bg-white border'
 
   const alert = (msg, type) => (
     <div className={`bg-${type}-200 py-2 px-4 w-full`}>{msg}</div>
@@ -127,18 +132,17 @@ const EditProductModal = (props) => {
           data.editProductModal.modal ? "" : "hidden"
         } fixed inset-0 flex items-center z-30 justify-center overflow-auto`}
       >
-        <div className="mt-32 md:mt-0 relative bg-white w-11/12 md:w-3/6 shadow-lg flex flex-col items-center space-y-4 px-4 py-2 md:px-8">
+        <div className={`mt-32 md:mt-0 relative ${darkModal} w-11/12 md:w-3/6 shadow-lg flex flex-col items-center space-y-4 px-4 py-2 md:px-8`}>
           <div className="flex items-center justify-between w-full pt-4">
             <span className="text-left font-semibold text-2xl tracking-wider">
               Edit Product
             </span>
             {/* Close Modal */}
             <span
-              style={{ background: "#303031" }}
               onClick={(e) =>
                 dispatch({ type: "editProductModalClose", payload: false })
               }
-              className="cursor-pointer text-gray-100 py-2 px-2 rounded-full"
+              className={`cursor-pointer ${darkbtn} py-2 px-2 rounded-full`}
             >
               <svg
                 className="w-6 h-6"
@@ -172,7 +176,7 @@ const EditProductModal = (props) => {
                       nameProduct: e.target.value,
                     })
                   }
-                  className="px-4 py-2 border focus:outline-none"
+                  className={`px-4 py-2 border focus:outline-none ${darkfield}`}
                   type="text"
                   required
                 />
@@ -192,7 +196,7 @@ const EditProductModal = (props) => {
                     })
                   }
                   type="number"
-                  className="px-4 py-2 border focus:outline-none"
+                  className={`px-4 py-2 border focus:outline-none ${darkfield}`}
                   id="price"
                   required
                 />
@@ -210,7 +214,7 @@ const EditProductModal = (props) => {
                     })
                   }
                   type="number"
-                  className="px-4 py-2 border focus:outline-none"
+                  className={`px-4 py-2 border focus:outline-none ${darkfield}`}
                   id="oldprice"
                 />
               </div>
@@ -227,7 +231,7 @@ const EditProductModal = (props) => {
                     description: e.target.value,
                   })
                 }
-                className="px-4 py-2 border focus:outline-none"
+                className={`px-4 py-2 border focus:outline-none ${darkfield}`}
                 name="description"
                 id="description"
                 cols={5}
@@ -295,7 +299,7 @@ const EditProductModal = (props) => {
                     }}
                     type="file"
                     accept=".jpg, .jpeg, .png"
-                    className="px-4 py-2 border focus:outline-none"
+                    className={`px-4 py-2 border focus:outline-none ${darkfield}`}
                     id="image"
                     multiple
                   />
@@ -314,7 +318,7 @@ const EditProductModal = (props) => {
                       })
                     }
                     name="status"
-                    className="px-4 py-2 border focus:outline-none"
+                    className={`px-4 py-2 border focus:outline-none ${darkfield}`}
                     id="status"
                   >
                     <option name="status" value="Active">
@@ -339,7 +343,7 @@ const EditProductModal = (props) => {
                       })
                     }
                     name="status"
-                    className="px-4 py-2 border focus:outline-none"
+                    className={`px-4 py-2 border focus:outline-none ${darkfield}`}
                     id="status"
                   >
                     <option disabled value="">
@@ -386,7 +390,7 @@ const EditProductModal = (props) => {
                       })
                     }
                     name="status"
-                    className="px-4 py-2 border focus:outline-none"
+                    className={`px-4 py-2 border focus:outline-none ${darkfield}`}
                     id="status"
                   >
                     <option disabled value="">
@@ -425,9 +429,8 @@ const EditProductModal = (props) => {
             </div>
             <div className="flex flex-col space-y-1 w-full pb-4 md:pb-6 mt-4">
               <button
-                style={{ background: "#303031" }}
                 type="submit"
-                className="rounded-full bg-gray-800 text-gray-100 text-lg font-medium py-2"
+                className={`rounded-full ${darkbtn} text-lg font-medium py-2`}
               >
                 Update product
               </button>

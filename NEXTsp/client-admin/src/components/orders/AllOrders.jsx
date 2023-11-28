@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { Fragment, useState, useEffect, useContext } from "react";
+import { ThemeContext } from "../theme/ThemeContext";
 import moment from "moment";
 import { getAllOrders } from "./FetchApi";
 import { OrderContext } from "./index";
@@ -12,8 +13,12 @@ const AllOrders = () => {
   const [sortOrder, setSortOrder] = useState('asc');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const { darkMode } = useContext(ThemeContext)
   const [currentPage, setCurrentPage] = useState(1);
   const ordersPerPage = 10;
+
+  const darkModeText = darkMode ? 'text-white' : 'text-gray-800'
+  const tablebg = darkMode ? 'bg-slate-700 text-white' : 'bg-white text-gray-800'
   // Fetch all orders on component mount
   const fetchData = async () => {
     try {
@@ -25,13 +30,6 @@ const AllOrders = () => {
       setLoading(false);
     }
   };
-  useEffect(() => {
-    const interval = setInterval(() => {
-      fetchData();
-    }, 10000); // Fetch data every 10 seconds
-  
-    return () => clearInterval(interval); // This represents the unmount function, in which you need to clear your interval to prevent memory leaks.
-  }, []);
 
   const sortOrders = () => {
     let sortedOrders = [...order];
@@ -125,9 +123,9 @@ const AllOrders = () => {
   return (
     <Fragment>
       <div className="flex items-center justify-center">
-        <h1 className="text-2xl font-semibold text-gray-800">All Orders</h1>
+        <h1 className={`text-2xl font-semibold ${darkModeText}`}>All Orders</h1>
       </div>
-      <div className="col-span-1 overflow-auto bg-white shadow-lg p-4">
+      <div className={`col-span-1 overflow-auto ${tablebg} shadow-lg p-4`}>
         <table className="table-auto border w-full my-2">
           <thead>
             <tr>
@@ -175,13 +173,14 @@ const AllOrders = () => {
                     <td className="px-4 py-2 border">
                       <select value={item.tracking}
                         onChange={(e) => updateTracking(item._id, e.target.value)}
+                        className="bg-transparent"
                       >
-                        <option value="pending">pending</option>
-                        <option value="confirmed">confirmed</option>
-                        <option value="shipping">shipping</option>
-                        <option value="delivered">delivered</option>
-                        <option value="done">done</option>
-                        <option value="cancel">cancel</option>
+                        <option value="pending" style={{ color: 'gray' }}>pending</option>
+                        <option value="confirmed" style={{ color: 'blue' }}>confirmed</option>
+                        <option value="shipping" style={{ color: 'green' }}>shipping</option>
+                        <option value="delivered" style={{ color: 'purple' }}>delivered</option>
+                        <option value="done" style={{ color: 'darkblue' }}>done</option>
+                        <option value="cancel" style={{ color: 'red' }}>cancel</option>
                       </select>
                     </td>
                     <td className="px-4 py-2 border">
