@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "../../assets/css/registerFrom.css";
 import axios from "axios";
-import Logo from "../../assets/img/Logo.png";
+import Logo from "../../assets/img/Logo_2.png";
 import Footer from "../../components/Footer";
+import "../../assets/css/Login.css";
 const RegisterForm = () => {
   const apiUrl = "https://nextsp-server.id.vn/api/auth/register";
   const [fullName, setFullName] = useState("");
@@ -83,13 +83,18 @@ const RegisterForm = () => {
 
   return (
     <div className=" w-full flex flex-col justify-center items-center bg-gradient-to-tl bg-color">
-      <div className="logoSection w-full bg-black">
-        <div className="logo h-24 w-24">
-          <img src={Logo} alt="" />
+      <div className="logoSection w-full bg-white">
+        <div className="ml-28 flex items-center content-center pt-4">
+          <div className="logo">
+            <img src={Logo} alt="" />
+          </div>
+          <span className=" border-l-2 border-black pl-4 w-56 font-semibold text-xl">
+            Trang Đăng Nhập
+          </span>
         </div>
       </div>
       <div className="RegistSection relative ">
-        <div className="Form absolute right-32 top-10 text-center pt-[50px] px-10 border-2 border-white rounded-xl bg-white">
+        <div className="Form absolute right-64 top-10 text-center pt-[50px] px-10 border-2 border-white rounded-xl bg-white">
           <h1 className="text-4xl pb-5">Đăng ký</h1>
           <div className="flex flex-col items-start">
             <label className="ml-1 mb-2" htmlFor="firstName">
@@ -180,10 +185,9 @@ const RegisterForm = () => {
             >
               Tiếp tục
             </button>
-
             <p className="py-4">
               Bạn đã có tài khoản?{" "}
-              <Link to="/login" className=" text-blue-400">
+              <Link to="/LoginUser" className=" text-blue-400">
                 Đăng nhập ngay
               </Link>
             </p>

@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import Logo from "../../assets/img/Logo.png";
+import Logo from "../../assets/img/Logo_2.png";
 import "../../assets/css/Login.css";
 import { Link } from "react-router-dom";
 

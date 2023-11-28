@@ -110,19 +110,38 @@ form {
 }
 .logoSection {
   height: 84px;
+  display: flex;
+  margin-top: auto;
+}
+.logoSection .logo {
+  width: 200px;
+  height: 100%;
+}
+.logoSection img {
+  height: 80%;
+  width: 100%;
 }
 
-.RegistSection {
+.RegistSection,
+.LoginSection {
   overflow: auto;
-  background-image: url("https://png.pngtree.com/background/20210710/original/pngtree-shopping-mall-supermarket-selection-merchandise-poster-background-material-picture-image_1048684.jpg");
+  background-image: url("../img/bg-regis.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   height: 800px;
   width: 100%;
 }
-.RegistSection .Form {
-  height: 90%;
+.RegistSection .Form,
+.LoginSection .Form {
+  max-height: 90%;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+.LoginSection .Form {
+  top: 200px;
+  right: 200px;
+  padding-bottom: 30px;
 }
 .RegistSection #firstName,
 #email,
