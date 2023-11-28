@@ -46,7 +46,7 @@ app.use("/api/orders", orderRoutes);
 app.use("/api/ratings", ratingRoutes);
 
 
-app.post("/", (req, res) => {
+app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
