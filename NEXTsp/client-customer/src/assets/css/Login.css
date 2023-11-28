@@ -1,23 +1,13 @@
-html {
-  color: #eee;
-}
-
-* {
+.LoginFormSection {
   font-family: "Gotham Rounded Book", "sans-serif";
   padding: 0;
   margin: 0;
   box-sizing: border-box;
 }
-
-body {
-  width: 100%;
-  min-height: 560px;
-  height: 100vh;
-  display: grid;
-  place-content: center;
-  background: #eee;
+.LoginFormSection label {
+  color: #fff;
+  text-align: left;
 }
-
 section {
   min-width: 450px;
   min-height: 520px;
@@ -31,21 +21,24 @@ section {
   justify-content: center;
   display: flex;
   align-items: center;
-  margin: 30px;
+  width: 200px;
+  height: 200px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-nav {
+.OptionSection {
   margin: 20px;
   display: flex;
   justify-content: center;
 }
 
-nav label {
+.OptionSection label {
   text-transform: uppercase;
   cursor: pointer;
 }
 
-nav label:first-child {
+.OptionSection label:first-child {
   margin-right: 20px;
 }
 
@@ -59,7 +52,7 @@ form {
   display: flex;
 }
 
-#SignIn:checked ~ section nav label:first-child {
+#SignIn:checked ~ section .OptionSection label:first-child {
   margin-bottom: -2px;
   border-bottom: 2px solid #1ed760;
 }
@@ -68,14 +61,14 @@ form {
   display: flex;
 }
 
-#SignUp:checked ~ section nav label:last-child {
+#SignUp:checked ~ section .OptionSection label:last-child {
   margin-bottom: -2px;
   border-bottom: 2px solid #1ed760;
 }
 
-input,
-button {
-  border-radius: 50px;
+.LoginFormSection input,
+.LoginFormSection button {
+  border-radius: 10px;
   padding: 15px 20px;
   margin-bottom: 15px;
   border: none;
@@ -83,8 +76,7 @@ button {
   font-size: 16px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
-
-button {
+.LoginFormSection button {
   background: #1ed760;
   text-transform: uppercase;
   font-weight: bold;
@@ -93,21 +85,21 @@ button {
   margin-top: 5px;
 }
 
-form span {
+.LoginFormSection form span {
   margin-left: 20px;
 }
 
-form span label {
+.LoginFormSection form span label {
   font-size: 14px;
   text-transform: lowercase;
 }
 
-input[type="checkbox"] {
+.LoginFormSection input[type="checkbox"] {
   cursor: pointer;
   accent-color: #3498db;
 }
 
-a {
+.LoginFormSection a {
   color: #797a7e;
   font-weight: bold;
   text-decoration: none;
@@ -115,4 +107,47 @@ a {
   display: flex;
   justify-content: center;
   cursor: pointer;
+}
+.logoSection {
+  height: 84px;
+  display: flex;
+  margin-top: auto;
+}
+.logoSection .logo {
+  width: 200px;
+  height: 100%;
+}
+.logoSection img {
+  height: 80%;
+  width: 100%;
+}
+
+.RegistSection,
+.LoginSection {
+  overflow: auto;
+  background-image: url("../img/bg-regis.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 800px;
+  width: 100%;
+}
+.RegistSection .Form,
+.LoginSection .Form {
+  max-height: 90%;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+.LoginSection .Form {
+  top: 200px;
+  right: 200px;
+  padding-bottom: 30px;
+}
+.RegistSection #firstName,
+#email,
+#password,
+#confirmPassword,
+#username {
+  border-style: solid;
+  border-width: 1px;
 }

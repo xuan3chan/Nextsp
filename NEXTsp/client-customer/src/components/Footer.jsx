@@ -3,7 +3,7 @@ import React from "react";
 const Footer = () => {
   return (
     <footer>
-      <div className="mt-10">
+      <div className="">
         <div className="footerSection flex gap-14 justify-center pt-14 pb-10 w-full border-t-2">
           <div className="footer-col-1 flex flex-col">
             <h1>Về NextSP Store</h1>

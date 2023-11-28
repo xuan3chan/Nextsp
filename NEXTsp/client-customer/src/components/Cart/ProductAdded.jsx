@@ -12,6 +12,7 @@ function ProductAdded(props) {
     const parsedCart = JSON.parse(storedCart) || [];
     const cartWithCount = parsedCart.map((item) => ({ ...item, count: 1 }));
     setCart(cartWithCount);
+    localStorage.setItem("FullCart", JSON.stringify(cartWithCount));
     const uniqueItemsById = cartWithCount.reduce((accumulator, currentItem) => {
       if (!accumulator[currentItem.id]) {
         accumulator[currentItem.id] = { ...currentItem };
@@ -22,7 +23,6 @@ function ProductAdded(props) {
     }, {});
     const uniqueCart = Object.values(uniqueItemsById);
     setCart(uniqueCart);
-    console.log(cartWithCount);
   }, []);
 
   const handleCheckLogin = () => {
@@ -40,7 +40,7 @@ function ProductAdded(props) {
     }
     return "";
   }
- const updateLocalStorage = (updatedCart) => {
+  const updateLocalStorage = (updatedCart) => {
     // Update local storage with the new cart data
     localStorage.setItem("cart", JSON.stringify(updatedCart));
   };
@@ -50,8 +50,8 @@ function ProductAdded(props) {
       const updatedCart = prevCart.map((item) =>
         item.id === productId ? { ...item, count: item.count + 1 } : item
       );
-
       updateLocalStorage(updatedCart);
+      console.log(updatedCart);
       return updatedCart;
     });
   };
@@ -63,6 +63,11 @@ function ProductAdded(props) {
           ? { ...item, count: item.count - 1 }
           : item
       );
+      if (updatedCart.find((item) => item.id === productId && item.count === 0))
+        removeItem(productId);
+      if (localStorage.getItem("cart") === "[]") {
+        localStorage.removeItem("cart");
+      }
 
       updateLocalStorage(updatedCart);
       return updatedCart;
@@ -92,12 +97,10 @@ function ProductAdded(props) {
   const removeItem = (itemId) => {
     // Remove the item from the state
     setCart((prevCart) => prevCart.filter((item) => item.id !== itemId));
-
     // Get the current cart from localStorage
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
     // Remove the item from the cart
     cart = cart.filter((item) => item.id !== itemId);
-
     // Save the updated cart back to localStorage
     localStorage.setItem("cart", JSON.stringify(cart));
   };

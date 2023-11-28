@@ -51,7 +51,7 @@
   max-width: 50%;
   margin-right: 20px;
 }
-.menu-item{
+.menu-item {
   text-align: left;
 }
 .category-item .brand-menu {
@@ -137,6 +137,10 @@
   background-color: inherit;
   font-family: inherit;
   height: 100%;
+}
+.dropbtn a {
+  color: white;
+  padding: 0 10px;
 }
 .dropbtn > i {
   margin-left: 4px;
@@ -274,7 +278,7 @@
   opacity: 100%;
 }
 .user_module_login:hover .LoginOption {
-  display: flex!important;
+  display: flex !important;
 }
 .navItem {
   position: relative;
@@ -432,4 +436,8 @@
 }
 .LoginOption {
   display: none;
+}
+.shipping-form{
+  display: block;
+  overflow: auto;
 }

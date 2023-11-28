@@ -61,23 +61,23 @@ const LogoutTracking = () => {
               <div className="subTitle_mainTitle maintTitle_idOrd">
                 Mã đơn hàng :
               </div>
-              {Order._id}
+              <span>{Order._id}</span>
             </p>
             <p className="content__body__subTitle flex gap-1">
               <div className="subTitle_mainTitle">Tên Người Nhận :</div>
-              {Order.fullName}
+              <span>{Order.fullName}</span>
             </p>
             <p className="content__body__subTitle flex gap-1">
               <div className="subTitle_mainTitle">Số Điện Thoại:</div>
-              {Order.phone}
+              <span>{Order.phone}</span>
             </p>
             <p className="content__body__subTitle flex gap-1">
               <div className="subTitle_mainTitle"> Địa Chỉ :</div>
-              {Order.address}
+              <span>{Order.address}</span>
             </p>
             <p className="content__body__subTitle flex gap-1">
               <div className="subTitle_mainTitle"> Trạng thái :</div>
-              {Order.tracking}
+              <span>{Order.tracking}</span>
             </p>
             <span className="content__body__subTitle flex ">
               <div className="subTitle_mainTitle">Sản Phẩm Đã Đặt:</div>
