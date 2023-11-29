@@ -79,7 +79,7 @@ function ProductList(props) {
                   </div>
                   <div className="textSection flex flex-col">
                     <div className="product_title text-left">
-                      <h1 className="h-16">{product.nameProduct} </h1>
+                      <h1 className="h-20">{product.nameProduct} </h1>
                     </div>
                     <div>
                       <p className="product_oldPrice text-left">
