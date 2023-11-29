@@ -57,7 +57,17 @@ const DashboardBar = () => {
     responsive: true,
     scales: {
       y: {
-        beginAtZero: true
+        beginAtZero: true,
+        title: {
+          display: true,
+          text: 'Đơn'
+        }
+      },
+      x: {
+        title: {
+          display: true,
+          text: 'Tháng'
+        }
       }
     },
     plugins: {
