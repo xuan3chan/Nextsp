@@ -3,6 +3,8 @@ import axios from 'axios';
 import { Bar } from 'react-chartjs-2';
 import { Chart, BarController, BarElement, CategoryScale, LinearScale, Title, Tooltip, Legend } from 'chart.js';
 
+const apiURL = process.env.REACT_APP_STATISTICINYEAR;
+
 Chart.register(BarController, BarElement, CategoryScale, LinearScale, Title, Tooltip, Legend);
 
 const DashboardBar = () => {
@@ -11,7 +13,7 @@ const DashboardBar = () => {
   const [serverMessage, setServerMessage] = useState('');
   useEffect(() => {
     const fetchData = () => {
-      axios.get(`http://localhost:3101/api/orders/statisticinyear/${selectedYear}`)
+      axios.get(`${apiURL}/${selectedYear}`)
         .then(response => {
           if (response.data.success) {
             setMonthlyOrderCount(response.data.months);
@@ -42,7 +44,7 @@ const DashboardBar = () => {
     labels: labels,
     datasets: [
       {
-        label: 'My First Dataset',
+        label: 'Orders',
         data: data,
         backgroundColor: 'rgba(75,192,192,0.4)',
         borderColor: 'rgba(75,192,192,1)',
@@ -50,7 +52,6 @@ const DashboardBar = () => {
       },
     ],
   };
-
   const options = {
     responsive: true,
     scales: {
