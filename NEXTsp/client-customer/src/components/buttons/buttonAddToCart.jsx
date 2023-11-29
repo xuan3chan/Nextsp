@@ -7,7 +7,7 @@ function ButtonAddToCart(props) {
   const [cartItems, setCart] = React.useState(cart);
   const updatedCart = [...cart, props.product];
   const addToCart = () => {
-    const existingItemIndex = cartItems.findIndex((item) => item.id === newItem.id);
+    const existingItemIndex = cart.findIndex((item) => item.id === newItem.id);
 
     if (existingItemIndex !== -1) {
       // If it exists, increase the count of that item
@@ -22,8 +22,8 @@ function ButtonAddToCart(props) {
       // If it doesn't exist, add the new item to the cart
       setCart((prevCart) => [...prevCart, { ...newItem, count: 1 }]);
     }
-
-    localStorage.setItem("cart", JSON.stringify(cartItems));
+    setCart(updatedCart);
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
     window.location.reload();
   };
 
