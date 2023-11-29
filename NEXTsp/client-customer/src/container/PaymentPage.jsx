@@ -28,7 +28,6 @@ function PaymentPage(props) {
     }
     return "";
   }
-  console.log(cart);
   const userId = localStorage.getItem("userId");
   const totalPrice = localStorage.getItem("totalPrice");
   const fullName = customerInformation.fullName;
