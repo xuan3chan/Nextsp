@@ -86,7 +86,9 @@ const RegisterForm = () => {
       <div className="logoSection w-full bg-white">
         <div className="flex items-center content-center">
           <div className="logo">
-            <img src={Logo} alt="" />
+            <Link to="/homepage">
+              <img src={Logo} alt="" />
+            </Link>
           </div>
           <span className=" LoginSectionTitle border-l-2 border-black pl-4 w-56 font-semibold text-xl">
             Trang Đăng Ký

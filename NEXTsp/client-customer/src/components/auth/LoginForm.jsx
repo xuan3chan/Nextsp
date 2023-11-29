@@ -3,7 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Logo from "../../assets/img/Logo_2.png";
 import Footer from "../../components/Footer";
-
+import { Link } from "react-router-dom";
 const apiUrl = "https://nextsp-server.id.vn/api/auth/login";
 
 const Login = () => {
@@ -56,7 +56,9 @@ const Login = () => {
       <div className="logoSection w-full bg-white">
         <div className="flex items-center content-center">
           <div className="ml-28 logo">
-            <img src={Logo} alt="" />
+            <Link to="/homepage">
+              <img src={Logo} alt="" />
+            </Link>
           </div>
           <span className="LoginSectionTitle border-l-2 border-black pl-4 w-56 font-semibold text-xl">
             Trang Đăng Nhập
