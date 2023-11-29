@@ -9,7 +9,8 @@ Chart.register(BarController, BarElement, CategoryScale, LinearScale, Title, Too
 
 const DashboardBar = () => {
   const [monthlyOrderCount, setMonthlyOrderCount] = useState([]);
-  const [selectedYear, setSelectedYear] = useState(2023);
+  const currentYear = new Date().getFullYear();
+  const [selectedYear, setSelectedYear] = useState(currentYear);
   const [serverMessage, setServerMessage] = useState('');
   useEffect(() => {
     const fetchData = () => {
@@ -56,7 +57,17 @@ const DashboardBar = () => {
     responsive: true,
     scales: {
       y: {
-        beginAtZero: true
+        beginAtZero: true,
+        title: {
+          display: true,
+          text: 'Đơn'
+        }
+      },
+      x: {
+        title: {
+          display: true,
+          text: 'Tháng'
+        }
       }
     },
     plugins: {
@@ -109,7 +120,7 @@ const DashboardBar = () => {
   return (
     <div className='w-[1000px]'>
       <select onChange={handleYearChange}>
-        {Array.from({length: 10}, (_, i) => 2023 - i).map(year => (
+        {Array.from({length: 10}, (_, i) => currentYear - i).map(year => (
           <option key={year} value={year}>
             {year}
           </option>
