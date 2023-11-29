@@ -51,7 +51,10 @@ const ReviewForm = ({ onSubmit }) => {
       <div className="TitleForm">
         <h1>Nêu Đánh Giá Của Bạn Về Sản Phẩm: </h1>
       </div>
-      <form onSubmit={handleSubmit} className="w-2/5 flex flex-col gap-4">
+      <form
+        onSubmit={handleSubmit}
+        className="w-2/5 FormContent flex flex-col gap-4"
+      >
         <Rating onRatingChange={handleRatingChange} />
         <textarea
           placeholder="Nhập đánh giá của bạn..."

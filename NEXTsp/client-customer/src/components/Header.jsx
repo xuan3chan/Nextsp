@@ -158,15 +158,15 @@ function Header(props) {
                           <a
                             className="category-link w-full"
                             href={`/Collection/${category.nameCategory}`}
-                            onClick={(e) =>
-                              handleCategoryItemClick(e, category)
-                            }
                           >
                             <span>{category.nameCategory}</span>
                           </a>
                           <FontAwesomeIcon
                             className="category-icon"
                             icon={faCaretRight}
+                            onClick={(e) =>
+                              handleCategoryItemClick(e, category)
+                            }
                           />
                           <div className="brand-menu-mb  flex flex-col w-full">
                             {category.brands &&

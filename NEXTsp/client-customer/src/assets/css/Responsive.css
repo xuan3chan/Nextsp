@@ -194,9 +194,6 @@ body {
     display: block;
     margin-right: 20px !important;
   }
-  .cart > a {
-    display: none;
-  }
   .header_searching_module {
     width: 170px;
   }
@@ -649,5 +646,47 @@ body {
   .content__body__subTitle{
     font-size: 14px;
   }
+  .RegistSection .logo, 
+  .logoSection .logo{
+    display: flex;
+    margin-top: auto;
+    width: 100%;
+    margin-left: 20px;
+    justify-content: center;
+    align-items: center;
 
+  }
+  .RegistSection img,
+  .logoSection img{
+    height: 60%;
+    width: 80%;
+  }
+  .RegistSection .Form,
+  .LoginSection .Form{ 
+    width: 380px!important;
+    height: max-content!important;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+  }
+  .LoginSectionTitle{
+    width: 100%;
+  }
+
+  .logoSection {
+    height: 60px;
+    padding: 0;
+  }
+  .FormContent{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px;
+  }
+  .ReviewForm textArea{
+    width: 280px;
+  }
 }

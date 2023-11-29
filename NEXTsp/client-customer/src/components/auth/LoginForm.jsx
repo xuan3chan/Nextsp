@@ -3,7 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Logo from "../../assets/img/Logo_2.png";
 import Footer from "../../components/Footer";
-
+import { Link } from "react-router-dom";
 const apiUrl = "https://nextsp-server.id.vn/api/auth/login";
 
 const Login = () => {
@@ -54,17 +54,19 @@ const Login = () => {
   return (
     <div className=" w-full flex flex-col justify-center items-center bg-gradient-to-tl bg-color ">
       <div className="logoSection w-full bg-white">
-        <div className=" ml-28 flex items-center content-center pt-4">
-          <div className="logo">
-            <img src={Logo} alt="" />
+        <div className="flex items-center content-center">
+          <div className="ml-28 logo">
+            <Link to="/homepage">
+              <img src={Logo} alt="" />
+            </Link>
           </div>
-          <span className=" border-l-2 border-black pl-4 w-56 font-semibold text-xl">
+          <span className="LoginSectionTitle border-l-2 border-black pl-4 w-56 font-semibold text-xl">
             Trang Đăng Nhập
           </span>
         </div>
       </div>
       <div className="LoginSection relative ">
-        <div className="Form absolute right-32 top-10 w-1/5 text-center pt-[50px] px-10 border-2 border-white rounded-xl bg-white">
+        <div className="Form absolute right-32 top-10 text-center pt-[50px] px-10 border-2 border-white rounded-xl bg-white">
           <h1 className="text-4xl pb-5">Đăng Nhập</h1>
           <div className="flex flex-col items-start">
             <label className="ml-1 mb-2" htmlFor="username">

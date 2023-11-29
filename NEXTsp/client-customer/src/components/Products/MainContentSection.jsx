@@ -54,7 +54,7 @@ function MainContentSection(props) {
             <div className="productOldPrice productOldPriceDetail m-0">
               {formatPrice(product.oldprice)}
             </div>
-            <div className="productSale">-17%</div>
+            <div className="productSale">17%</div>
           </div>
           <div className="btnSection flex gap-2 w-80">
             <ButtonBuyNow product={product} />

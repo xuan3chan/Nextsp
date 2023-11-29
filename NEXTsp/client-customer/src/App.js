@@ -9,7 +9,6 @@ import CartPage from "./container/CartPage";
 import CustomerShipping from "./container/CustomerShipping";
 import PaymentPage from "./container/PaymentPage";
 import Account from "./container/Account";
-import LogInNew from "./components/auth/LoginFromNew";
 const App = () => {
   return (
     <Router>
@@ -30,7 +29,6 @@ const App = () => {
           <Route path="/Customer" element={<CustomerShipping />} />
           <Route path="/payment" element={<PaymentPage></PaymentPage>}></Route>
           <Route path="/Account" element={<Account></Account>}></Route>
-          <Route path="/LogInNew" element={<LogInNew />}></Route>
         </Routes>
       </LoadingProvider>
     </Router>
