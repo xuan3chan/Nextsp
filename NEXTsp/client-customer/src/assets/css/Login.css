@@ -137,6 +137,7 @@ form {
   max-height: 90%;
   margin-top: auto;
   margin-bottom: auto;
+  width: 420px!important;
 }
 .LoginSection .Form {
   top: 200px;
