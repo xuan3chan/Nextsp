@@ -108,7 +108,7 @@ function ProductList(props) {
           )}
         </div>
       </div>
-      <div className=" flex flex-wrap gap-1 w-4/5 justify-center pt-12 items-center pb-8 mr-auto ml-auto">
+      <div className=" flex flex-wrap gap-1 min-w-4/5 justify-center pt-12 items-center pb-8 mr-auto ml-auto">
         {filteredProducts
           .slice((pageIndex - 1) * itemsPerPage, pageIndex * itemsPerPage)
           .map((product) => (
@@ -126,7 +126,7 @@ function ProductList(props) {
                 </div>
                 <div className="textSection flex flex-col">
                   <div className="product_title text-left">
-                    <h1 className=" max-[]: h-16 truncate ">
+                    <h1 className=" max-[]: h-20 truncate ">
                       {product.nameProduct}{" "}
                     </h1>
                   </div>
