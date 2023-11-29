@@ -179,6 +179,7 @@
 }
 .productItem {
   height: 400px;
+  min-width: 18% ;
 }
 .product_image {
   width: 100%;
