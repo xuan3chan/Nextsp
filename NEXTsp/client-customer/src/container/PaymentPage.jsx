@@ -47,7 +47,6 @@ function PaymentPage(props) {
   const data = {
     userId,
     product,
-    totalPrice,
     address,
     phone,
     fullName,
