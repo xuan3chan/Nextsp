@@ -29,6 +29,17 @@ function ProductList(props) {
     }, 2000);
     fetchData();
   }, []);
+  function shortenProductName(productName, maxLength) {
+    if (productName.length <= maxLength) {
+      return productName;
+    } else {
+      // If the product name is longer than maxLength, truncate it and add ellipsis
+      return productName.substring(0, maxLength - 3) + "...";
+    }
+  }
+
+  // Example usage:
+
 
   const imagePlaceHolder = "https://via.placeholder.com/350";
   return (
@@ -79,7 +90,9 @@ function ProductList(props) {
                   </div>
                   <div className="textSection flex flex-col">
                     <div className="product_title text-left">
-                      <h1 className="h-20">{product.nameProduct} </h1>
+                      <h1 className="h-20">
+                        {shortenProductName(product.nameProduct, 50)}
+                      </h1>
                     </div>
                     <div>
                       <p className="product_oldPrice text-left">
