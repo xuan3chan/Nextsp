@@ -194,9 +194,6 @@ body {
     display: block;
     margin-right: 20px !important;
   }
-  .cart > a {
-    display: none;
-  }
   .header_searching_module {
     width: 170px;
   }
@@ -673,9 +670,13 @@ body {
     margin-right: auto;
     left: 0;
   }
+  .LoginSectionTitle{
+    width: 100%;
+  }
 
-  .LoginSection{
-    align-items: center;
+  .logoSection {
+    height: 60px;
+    padding: 0;
   }
   .FormContent{
     width: 100%;

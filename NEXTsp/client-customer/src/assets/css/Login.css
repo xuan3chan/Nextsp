@@ -112,6 +112,8 @@ form {
   height: 84px;
   display: flex;
   margin-top: auto;
+  padding-top: 10px;
+  padding-left: 20px;
 }
 .logoSection .logo {
   width: 200px;

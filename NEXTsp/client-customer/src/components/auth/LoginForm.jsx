@@ -54,11 +54,11 @@ const Login = () => {
   return (
     <div className=" w-full flex flex-col justify-center items-center bg-gradient-to-tl bg-color ">
       <div className="logoSection w-full bg-white">
-        <div className="flex items-center content-center pt-4">
+        <div className="flex items-center content-center">
           <div className="ml-28 logo">
             <img src={Logo} alt="" />
           </div>
-          <span className=" border-l-2 border-black pl-4 w-56 font-semibold text-xl">
+          <span className="LoginSectionTitle border-l-2 border-black pl-4 w-56 font-semibold text-xl">
             Trang Đăng Nhập
           </span>
         </div>
