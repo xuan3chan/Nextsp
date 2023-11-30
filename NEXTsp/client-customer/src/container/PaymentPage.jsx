@@ -67,10 +67,10 @@ function PaymentPage(props) {
         // Handle error
         console.error("Error placing order:", error);
       });
-    // localStorage.removeItem("cart");
-    // localStorage.removeItem("totalPrice");
-    // localStorage.removeItem("customerInformation");
-    // window.location.href = "/homepage";
+    localStorage.removeItem("cart");
+    localStorage.removeItem("totalPrice");
+    localStorage.removeItem("customerInformation");
+    window.location.href = "/homepage";
     alert("Đặt hàng thành công");
   };
 

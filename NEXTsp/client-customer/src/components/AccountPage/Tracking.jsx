@@ -23,7 +23,8 @@ function Tracking(props) {
         },
       })
       .then((response) => {
-        setOrderDetails(response.data);
+        setOrderDetails(response.data.reverse());
+        console.log(response.data);
       })
       .catch((error) => {
         console.error(error);

@@ -65,11 +65,13 @@ function Header(props) {
   useEffect(() => {
     const cartData = JSON.parse(localStorage.getItem("cart")) || [];
     setCart(cartData);
-  
-    const totalQuantity = cartData.reduce((total, item) => total + item.count, 0);
+
+    const totalQuantity = cartData.reduce(
+      (total, item) => total + item.count,
+      0
+    );
     setCounterCart(totalQuantity);
   }, []);
-  
 
   return (
     <div>
@@ -197,13 +199,16 @@ function Header(props) {
               Trạng Thái Đơn Hàng
             </Link>
           </div>
-          <div className="navItem cart opacity-60 hover:cursor-pointer hover:opacity-100 text-sm">
+          <Link
+            to={"/CartPage"}
+            className="navItem cart opacity-60 hover:cursor-pointer hover:opacity-100 text-sm"
+          >
             <div className="boxIcon">
               <PiShoppingCartSimpleBold></PiShoppingCartSimpleBold>
             </div>
             <div className="number-counter">{counterCart}</div>
-            <Link to={"/CartPage"}>Giỏ Hàng </Link>
-          </div>
+            <a>Giỏ Hàng </a>
+          </Link>
           <div className="header_user_module">
             {localStorage.getItem("accessToken") === null ? (
               <Link to="/LoginUser">
