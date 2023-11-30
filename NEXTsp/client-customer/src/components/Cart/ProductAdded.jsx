@@ -12,7 +12,6 @@ function ProductAdded(props) {
     const parsedCart = JSON.parse(storedCart) || [];
     const cartWithCount = parsedCart.map((item) => ({ ...item, count: 1 }));
     setCart(cartWithCount);
-    localStorage.setItem("FullCart", JSON.stringify(cartWithCount));
     const uniqueItemsById = cartWithCount.reduce((accumulator, currentItem) => {
       if (!accumulator[currentItem.id]) {
         accumulator[currentItem.id] = { ...currentItem };

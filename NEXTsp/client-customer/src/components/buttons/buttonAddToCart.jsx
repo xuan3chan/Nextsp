@@ -6,6 +6,7 @@ function ButtonAddToCart(props) {
   const newItem = props.product;
   const [cartItems, setCart] = React.useState(cart);
   const updatedCart = [...cart, props.product];
+
   const addToCart = () => {
     const existingItemIndex = cart.findIndex((item) => item.id === newItem.id);
 

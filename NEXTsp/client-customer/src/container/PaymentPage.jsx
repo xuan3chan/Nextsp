@@ -4,10 +4,11 @@ import axios from "axios";
 import "../assets/css/Payment.css";
 function PaymentPage(props) {
   const [cart, setCart] = React.useState([]);
-
+  const [FullCart, setFullCart] = React.useState([]);
   useEffect(() => {
     const storedCart = localStorage.getItem("cart");
     const parsedCart = JSON.parse(storedCart) || [];
+    const FullCart = localStorage.getItem("FullCart");
     setCart(parsedCart);
   }, []);
   const [selectedPayment, setSelectedPayment] = useState("COD");
@@ -39,7 +40,7 @@ function PaymentPage(props) {
   const accountName = localStorage.getItem("accountName");
   const imageUrlQR = `https://img.vietqr.io/image/tpb-04144454101-compact2.jpg?amount=${totalPriceNumber}&addInfo=${addInfo}&accountName=${"Nguyễn Văn Thiện"}`;
   const payment = selectedPayment;
-  const product = cart.map((item) => ({
+  const product = FullCart.map((item) => ({
     productId: item.id,
     quantity: item.count,
   }));
@@ -47,7 +48,6 @@ function PaymentPage(props) {
   const data = {
     userId,
     product,
-    totalPrice,
     address,
     phone,
     fullName,
@@ -68,11 +68,13 @@ function PaymentPage(props) {
         // Handle error
         console.error("Error placing order:", error);
       });
-    localStorage.removeItem("cart");
-    localStorage.removeItem("totalPrice");
-    localStorage.removeItem("customerInformation");
-    window.location.href = "/homepage";
-    alert("Đặt hàng thành công");
+    // localStorage.removeItem("cart");
+    // localStorage.removeItem("totalPrice");
+    // localStorage.removeItem("customerInformation");
+    // window.location.href = "/homepage";
+    // alert("Đặt hàng thành công");
+    console.log(cart);
+    console.log(data);
   };
 
   return (
