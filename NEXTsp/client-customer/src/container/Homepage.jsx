@@ -8,14 +8,12 @@ import {
   SloganListSection,
   ProductList,
   Footer,
-  BannerTop,
 } from "../components";
 import "../assets/css/Responsive.css";
 import "../assets/css/homepage.css";
 import "../assets/css/main.css";
 import ProductListAll from "../components/homepage/ProductListAll";
 import SlidesShowMobile from "../components/homepage/SlidesShowMobile";
-import bannerMb from "../assets/img/banner/banner-mb.jpg";
 function Homepage(props) {
   const [isLoading, setIsLoading] = useState(false);
   return (

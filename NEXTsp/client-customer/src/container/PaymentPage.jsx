@@ -8,7 +8,6 @@ function PaymentPage(props) {
   useEffect(() => {
     const storedCart = localStorage.getItem("cart");
     const parsedCart = JSON.parse(storedCart) || [];
-    const FullCart = localStorage.getItem("FullCart");
     setCart(parsedCart);
   }, []);
   const [selectedPayment, setSelectedPayment] = useState("COD");
@@ -40,7 +39,7 @@ function PaymentPage(props) {
   const accountName = localStorage.getItem("accountName");
   const imageUrlQR = `https://img.vietqr.io/image/tpb-04144454101-compact2.jpg?amount=${totalPriceNumber}&addInfo=${addInfo}&accountName=${"Nguyễn Văn Thiện"}`;
   const payment = selectedPayment;
-  const product = FullCart.map((item) => ({
+  const product = cart.map((item) => ({
     productId: item.id,
     quantity: item.count,
   }));
@@ -72,9 +71,7 @@ function PaymentPage(props) {
     // localStorage.removeItem("totalPrice");
     // localStorage.removeItem("customerInformation");
     // window.location.href = "/homepage";
-    // alert("Đặt hàng thành công");
-    console.log(cart);
-    console.log(data);
+    alert("Đặt hàng thành công");
   };
 
   return (

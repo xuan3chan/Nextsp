@@ -1,16 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
 function ButtonBuyNow(props) {
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
   const newItem = props.product;
-  const [cartItems, setCart] = React.useState(cart);
-  const updatedCart = [...cart, props.product];
+
+  // Load the cart from local storage on component mount
+  const cartFromLocalStorage = JSON.parse(localStorage.getItem("cart")) || [];
+  const [cart, setCart] = React.useState(cartFromLocalStorage);
 
   const buyNowBtn = () => {
     const existingItemIndex = cart.findIndex((item) => item.id === newItem.id);
 
     if (existingItemIndex !== -1) {
-      // If it exists, increase the count of that item
       setCart((prevCart) =>
         prevCart.map((item, index) =>
           index === existingItemIndex
@@ -19,21 +19,19 @@ function ButtonBuyNow(props) {
         )
       );
     } else {
-      // If it doesn't exist, add the new item to the cart
       setCart((prevCart) => [...prevCart, { ...newItem, count: 1 }]);
     }
-    setCart(updatedCart);
-    localStorage.setItem("cart", JSON.stringify(updatedCart));
     window.location.href = "/CartPage";
   };
+  React.useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
   return (
-    <Link to="/CartPage">
-      <div className="btn-BuyNow btn text-white text-center p-2 flex flex-colflex items-center contents-center justify-center rounded-sm">
-        <div className=" cursor-pointer" onClick={buyNowBtn}>
-          Mua Ngay
-        </div>
+    <div className="btn-BuyNow btn text-white text-center p-2 flex flex-colflex items-center contents-center justify-center rounded-sm">
+      <div className=" cursor-pointer" onClick={buyNowBtn}>
+        Mua Ngay
       </div>
-    </Link>
+    </div>
   );
 }
 

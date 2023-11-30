@@ -23,7 +23,6 @@ function ProductList(props) {
     const fetchData = async () => {
       const result = await axios.get(ApiProducts);
       setProducts(result.data.products);
-      console.log(result.data.products);
     };
     fetchData();
   }, []);
@@ -34,6 +33,7 @@ function ProductList(props) {
       setIsLoading(false);
     }, 2000);
   }, []);
+
   return (
     <div className="productList w-full p-4 mr-auto ml-auto bg-white rounded-md">
       {isLoading && (

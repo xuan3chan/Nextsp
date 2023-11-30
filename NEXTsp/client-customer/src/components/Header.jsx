@@ -59,19 +59,18 @@ function Header(props) {
       });
   }, []);
 
-  const getCart = () => {
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
-    console.log(cart[0]);
-  };
-
   const [cart, setCart] = useState([]);
-  const [counterCart, setCounterCart] = useState(null);
+  const [counterCart, setCounterCart] = useState(0);
 
   useEffect(() => {
     const cartData = JSON.parse(localStorage.getItem("cart")) || [];
     setCart(cartData);
-    setCounterCart(cartData.length);
+  
+    const totalQuantity = cartData.reduce((total, item) => total + item.count, 0);
+    setCounterCart(totalQuantity);
   }, []);
+  
+
   return (
     <div>
       <div className="header z-20 flex justify-center relative">
@@ -79,21 +78,15 @@ function Header(props) {
           <img className="" src={LogoPage} alt="" />
         </Link>
         <div className="navbar flex ">
-          <a href="/Homepage">Trang Chủ</a>
+          <Link to="/Homepage">Trang Chủ</Link>
           <div className="dropdown">
             <div className="dropdown-btn-container flex justify-center items-center">
               <div className="dropbtn flex justify-center items-center">
                 <FontAwesomeIcon className="mr-1" icon={faBars} />
-                <span
-                  onClick={() => {
-                    window.location.href = "/Collection";
-                  }}
-                >
-                  Danh Mục
-                </span>
+                <Link to="/Collection">Danh mục</Link>
                 <i className="fa fa-caret-down"></i>
               </div>
-              <div id="boxA" className="dropdown-content  flex flex-col w-48 ">
+              <div className="dropdown-content  flex flex-col w-48 ">
                 {Categories &&
                   Categories.map((category) => {
                     if (category.status === "Active") {
@@ -112,7 +105,7 @@ function Header(props) {
                               icon={faCaretRight}
                             />
                           </a>
-                          <div id="boxB" className="brand-menu">
+                          <div className="brand-menu">
                             {category.brands &&
                               category.brands.map((brand) => (
                                 <a
@@ -200,9 +193,9 @@ function Header(props) {
             <div className="boxIcon">
               <BiTask></BiTask>
             </div>
-            <a href="/Account" className="w-20">
+            <Link to="/Account" className="w-20">
               Trạng Thái Đơn Hàng
-            </a>
+            </Link>
           </div>
           <div className="navItem cart opacity-60 hover:cursor-pointer hover:opacity-100 text-sm">
             <div className="boxIcon">

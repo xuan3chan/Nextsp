@@ -2,35 +2,26 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import TotalSection from "./TotalSection";
 import { useNavigate } from "react-router-dom";
+
 function ProductAdded(props) {
   const [cart, setCart] = useState([]);
   const placeHolderImg =
     "https://cdn3.vectorstock.com/i/1000x1000/35/52/placeholder-rgb-color-icon-vector-32173552.jpg";
-
+  const [counterCart, setCounterCart] = useState(0);
   useEffect(() => {
     const storedCart = localStorage.getItem("cart");
     const parsedCart = JSON.parse(storedCart) || [];
-    const cartWithCount = parsedCart.map((item) => ({ ...item, count: 1 }));
-    setCart(cartWithCount);
-    const uniqueItemsById = cartWithCount.reduce((accumulator, currentItem) => {
-      if (!accumulator[currentItem.id]) {
-        accumulator[currentItem.id] = { ...currentItem };
-      } else {
-        accumulator[currentItem.id].count += currentItem.count;
-      }
-      return accumulator;
-    }, {});
-    const uniqueCart = Object.values(uniqueItemsById);
-    setCart(uniqueCart);
+    setCart(parsedCart); // Set parsedCart to the cart state
   }, []);
 
   const handleCheckLogin = () => {
     const token = localStorage.getItem("accessToken");
-    token == null
-      ? alert("Vui Lòng Đăng Nhập Để Tiếp Tục!")(
-          (window.location.href = "/LoginUser")
-        )
-      : (window.location.href = "/Customer");
+    if (token == null) {
+      alert("Vui Lòng Đăng Nhập Để Tiếp Tục!");
+      window.location.href = "/LoginUser";
+    } else {
+      window.location.href = "/Customer";
+    }
   };
 
   function formatPrice(price) {
@@ -39,8 +30,8 @@ function ProductAdded(props) {
     }
     return "";
   }
+
   const updateLocalStorage = (updatedCart) => {
-    // Update local storage with the new cart data
     localStorage.setItem("cart", JSON.stringify(updatedCart));
   };
 
@@ -50,7 +41,6 @@ function ProductAdded(props) {
         item.id === productId ? { ...item, count: item.count + 1 } : item
       );
       updateLocalStorage(updatedCart);
-      console.log(updatedCart);
       return updatedCart;
     });
   };
@@ -73,11 +63,15 @@ function ProductAdded(props) {
     });
   };
 
-  const calculateTotalQuantity = () => {
-    const totalQuantity = cart.reduce((total, item) => total + item.count, 0);
-    localStorage.setItem("totalQuantity", JSON.stringify(totalQuantity));
-    return totalQuantity;
-  };
+  useEffect(() => {
+    const cartData = JSON.parse(localStorage.getItem("cart")) || [];
+    setCart(cartData);
+  
+    const totalQuantity = cartData.reduce((total, item) => total + item.count, 0);
+    setCounterCart(totalQuantity);
+  }, []);
+  
+
 
   const calculateTotalPrice = () => {
     const totalPrice = cart.reduce(
@@ -93,14 +87,11 @@ function ProductAdded(props) {
       return cart.find((item) => item.id === id);
     }
   );
+
   const removeItem = (itemId) => {
-    // Remove the item from the state
     setCart((prevCart) => prevCart.filter((item) => item.id !== itemId));
-    // Get the current cart from localStorage
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
-    // Remove the item from the cart
     cart = cart.filter((item) => item.id !== itemId);
-    // Save the updated cart back to localStorage
     localStorage.setItem("cart", JSON.stringify(cart));
   };
 
@@ -165,7 +156,7 @@ function ProductAdded(props) {
         <p className="totalQuanlity flex relative mt-8">
           <p className="mainText w-30">Tổng Số Lượng Sản Phẩm:</p>
           <p className="subText absolute right-4 ">
-            {calculateTotalQuantity()} SP
+            {counterCart} SP
           </p>
         </p>
         <p className="totalShip w-full flex relative ">
