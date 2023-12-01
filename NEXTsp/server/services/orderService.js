@@ -75,7 +75,24 @@ class OrderService {
     const result = await Order.find()
       .populate({ path: "product.productId", select: "nameProduct price" })
       .populate({ path: "userId", select: "fullName email accountName" });
-    return { success: true, message: "all order", order: result };
+
+    // Function to format date
+    const formatDate = (dateString) => {
+      const date = new Date(dateString);
+      const day = String(date.getDate()).padStart(2, '0');
+      const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-based
+      const year = date.getFullYear();
+
+      return `${day}/${month}/${year}`;
+    };
+
+    // Format the createdAt date for each order
+    const ordersWithFormattedDate = result.map(order => ({
+      ...order._doc,
+      createdAt: formatDate(order.createdAt)
+    }));
+
+    return { success: true, message: "all order", order: ordersWithFormattedDate };
   }
   async getOrdersByUserId(userId) {
     const orders = await Order.find({ userId: userId })
