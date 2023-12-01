@@ -9,6 +9,7 @@ const apiURL = process.env.REACT_APP_ORDERS
 
 const AllOrders = () => {
   const { data, dispatch } = useContext(OrderContext);
+  const [mostRecentOrder, setMostRecentOrder] = useState(null);
   const [order, setOrder] = useState([]);
   const [sortOrder, setSortOrder] = useState('asc');
   const [loading, setLoading] = useState(true);
@@ -22,7 +23,15 @@ const AllOrders = () => {
   // Fetch all orders on component mount
   const fetchData = async () => {
     try {
-      const responseData = await getAllOrders();
+      let responseData = await getAllOrders();
+      
+      // Sort data from newest to oldest
+      responseData.sort((a, b) => {
+        let dateA = new Date(moment(a.createdAt, 'DD/MM/YYYY HH:mm:ss'));
+        let dateB = new Date(moment(b.createdAt, 'DD/MM/YYYY HH:mm:ss'));
+        return dateB - dateA;
+      });
+      
       setOrder(responseData);
       setLoading(false);
     } catch (err) {
@@ -129,6 +138,7 @@ const AllOrders = () => {
         <table className="table-auto border w-full my-2">
           <thead>
             <tr>
+              <th className="px-4 py-2 w-6 border">ID</th>
               <th className="px-4 py-2 w-1/3 border">Products</th>
               <th className="px-4 py-2 border">Customer</th>
               <th className="px-4 py-2 border">Email</th>
@@ -147,14 +157,17 @@ const AllOrders = () => {
               currentOrders.map((item, i) => {
                 return (
                   <tr key={i}>
+                    <td className="px-4 py-2 border text-sm">{item._id}</td>
                     <td className="px-4 py-2 border text-sm">
                       {item.product?.map((elem, i) => {
                         // Check if productId exists before accessing nameProduct
                         if (elem.productId) {
                           const productName = elem.productId.nameProduct;
+                          const productQtt = elem.quantity
                           return (
                             <div key={i}>
-                              <p>{productName + "; "}</p>
+                              <p>{`${productName}; `}</p>
+                              <p>{`SL: ${productQtt}`}</p>
                             </div>
                           );
                         }
@@ -168,7 +181,7 @@ const AllOrders = () => {
                     <td className="px-4 py-2 border text-sm text-center">{item.payment}</td>
                     <td className="px-4 py-2 border text-sm">{item.totalPrice}</td>
                     <td className="px-4 py-2 border text-sm text-center">
-                      {moment(item.createdAt).format("DD/MM/YYYY")}
+                      {item.createdAt.slice(0,11)}
                     </td>
                     <td className="px-4 py-2 border">
                       <select value={item.tracking}

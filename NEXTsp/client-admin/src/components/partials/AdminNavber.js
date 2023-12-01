@@ -3,18 +3,24 @@ import { useNavigate  } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import { Link } from "react-router-dom";
 import { ThemeContext } from '../theme/ThemeContext';
+import { AdminLayoutContext } from "./AdminLayoutContext";
 const AdminNavber = (props) => {
   const navigate = useNavigate ();
-
 
   const accessToken = localStorage.getItem("accessToken");
   const decodedToken = accessToken ? jwtDecode(accessToken) : null;
   const accountName = decodedToken ? decodedToken.adminName : null;
 
   const { darkMode, setDarkMode } = useContext(ThemeContext);
+  const { isSidebarVisible, setSidebarVisible } = useContext(AdminLayoutContext);
 
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
+  };
+
+  const toggleSidebar = () => {
+    setSidebarVisible(!isSidebarVisible);
+    console.log(isSidebarVisible)
   };
 
   const logout = () => {
@@ -25,7 +31,7 @@ const AdminNavber = (props) => {
     <Fragment>
       <nav className={`sticky z-10 flex items-center shadow-md justify-between px-4 py-4 md:px-8 top-0 w-full ${darkMode ? 'bg-gray-900' : 'bg-white'}`}>
         {/*  Large Screen Show  */}
-        <div className="hidden lg:block lg:flex lg:items-center lg:space-x-4 mr-32">
+        <div className="hidden lg:block lg:flex lg:items-center lg:space-x-4 mr-32" title="dashboard" onClick={toggleSidebar}>
           <span>
             <svg
               className="w-8 h-8 cursor-pointer text-gray-600"

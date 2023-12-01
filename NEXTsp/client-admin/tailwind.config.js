@@ -12,6 +12,10 @@ module.exports = {
   ],
   theme: {
     extend: {
+      screens: {
+        'custom1': '1290px',
+        'custom2': '1450px',
+      },
       colors: {
         'login-pink': '#FFF3FF',
         'login-blue': '#CBE1FD',

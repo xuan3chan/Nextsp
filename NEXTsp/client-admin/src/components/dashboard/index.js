@@ -10,7 +10,7 @@ const DashboardComponent = () => {
   const darkBg = darkMode ? 'bg-gray-800' : ''
 
   return (
-    <div className= {`grid grid-cols-1 space-y-4 p-4 ${darkBg}`}>
+    <div className= {`grid grid-cols-1 space-y-4 p-4 w-full justify-items-center ${darkBg}`}>
       <DashboardBarByYear/>
       <DashboardBarByMonth/>
     </div>
