@@ -36,6 +36,14 @@ function MainContentSection(props) {
     }
     return "Not Available "; // You can change this message to your preferred text
   }
+  const [discount, setDiscount] = useState(0);
+  useEffect(() => {
+    if (product) {
+      const discount =
+        ((product.oldprice - product.price) / product.oldprice) * 100;
+      setDiscount(Math.round(discount));
+    }
+  }, [product]);
   return (
     <div>
       {product && (
@@ -54,7 +62,7 @@ function MainContentSection(props) {
             <div className="productOldPrice productOldPriceDetail m-0">
               {formatPrice(product.oldprice)}
             </div>
-            <div className="productSale">17%</div>
+            <div className="productSale">{discount} %</div>
           </div>
           <div className="btnSection flex gap-2 w-80">
             <ButtonBuyNow product={product} />

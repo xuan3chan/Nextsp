@@ -36,7 +36,6 @@ function ProductList(props) {
   }, [ApiProducts]);
 
   useEffect(() => {
-    // Ensure that products is not undefined before filtering
     if (products) {
       const productByCategory = products.filter(
         (product) => product.category.name === category
@@ -46,7 +45,6 @@ function ProductList(props) {
           product.brand.name === nameCategory &&
           product.category.name === category
       );
-
       nameCategory == null
         ? setFilteredProducts(productByCategory)
         : setFilteredProducts(productByBrand);
@@ -89,6 +87,7 @@ function ProductList(props) {
     );
     setFilteredProducts(sortProducts);
   };
+
   return (
     <div className="productList max-h-full w-full bg-white rounded-md pb-8">
       <h1 className="CategoryTitle">
@@ -110,6 +109,7 @@ function ProductList(props) {
       </div>
       <div className=" flex flex-wrap gap-1 min-w-4/5 justify-center pt-12 items-center pb-8 mr-auto ml-auto">
         {filteredProducts
+          .filter((product) => product.status === "Active")
           .slice((pageIndex - 1) * itemsPerPage, pageIndex * itemsPerPage)
           .map((product) => (
             <div

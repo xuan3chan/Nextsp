@@ -33,7 +33,29 @@ function ProductList(props) {
       setIsLoading(false);
     }, 2000);
   }, []);
+  const AvailableProducts = products.filter(
+    (product) => product.status === "Active"
+  );
+  const handleCurrentItem = (productId) => {
+    const selectedProduct = products.find(
+      (product) => product.id === productId
+    );
 
+    if (selectedProduct) {
+      const storedProducts = localStorage.getItem("currentItem");
+      const parsedProducts = JSON.parse(storedProducts) || [];
+      const isProductInStorage = parsedProducts.some(
+        (product) => product.id === productId
+      );
+
+      if (!isProductInStorage) {
+        // If the product is not in the array, add it
+        const updatedProducts = [...parsedProducts, selectedProduct];
+        // Save the updated array back to localStorage
+        localStorage.setItem("currentItem", JSON.stringify(updatedProducts));
+      }
+    }
+  };
   return (
     <div className="productList w-full p-4 mr-auto ml-auto bg-white rounded-md">
       {isLoading && (
@@ -65,11 +87,12 @@ function ProductList(props) {
         </div>
       </div>
       <div className="ProductList2 flex flex-wrap gap-4 content-center justify-center">
-        {products.reverse() &&
-          products.map((product) => (
+        {AvailableProducts.reverse() &&
+          AvailableProducts.map((product) => (
             <div
               key={product.id}
               className="productItem flex flex-col border-black-500/100 p-4 gap-1 items-center justify-center"
+              onClick={() => handleCurrentItem(product.id)}
             >
               <Link
                 className="w-full items-center justify-center"
