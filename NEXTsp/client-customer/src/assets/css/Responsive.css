@@ -95,8 +95,21 @@ body {
   }
 }
 @media (max-width: 900px) {
-  .navbar > a {
+  .home > span{
     display: none;
+  }
+  .home {
+    background-color: #ddd;
+    width: 60px;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    }
+
+  .home svg{
+    color:#000;
+    width: 30px;
+    height: 30px;
   }
   .navbar .dropdown {
     display: block;

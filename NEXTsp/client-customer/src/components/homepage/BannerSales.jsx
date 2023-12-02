@@ -1,6 +1,8 @@
 import React from "react";
 import bgBannerSales from "../../assets/img/Apple-Iphone-15-Pro-PNG.png";
 const BannerSales = () => {
+
+
   return (
     <div className="w-full h-[490px] bg-[#EDF1F3] relative flex justify-center items-center">
       <img
