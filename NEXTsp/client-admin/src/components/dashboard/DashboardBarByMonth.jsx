@@ -83,19 +83,6 @@ const DashboardBar = () => {
       },
       tooltip: {
         enabled: true,
-        callbacks: {
-          title: function(context) {
-            return context[0].dataset.label;
-          },
-          label: function(context) {
-            var label = `Tháng ${context.dataIndex + 1}: `;
-  
-            if (context.parsed.y !== null) {
-              label += new Number(context.parsed.y).toLocaleString();
-            }
-            return label;
-          }
-        }
       },
     },
     interaction: {
@@ -125,7 +112,7 @@ const DashboardBar = () => {
   };
 
   return (
-    <div className='w-[1000px]'>
+    <div className='w-[1160px]'>
       <select value={selectedYear} onChange={handleYearChange}>
         {Array.from({length: 10}, (_, i) => 2023 - i).map(year => (
           <option key={year} value={year}>
