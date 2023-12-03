@@ -30,7 +30,7 @@ const ReviewForm = ({ onSubmit }) => {
       userId: localStorage.getItem("userId"),
       productId: id,
       review: review,
-      rating: 4,
+      rating: rating,
     };
 
     try {
