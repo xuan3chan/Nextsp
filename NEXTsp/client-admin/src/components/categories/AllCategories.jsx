@@ -118,6 +118,7 @@ const AllCategories = () => {
         <table className="table-auto border w-full my-2">
           <thead>
             <tr className={`${darkModeText}`}>
+              <th className="px-4 py-2 border">No.</th>
               <th className="px-4 py-2 border">Category</th>
               <th className="px-4 py-2 w-2/4 border">Description</th>
               <th className="px-4 py-2 w-1/6 border">Status</th>
@@ -128,6 +129,7 @@ const AllCategories = () => {
         {currentCategories && currentCategories.length > 0 ? (
           currentCategories.map((category, index) => (
                 <tr key={category._id} className={`${darkModeText}`}>
+                  <td className="px-4 py-2 border text-center">{index + 1}</td>
                   <td className="px-4 py-2 border">{category.nameCategory}</td>
                   <td className="px-4 py-2 border whitespace-normal break-words break-all">{category.description}</td>
                   <td className="px-4 py-2 text-center border">
