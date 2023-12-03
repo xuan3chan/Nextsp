@@ -80,8 +80,9 @@ function ProductListAll(props) {
         )}
       </div>
       <div className="flex flex-wrap gap-3 content-center justify-center pt-12 pb-4 ">
-        {products &&
+        {Array.isArray(products) &&
           products
+            .filter((product) => product.status === "Active")
             .slice((pageIndex - 1) * itemsPerPage, pageIndex * itemsPerPage)
             .map((product) => (
               <div

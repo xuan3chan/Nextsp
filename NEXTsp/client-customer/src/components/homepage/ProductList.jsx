@@ -19,7 +19,7 @@ function ProductList(props) {
     }
     return "";
   }
-  
+
   useEffect(() => {
     const fetchData = async () => {
       const result = await axios.get(ApiProducts);
@@ -38,6 +38,9 @@ function ProductList(props) {
       return productName.substring(0, maxLength - 3) + "...";
     }
   }
+  const AvailableProducts = products.filter(
+    (product) => product.status === "Active"
+  );
 
   const imagePlaceHolder = "https://via.placeholder.com/350";
   return (
@@ -71,7 +74,7 @@ function ProductList(props) {
         </div>
       </div>
       <div className="ProductList2 flex flex-wrap gap-4 content-center justify-center">
-        {products.map(
+        {AvailableProducts.map(
           (product, index) =>
             index < 5 && (
               <div
@@ -81,7 +84,11 @@ function ProductList(props) {
                 <Link to={`/products/${product.id}`}>
                   <div className="product_image w-60 h-52 object-cover">
                     <img
-                      src={product.images[0] == null ? imagePlaceHolder : product.images[0]}
+                      src={
+                        product.images[0] == null
+                          ? imagePlaceHolder
+                          : product.images[0]
+                      }
                       alt=""
                       className="w-full h-44 object-contain "
                     />

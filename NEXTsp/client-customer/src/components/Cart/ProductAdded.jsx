@@ -8,6 +8,7 @@ function ProductAdded(props) {
   const placeHolderImg =
     "https://cdn3.vectorstock.com/i/1000x1000/35/52/placeholder-rgb-color-icon-vector-32173552.jpg";
   const [counterCart, setCounterCart] = useState(0);
+
   useEffect(() => {
     const storedCart = localStorage.getItem("cart");
     const parsedCart = JSON.parse(storedCart) || [];
@@ -54,24 +55,22 @@ function ProductAdded(props) {
       );
       if (updatedCart.find((item) => item.id === productId && item.count === 0))
         removeItem(productId);
+
       if (localStorage.getItem("cart") === "[]") {
         localStorage.removeItem("cart");
       }
-
+      if (cart[0].count === 0) {
+        setCart([]);
+      }
       updateLocalStorage(updatedCart);
       return updatedCart;
     });
   };
-
   useEffect(() => {
-    const cartData = JSON.parse(localStorage.getItem("cart")) || [];
-    setCart(cartData);
-  
-    const totalQuantity = cartData.reduce((total, item) => total + item.count, 0);
-    setCounterCart(totalQuantity);
-  }, []);
-  
-
+    const storedCart = localStorage.getItem("cart");
+    const parsedCart = JSON.parse(storedCart) || [];
+    setCounterCart(parsedCart.reduce((total, item) => total + item.count, 0));
+  }, [cart]);
 
   const calculateTotalPrice = () => {
     const totalPrice = cart.reduce(
@@ -155,9 +154,7 @@ function ProductAdded(props) {
       <div className="SummarySection">
         <p className="totalQuanlity flex relative mt-8">
           <p className="mainText w-30">Tổng Số Lượng Sản Phẩm:</p>
-          <p className="subText absolute right-4 ">
-            {counterCart} SP
-          </p>
+          <p className="subText absolute right-4 ">{counterCart} SP</p>
         </p>
         <p className="totalShip w-full flex relative ">
           <p className="mainText w-30">Phí Vận Chuyển:</p>

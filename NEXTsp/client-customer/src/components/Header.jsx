@@ -14,6 +14,7 @@ import SearchFunction from "./Header/SearchFunction";
 import LogoPage from "../assets/img/Logo.png";
 import { FaClipboardCheck } from "react-icons/fa";
 import { FaUser } from "react-icons/fa";
+import { FaHome } from "react-icons/fa";
 
 function Header(props) {
   const [Categories, setCategories] = useState([]);
@@ -80,7 +81,10 @@ function Header(props) {
           <img className="" src={LogoPage} alt="" />
         </Link>
         <div className="navbar flex ">
-          <Link to="/Homepage">Trang Chủ</Link>
+          <Link className="flex items-center gap-1 home" to="/Homepage">
+            <FaHome />
+            <span>Trang Chủ</span>
+          </Link>
           <div className="dropdown">
             <div className="dropdown-btn-container flex justify-center items-center">
               <div className="dropbtn flex justify-center items-center">
