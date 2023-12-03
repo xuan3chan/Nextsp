@@ -36,6 +36,10 @@ function Homepage(props) {
                 title="PC Máy Tính Bàn - Intel"
                 CollectionBrand="Samsung"
               />
+              <ProductList
+              title="Gaming Gear"
+              CollectionBrand="Bàn Phím"
+            />
             </div>
           </div>
         </div>
