@@ -9,11 +9,18 @@ import ReviewForm from "../components/Products/ReviewForm";
 import GetReview from "../components/Products/GetReview";
 import CurrentlyItems from "../components/Products/CurrentlyItems";
 import "../assets/css/Products.css";
+import Swal from 'sweetalert2'
+
 function Products(props) {
+
+  
   const handleReviewSubmit = (reviewData) => {
-    // Xử lý đánh giá, ví dụ: gửi đến máy chủ hoặc lưu vào trạng thái ứng dụng
-    alert("Đánh giá đã được gửi: " + JSON.stringify(reviewData));
-    console.log("Đánh giá đã được gửi:");
+    Swal.fire({
+      title: 'Thành Công!',
+      text: 'Đánh giá đã được gửi',
+      icon: 'success',
+      confirmButtonText: 'OK',
+    });
   };
   return (
     <div className="OverProduct bg-product flex flex-col items-center">

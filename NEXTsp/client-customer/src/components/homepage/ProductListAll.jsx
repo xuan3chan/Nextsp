@@ -88,47 +88,52 @@ function ProductList(props) {
       </div>
       <div className="ProductList2 flex flex-wrap gap-4 content-center justify-center">
         {AvailableProducts.reverse() &&
-          AvailableProducts.map((product) => (
-            <div
-              key={product.id}
-              className="productItem flex flex-col border-black-500/100 p-4 gap-1 items-center justify-center"
-              onClick={() => handleCurrentItem(product.id)}
-            >
-              <Link
-                className="w-full items-center justify-center"
-                to={`/products/${product.id}`}
-              >
-                <div className="product_image w-60 h-52 object-cover flex items-center justify-center">
-                  <img
-                    src={product.images[0]}
-                    alt=""
-                    className="w-60 h-44 object-contain"
-                  />
+          AvailableProducts.map(
+            (product, index) =>
+              index < 10 && (
+                <div
+                  key={product.id}
+                  className="productItem flex flex-col border-black-500/100 p-4 gap-1 items-center justify-center"
+                  onClick={() => handleCurrentItem(product.id)}
+                >
+                  <Link
+                    className="w-full items-center justify-center"
+                    to={`/products/${product.id}`}
+                  >
+                    <div className="product_image w-60 h-52 object-cover flex items-center justify-center">
+                      <img
+                        src={product.images[0]}
+                        alt=""
+                        className="w-60 h-44 object-contain"
+                      />
+                    </div>
+                    <div className="textSection flex flex-col px-9">
+                      <div className="product_title">
+                        <h1 className="h-20">{product.nameProduct} </h1>
+                      </div>
+                      <div>
+                        <p className="product_oldPrice">
+                          {formatPrice(product.oldprice)}
+                        </p>
+                        <p className="product_price">
+                          {formatPrice(product.price)}
+                        </p>
+                      </div>
+                      <div className="product_rating flex gap-1 items-center">
+                        <StarRating rating={product.averageRating} />
+                        <p className="text-xs">
+                          ({product.numReviews} đánh giá)
+                        </p>
+                      </div>
+                    </div>
+                  </Link>
+                  <div className="over-button flex gap-4 items-center justify-center mt-3">
+                    <ButtonBuyNow product={product} />
+                    <ButtonAddToCart product={product} />
+                  </div>
                 </div>
-                <div className="textSection flex flex-col px-9">
-                  <div className="product_title">
-                    <h1 className="h-20">{product.nameProduct} </h1>
-                  </div>
-                  <div>
-                    <p className="product_oldPrice">
-                      {formatPrice(product.oldprice)}
-                    </p>
-                    <p className="product_price">
-                      {formatPrice(product.price)}
-                    </p>
-                  </div>
-                  <div className="product_rating flex gap-1 items-center">
-                    <StarRating rating={product.averageRating} />
-                    <p className="text-xs">({product.numReviews} đánh giá)</p>
-                  </div>
-                </div>
-              </Link>
-              <div className="over-button flex gap-4 items-center justify-center mt-3">
-                <ButtonBuyNow product={product} />
-                <ButtonAddToCart product={product} />
-              </div>
-            </div>
-          ))}
+              )
+          )}
       </div>
     </div>
   );

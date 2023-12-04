@@ -11,18 +11,13 @@ function Breadcrumb(props) {
             <a href="/Homepage">Trang Chủ</a>
           </li>
           <a
-            href="/collection"
             className="breadcrumb-item active"
             aria-current="page"
           >
             Danh Mục
           </a>
           <a className="breadcrumb-item active" aria-current="page">
-            {params.nameCategory === undefined
-              ? "Sản Phẩm"
-              : params.nameCategory === ""
-              ? " "
-              : params.nameCategory}
+            {params.nameCategory || params.category} {params.brand} {params.name} {props.titleCollection} 
           </a>
         </ol>
       </nav>

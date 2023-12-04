@@ -27,7 +27,7 @@ function Collection(props) {
       <div className="CollectionSection color-bg bg-slate-200 w-4/5">
         <div className="mr-auto ml-auto flex flex-col">
           <Header></Header>
-          <Breadcrumb></Breadcrumb>
+          <Breadcrumb titleCollection = "Tất Cả Sản Phẩm"></Breadcrumb>
           <div className="container_content ">
             {nameCategory || category ? (
               <ProductList

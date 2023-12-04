@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Header } from "../components";
 import axios from "axios";
 import "../assets/css/Payment.css";
+import Swal from "sweetalert2";
 function PaymentPage(props) {
   const [cart, setCart] = React.useState([]);
   const [FullCart, setFullCart] = React.useState([]);
@@ -35,7 +36,7 @@ function PaymentPage(props) {
   const address = customerInformation.address;
   const tracking = "pending";
   const totalPriceNumber = Number(totalPrice);
-  const addInfo = `NextSP Store Payment, userId: ${userId}`;
+  const addInfo = `NextSP Store, userId: ${userId}`;
   const accountName = localStorage.getItem("accountName");
   const imageUrlQR = `https://img.vietqr.io/image/tpb-04144454101-compact2.jpg?amount=${totalPriceNumber}&addInfo=${addInfo}&accountName=${"Nguyễn Văn Thiện"}`;
   const payment = selectedPayment;
@@ -67,11 +68,18 @@ function PaymentPage(props) {
         // Handle error
         console.error("Error placing order:", error);
       });
-    localStorage.removeItem("cart");
-    localStorage.removeItem("totalPrice");
-    localStorage.removeItem("customerInformation");
-    window.location.href = "/homepage";
-    alert("Đặt hàng thành công");
+    Swal.fire({
+      title: "Thành Công!",
+      text: "Đặt hàng thành công",
+      icon: "success",
+      confirmButtonText: "OK",
+    });
+    setTimeout(() => {
+      localStorage.removeItem("cart");
+      localStorage.removeItem("totalPrice");
+      localStorage.removeItem("customerInformation");
+      window.location.href = "/homepage";
+    }, 2000);
   };
 
   return (
