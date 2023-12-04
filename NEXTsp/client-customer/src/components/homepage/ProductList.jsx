@@ -39,7 +39,11 @@ function ProductList(props) {
     }
   }
   const AvailableProducts = products.filter(
-    (product) => product.status === "Active"
+    (product) =>
+      (product.status === "Active" &&
+        product.category.name === props.CollectionCategory) ||
+      (product.brand.name === props.CollectionBrand &&
+        product.status === "Active")
   );
 
   const imagePlaceHolder = "https://via.placeholder.com/350";

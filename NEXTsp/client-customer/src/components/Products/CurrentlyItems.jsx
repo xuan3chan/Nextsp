@@ -29,6 +29,9 @@ function CurrentlyItems(props) {
       return productName.substring(0, maxLength - 3) + "...";
     }
   }
+  const handleReload = () => {
+    window.location.reload();
+  };
 
   const AvailableProducts = products.filter(
     (product) => product.status === "Active"
@@ -55,10 +58,11 @@ function CurrentlyItems(props) {
         <div className="ProductList2 flex flex-wrap gap-4 items-start">
           {products.map(
             (product, index) =>
-              index < 5 && (
+              index < 20 && (
                 <div
                   key={product.id}
                   className="productItem flex flex-col border-black-500/100 p-4 gap-1 items-center justify-center"
+                  onClick={handleReload}
                 >
                   <Link to={`/products/${product.id}`}>
                     <div className="product_image w-60 h-52 object-cover">

@@ -34,12 +34,14 @@ function Homepage(props) {
               <ProductListAll />
               <ProductList
                 title="PC Máy Tính Bàn - Intel"
-                CollectionBrand="Samsung"
+                CollectionBrand="Intel"
+                CollectionCategory="PC Máy Tính Bàn"
               />
               <ProductList
-              title="Gaming Gear"
-              CollectionBrand="Bàn Phím"
-            />
+                title="Gaming Gear"
+                CollectionBrand="Asus"
+                CollectionCategory="Bàn Phím"
+              />
             </div>
           </div>
         </div>
