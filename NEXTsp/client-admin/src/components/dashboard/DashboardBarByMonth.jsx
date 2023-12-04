@@ -50,9 +50,11 @@ const DashboardBar = () => {
       {
         label: 'Orders',
         data: data,
-        backgroundColor: 'rgba(75,192,192,0.4)',
-        borderColor: 'rgba(75,192,192,1)',
+        backgroundColor: 'rgb(109, 185, 239,0.4)',
+        borderColor: 'rgb(48, 129, 208,0.4)',
         borderWidth: 1,
+        hoverBackgroundColor: 'rgb(109, 185, 239,1)',
+        hoverBorderColor: 'rgb(48, 129, 208,0.7)',
       },
     ],
   };

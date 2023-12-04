@@ -115,11 +115,11 @@ const AllBrands = () => {
         <h1 className={`text-2xl font-semibold ${darkModeText}`}>All Brands</h1>
       </div>
       <div className="flex flex-col items-center justify-start">
-        <div className="w-full mt-4">
+        <div className="w-full mt-4 shadow-2xl">
           <div className="flex flex-col">
             <div className="overflow-x-auto">
-              <div className="py-2 align-middle inline-block min-w-full">
-                <div className={`overflow-hidden shadow-lg p-5 ${tablebg}`}>
+              <div className="align-middle inline-block min-w-full">
+                <div className={`overflow-hidden shadow-2xl p-5 ${tablebg}`}>
                   <table className={`min-w-full divide-y divide-gray-200 border ${darkModeText}`}>
                     <thead>
                       <tr className={`text-xs tracking-wider text-left uppercase ${darkModeText} text-center`}>
