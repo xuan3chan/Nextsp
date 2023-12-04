@@ -30,7 +30,7 @@ const LogoutTracking = () => {
   };
 
   const showMoreProduct = () => {
-    setVisibleProduct(visibleProduct + 10);
+    setVisibleProduct(visibleProduct + 10); // Tăng số lượng hình ảnh được hiển thị khi nhấn nút "Xem thêm"
   };
 
   const handleTracking = () => {
@@ -83,36 +83,38 @@ const LogoutTracking = () => {
               <div className="subTitle_mainTitle">Sản Phẩm Đã Đặt:</div>
             </span>
             {Array.isArray(Order.product) &&
-              Order.product.map((orderItem) => (
-                <div
-                  key={orderItem.productId._id}
-                  className="productSection h-24 flex flex-row w-full mt-4 "
-                >
-                  <div className="imageSection relative w-20 h-full">
-                    {orderItem.productId.images &&
-                      orderItem.productId.images.length > 0 && (
-                        <img
-                          src={orderItem.productId.images[0]}
-                          className="w-24 h-20 object-cover"
-                          alt=""
-                        />
-                      )}
-                    <div className="numberQuantity absolute bottom-4 right-0 bg-slate-200 ">
-                      x{orderItem.quantity}
+              Order.product
+                .slice(0, visibleProduct)
+                .map((orderItem) => (
+                  <div
+                    key={orderItem.productId._id}
+                    className="productSection h-24 flex flex-row w-full mt-4 "
+                  >
+                    <div className="imageSection relative w-20 h-full">
+                      {orderItem.productId.images &&
+                        orderItem.productId.images.length > 0 && (
+                          <img
+                            src={orderItem.productId.images[0]}
+                            className="w-24 h-20 object-cover"
+                            alt=""
+                          />
+                        )}
+                      <div className="numberQuantity absolute bottom-4 right-0 bg-slate-200 ">
+                        x{orderItem.quantity}
+                      </div>
                     </div>
-                  </div>
-                  <div className="textSection ml-4 h-full flex flex-col justify-center items-center">
-                    <span className="product-Title text-left w-full justify-center">
-                      {orderItem.productId.nameProduct}
-                    </span>
-                    <div className="priceSection text-left flex flex-col w-full h-10">
-                      <span className="product-Price w-28">
-                        {formatPrice(orderItem.productId.price)}
+                    <div className="textSection ml-4 h-full flex flex-col justify-center items-center">
+                      <span className="product-Title text-left w-full justify-center">
+                        {orderItem.productId.nameProduct}
                       </span>
+                      <div className="priceSection text-left flex flex-col w-full h-10">
+                        <span className="product-Price w-28">
+                          {formatPrice(orderItem.productId.price)}
+                        </span>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))}
             {Array.isArray(Order.product) &&
               Order.product.length > visibleProduct && (
                 <button onClick={showMoreProduct}>Xem thêm</button>
