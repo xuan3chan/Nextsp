@@ -16,6 +16,7 @@ const AllOrders = () => {
   const { darkMode } = useContext(ThemeContext)
   const [currentPage, setCurrentPage] = useState(1);
   const ordersPerPage = 10;
+  const [showMore, setShowMore] = useState(null);
 
   const darkModeText = darkMode ? 'text-white' : 'text-gray-800'
   const tablebg = darkMode ? 'bg-slate-700 text-white' : 'bg-white text-gray-800'
@@ -137,21 +138,18 @@ const AllOrders = () => {
         <table className="table-auto border w-full my-2">
           <thead>
             <tr>
-              <th className="px-4 py-2 border">No.</th>
-              <th className="px-4 py-2 w-6 border">ID</th>
-              <th className="px-4 py-2 w-1/3 border">Products</th>
-              <th className="px-4 py-2 border">UserId</th>
-              <th className="px-4 py-2 border">Customer</th>
-              <th className="px-4 py-2 border">Email</th>
-              <th className="px-4 py-2 border">Address</th>
-              <th className="px-4 py-2 border">Phone</th>
-              <th className="px-4 py-2 border ">Payment</th>
-              <th className={`px-4 py-2 border ${sortOrder === 'desc' ? ' bg-black/10 shadow-inner' : ''}`} onClick={toggleSortOrder}>
+              <th className="px-3 py-1 border">No.</th>
+              <th className="px-3 py-1 w-6 border">ID</th>
+              <th className="px-3 py-1 w-1/3 border">Products</th>
+              <th className="px-3 py-1 border">UserId</th>
+              <th className="px-3 py-1 border">Custommer Info</th>
+              <th className="px-3 py-1 border ">Payment</th>
+              <th className={`px-3 py-1 border ${sortOrder === 'desc' ? ' bg-black/10 shadow-inner' : ''}`} onClick={toggleSortOrder}>
                 Total {sortOrder === 'desc' ? '↑' : '↓'}
               </th>
-              <th className="px-4 py-2 w-[9.666667%] border">Created at</th>
-              <th className="px-4 py-2 border">Tracking</th>
-              <th className="px-4 py-2 border">Actions</th>
+              <th className="px-3 py-1 w-[9.666667%] border">Created at</th>
+              <th className="px-3 py-1 border">Tracking</th>
+              <th className="px-3 py-1 border">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -159,11 +157,11 @@ const AllOrders = () => {
               currentOrders.map((item, i) => {
                 return (
                   <tr key={i}>
-                    <td className="px-4 py-2 border text-sm text-center">
+                    <td className="px-3 py-1 border text-sm text-center">
                       { indexOfFirstOrder + i + 1}
                     </td>
-                    <td className="px-4 py-2 border text-sm">{item._id}</td>
-                    <td className="px-4 py-2 border text-sm">
+                    <td className="px-3 py-1 border text-sm">{item._id}</td>
+                    <td className="px-3 py-1 border text-sm">
                       {item.product?.map((elem, i) => {
                         // Check if productId exists before accessing nameProduct
                         if (elem.productId) {
@@ -180,17 +178,29 @@ const AllOrders = () => {
                         return null;
                       })}
                     </td>
-                    <td className="px-4 py-2 border text-sm">{item.userId ? item.userId._id : 'N/A'}</td>
-                    <td className="px-4 py-2 border text-sm">{item.userId ? item.fullName : 'N/A'}</td>
-                    <td className="px-4 py-2 border text-sm">{item.userId ? item.userId.email.slice(0, 10) + "..." : 'N/A'}</td>
-                    <td className="px-4 py-2 border text-sm">{item.address}</td>
-                    <td className="px-4 py-2 border text-sm">{item.phone}</td>
-                    <td className="px-4 py-2 border text-sm text-center">{item.payment}</td>
-                    <td className="px-4 py-2 border text-sm">{Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(item.totalPrice)}</td>
-                    <td className="px-4 py-2 border text-sm text-center">
+                    <td className="px-3 py-1 border text-sm">{item.userId ? item.userId._id : 'N/A'}</td>
+                    <td className="p-2 border">
+                      {showMore === item._id ? (
+                        <>
+                          <div><span className="font-semibold">Name:</span> {item.userId ? item.fullName : 'N/A'}</div>
+                          <div><span className="font-semibold">Email:</span> {item.userId ? item.userId.email : 'N/A'}</div>
+                          <div><span className="font-semibold">Address:</span> {item.userId ? item.address : 'N/A'}</div>
+                          <div><span className="font-semibold">Phone:</span> {item.userId ? item.phone : 'N/A'}</div>
+                          <button onClick={() => setShowMore(null)}>See less</button>
+                        </>
+                      ) : (
+                        <>
+                          <div>Name: {item.userId ? item.userId.name : 'N/A'}</div>
+                          <button onClick={() => setShowMore(item._id)}>See more...</button>
+                        </>
+                      )}
+                    </td>
+                    <td className="px-3 py-1 border text-sm text-center">{item.payment}</td>
+                    <td className="px-3 py-1 border text-sm">{Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(item.totalPrice)}</td>
+                    <td className="px-3 py-1 border text-sm text-center">
                       {item.createdAt.slice(0,11)}
                     </td>
-                    <td className="px-4 py-2 border">
+                    <td className="px-3 py-1 border">
                       <select value={item.tracking}
                         onChange={(e) => updateTracking(item._id, e.target.value)}
                         className="bg-transparent"
@@ -203,7 +213,7 @@ const AllOrders = () => {
                         <option value="cancel" style={{ color: 'red' }}>cancel</option>
                       </select>
                     </td>
-                    <td className="px-4 py-2 border">
+                    <td className="px-3 py-1 border">
                       <button
                         onClick={() => deleteOrder(item._id, dispatch)}
                         className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded"
