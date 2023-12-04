@@ -129,7 +129,7 @@ const AllCategories = () => {
         {currentCategories && currentCategories.length > 0 ? (
           currentCategories.map((category, index) => (
                 <tr key={category._id} className={`${darkModeText}`}>
-                  <td className="px-4 py-2 border text-center">{index + 1}</td>
+                  <td className="px-4 py-2 border text-center">{indexOfFirstCategory + index + 1}</td>
                   <td className="px-4 py-2 border">{category.nameCategory}</td>
                   <td className="px-4 py-2 border whitespace-normal break-words break-all">{category.description}</td>
                   <td className="px-4 py-2 text-center border">

@@ -9,7 +9,6 @@ const apiURL = process.env.REACT_APP_ORDERS
 
 const AllOrders = () => {
   const { data, dispatch } = useContext(OrderContext);
-  const [mostRecentOrder, setMostRecentOrder] = useState(null);
   const [order, setOrder] = useState([]);
   const [sortOrder, setSortOrder] = useState('asc');
   const [loading, setLoading] = useState(true);
@@ -159,7 +158,7 @@ const AllOrders = () => {
                 return (
                   <tr key={i}>
                     <td className="px-4 py-2 border text-sm text-center">
-                      {i + 1}
+                      { indexOfFirstOrder + i + 1}
                     </td>
                     <td className="px-4 py-2 border text-sm">{item._id}</td>
                     <td className="px-4 py-2 border text-sm">
@@ -183,7 +182,7 @@ const AllOrders = () => {
                     <td className="px-4 py-2 border text-sm">{item.userId ? item.userId.email.slice(0, 10) + "..." : 'N/A'}</td>
                     <td className="px-4 py-2 border text-sm">{item.address}</td>
                     <td className="px-4 py-2 border text-sm text-center">{item.payment}</td>
-                    <td className="px-4 py-2 border text-sm">{item.totalPrice}</td>
+                    <td className="px-4 py-2 border text-sm">{Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(item.totalPrice)}</td>
                     <td className="px-4 py-2 border text-sm text-center">
                       {item.createdAt.slice(0,11)}
                     </td>

@@ -136,7 +136,7 @@ const AllBrands = () => {
                         currentBrands.map((brand, index) => (
                           <tr key={brand._id} className={`${darkModeText}`}>
                             <td className="px-4 py-4 border whitespace-nowrap text-center">
-                              {index + 1}
+                              {indexOfFirstBrand + index + 1}
                             </td>
                             <td className="px-6 py-4 border whitespace-nowrap">
                               <div className="text-sm">

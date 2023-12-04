@@ -136,7 +136,7 @@ const AllProducts = () => {
               currentProducts.map((product, index) => (
                 <tr className="border border-spacing-1" key={product.id}>
                   <td className="p-2 border text-center">
-                    {index + 1}
+                    {indexOfFirstProduct + index + 1}
                   </td>
                   <td className="p-2 text-left border">
                     {product.nameProduct.length > 15
