@@ -112,16 +112,22 @@ function Header(props) {
                             />
                           </a>
                           <div className="brand-menu">
-                            {category.brands &&
-                              category.brands.map((brand) => (
-                                <a
-                                  className="brand-link"
-                                  href={`/Collection/${category.nameCategory}/${brand.nameBrand}`}
-                                  key={brand._id}
-                                >
-                                  {brand.nameBrand}
-                                </a>
-                              ))}
+                          {category.brands && category.brands.length > 0 && (
+                            category.brands.map((brand) => {
+                              if (brand.status === "Active") {
+                                return (
+                                  <a
+                                    className="brand-link"
+                                    href={`/Collection/${category.nameCategory}/${brand.nameBrand}`}
+                                    key={brand._id}
+                                  >
+                                    {brand.nameBrand}
+                                  </a>
+                                );
+                              }
+                              return null;
+                            })
+                          )}
                           </div>
                         </div>
                       );
