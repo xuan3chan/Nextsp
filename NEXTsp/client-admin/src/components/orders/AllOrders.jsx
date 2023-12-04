@@ -138,6 +138,7 @@ const AllOrders = () => {
         <table className="table-auto border w-full my-2">
           <thead>
             <tr>
+              <th className="px-4 py-2 border">No.</th>
               <th className="px-4 py-2 w-6 border">ID</th>
               <th className="px-4 py-2 w-1/3 border">Products</th>
               <th className="px-4 py-2 border">Customer</th>
@@ -157,6 +158,9 @@ const AllOrders = () => {
               currentOrders.map((item, i) => {
                 return (
                   <tr key={i}>
+                    <td className="px-4 py-2 border text-sm text-center">
+                      {i + 1}
+                    </td>
                     <td className="px-4 py-2 border text-sm">{item._id}</td>
                     <td className="px-4 py-2 border text-sm">
                       {item.product?.map((elem, i) => {

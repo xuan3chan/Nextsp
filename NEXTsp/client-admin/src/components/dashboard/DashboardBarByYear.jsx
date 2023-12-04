@@ -132,7 +132,7 @@ const DashboardBar = () => {
   };
 
   return (
-    <div className="w-[1160px]">
+    <div className="w-[1160px] xl:w-[1160px] lg:w-[900px] md:w-[650px] sm:w-[450px]">
       <select onChange={handleYearChange}>
         {Array.from({ length: 10 }, (_, i) => currentYear - i).map((year) => (
           <option key={year} value={year}>

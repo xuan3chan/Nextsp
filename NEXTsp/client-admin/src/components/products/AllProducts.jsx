@@ -117,6 +117,7 @@ const AllProducts = () => {
         <table className="table-auto border w-full my-2">
           <thead>
             <tr>
+              <th className="px-4 py-2 border">No.</th>
               <th className="px-4 py-2 border">Product</th>
               <th className="px-4 py-2 border">Description</th>
               <th className="px-4 py-2 border w-5 h-2">Images</th>
@@ -130,8 +131,11 @@ const AllProducts = () => {
           </thead>
           <tbody>
             {currentProducts && currentProducts.length > 0 ? (
-              currentProducts.map((product) => (
+              currentProducts.map((product, index) => (
                 <tr className="border border-spacing-1" key={product.id}>
+                  <td className="p-2 text-left border text-center">
+                    {index + 1}
+                  </td>
                   <td className="p-2 text-left border">
                     {product.nameProduct.length > 15
                       ? product.nameProduct.substring(0, 25) + "..."

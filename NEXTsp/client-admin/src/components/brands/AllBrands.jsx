@@ -123,6 +123,7 @@ const AllBrands = () => {
                   <table className={`min-w-full divide-y divide-gray-200 border ${darkModeText}`}>
                     <thead>
                       <tr className={`text-xs tracking-wider text-left uppercase ${darkModeText} text-center`}>
+                        <th className="px-4 py-2 border w-2">No.</th>
                         <th className="px-6 py-3 border">Name</th>
                         <th className="px-6 py-3 border">Description</th>
                         <th className="px-6 py-3 border">Status</th>
@@ -132,8 +133,11 @@ const AllBrands = () => {
                     </thead>
                     <tbody className=" divide-y divide-gray-200">
                       {currentBrands && currentBrands.length > 0 ? (
-                        currentBrands.map((brand) => (
+                        currentBrands.map((brand, index) => (
                           <tr key={brand._id} className={`${darkModeText}`}>
+                            <td className="px-4 py-4 border whitespace-nowrap text-center">
+                              {index + 1}
+                            </td>
                             <td className="px-6 py-4 border whitespace-nowrap">
                               <div className="text-sm">
                                 {brand.nameBrand}
