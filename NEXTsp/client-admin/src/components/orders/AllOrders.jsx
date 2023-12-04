@@ -141,9 +141,11 @@ const AllOrders = () => {
               <th className="px-4 py-2 border">No.</th>
               <th className="px-4 py-2 w-6 border">ID</th>
               <th className="px-4 py-2 w-1/3 border">Products</th>
+              <th className="px-4 py-2 border">UserId</th>
               <th className="px-4 py-2 border">Customer</th>
               <th className="px-4 py-2 border">Email</th>
               <th className="px-4 py-2 border">Address</th>
+              <th className="px-4 py-2 border">Phone</th>
               <th className="px-4 py-2 border ">Payment</th>
               <th className={`px-4 py-2 border ${sortOrder === 'desc' ? ' bg-black/10 shadow-inner' : ''}`} onClick={toggleSortOrder}>
                 Total {sortOrder === 'desc' ? '↑' : '↓'}
@@ -179,9 +181,11 @@ const AllOrders = () => {
                         return null;
                       })}
                     </td>
-                    <td className="px-4 py-2 border text-sm">{item.userId ? item.userId.fullName : 'N/A'}</td>
+                    <td className="px-4 py-2 border text-sm">{item.userId ? item.userId._id : 'N/A'}</td>
+                    <td className="px-4 py-2 border text-sm">{item.userId ? item.fullName : 'N/A'}</td>
                     <td className="px-4 py-2 border text-sm">{item.userId ? item.userId.email.slice(0, 10) + "..." : 'N/A'}</td>
                     <td className="px-4 py-2 border text-sm">{item.address}</td>
+                    <td className="px-4 py-2 border text-sm">{item.phone}</td>
                     <td className="px-4 py-2 border text-sm text-center">{item.payment}</td>
                     <td className="px-4 py-2 border text-sm">{item.totalPrice}</td>
                     <td className="px-4 py-2 border text-sm text-center">
