@@ -34,7 +34,9 @@ const AllProducts = () => {
     setLoading(true);
     try {
       const responseData = await getAllProduct();
-      setProducts(responseData);
+      // Reverse the array before setting it
+      const reversedData = [...responseData].reverse();
+      setProducts(reversedData);
       setLoading(false);
     } catch (err) {
       setError(true);
@@ -133,7 +135,7 @@ const AllProducts = () => {
             {currentProducts && currentProducts.length > 0 ? (
               currentProducts.map((product, index) => (
                 <tr className="border border-spacing-1" key={product.id}>
-                  <td className="p-2 text-left border text-center">
+                  <td className="p-2 border text-center">
                     {index + 1}
                   </td>
                   <td className="p-2 text-left border">
