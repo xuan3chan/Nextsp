@@ -33,8 +33,8 @@ function Homepage(props) {
               <SloganListSection />
               <ProductListAll />
               <ProductList
-                title="PC Máy Tính Bàn - Intel"
-                CollectionCategory="PC Máy Tính Bàn"
+                title="Thương Hiệu Asus"
+                CollectionBrand="Asus"                
               />
               <ProductList
                 title="Gaming Gear"

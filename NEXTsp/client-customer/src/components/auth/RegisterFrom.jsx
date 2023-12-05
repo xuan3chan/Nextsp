@@ -4,6 +4,8 @@ import axios from "axios";
 import Logo from "../../assets/img/Logo_2.png";
 import Footer from "../../components/Footer";
 import "../../assets/css/Login.css";
+import Swal from "sweetalert2";
+
 const RegisterForm = () => {
   const apiUrl = "https://nextsp-server.id.vn/api/auth/register";
   const [fullName, setFullName] = useState("");
@@ -67,13 +69,27 @@ const RegisterForm = () => {
         setAccountName("");
         setPassword("");
         setConfirmPassword("");
-        // Redirect to login page or do something else
-        loginPage("/loginUser");
+
+        Swal.fire({
+          title: "Thành Công!",
+          text: "Đăng Ký Thành Công",
+          icon: "success",
+          confirmButtonText: "OK",
+        });
+        setTimeout = () => {
+          loginPage("/loginUser"), 2000;
+        };
       })
       .catch((error) => {
         console.error("Error:", error.response);
         if (error.response && error.response.data) {
           setErrors(error.response.data);
+          Swal.fire({
+            title: "Thất bại!",
+            text: `${error.response.data.message}`,
+            icon: "error",
+            confirmButtonText: "OK",
+          });
         } else {
           // Handle unexpected errors
           setErrors({ general: "Something went wrong. Please try again." });
