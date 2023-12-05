@@ -39,7 +39,6 @@ function Homepage(props) {
               />
               <ProductList
                 title="Gaming Gear"
-                CollectionBrand="Asus"
                 CollectionCategory="Bàn Phím"
               />
             </div>
