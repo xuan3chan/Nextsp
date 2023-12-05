@@ -209,7 +209,7 @@ const AddBrandDetail = ({ categories, isDarkMode }) => {
                 </select>
               </div>
               <div className="w-1/2 flex flex-col space-y-1">
-                <label htmlFor="status">Brand Category *</label>
+                <label htmlFor="status">Category *</label>
                   <Select
                   isMulti
                   name="category"
