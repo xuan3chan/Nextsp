@@ -10,7 +10,9 @@ const apiURL = process.env.REACT_APP_ORDERS
 const AllOrders = () => {
   const { data, dispatch } = useContext(OrderContext);
   const [order, setOrder] = useState([]);
+
   const [sortOrder, setSortOrder] = useState('asc');
+
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const { darkMode } = useContext(ThemeContext)
@@ -51,6 +53,10 @@ const AllOrders = () => {
   };
 
   useEffect(() => {
+    sortOrders();
+  }, [sortOrder]);
+
+  useEffect(() => {
     fetchData();
   }, []);
 
@@ -89,15 +95,11 @@ const AllOrders = () => {
     }
   }
 
-  useEffect(() => {
-    sortOrders();
-  }, [sortOrder]);
-  
-
   const toggleSortOrder = () => {
     setSortOrder(prevSortOrder => prevSortOrder === 'asc' ? 'desc' : 'asc');
     sortOrders()
   };
+
   
 
 
@@ -147,7 +149,9 @@ const AllOrders = () => {
               <th className={`px-3 py-1 border ${sortOrder === 'desc' ? ' bg-black/10 shadow-inner' : ''}`} onClick={toggleSortOrder}>
                 Total {sortOrder === 'desc' ? '↑' : '↓'}
               </th>
-              <th className="px-3 py-1 w-[9.666667%] border">Created at</th>
+              <th className={`px-3 py-1 w-[9.666667%] border`}>
+                Created at
+              </th>
               <th className="px-3 py-1 border">Tracking</th>
               <th className="px-3 py-1 border">Actions</th>
             </tr>
