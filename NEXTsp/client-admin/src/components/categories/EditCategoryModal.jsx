@@ -66,7 +66,7 @@ const EditCategoryModal = () => {
           {/* Modal Header */}
           <div className="flex items-center justify-between w-full pt-4 px-4">
             <span className="text-left font-semibold text-2xl tracking-wider">
-              Add Category
+              Edit Category
             </span>
             {/* Close Modal */}
             <span
