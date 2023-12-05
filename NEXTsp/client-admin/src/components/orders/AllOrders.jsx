@@ -144,7 +144,7 @@ const AllOrders = () => {
               <th className="px-3 py-1 w-6 border">ID</th>
               <th className="px-3 py-1 w-1/3 border">Products</th>
               <th className="px-3 py-1 border">UserId</th>
-              <th className="px-3 py-1 border">Custommer Info</th>
+              <th className="px-3 py-1 border">Customer Info</th>
               <th className="px-3 py-1 border ">Payment</th>
               <th className={`px-3 py-1 border ${sortOrder === 'desc' ? ' bg-black/10 shadow-inner' : ''}`} onClick={toggleSortOrder}>
                 Total {sortOrder === 'desc' ? '↑' : '↓'}
