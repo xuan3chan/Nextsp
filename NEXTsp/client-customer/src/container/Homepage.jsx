@@ -34,7 +34,6 @@ function Homepage(props) {
               <ProductListAll />
               <ProductList
                 title="PC Máy Tính Bàn - Intel"
-                CollectionBrand="Intel"
                 CollectionCategory="PC Máy Tính Bàn"
               />
               <ProductList
