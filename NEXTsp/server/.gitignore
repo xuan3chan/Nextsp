@@ -10,6 +10,7 @@
 .env.development.local
 .env.test.local
 .env.production.local
+.env
 
 # Log files
 npm-debug.log*
@@ -30,8 +31,3 @@ yarn-error.log*
 
 # Debug files
 output.log
-
-# Windows
-Thumbs.db
-Desktop.ini
-.vercel
