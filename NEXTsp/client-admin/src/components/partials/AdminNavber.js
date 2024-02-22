@@ -60,7 +60,7 @@ const AdminNavber = () => {
         {/*  Large Screen Show  */}
         <div className="hidden lg:block">
           <span
-            onClick={(e) => navigate("/admin/dashboard")}
+            onClick={(e) => navigate("/dashboard")}
             style={{ letterSpacing: "0.70rem" }}
             className={`flex items-left text-center font-bold uppercase ${
               darkMode ? "text-white" : "text-black"
@@ -88,7 +88,7 @@ const AdminNavber = () => {
             />
           </svg>
           <span
-            onClick={(e) => navigate("/admin/dashboard")}
+            onClick={(e) => navigate("/dashboard")}
             style={{ letterSpacing: "0.10rem" }}
             className="flex items-left text-center font-bold uppercase text-gray-800 text-2xl cursor-pointer px-2 "
           >
