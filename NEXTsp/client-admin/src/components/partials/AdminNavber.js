@@ -1,18 +1,19 @@
 import React, { Fragment, useContext } from "react";
-import { useNavigate  } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import { Link } from "react-router-dom";
-import { ThemeContext } from '../theme/ThemeContext';
+import { ThemeContext } from "../theme/ThemeContext";
 import { AdminLayoutContext } from "./AdminLayoutContext";
-const AdminNavber = (props) => {
-  const navigate = useNavigate ();
+const AdminNavber = () => {
+  const navigate = useNavigate();
 
   const accessToken = localStorage.getItem("accessToken");
   const decodedToken = accessToken ? jwtDecode(accessToken) : null;
   const accountName = decodedToken ? decodedToken.adminName : null;
 
   const { darkMode, setDarkMode } = useContext(ThemeContext);
-  const { isSidebarVisible, setSidebarVisible } = useContext(AdminLayoutContext);
+  const { isSidebarVisible, setSidebarVisible } =
+    useContext(AdminLayoutContext);
 
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
@@ -28,9 +29,17 @@ const AdminNavber = (props) => {
   };
   return (
     <Fragment>
-      <nav className={`sticky z-10 flex items-center shadow-md justify-between px-4 py-4 md:px-8 top-0 w-full ${darkMode ? 'bg-gray-900' : 'bg-white'}`}>
+      <nav
+        className={`sticky z-10 flex items-center shadow-md justify-between px-4 py-4 md:px-8 top-0 w-full ${
+          darkMode ? "bg-gray-900" : "bg-white"
+        }`}
+      >
         {/*  Large Screen Show  */}
-        <div className="hidden lg:flex lg:items-center lg:space-x-4 mr-32" title="dashboard" onClick={toggleSidebar}>
+        <div
+          className="hidden lg:flex lg:items-center lg:space-x-4 mr-32"
+          title="dashboard"
+          onClick={toggleSidebar}
+        >
           <span>
             <svg
               className="w-8 h-8 cursor-pointer text-gray-600"
@@ -53,7 +62,9 @@ const AdminNavber = (props) => {
           <span
             onClick={(e) => navigate("/admin/dashboard")}
             style={{ letterSpacing: "0.70rem" }}
-            className={`flex items-left text-center font-bold uppercase ${darkMode ? 'text-white' : 'text-black'} text-2xl cursor-pointer px-2 text-center`}
+            className={`flex items-left text-center font-bold uppercase ${
+              darkMode ? "text-white" : "text-black"
+            } text-2xl cursor-pointer px-2 text-center`}
           >
             NextSP
           </span>
@@ -79,16 +90,24 @@ const AdminNavber = (props) => {
           <span
             onClick={(e) => navigate("/admin/dashboard")}
             style={{ letterSpacing: "0.10rem" }}
-            className="flex items-left text-center font-bold uppercase text-gray-800 text-2xl cursor-pointer px-2 text-center"
+            className="flex items-left text-center font-bold uppercase text-gray-800 text-2xl cursor-pointer px-2 "
           >
             NextSP
           </span>
         </div>
         {/* Both Screen show */}
         <div className="flex items-center">
-          <div className={`hover:${darkMode ? 'bg-gray-700' : 'bg-gray-200' } rounded-lg p-2`} title="Darkmode" onClick={toggleDarkMode}>
+          <div
+            className={`hover:${
+              darkMode ? "bg-gray-700" : "bg-gray-200"
+            } rounded-lg p-2`}
+            title="Darkmode"
+            onClick={toggleDarkMode}
+          >
             <svg
-              className={`cursor-pointer w-8 h-8 ${darkMode ? 'text-gray-300' : 'text-black'} hover:text-gray-800`}
+              className={`cursor-pointer w-8 h-8 ${
+                darkMode ? "text-gray-300" : "text-black"
+              } hover:text-gray-800`}
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -102,9 +121,16 @@ const AdminNavber = (props) => {
               />
             </svg>
           </div>
-          <div className={`hover:${darkMode ? 'bg-gray-700' : 'bg-gray-200' } rounded-lg p-2`} title="Search">
+          <div
+            className={`hover:${
+              darkMode ? "bg-gray-700" : "bg-gray-200"
+            } rounded-lg p-2`}
+            title="Search"
+          >
             <svg
-              className={`cursor-pointer w-8 h-8 ${darkMode ? 'text-gray-300' : 'text-black'} hover:text-gray-800`}
+              className={`cursor-pointer w-8 h-8 ${
+                darkMode ? "text-gray-300" : "text-black"
+              } hover:text-gray-800`}
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -120,29 +146,39 @@ const AdminNavber = (props) => {
           </div>
           {/* Logout Button Dropdown */}
           <div
-            className={`userDropdownBtn hover:${darkMode ? 'bg-gray-700' : 'bg-gray-200' } px-2 py-2 rounded-lg relative group`}
+            className={`userDropdownBtn hover:${
+              darkMode ? "bg-gray-700" : "bg-gray-200"
+            } px-2 py-2 rounded-lg relative group`}
             title="user"
           >
             <div className="header_user_module">
-            {accessToken === null ? (
-              <Link to="/LoginUser">
+              {accessToken === null ? (
+                <Link to="/LoginUser">
+                  <button className="user_module_login">
+                    <div className="boxIcon"></div>
+                    <p>Đăng Nhập</p>
+                  </button>
+                </Link>
+              ) : (
                 <button className="user_module_login">
-                  <div className="boxIcon">
-                  </div>
-                  <p>Đăng Nhập</p>
+                  <div className="boxIcon"></div>
+                  <p className={`${darkMode ? "text-white" : "text-black"}`}>
+                    Hello, {accountName}
+                  </p>
                 </button>
-              </Link>
-            ) : (
-              <button className="user_module_login">
-                <div className="boxIcon">
-                </div>
-                <p className={`${darkMode ? 'text-white' : 'text-black'}`}>Hello, {accountName}</p>
-              </button>
-            )}
-          </div>
-            <div className={`hidden userDropdown absolute right-0 mt-1 ${darkMode ? 'bg-gray-700' : 'bg-gray-200' } rounded group-hover:block`}>
+              )}
+            </div>
+            <div
+              className={`hidden userDropdown absolute right-0 mt-1 ${
+                darkMode ? "bg-gray-700" : "bg-gray-200"
+              } rounded group-hover:block`}
+            >
               <li className="flex flex-col text-gray-700">
-                <span className={`flex space-x-1 py-2 px-8 hover:${darkMode ? 'bg-gray-400 shadow-inner' : 'bg-gray-200' } cursor-pointer ${darkMode ? 'text-white' : 'text-black'}`}>
+                <span
+                  className={`flex space-x-1 py-2 px-8 hover:${
+                    darkMode ? "bg-gray-400 shadow-inner" : "bg-gray-200"
+                  } cursor-pointer ${darkMode ? "text-white" : "text-black"}`}
+                >
                   <span>
                     <svg
                       className="w-6 h-6"
@@ -169,7 +205,9 @@ const AdminNavber = (props) => {
                 </span>
                 <span
                   onClick={(e) => logout()}
-                  className={`flex space-x-1 py-2 px-8 hover:${darkMode ? 'bg-gray-400 shadow-inner' : 'bg-gray-200' } cursor-pointer ${darkMode ? 'text-white' : 'text-black'}`}
+                  className={`flex space-x-1 py-2 px-8 hover:${
+                    darkMode ? "bg-gray-400 shadow-inner" : "bg-gray-200"
+                  } cursor-pointer ${darkMode ? "text-white" : "text-black"}`}
                   title="Logout"
                 >
                   <span>

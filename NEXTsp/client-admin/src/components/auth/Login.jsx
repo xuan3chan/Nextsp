@@ -23,7 +23,7 @@ const Login = () => {
           localStorage.setItem("accessToken", response.data.accessToken);
 
           setTimeout(() => {
-            navigate("/admin/dashboard");
+            navigate("/");
             window.location.reload();
           }, 200);
         } else {

@@ -6,7 +6,7 @@ import { ThemeContext } from '../theme/ThemeContext';
 
 const ProductsMenu = (props) => {
   const { dispatch } = useContext(ProductContext)
-  const { darkMode, setDarkMode } = useContext(ThemeContext)
+  const { darkMode } = useContext(ThemeContext)
   const btnDM = darkMode ? 'bg-[#2D9596] text-gray-100' : 'bg-[#303031] text-gray-100'
 
   return (

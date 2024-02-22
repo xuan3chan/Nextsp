@@ -22,18 +22,19 @@ const AdminSidebar = (props) => {
   return (
     <Fragment>
       <div
-        style={{ 
-          boxShadow: `1px 1px 8px 0.2px ${shadowSidebar}`, 
+        style={{
+          boxShadow: `1px 1px 8px 0.2px ${shadowSidebar}`,
         }}
         id="sidebar"
         className={`sticky top-0 left-0 h-screen md:w-3/12 lg:w-2/12 sm:w-4/12 sidebarShadow ${
-          darkMode ? "bg-gray-900 text-white" : "bg-white text-gray-600"} 
-          ${isSidebarVisible ? 'block' : 'hidden'}`}
+          darkMode ? "bg-gray-900 text-white" : "bg-white text-gray-600"
+        } 
+          ${isSidebarVisible ? "block" : "hidden"}`}
       >
         <div
-          onClick={(e) => navigate("/admin/dashboard")}
+          onClick={(e) => navigate("/dashboard")}
           className={`${
-            location.pathname === "/admin/dashboard" ? darkmodeactive : ""
+            location.pathname === "/dashboard" ? darkmodeactive : ""
           } hover:${darkmodehoverdiv} cursor-pointer flex flex-col items-center justify-center py-6`}
         >
           <span>
@@ -56,11 +57,9 @@ const AdminSidebar = (props) => {
         </div>
         <hr className={darkmodeHR} />
         <div
-          onClick={(e) => navigate("/admin/dashboard/categories")}
+          onClick={(e) => navigate("/categories")}
           className={`${
-            location.pathname === "/admin/dashboard/categories"
-              ? darkmodeactive
-              : ""
+            location.pathname === "/categories" ? darkmodeactive : ""
           } hover:${darkmodehoverdiv} cursor-pointer flex flex-col items-center justify-center py-6`}
         >
           <span>
@@ -83,11 +82,9 @@ const AdminSidebar = (props) => {
         </div>
         <hr className={darkmodeHR} />
         <div
-          onClick={(e) => navigate("/admin/dashboard/brands")}
+          onClick={(e) => navigate("/brands")}
           className={`${
-            location.pathname === "/admin/dashboard/brands"
-              ? darkmodeactive
-              : ""
+            location.pathname === "/brands" ? darkmodeactive : ""
           } hover:${darkmodehoverdiv} cursor-pointer flex flex-col items-center justify-center py-6`}
         >
           <span>
@@ -110,11 +107,9 @@ const AdminSidebar = (props) => {
         </div>
         <hr className={darkmodeHR} />
         <div
-          onClick={(e) => navigate("/admin/dashboard/products")}
+          onClick={(e) => navigate("/products")}
           className={`${
-            location.pathname === "/admin/dashboard/products"
-              ? darkmodeactive
-              : ""
+            location.pathname === "/products" ? darkmodeactive : ""
           } hover:${darkmodehoverdiv} cursor-pointer flex flex-col items-center justify-center py-6`}
         >
           <span>
@@ -137,11 +132,9 @@ const AdminSidebar = (props) => {
         </div>
         <hr className={darkmodeHR} />
         <div
-          onClick={(e) => navigate("/admin/dashboard/orders")}
+          onClick={(e) => navigate("/orders")}
           className={`${
-            location.pathname === "/admin/dashboard/orders"
-              ? darkmodeactive
-              : ""
+            location.pathname === "/orders" ? darkmodeactive : ""
           } hover:${darkmodehoverdiv} cursor-pointer flex flex-col items-center justify-center py-6`}
         >
           <span>
