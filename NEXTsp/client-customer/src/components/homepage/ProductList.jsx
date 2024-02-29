@@ -41,11 +41,12 @@ function ProductList(props) {
   const AvailableProducts = products.filter(
     (product) =>
       (product.status === "Active" &&
+        product.category &&
         product.category.name === props.CollectionCategory) ||
-      (product.brand.name === props.CollectionBrand &&
+      (product.brand &&
+        product.brand.name === props.CollectionBrand &&
         product.status === "Active")
   );
-
   const imagePlaceHolder = "https://via.placeholder.com/350";
   return (
     <div className="productList  w-full  p-4 mr-auto ml-auto bg-white rounded-md">
