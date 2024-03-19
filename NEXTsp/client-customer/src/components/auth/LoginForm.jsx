@@ -87,7 +87,7 @@ const Login = () => {
             )}
 
             <label className="ml-1 mb-2" htmlFor="password">
-              Tạo mật khẩu:
+              Mật khẩu:
             </label>
             <input
               id="password"
