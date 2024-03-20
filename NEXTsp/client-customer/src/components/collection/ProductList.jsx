@@ -29,6 +29,7 @@ function ProductList(props) {
       .get(ApiProducts)
       .then((res) => {
         setProducts(res.data.products);
+        console.table(res.data.products);
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -40,17 +41,18 @@ function ProductList(props) {
       const productByCategory = products.filter(
         (product) => product.category.name === category
       );
-      const productByBrand = products.filter(
-        (product) =>
-          product.brand.name === nameCategory &&
-          product.category.name === category
-      );
-      nameCategory == null
+      const productByBrand = products.filter((product) => {
+        return product.brand == null
+          ? product.category.name === category
+          : product.brand.name === nameCategory &&
+              product.category.name === category;
+      });
+
+      nameCategory === null
         ? setFilteredProducts(productByCategory)
         : setFilteredProducts(productByBrand);
     } else {
-      // Handle the case where products is undefined
-      setFilteredProducts([]);
+      console.log("No products");
     }
   }, [category, nameCategory, products]);
 

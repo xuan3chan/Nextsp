@@ -84,10 +84,10 @@ function ProductList(props) {
             index < 5 && (
               <div
                 key={product.id}
-                className="productItem flex flex-col border-black-500/100 p-4 gap-1 items-center justify-center"
+                className="productItem flex flex-col border-black-500/100 gap-1 items-center justify-center"
               >
                 <Link to={`/products/${product.id}`}>
-                  <div className="product_image w-60 h-52 object-cover">
+                  <div className="product_image w-full h-52 object-cover">
                     <img
                       src={
                         product.images[0] == null
@@ -98,7 +98,7 @@ function ProductList(props) {
                       className="w-full h-44 object-contain "
                     />
                   </div>
-                  <div className="textSection flex flex-col">
+                  <div className="textSection w-full flex flex-col">
                     <div className="product_title text-left">
                       <h1 className="h-20">
                         {shortenProductName(product.nameProduct, 50)}
@@ -113,7 +113,7 @@ function ProductList(props) {
                       </p>
                     </div>
                   </div>
-                  <div className="product_rating flex gap-1 items-center">
+                  <div className="product_rating h-3 flex gap-1 items-center">
                     <StarRating rating={product.averageRating} />
                     <p className="text-xs">({product.numReviews} đánh giá)</p>
                   </div>
