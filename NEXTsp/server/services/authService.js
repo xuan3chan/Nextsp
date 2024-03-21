@@ -89,6 +89,25 @@ const loginAdminService = async ({ accountName, password }) => {
     accessToken,
   };
 };
+const registerAdminService = async ({ accountName, password }) => {
+  const admin = await Admin.findOne
+  ({ accountName });
+  if (admin) {
+    throw { status: 400, message: "Admin account already taken" };
+  }
+  const hashedPassword = await argon2d.hash(password);
+  const newAdmin = new Admin({
+    accountName,
+    password: hashedPassword,
+  });
+  await newAdmin.save();
+  const accessToken = jwt.sign(
+    { adminId: newAdmin._id },
+    process.env.ACCESS_TOKEN_SECRET,
+    { expiresIn: "1h" }
+  );
+  return { success: true, message: "Admin created successfully", accessToken };
+};
 //get user check token
 const getUserService = async (req) => {
   const authorization = req.headers["authorization"];
@@ -112,4 +131,5 @@ module.exports = {
   loginUserService,
   loginAdminService,
   getUserService,
+  registerAdminService
 };

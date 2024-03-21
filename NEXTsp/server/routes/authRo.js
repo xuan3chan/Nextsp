@@ -8,6 +8,8 @@ const verifyToken = require('../middleware/auth');
 // @desc Register user
 // @access Public
 router.post('/register', authCtrl.registerUser);
+//registeradmin
+router.post('/register/admin', authCtrl.registerAdmin);
 
 // @route POST api/auth/login
 // @desc Login user

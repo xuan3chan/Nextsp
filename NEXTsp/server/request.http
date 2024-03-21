@@ -48,16 +48,11 @@
 #     "category": "65394a3501cc7134c7daa57d",
 #     "brand": "65394f137fb869aad55653af"
 # # 
-# Post http://localhost:3101/api/products/add
-# content-type: application/json
+Post http://localhost:3101/api/auth/register/admin
+content-type: application/json
 
-# {
-#     "nameProduct": "minhxuan7",
-#     "description": "Mô tả sản phẩm",
-#     "price": 10000000,
-#     "oldprice": 11000000,
-#     "status": "Active",
-#     "brand": "65394f137fb869aad55653af"
-# }
-GET http://localhost:3101/api/products/getall
-# Get http://localhost:3101/api/brands/getall
+{
+    "accountName": "admin20",
+    "password": "admin"
+}
+
