@@ -23,6 +23,25 @@ const registerUser = async (req, res) => {
     handleErrorResponse(res, error);
   }
 };
+const registerAdmin = async (req, res) => {
+  const { accountName, password } = req.body;
+
+  if (!accountName || !password) {
+    return res
+      .status(400)
+      .json({ success: false, message: "Missing accountName and/or password" });
+  }
+
+  try {
+    const result = await authService.registerAdminService({
+      accountName,
+      password,
+    });
+    res.json(result);
+  } catch (error) {
+    handleErrorResponse(res, error);
+  }
+};
 
 const loginUser = async (req, res) => {
   const { accountName, email, password } = req.body;
@@ -82,4 +101,5 @@ module.exports = {
   loginUser,
   loginAdmin,
   getUserController,
+  registerAdmin,
 };
