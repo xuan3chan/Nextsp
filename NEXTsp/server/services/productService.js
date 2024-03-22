@@ -23,6 +23,12 @@ class ProductService {
           message: "A product with this name already exists",
         };
       }
+      //price must be a number >0 and oldprice must be a number >0
+      if (isNaN(price) || price <= 0) {
+        throw {
+          status: 400,
+          message: "Price must be a number greater than 0",
+        };}
 
       // Check for duplicate originalnames in req.files
       //1
