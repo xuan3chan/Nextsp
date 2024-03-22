@@ -148,10 +148,10 @@
   vertical-align: right;
   fill: currentColor;
 }
-.navbar a:hover,
 .dropdown:hover .dropbtn {
-  background-color: #ddd;
-  color: black;
+  background-color: #aeaeae;
+  color:#000
+  ;
 }
 
 .dropdown-content,

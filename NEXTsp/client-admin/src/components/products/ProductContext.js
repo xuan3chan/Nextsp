@@ -14,7 +14,6 @@ export const productState = {
     oldprice: ""
   },
 }
-
 export const productReducer = (state, action) => {
   switch(action.type) {
     case "fetchProductsAndChangeState":

@@ -12,7 +12,6 @@ function Collection(props) {
   const [isLoading, setIsLoading] = useState(true);
   const { category, nameCategory } = useParams();
   useEffect(() => {
-    // Simulate a data loading delay
     setTimeout(() => {
       setIsLoading(false);
     }, 1400);
