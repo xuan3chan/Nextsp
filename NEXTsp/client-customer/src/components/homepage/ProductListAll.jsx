@@ -26,6 +26,7 @@ function ProductList(props) {
     };
     fetchData();
   }, []);
+  console.log(products)
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {

@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { LoginForm, RegisterFrom } from "./components";
 import Homepage from "./container/Homepage";
 import Collection from "./container/Collection";
+import CollectionTest from "./container/CollectionTest";
 import { LoadingProvider } from "./components/LoadingContext";
 import Products from "./container/Products";
 import CartPage from "./container/CartPage";
@@ -29,6 +30,10 @@ const App = () => {
           <Route path="/Customer" element={<CustomerShipping />} />
           <Route path="/payment" element={<PaymentPage></PaymentPage>}></Route>
           <Route path="/Account" element={<Account></Account>}></Route>
+          <Route
+            path="/CollectionTest"
+            element={<CollectionTest></CollectionTest>}
+          ></Route>
         </Routes>
       </LoadingProvider>
     </Router>

@@ -16,7 +16,7 @@ function ProductList(props) {
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const ApiProducts = "https://nextsp-server.id.vn/api/products/getall";
-
+  // Get Products Data
   useEffect(() => {
     axios
       .get(ApiProducts)
@@ -27,28 +27,25 @@ function ProductList(props) {
         console.error("Error:", error);
       });
   }, [ApiProducts]);
-  function shortenProductName(productName, maxLength) {
-    if (productName.length <= maxLength) {
-      return productName;
-    } else {
-      return productName.substring(0, maxLength - 3) + "...";
-    }
-  }
+
   useEffect(() => {
     if (products) {
       const productByCategory = products.filter(
         (product) => product.category && product.category.name === category
       );
+
       const productByBrand = products.filter((product) => {
         if (!product.brand && !nameCategory) {
           return true;
         }
         return (
-          product.brand && product.brand.name === nameCategory &&
-          product.category && product.category.name === category
+          product.brand &&
+          product.brand.name === nameCategory &&
+          product.category &&
+          product.category.name === category
         );
       });
-  
+
       nameCategory === null
         ? setFilteredProducts(productByCategory)
         : setFilteredProducts(productByBrand);
@@ -57,7 +54,16 @@ function ProductList(props) {
       setFilteredProducts([]);
     }
   }, [category, nameCategory, products]);
-  
+
+  // Function Shorten Product Name
+  function shortenProductName(productName, maxLength) {
+    if (productName.length <= maxLength) {
+      return productName;
+    } else {
+      return productName.substring(0, maxLength - 3) + "...";
+    }
+  }
+
   const handlePageChange = (newPageIndex) => {
     setPageIndex(newPageIndex);
   };
@@ -169,7 +175,7 @@ function ProductList(props) {
         </div>
       </div>
       <div className="flex flex-wrap gap-1 min-w-4/5 justify-center pt-12 items-center pb-8 mr-auto ml-auto">
-      {productListContent}
+        {productListContent}
       </div>
       <Pagination
         pageIndex={pageIndex}
